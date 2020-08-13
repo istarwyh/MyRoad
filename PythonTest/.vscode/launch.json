@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "python",
+      "name": "python",
+      "request": "launch",
+      //"cwd":"${workspaceFolder}",
+      "stopOnEntry": false,
+      "pythonPath": "D:\\Python",
+      "program": "${file}"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "attachment_folder": "_v_attachments",
+  "created_time": "2020-07-13T03:10:17Z",
+  "files": [
+  ],
+  "image_folder": "",
+  "recycle_bin_folder": "_v_recycle_bin",
+  "sub_directories": [
+    {
+      "name": "Qita"
+    },
+    {
+      "name": "学习 思考 冷静"
+    },
+    {
+      "name": "技术"
+    },
+    {
+      "name": "生活"
+    },
+    {
+      "name": "算法足迹"
+    },
+    {
+      "name": "TODO"
+    }
+  ],
+  "tags": [
+  ],
+  "version": "1"
+}

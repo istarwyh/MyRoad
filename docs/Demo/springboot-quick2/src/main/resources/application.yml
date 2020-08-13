@@ -1,0 +1,21 @@
+#yml弥补xml数据标签太多而不重视数据的缺点
+# 普通数据的配置
+name: wangyihui
+# 配置对象数据
+person:
+  name: yihui
+  age: 18
+  addr: beijing
+server:
+  port: 8080
+#行内对象配置
+#配置数组/集合
+#city:
+#  - beijing
+#  - tianjin
+#  - chongqin
+#capital: {beijing,newyork,london}
+#配置集合内对象,以及其他数据结构
+#配置Map
+key:
+#  key1: value1

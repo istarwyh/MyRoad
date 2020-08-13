@@ -1,0 +1,34 @@
+{
+  "attachment_folder": "_v_attachments",
+  "created_time": "2020-07-13T03:10:17Z",
+  "files": [
+  ],
+  "image_folder": "",
+  "recycle_bin_folder": "_v_recycle_bin",
+  "sub_directories": [
+    {
+      "name": "CSDN"
+    },
+    {
+      "name": "GitHub"
+    },
+    {
+      "name": "综合训练"
+    },
+    {
+      "name": "juejin"
+    },
+    {
+      "name": "软件测试"
+    },
+    {
+      "name": "TODO"
+    },
+    {
+      "name": "Buffer"
+    }
+  ],
+  "tags": [
+  ],
+  "version": "1"
+}

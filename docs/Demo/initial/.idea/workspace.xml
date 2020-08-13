@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200606202543831_17098.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607142835875_3237.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607142914886_17463.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607155550680_21577.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607181316760_2128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607182355967_22741.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607183412972_27268.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607183522976_3414.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607193135969_21494.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200608085458173_6823.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Books/SpringBoot经典学习笔记.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Books/SpringBoot经典学习笔记.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-quick2/src/main/resources/static/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-quick2/src/main/resources/static/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.1.4\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1docxMyJoKV93euTuSYx2s9qjgn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="项目" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\桌面\TestCode\docs\Demo\initial\src\main\resources\templates\error" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.MybatisApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.example.mybatistest.entity在rest-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="rest-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.mybatistest.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.mybatistest.entity" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="rest-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.hello.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.hello.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="rest-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.mybatistest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.mybatistest.MybatisApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RestServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="rest-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.restservice.RestServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.MybatisApplication" />
+        <item itemvalue="JUnit.com.example.mybatistest.entity在rest-service" />
+        <item itemvalue="Spring Boot.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="" />
+      <created>1593095131095</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593095131095</updated>
+      <workItem from="1593095134329" duration="23805000" />
+      <workItem from="1593163330835" duration="508000" />
+      <workItem from="1593230297755" duration="12719000" />
+      <workItem from="1593254031975" duration="2780000" />
+      <workItem from="1593311011507" duration="10113000" />
+      <workItem from="1593656748591" duration="4516000" />
+      <workItem from="1596513004838" duration="1520000" />
+      <workItem from="1597195964137" duration="1676000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="472" y="77" key="#HTTP代理" timestamp="1593253873534">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="472" y="77" key="#HTTP代理/0.0.1536.864@0.0.1536.864" timestamp="1593253873534" />
+    <state x="509" y="103" key="#com.intellij.ide.util.MemberChooser" timestamp="1593253609719">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="509" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1593253609719" />
+    <state x="967" y="125" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1593153849732">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="967" y="125" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1536.864@0.0.1536.864" timestamp="1593153849732" />
+    <state x="464" y="355" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593139580762">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="464" y="355" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.864@0.0.1536.864" timestamp="1593139580762" />
+    <state x="606" y="312" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1593139582585">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="606" y="312" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1536.864@0.0.1536.864" timestamp="1593139582585" />
+    <state x="779" y="113" key="#检查" timestamp="1593153118235">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="779" y="113" key="#检查/0.0.1536.864@0.0.1536.864" timestamp="1593153118235" />
+    <state x="549" y="130" key="FileChooserDialogImpl" timestamp="1593671922757">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="549" y="130" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1593671922757" />
+    <state width="1261" height="262" key="GridCell.Tab.0.bottom" timestamp="1597197156246">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state width="1492" height="85" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
+    <state width="1261" height="262" key="GridCell.Tab.0.bottom/62.0.1304.768@62.0.1304.768" timestamp="1597197156246" />
+    <state width="1261" height="262" key="GridCell.Tab.0.center" timestamp="1597197156245">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state width="1492" height="85" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
+    <state width="1261" height="262" key="GridCell.Tab.0.center/62.0.1304.768@62.0.1304.768" timestamp="1597197156245" />
+    <state width="1261" height="262" key="GridCell.Tab.0.left" timestamp="1597197156245">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state width="1492" height="85" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
+    <state width="1261" height="262" key="GridCell.Tab.0.left/62.0.1304.768@62.0.1304.768" timestamp="1597197156245" />
+    <state width="1261" height="262" key="GridCell.Tab.0.right" timestamp="1597197156245">
+      <screen x="62" y="0" width="1304" height="768" />
+    </state>
+    <state width="1492" height="85" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
+    <state width="1261" height="262" key="GridCell.Tab.0.right/62.0.1304.768@62.0.1304.768" timestamp="1597197156245" />
+    <state width="1492" height="217" key="GridCell.Tab.1.bottom" timestamp="1593329639468">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="217" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1593329639468" />
+    <state width="1492" height="217" key="GridCell.Tab.1.center" timestamp="1593329639467">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="217" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1593329639467" />
+    <state width="1492" height="217" key="GridCell.Tab.1.left" timestamp="1593329639467">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="217" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1593329639467" />
+    <state width="1492" height="217" key="GridCell.Tab.1.right" timestamp="1593329639468">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1492" height="217" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1593329639468" />
+    <state x="698" y="166" key="IDE.errors.dialog" timestamp="1593139291548">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="698" y="166" key="IDE.errors.dialog/0.0.1536.864@0.0.1536.864" timestamp="1593139291548" />
+    <state x="531" y="42" key="Maven.ArtifactSearchDialog" timestamp="1593247700658">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="531" y="42" key="Maven.ArtifactSearchDialog/0.0.1536.864@0.0.1536.864" timestamp="1593247700658" />
+    <state x="423" y="135" key="NewModule_or_Project.wizard" timestamp="1593671924793">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="423" y="135" key="NewModule_or_Project.wizard/0.0.1536.864@0.0.1536.864" timestamp="1593671924793" />
+    <state x="-9" y="13" key="SettingsEditor" timestamp="1593255321683">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="-9" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1593255321683" />
+    <state x="401" y="92" key="new project wizard" timestamp="1593095840433">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="401" y="92" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1593095840433" />
+    <state x="425" y="197" key="run.anything.popup" timestamp="1593246848935">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1593246848935" />
+    <state x="1018" y="248" width="840" height="911" key="search.everywhere.popup" timestamp="1596513173157">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="814" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1593329415214" />
+    <state x="1018" y="248" width="840" height="911" key="search.everywhere.popup/0.0.1920.1160@0.0.1920.1160" timestamp="1596513173157" />
+  </component>
+</project>

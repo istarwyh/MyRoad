@@ -1,0 +1,82 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug (Launch) - Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-SocketApplication<socket>",
+      "request": "launch",
+      "mainClass": "com.socket.SocketApplication",
+      "projectName": "socket"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-TCPClient<socket>",
+      "request": "launch",
+      "mainClass": "com.socket.domain.TCPClient",
+      "projectName": "socket"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-TCPServer<socket>",
+      "request": "launch",
+      "mainClass": "com.socket.domain.TCPServer",
+      "projectName": "socket"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-UDPReceive<socket>",
+      "request": "launch",
+      "mainClass": "com.socket.domain.UDPReceive",
+      "projectName": "socket"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-UDPSend<socket>",
+      "request": "launch",
+      "mainClass": "com.socket.domain.UDPSend",
+      "projectName": "socket"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-SpringbootQuick2Application<springboot-quick2>",
+      "request": "launch",
+      "mainClass": "com.itheima.SpringbootQuick2Application",
+      "projectName": "springboot-quick2"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-Calculate<springboot-quick2>",
+      "request": "launch",
+      "mainClass": "com.itheima.domain.Calculate",
+      "projectName": "springboot-quick2"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-Test2<springboot-quick2>",
+      "request": "launch",
+      "mainClass": "com.itheima.domain.Test2",
+      "projectName": "springboot-quick2"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-LogParser",
+      "request": "launch",
+      "mainClass": "LogParser"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Launch)-Test",
+      "request": "launch",
+      "mainClass": "Test"
+    }
+  ]
+}
