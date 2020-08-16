@@ -1,3 +1,4 @@
+vnote_backup_file_826537664 H:/桌面/MyRoad/docs/Vnote/Java/基础知识/IO.md
 ## 1. IO的设计
 ### 1.1. 数据源的多样性
 数据源可以是内存，文件，网络或程序,呈现异构性.

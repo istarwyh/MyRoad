@@ -1,18 +1,29 @@
 import java.util.Scanner;
+import java.io.*;
 class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
-        while(input.hasNextLine()){
-            int len = input.nextInt();
-            char[] cc = new char[len];
-            for(int i=0;i<len; i++){
-                cc[i] = input.next().charAt(0);
-            }
-            System.out.println("--- 打印开始 ---");
-            new Solution().getAllSubset(cc);
+        URL url = new URL(URLString);
+        // 创建磁盘对象
+        // 如果不封装成File,直接将路径用于构造接下来的节点流也可以
+        File source = new File("JavaTest"+File.separator+"in.txt");
+        File target = new File("JavaTest"+File.separator+"out.txt");
+
+        //字符缓冲输入流
+        BufferedReader br = new BufferedReader(new FileReader(source));
+        //字符缓冲输出流
+        BufferedWriter bw = new BufferedWriter(new FileWriter(target));
+
+        char[] buffer = new char[10];
+        //len表示读取的字节数
+        int len = -1;
+        while((len=br.read(buffer))!=-1){
+            bw.write(buffer,0,len);
         }
- 
-        input.close();
+
+        // 关闭IO资源
+        br.close();
+        bw.close();
     }
     /**
      * 以集合{a,b,c}为例，
