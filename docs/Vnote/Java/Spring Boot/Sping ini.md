@@ -302,7 +302,8 @@ Controller负责**具体的**业务模块**流程**的控制；Service层负责�
 - 利用模子来制作各种形状的蛋糕/瓶子
 - 使用方印染不同的印泥后盖章
 
-但是我们也注意到模具与实例之间是可以完全分离的,实例的一部分不需要放在所以之前的模板技术还可以继续解耦.于是诞生了前后端分离,开始流行返回`json`而不是逻辑视图名.
+但是我们也注意到模具与实例之间是可以完全分离的,实例的一部分不需要放在模具中。所以之前的模板技术还可以继续解耦.于是诞生了前后端分离,开始流行返回`json`而不是逻辑视图名。
+另一方面，从管理学的角度，这也符合团队成员各司其职的原则。
 ### 2.8. 泛谈架构分层
 SpringBoot通常分为
 
@@ -323,8 +324,8 @@ SpringBoot通常分为
 
 >面向对象的本质是面向数据库开发
 ## 3. 微服务
-### RPC的诞生
-#### RPC的概念
+### 3.1. RPC的诞生
+#### 3.1.1. RPC的概念
 RPC全称为Remote Procedure Call,既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为内部服务管理框架在发展。
 
 `http`作为一种最常用的交互方式，在内部系统服务调用很复杂的情况下，包括效率和安全性在内，需要一个内部服务的管理系统--即RPC。本地调用的过程至少需要涉及
@@ -351,14 +352,14 @@ RPC全称为Remote Procedure Call,既作为一种比`tcp`或`http`等更高层�
 - 熔断机制
 - 负载均衡等
 
-#### RPC的实现
+#### 3.1.2. RPC的实现
 基于TCP实现：底层自定制字段，减少网络开销
 基于HTTP实现：
 - 可以使用JSON或XML格式的请求或响应数据
 - 先得建立TCP连接，字节数占用多
 
 
-### 组件
+### 3.2. 组件
 Java领域以Spring Cloud为代表，
 <center>Spring Cloud=服务发现+负载均衡+限流熔断降级+网关+Spring Boot</center>
 
@@ -367,7 +368,7 @@ Java领域以Spring Cloud为代表，
 - 每一个功能元素放在一个独立的服务中---就像装配式建筑一样,不过要有**多微**?-->参考官方文档
 
 - 单元和单元之间的通信通过`http`方式(无协议状态)进行连接
-### Service Mesh
+### 3.3. Service Mesh
 >一言以蔽之：Service Mesh是微服务时代的TCP协议。[^ServiceMesh]
 
 [^ServiceMesh]:[什么是Service Mesh](https://zhuanlan.zhihu.com/p/61901608)
@@ -432,7 +433,7 @@ maven自己定义了
 
 
 
-## About Me
+## 5. About Me
 
 [
     ![wangyihui's github stats](https://github-readme-stats.vercel.app/api?username=istarwyh "![wangyihui's github stats")

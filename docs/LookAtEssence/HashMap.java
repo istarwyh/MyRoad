@@ -211,7 +211,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * The default initial capacity - MUST be a power of two.
      * 使用1左移4位,即二进制1000,十进制的16
      */
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; //  16
 
     /**
      * The maximum capacity, used if a higher value is implicitly specified
@@ -256,6 +256,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Basic hash bin node, used for most entries.  (See below for
      * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
      * Node是HashMap的一个内部类，实现了Map.Entry接口，本质是就是一个映射(键值对)的数据结构,用来存储put进去的每个k-v
+     * 这种泛型？
      */
     static class Node<K, V> implements Map.Entry<K, V> {
         final int hash;// 用来定位数组索引位置
@@ -332,8 +333,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         //1.取key得hashcode值
         //2.高位参与运算--h和h右移16位做异或运算,事实上是用右移后的数来保留hashCode的末几位的特征,比如
         // 1000000的二进制: 00000000 00001111 01000010 01000000
-        // 右移16位： 00000000 00000000 00000000 00001111
-        // 异或后: 00000000 00001111 01000010 01001111
+        // 右移16位：       00000000 00000000 00000000 00001111
+        // 异或后:          00000000 00001111 01000010 01001111
 
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
@@ -375,14 +376,16 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * Returns a power of two size for the given target capacity.
+     * 给的即使不是合数也变换为最近的大于它的合数
      */
     static final int tableSizeFor(int cap) {
         // 这里是int型,4个字节.
-        // 例如cap=17-->00000000 00000000 00000000 00010001,cap-1=16 -->00000000 00000000 00000000 00010000
+        // 例如cap=17 -->  00000000 00000000 00000000 00010001,
+        //    cap-1=16 --> 00000000 00000000 00000000 00010000
         // cap-1后，n的二进制最右一位肯定和cap的最右一位不同，即一个为0，一个为1
         // numberOfLeadingZeross是一种二分法，不断的从中间的位置向左计算0的个数。如果左边都为0，那么就把右边的数移动左边，以此计算右边零的个数-->最后返回无符号整型数的最高非零位前面的0的个数,以上面为例则是27
         // -1最前面一位是符号位-->10000000 00000000 00000000 0000001
-        // 补码往左移27位,31 = 00000000 00000000 00000000 00011111
+        // 补码往左移27位,   31 = 00000000 00000000 00000000 00011111
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
         // 00011111
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
@@ -585,8 +588,10 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         // 因为 n 永远是2的次幂，所以 n-1 通过 二进制表示，永远都是尾端以连续1的形式表示
         // 比如16的初始容量-->10000,16-1=15-->01111.这样当(n-1)和hash做与运算时,一定会保留hash中除(n-1)最后一位后的所有位置上的1(二进制)
         // 事实上当n为2次幂的时候,一定有     (n-1)&hash = hash % n
-        // 优势很明显:1.&操作速度比%快; 2.索引值在capacity中不会超出数组长度
-        // 但是如果我初始化的时候没有指定是2^n???
+        // 优势很明显:
+        // 1.&操作速度比%快; 
+        // 2.索引值在capacity中不会超出数组长度
+        // 但是如果我初始化的时候没有指定是2^n???--》会有tableSizeFor(int capacity)方法将其变为2^n
         if ((tab = table) != null && (n = tab.length) > 0 &&
                 (first = tab[(n - 1) & hash]) != null) {
 
