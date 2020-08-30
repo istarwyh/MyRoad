@@ -1,71 +1,147 @@
 ## 1. IO的设计
-对称性: 
+### 1.1. 数据源的多样性
+数据源可以是内存，文件，网络或程序,呈现异构性.
 
-- InputStream/OutputStream 读取字节流
-- 为了避免文本翻译成字符,又提供了Reader/Writer
+- 代表磁盘文件本身的类:`java.io.File`
+- 代表网络资源的类:`java.net.URL`
 
+**注意**
 
-## 2. 文件IO
+- 屏蔽不同操作系统下的
+    - 文件分隔符的不同,使用`File.separator`
+    - 路径列表分隔符的不同,使用`pathSeparator`
 
-- `File`可以封装文件路径,如`java.io.File file = new java.io.File("in.txt");`和`Path.get()`类似
-- 然后重定向输入输出流
+### 1.2. 节点流与包装流
+为了屏蔽这样的异构性一般需要一个中间件解耦,这里采用装饰器设计模式,通过使用`包装流`(又称处理流)来包装不同的`节点流`[^IO]
+[^IO]:[Java IO流详解（二）](https://lrh1993.github.io/2017/02/22/Java-IO流详解（二）——IO流的框架体系/)
+
+- 节点流:从/向一个特定的IO设备（如磁盘、网络）读/写数据的流
+    - FileInputStream:数据源是磁盘文件
+    - FileOutputStream:目的地是磁盘文件
+- 包装流:对一个已存在的流进行连接或封装，通过封装后的流来实现数据读/写功能
+
+```java
+//节点流，直接传入的参数是IO设备
+FileInputStream fis = new FileInputStream("test.txt");
+//处理流，直接传入的参数是流对象
+BufferedInputStream bis = new BufferedInputStream(fis);
+```
+### 1.3. 字节流与字符流
+1. 字节流能处理所有类型的数据（如图片、avi等）.
+2. 不过为了提高对纯文本文件,也即全部都是字符(`char`)的文件的处理效率,在原本按字节(`8bit`)读取流的基础上,通过指定字符格式而可以一次按字符大小一次读取多个字节.当然另一方面字符流也只能处理字符类型的数据。
+3. 字节流与字符流之间也需要一个桥梁,即转换流
+
+- 字节流:InputStream/OutputStream 
+- 字符流: Reader/Writer
+    - 将平台缺省的编码集编码的字节转换为`Unicode`字符
+- 转换流
+    ![](https://gitee.com/istarwyh/images/raw/master/1597571662_20200816165826127_2534.png)
+### 1.4. 缓冲流与Flush
+与自己设计缓冲数组类似:
+```java
+ byte[] buffer  = new byte[10];//这里我们定义了一个 长度为 10 的字节数组，用来存储读取的数据
+ in.read(buffer);//获取 某数据源中的前10 个字节，并存储到 buffer 数组中
+``` 
+将读取的数据先存放数组中，再取数组里面的数据相比一个一个的读取/写入数据效率要高很多,于是诞生了缓冲流.注意读取时仍需要一个小的数组再将小数组放入到缓冲流内部数组中(`?`)[^IO-Buffer]:
+[^IO-Buffer]:[Java IO详解（五)](https://www.cnblogs.com/ysocean/p/6864080.html)
+
+```java
+// 创建磁盘对象
+// 如果不封装成File,直接将路径用于构造接下来的节点流也可以
+File source = new File("JavaTest"+File.separator+"in.txt");
+File target = new File("JavaTest"+File.separator+"out.txt");
+
+//字符缓冲输入流
+BufferedReader br = new BufferedReader(new FileReader(source));
+//字符缓冲输出流
+BufferedWriter bw = new BufferedWriter(new FileWriter(target));
+
+char[] buffer = new char[10];
+//len表示读取的字节数
+int len = -1;
+while((len=br.read(buffer))!=-1){
+    bw.write(buffer,0,len);
+}
+
+// 关闭IO资源
+br.close();
+bw.close();
+```
+
+程序里打开的IO资源不属于内存资源，垃圾回收机制无法回收该资源，所以需要显式关闭文件IO资源(`close()`);当关闭资源IO资源时,缓冲流中的数据也会被`Flush`到目的端.
+### 1.5. 结合Scanner对IO的实现
+Scanner作为StringTokenizer和Matcher类之间的某种结合,可以扫描输入文本.
+#### 1.5.1. 文件IO
+重定向输入输出流至`terminal`
+
 ```java
 import java.io.*;
 import java.util.*;
-public class Test {
-    public static void main(String[] args) throws Exception{
-        File sourceFile  = new File(args[0]);
-        File targetFile = new File(args[1]);
-        if (!sourceFile.exists() || !targetFile.exists()) return;
+---
+File sourceFile  = new File(args[0]);
+File targetFile = new File(args[1]);
+if (!sourceFile.exists() || !targetFile.exists()) return;
 
-        Scanner in = new Scanner(sourceFile);
-        PrintWriter out = new PrintWriter(targetFile);
-        while (in.hasNext()) {
-            String s = in.nextLine();
-            String s2 = s.replaceAll(args[2],args[3]);
-            out.println(s2);
-        }
-        
-        in.close();out.close();
-    }
+Scanner in = new Scanner(sourceFile);
+PrintWriter out = new PrintWriter(targetFile);
+while (in.hasNext()) {
+    String s = in.nextLine();
+    String s2 = s.replaceAll(args[2],args[3]);
+    out.println(s2);
 }
+
+in.close();out.close();
+
 ```
-## 3. 网页IO
-File封装换成了`URL`封装,以及需要调用对象的`openStream()`方法来打开输出流.文件不需要大概是因为本机访问便利.
+
+#### 1.5.2. 网页IO
+`File`封装换成了`URL`封装,以及需要调用对象`url`的`openStream()`方法来打开输出流.文件不需要大概是因为本机访问便利.
 
 ```java
-
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
-public class Test {
-    public static void main(String[] args) throws Exception{
-        System.out.println("Enter a url:");
-        Scanner input = new Scanner(System.in);
-        String URLString = input.next();
-        try {
-            URL url = new URL(URLString);
-            Scanner in = new Scanner(url.openStream());
-            PrintWriter out = new PrintWriter("out.txt");
-            while (in.hasNext()) {
-                String line = in.nextLine();
-                out.println(line);
-            }
-            in.close();out.close();
-        }
-        catch (MalformedURLException ex){
-            System.out.println(ex.toString());
-        }
-        catch (IOException ex){
-            System.out.println(ex.toString());
-        }
-       
-        input.close();
+System.out.println("Enter a url:");
+Scanner input = new Scanner(System.in);
+String URLString = input.next();
+try {
+    URL url = new URL(URLString);
+    Scanner in = new Scanner(url.openStream());
+    PrintWriter out = new PrintWriter("out.txt");
+    while (in.hasNext()) {
+        String line = in.nextLine();
+        out.println(line);
     }
+    in.close();out.close();
 }
+catch (MalformedURLException ex){
+    System.out.println(ex.toString());
+}
+catch (IOException ex){
+    System.out.println(ex.toString());
+}    
+
+input.close();
+
 ```
-## 4. IO中的阻塞问题
+#### 1.5.3. 原理略窥
+```java
+  public Scanner(File source) throws FileNotFoundException {
+        this((ReadableByteChannel)(new FileInputStream(source).getChannel()));
+    }
+```
+底层调用了对应的节点输入流方法.
+### 1.6. 根据需要选择[^JavaIO流详解]与总结
+除了常见基于数据源的操作,还有一些流负责程序运行时的场景:
+[^JavaIO流详解]:[Java IO流详解](http://www.51gjie.com/java/686.html)
+
+- 对象输入输出(序列化与反序列化)：ObjectInputStream, ObjectOutputStream
+- 在内存中读取字节流: ByteArrayInputSteam,ByteArrayOutputSteam
+- 进程间通信：PipeInputStream, PipeOutputStream, PipeReader, PipeWriter 
+- 合并输入：SequenceInputStream
+
+.....
+
+简单总结如下:
+![](https://gitee.com/istarwyh/images/raw/master/1597571664_20200816175308306_11966.png)
+## 2. IO中的阻塞问题
 
 ```java
 BufferedReader reader = .....
@@ -82,7 +158,7 @@ while(数据还没准备好){
 ```
 对于传统的阻塞问题,没有什么好的解决办法,列举几种:
 
-1.  客户端在`write()`后马上`close()`关闭输出流，服务器不阻塞
+1.  客户端在`write()`后马上`close()`关闭输出流或直接写入结束标志,如`socket.shutdownOutput()`，服务器不阻塞
     - 缺点:除非协议是单向的
 2. 发送方返回数据长度,接收方接收完后退出`read()`
     - 缺点:如果不是一次返回总的数据长度,每次都告知发送长度,开销大也麻烦
@@ -96,15 +172,14 @@ if (len < 1024) {
 
 4. 指定等待时间,超时退出`read()`
 5. 商定结束标志,如`\n`或`EOF`等
-6. 直接写入结束标志,如`socket.shutdownOutput()`
-    - 缺点:后面将无法交互
-## 5. NIO(New IO)
+
+## 3. NIO(New IO)
 但是面对成百上千个文件需要读取,就必须改成非阻塞的,即允许同时处理---通过轮询操作循环检查是否可以关闭输入流.
 
 **文字解释**
-具体的实现方式如NIO(`non-blocking IO`),使用一个线程管理高并发的多个socket连接线程.
+具体的实现方式如NIO(`non-blocking IO`),使用**一个线程**管理高并发的多个socket连接线程.
 
-- Channel: 类似Stream,但是NB.将一个socket视为Channel的一种
+- Channel: 类似Stream,但是`Non-Blocking`.将一个socket视为Channel的一种
 - Buffer:Channel读取的数据在Buffer中.而由于Buffer不是流,Channel可以任意位置读
 - Selector:和Channel 配合使用,Channel注册自己及自己监听的`XXX事件`在Selector中
 
@@ -126,15 +201,15 @@ while(true){
 ```
 **图表解释**
 ![](https://gitee.com/istarwyh/images/raw/master/1589943618_20200520105140401_10630.png)
-### 5.1. NIO的易用性
+### 3.1. NIO的易用性
 因为JDK 原生API开发NIO需要开发者理解`Selector`、`Channel`和`ByteBuffer`三大组件,编程模式较为复杂;原生实现也不够稳定.所以应运而生`Netty`,将三大组件封装在了内部.
 `dubbo`、`spark`、`zookeeper`和`elasticSearch`等框架使用`Netty`作为底层通信IO框架.
-## 6. 常用服务器运行软件
-对于服务器往往会接触多个线程与对象.
-### 6.1. Ngnix
+## 4. 常用服务器运行软件
+对于服务器往往会接触多个线程与对象,直接使用Java IO的API来操作IO并不常见.通常配置文件(`xml`,`properties`等)被框架读取后,框架会把**配置数据**变成**Java对象**方便程序员调用,而不用程序员关注IO细节.不过框架本身是怎么做的呢?
+### 4.1. Ngnix
 - 静态连接处理
 - 维持动态连接,将连接请求分发给Tomcat集群
-### 6.2. Tomcat
+### 4.2. Tomcat
 Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出一个单独的`servlet`线程去处理请求.同一时刻,可能有多个线程在处理多个请求:
 
 - 执行`servlet`代码
@@ -144,28 +219,28 @@ Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出
 - 网络IO(例如http服务,30~100ms)
 
 线程往往只能阻塞.而垃圾服务器,CPU核心一般不超过4核,线程之间还需要常常切换.
-### 6.3. Spring框架
+### 4.3. Spring框架
 1. Spring的单例保证在一个IOC容器中只有一个action单例,从而保证开发者使用的是同一个实例.
-2. 对于Dao层的bean对象,Spring对于`ThreadLocal`对象,区别常用的加锁方式,用空间换时间--给每个线程分配独立的变量副本,从而隔离多线程访问对于数据访问的冲突.
+2. 对于Dao层的bean对象,Spring对于`ThreadLocal`对象,区别常用的加锁方式,用空间换时间--**给每个线程复制一份独立的变量副本**,从而隔离多线程访问对于数据访问的冲突.
 3. 不过Spring没有保证所有Bean的线程安全.
 
-实际工作中,直接使用Java IO的API来操作IO并不常见.通常配置文件(`xml`,`properties`等)被框架读取后,框架会把**配置数据**变成**Java对象**方便程序员调用,而不用程序员关注IO细节.
-### 6.4. Redis
-因为对Redis的请求都是访问内存,不涉及文件/DB/IO等操作,时间很短(`100ns`左右),所以用同一线程就可处理多个请求.同时也避免了线程切换的开销和共享数据的问题.
-### 6.5. Node.js
+
+### 4.4. Redis
+因为对Redis的请求都是访问内存,不涉及文件/DB/IO等操作,时间很短(`100ns`左右),所以用**同一线程**就可处理多个请求.同时也避免了线程切换的开销和共享数据的问题.
+### 4.5. Node.js
 事件驱动编程
 
-- 对于大部分非阻塞的线程,用一个线程处理所有请求,遇到耗时长的IO等操作,留下回调函数,等到I/O操作完成后再去执行回调函数
+- 对于大部分非阻塞的线程,用一个线程处理所有请求,遇到耗时长的IO等操作,留下**回调函数**,等到I/O操作完成后再去执行回调函数
 - 个别会阻塞的线程,例如Linux文件I/O,CPU密集型的任务如加密/压缩等,从线程池拿线程
 
 
-#### 6.5.1. 代表产品
+#### 4.5.1. 代表产品
 Electron桌面开发
 高并发异步减少线程
-#### 6.5.2. 缺点
+#### 4.5.2. 缺点
 - 单一主线程不能发挥多核优势
 - 对于计算密集型的项目应当考虑其他技术
-### 6.6. Node.x->Vert.x
+### 4.6. Node.x->Vert.x
 
 Verticle循环关联事件:
 ```java
@@ -216,8 +291,8 @@ public class DatabaseVerticle extends AbstractVerticle{
 ```
 
 同时这里使用了`Event Bus`，让不同的`Verticle`之间通过消息传递.因为不用共享内存,所以不用加锁.
-## 7. 其他
-### JdbcType类型和Java类型[^Jdbc]
+## 5. 其他
+### 5.1. JdbcType类型和Java类型[^Jdbc]
 [^Jdbc]:[JdbcType类型和Java类型的对应关系](https://blog.csdn.net/qq_39019865/article/details/80800649)
 
 ![](https://gitee.com/istarwyh/images/raw/master/1596795260_20200807181300916_6888.png)
