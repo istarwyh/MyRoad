@@ -23,20 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200606202543831_17098.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607142835875_3237.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607142914886_17463.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607155550680_21577.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607181316760_2128.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607182355967_22741.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607183412972_27268.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607183522976_3414.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200607193135969_21494.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Vnote/store/juejin/_v_recycle_bin/20200729/20200608085458173_6823.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Books/SpringBoot经典学习笔记.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Books/SpringBoot经典学习笔记.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-quick2/src/main/resources/static/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-quick2/src/main/resources/static/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/_vnote.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/不同的计算机语言.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/不同的计算机语言.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +74,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.15" />
@@ -98,17 +90,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.MybatisApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="com.example.mybatistest.entity在rest-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="rest-service" />
       <extension name="coverage">
@@ -183,6 +164,8 @@
       <workItem from="1593656748591" duration="4516000" />
       <workItem from="1596513004838" duration="1520000" />
       <workItem from="1597195964137" duration="1676000" />
+      <workItem from="1597743663632" duration="1979000" />
+      <workItem from="1598405464382" duration="1203000" />
     </task>
     <servers />
   </component>
@@ -220,6 +203,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="967" y="125" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1536.864@0.0.1536.864" timestamp="1593153849732" />
+    <state x="671" y="335" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598405269216">
+      <screen x="62" y="0" width="1858" height="1200" />
+    </state>
+    <state x="671" y="335" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/62.0.1858.1200@62.0.1858.1200" timestamp="1598405269216" />
     <state x="464" y="355" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593139580762">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
