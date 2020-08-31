@@ -1,3 +1,4 @@
+vnote_backup_file_826537664 D:/Test/MyRoad/docs/Vnote/Java/基础知识/从String.Intern()实验看常量加载过程.md
 
 >**字符串常量池本质上是个哈希表，它存储的是字符串实例对象的引用![^jvm]**
 
