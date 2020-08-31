@@ -1003,12 +1003,17 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     public Collection<V> values() {
         Collection<V> vs = values;
         if (vs == null) {
+            /**
+             * 初始化的时候会实现AbstractCollection<V>的方法？
+             */
             vs = new Values();
             values = vs;
         }
         return vs;
     }
-
+    /**
+     *  Values gives it access to the members of the enclosing HashMap instance it is associated with. 
+     */
     final class Values extends AbstractCollection<V> {
         public final int size() {
             return size;
@@ -1017,7 +1022,10 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         public final void clear() {
             HashMap.this.clear();
         }
-
+        /**
+         * 实现AbstractCollection<V>中的Iterator方法
+         *  The Iterator actually iterates over the Entries of the HashMap and returns their values.
+         */
         public final Iterator<V> iterator() {
             return new ValueIterator();
         }
