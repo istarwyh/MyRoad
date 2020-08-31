@@ -1,5 +1,5 @@
-# 1. 引用vs指针
-## 1.1. [C/C++的存在](https://blog.csdn.net/JianZhiZG/article/details/1427086)
+# 引用vs指针
+## 1. [C/C++的存在](https://blog.csdn.net/JianZhiZG/article/details/1427086)
 ```java
 class SwapTest 
 { Integer x = 5, y = 6;
@@ -20,7 +20,7 @@ class SwapTest
     } 
 }
 ```
-## 1.2. [java中只有值传递](https://blog.csdn.net/qq_35923749/article/details/79703700)
+## 2. [java中只有值传递](https://blog.csdn.net/qq_35923749/article/details/79703700)
 然而神奇的是...
 ```java
 import java.util.Date;
@@ -76,7 +76,7 @@ public class Test{
     }
 }
 ```
-## 1.3. 总结
+## 3. 总结
 1. 当把Java的**基本数据类型(如int,char,double等)作为入口参数**传给函数体的时候,传入的参数在函数体内部会被拷贝一份而变成局部变量,其生命周期也即在函数内部,而所有的函数体内部的操作都是针对这个**拷贝**的操作,它影响不到作为输入参数的变量.这种参数传递的方式也即"值传递".
 2. 但是在Java中用**对象作为入口参数的传递**(如[数组](https://blog.csdn.net/dadoneo/article/details/6577976?reload)) 则缺省为 **"引用传递"** ,即传递的是对象的引用(值),这个"引用"的概念与C/C++中的指针引用是一样的.但因为仍是值传递的缘故,此时无论对传入的引用(值)做了何种操作，都不会改变实参对象的*引用* :
 ```java
@@ -121,5 +121,3 @@ public class Test{
 
 [^浅拷贝]:[Java的深拷贝和浅拷贝](https://www.cnblogs.com/ysocean/p/8482979.html)
 
-## 1.4. 思考
-王垠认为,Java中`int`这种基本类型变量因为是原始类型,无法用`*`或者`.`访问成员变量,所以它们在**实现上**是传递值还是引用类型对于程序员没有区别.而在实际实现时,因为`innling`,将基本类型如`int`优化成值类型的传递.那`null`是引用类型,不能转换为基本类型,这又该如何解释?
