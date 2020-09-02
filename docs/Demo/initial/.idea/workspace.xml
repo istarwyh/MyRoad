@@ -24,16 +24,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/_vnote.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/不同的计算机语言.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/学习 思考 冷静/不同的计算机语言.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -79,7 +77,7 @@
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -166,6 +164,7 @@
       <workItem from="1597195964137" duration="1676000" />
       <workItem from="1597743663632" duration="1979000" />
       <workItem from="1598405464382" duration="1203000" />
+      <workItem from="1599010633216" duration="284000" />
     </task>
     <servers />
   </component>
@@ -271,10 +270,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="423" y="135" key="NewModule_or_Project.wizard/0.0.1536.864@0.0.1536.864" timestamp="1593671924793" />
-    <state x="-9" y="13" key="SettingsEditor" timestamp="1593255321683">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="492" y="244" key="SettingsEditor" timestamp="1599010919312">
+      <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state x="-9" y="13" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1593255321683" />
+    <state x="492" y="244" key="SettingsEditor/62.0.1858.1200@62.0.1858.1200" timestamp="1599010919312" />
     <state x="401" y="92" key="new project wizard" timestamp="1593095840433">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
