@@ -16,18 +16,43 @@ import java.util.List;
  */
 @Repository
 public interface UserDao {
-    @Select("Select * from user where name = #{name}")
-    User findUserByName(@Param("name") String name);
-
-    @Select("select * from user")
-    List<User> findAllUser();
-
+    /**
+     * 增
+     * @param name
+     * @param age
+     * @param money
+     */
     @Insert("Insert into user(name,age,money) values(#{name},#{age},#{money})")
     void insertUser(@Param("name") String name, @Param("age") Integer age, @Param("money") Double money);
+    /**
+     * 删
+     * @param id
+     */
+    @Delete("Delete from user where id=#{id}")
+    void deleteUser(@Param("id") int id);
 
+    /**
+     * 改
+     * @param name
+     * @param age
+     * @param money
+     * @param id
+     */
     @Update("Update user set name=#{name},age=#{age},money=#{money} where id=#{id}")
     void updateUser(@Param("name") String name, @Param("age") Integer age, @Param("money") Double money, @Param("id") int id);
 
-    @Delete("Delete from user where id=#{id}")
-    void deleteUser(@Param("id") int id);
+    /**
+     * 查
+     * @param name
+     * @return
+     */
+    @Select("Select * from user where name = #{name}")
+    User findUserByName(@Param("name") String name);
+
+    /**
+     * 查
+     * @return
+     */
+    @Select("select * from user")
+    List<User> findAllUser();
 }
