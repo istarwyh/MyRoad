@@ -383,11 +383,16 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         // 例如cap=17 -->  00000000 00000000 00000000 00010001,
         //    cap-1=16 --> 00000000 00000000 00000000 00010000
         // cap-1后，n的二进制最右一位肯定和cap的最右一位不同，即一个为0，一个为1
-        // numberOfLeadingZeross是一种二分法，不断的从中间的位置向左计算0的个数。如果左边都为0，那么就把右边的数移动左边，以此计算右边零的个数-->最后返回无符号整型数的最高非零位前面的0的个数,以上面为例则是27
-        // -1最前面一位是符号位-->10000000 00000000 00000000 0000001
-        // 补码往左移27位,   31 = 00000000 00000000 00000000 00011111
+        // numberOfLeadingZeros是一种二分法，不断的从中间的位置向左计算0的个数。
+            // 如果左边都为0，那么就把右边的数移动左边，以此计算右边零的个数
+            // -->最后返回无符号整型数的最高非零位前面的0的个数,以上面为例则是27
+        // -1最前面一位是符号位-->10000000 00000000 00000000 00000001
+            // -1的补码：11111111 11111111 11111111 11111111
+            // 右移一位缩小两倍，加上符号位一起，将-1当做整数则是2^32-1
+            // -1无符号右移27位, 所以值为2^32 -1 ==  31 == 00000000 00000000 00000000 00011111
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
         // 00011111
+        // -1无符号右移 m = Integer.numberOfLeadingZeros(cap - 1) 位的时候会获取一个2^(n+1)-1的值，最后+1就会是cap的两倍(n = siezeOf(int) - m)
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
@@ -583,7 +588,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         Node<K, V> first, e;
         int n;
         K k;
-        //table也就是节点表(为什么不叫节点树?因为其实的确是在数组坑位底下的链表节点里,在链表长度大于16时才变成红黑树)
+        //table也就是节点表(为什么不叫节点树?因为其实的确是在数组坑位底下的链表节点里,在链表长度大于8时才变成红黑树)
         // 保证table不为null且不为空,然后计算key在table中的索引位置
         // 因为 n 永远是2的次幂，所以 n-1 通过 二进制表示，永远都是尾端以连续1的形式表示
         // 比如16的初始容量-->10000,16-1=15-->01111.这样当(n-1)和hash做与运算时,一定会保留hash中除(n-1)最后一位后的所有位置上的1(二进制)
@@ -591,7 +596,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         // 优势很明显:
         // 1.&操作速度比%快; 
         // 2.索引值在capacity中不会超出数组长度
-        // 但是如果我初始化的时候没有指定是2^n???--》会有tableSizeFor(int capacity)方法将其变为2^n
+        // 但是如果我初始化的时候没有指定是2^n???--> 会有tableSizeFor(int capacity)方法将其变为2^n
         if ((tab = table) != null && (n = tab.length) > 0 &&
                 (first = tab[(n - 1) & hash]) != null) {
 
@@ -636,12 +641,13 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * previously associated {@code null} with {@code key}.)
      */
     public V put(K key, V value) {
+        // 外观(Facade)模式的设计方法，为外部调用提供一个简单的接口
         return putVal(hash(key), key, value, false, true);
     }
 
     /**
      * Implements Map.put and related methods.
-     *
+     * 
      * @param hash         hash for key
      * @param key          the key
      * @param value        the value to put
@@ -654,32 +660,49 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         Node<K, V>[] tab;
         Node<K, V> p;
         int n, i;
+        // 数组为空则初始化数组
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
+            // 数组不为空则计算桶位
+                    // 如果桶位为空，则创建新结点并存放
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
-        else {
+                    // 如果发生了hash冲突，即桶位根结点已被占
             Node<K, V> e;
             K k;
+            // 比较现有p与要插入的key
+            // 比较数据与对象的hash值
+            // 如果是基本数据类型，直接比较值
+            // 如果是对象，多态调用equals()方法
             if (p.hash == hash &&
                     ((k = p.key) == key || (key != null && key.equals(k))))
+                    //局部工具结点e来保存旧的结点信息
                 e = p;
+                // 如果已经是红黑树结点，即已经转成了红黑树，直接插入红黑树
+                    // 传入红黑树结点指针
             else if (p instanceof TreeNode)
                 e = ((TreeNode<K, V>) p).putTreeVal(this, tab, hash, key, value);
             else {
+                // 不是红黑树则加入链表
+                    // binCount记录遍历的结点数
                 for (int binCount = 0; ; ++binCount) {
+                    // 正常插入
                     if ((e = p.next) == null) {
                         p.next = newNode(hash, key, value, null);
+                        // 如果结点数超过TREEIFY_THRESHOLD==8，则转成红黑树
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                             treeifyBin(tab, hash);
                         break;
                     }
+                    // 发现链表中已有这个结点
                     if (e.hash == hash &&
                             ((k = e.key) == key || (key != null && key.equals(k))))
                         break;
+                    // 遍历链表，结合前面的可以看到有 p = p.next
                     p = e;
                 }
             }
+            // 覆盖旧结点的值并返回旧结点
             if (e != null) { // existing mapping for key
                 V oldValue = e.value;
                 if (!onlyIfAbsent || oldValue == null)
@@ -689,6 +712,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             }
         }
         ++modCount;
+        // 如果结点数大于阈值，扩容为2倍
         if (++size > threshold)
             resize();
         afterNodeInsertion(evict);
