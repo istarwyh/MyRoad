@@ -371,6 +371,7 @@ RPC全称为Remote Procedure Call,既作为一种比`tcp`或`http`等更高层�
 
 与任何一种协议的报文设计类似，同样需要将这些参数进行合适的编码设计。作为RPC协议中服务A调用服务B的过程双方，
 
+
 对于服务A：
 
 - 序列化
@@ -392,21 +393,25 @@ RPC全称为Remote Procedure Call,既作为一种比`tcp`或`http`等更高层�
 - 负载均衡等
 
 #### 3.1.2. RPC的实现
-基于TCP实现：底层自定制字段，减少网络开销
-基于HTTP实现：
-- 可以使用JSON或XML格式的请求或响应数据
-- 先得建立TCP连接，字节数占用多
+- 基于TCP实现：底层自定制字段，减少网络开销
+- 基于HTTP实现：
+    - 可以使用JSON或XML格式的请求或响应数据
+    - HTTP无状态便于联系同时降低复用
+    - 先得建立TCP连接，字节数占用多
 
 
 ### 3.2. 组件
 Java领域以Spring Cloud为代表，
-<center>Spring Cloud=服务发现+负载均衡+限流熔断降级+网关+Spring Boot</center>
+<center>Spring Cloud=服务发现+负载均衡+限流熔断降级+网关+Spring Boot+分库分表+读写分离</center>
 
-微服务将业务逻辑分散到不同的物理机，不同的进程下，它们使用相同的物理机，CPU，内存地址空间[^从rpc到微服务]
+微服务将业务逻辑分散到不同的物理机，不同的进程下，(以使)它们就像使用相同的物理机，CPU，内存地址空间[^从rpc到微服务]
 [^从rpc到微服务]:[微服务发展沿革](https://cloud.tencent.com/developer/article/1051490)
+
 - 每一个功能元素放在一个独立的服务中---就像装配式建筑一样,不过要有**多微**?-->参考官方文档
 
 - 单元和单元之间的通信通过`http`方式(无协议状态)进行连接
+
+
 ### 3.3. Service Mesh
 >一言以蔽之：Service Mesh是微服务时代的TCP协议。[^ServiceMesh]
 
