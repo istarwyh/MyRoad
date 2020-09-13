@@ -328,8 +328,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
     static final int hash(Object key) {
         int h;
-        // 首先一个前提,hashCode的值很大不能直接用来做索引
-        //1.8中替换了1.7中取模运算(这里没有出现)
+        // 首先一个前提,key.hashCode()返回int型的hash值，2……31 * 2的空间太大不能直接用来做索引
+        // 所以必须要借用余数或者异或操作来保留hash值特征的同时映射到较小范围做索引
+
+        
+        //1.8中替换了1.7中取模运算(这里没有出现),因为位运算更快
         //1.取key得hashcode值
         //2.高位参与运算--h和h右移16位做异或运算,事实上是用右移后的数来保留hashCode的末几位的特征,比如
         // 1000000的二进制: 00000000 00001111 01000010 01000000
@@ -388,8 +391,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             // -->最后返回无符号整型数的最高非零位前面的0的个数,以上面为例则是27
         // -1最前面一位是符号位-->10000000 00000000 00000000 00000001
             // -1的补码：11111111 11111111 11111111 11111111
-            // 右移一位缩小两倍，加上符号位一起，将-1当做整数则是2^32-1
-            // -1无符号右移27位, 所以值为2^32 -1 ==  31 == 00000000 00000000 00000000 00011111
+                // 右移一位缩小两倍，加上符号位一起，将-1当做整数则是2^32-1
+                // -1无符号右移27位, 所以值为2^32 -1 ==  31 == 00000000 00000000 00000000 00011111
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
         // 00011111
         // -1无符号右移 m = Integer.numberOfLeadingZeros(cap - 1) 位的时候会获取一个2^(n+1)-1的值，最后+1就会是cap的两倍(n = siezeOf(int) - m)
@@ -399,8 +402,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /* ---------------- Fields:下面才是对象实例变量的部分 -------------- */
 
     /**
-     * The table, initialized on first use, and resized as
-     * necessary.
+     * The table, initialized on first use, and resized as necessary.
      * When allocated, length is always a power of two.
      * 这是一种非常规的设计，相对来说把桶的大小设计为素数导致冲突的概率要小于合数;
      * Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）。HashMap采用这种非常规设计，主要是为了<br>
@@ -408,7 +410,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * <br>HashMap定位哈希桶索引位置时也使用了高位参与运算</br>
      * <br>(We also tolerate length zero in some operations to allow
      * bootstrapping mechanics that are currently not needed.)</br>
-     * 这里的桶其实就是数组的坑位.如果哈希桶数组很大，即使较差的Hash算法也会比较分散，如果哈希桶数组数组很小，即使好的Hash算法也会出现较多碰撞，所以就需要在空间成本和时间成本之间权衡，根据实际情况确定哈希桶数组的大小，并在此基础上设计好的Hash算法减少Hash碰撞。
+     * 这里的buckets其实就是数组的坑位.如果哈希桶数组很大，即使较差的Hash算法也会比较分散
+     * 如果哈希桶数组数组很小，即使好的Hash算法也会出现较多碰撞
+     * 所以就需要在空间成本和时间成本之间权衡，根据实际情况确定哈希桶数组的大小，并在此基础上设计好的Hash算法减少Hash碰撞。
      */
     transient Node<K, V>[] table;
 
@@ -426,7 +430,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     transient int size;
 
     /**
-     * 用来记录HashMap内部结构发生变化的次数(如put新键值对,但不包括覆盖) or otherwise modify its internal structure (e.g.,rehash).  This field is used to make iterators on Collection-views of
+     * 用来记录HashMap内部结构发生变化的次数(如put新键值对,但不包括覆盖) or otherwise modify its internal structure (e.g.,rehash).  
+     * This field is used to make iterators on Collection-views of
      * the HashMap fail-fast.  (See ConcurrentModificationException).
      */
     transient int modCount;
