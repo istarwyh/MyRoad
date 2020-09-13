@@ -6,37 +6,3 @@ HashMap首先要解决的问题是Node的Key应该怎么映射，使得放进去
 [扰动函数](https://blog.csdn.net/mrchaochao/article/details/106340059?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-7.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-7.channel_param)
 
 [^组合模式]:[组合模式以及HashMap的设计分析（不包括具体实现）](http://www.manongjc.com/detail/17-vpesnqkfshssbzf.html)
-
-## 2. HashMap Use
-
-### 2.1. 另一个将count作为了属性
-[remove-duplicates-from-sorted-array-ii](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/)
-```
-class Solution {
-    public int removeDuplicates(int[] nums) {
-        // 对特殊情况进行优化,这里的特殊情况是长度小于3不用判断
-        if(nums.length < 3 ) return nums.length;
-        int p = 0;//[0,p]中存储次数至多为2的元素,p是区间尾
-        int count=1;// 元素出现的次数.
-        for(int i=1;i<nums.length;i++){
-                
-            if(nums[i] == nums[i-1]){
-                count++;
-            }else
-                count=1;
-            // 当它满足出现次数不超过2时,相当于给了nums[i]这个元素一个属性,当满足这个属性时
-            // 我把它添加在[0,p)这个集合中
-            if(count <= 2){
-                // p与i指向同一个位置时,避免多一次复制
-                if(p != i)
-                    nums[++p] = nums[i];
-                else    
-                    ++p;
-            }
-           
-        }
-        // 长度比区间尾的下标大1,[0,2]长度为3
-        return p+1;
-    }
-}
-```
