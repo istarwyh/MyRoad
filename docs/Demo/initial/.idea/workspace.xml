@@ -25,9 +25,11 @@
     <list default="true" id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hello/Solution$Pattern.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hello/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/hello/Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hello/Solution.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md.vswp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md.vswp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/_vnote.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +215,7 @@
       <workItem from="1599645778948" duration="7733000" />
       <workItem from="1599912123002" duration="2023000" />
       <workItem from="1599914255894" duration="12779000" />
-      <workItem from="1600001566064" duration="790000" />
+      <workItem from="1600001566064" duration="6422000" />
     </task>
     <servers />
   </component>
@@ -247,10 +249,11 @@
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state x="617" y="278" key="#Inspections/62.0.1858.1200@62.0.1858.1200" timestamp="1599901564532" />
-    <state x="509" y="103" key="#com.intellij.ide.util.MemberChooser" timestamp="1593253609719">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="678" y="143" key="#com.intellij.ide.util.MemberChooser" timestamp="1600071984647">
+      <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state x="509" y="103" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1593253609719" />
+    <state x="678" y="143" key="#com.intellij.ide.util.MemberChooser/62.0.1858.1200@62.0.1858.1200" timestamp="1600071984647" />
     <state x="967" y="125" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1593153849732">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -284,30 +287,30 @@
     </state>
     <state x="549" y="130" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1593671922757" />
     <state x="726" y="181" key="FileChooserDialogImpl/62.0.1858.1200@62.0.1858.1200" timestamp="1599901651894" />
-    <state width="1815" height="411" key="GridCell.Tab.0.bottom" timestamp="1600002362619">
+    <state width="1815" height="438" key="GridCell.Tab.0.bottom" timestamp="1600067830299">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
     <state width="1261" height="256" key="GridCell.Tab.0.bottom/62.0.1304.768@62.0.1304.768" timestamp="1599666480721" />
-    <state width="1815" height="411" key="GridCell.Tab.0.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
-    <state width="1815" height="411" key="GridCell.Tab.0.center" timestamp="1600002362619">
+    <state width="1815" height="438" key="GridCell.Tab.0.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
+    <state width="1815" height="438" key="GridCell.Tab.0.center" timestamp="1600067830299">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
     <state width="1261" height="256" key="GridCell.Tab.0.center/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="411" key="GridCell.Tab.0.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
-    <state width="1815" height="411" key="GridCell.Tab.0.left" timestamp="1600002362619">
+    <state width="1815" height="438" key="GridCell.Tab.0.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
+    <state width="1815" height="438" key="GridCell.Tab.0.left" timestamp="1600067830298">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
     <state width="1261" height="256" key="GridCell.Tab.0.left/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="411" key="GridCell.Tab.0.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
-    <state width="1815" height="411" key="GridCell.Tab.0.right" timestamp="1600002362619">
+    <state width="1815" height="438" key="GridCell.Tab.0.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830298" />
+    <state width="1815" height="438" key="GridCell.Tab.0.right" timestamp="1600067830299">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
     <state width="1261" height="256" key="GridCell.Tab.0.right/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="411" key="GridCell.Tab.0.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
+    <state width="1815" height="438" key="GridCell.Tab.0.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
     <state width="1815" height="411" key="GridCell.Tab.1.bottom" timestamp="1600002362620">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
@@ -366,7 +369,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java</url>
-          <line>30</line>
+          <line>35</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

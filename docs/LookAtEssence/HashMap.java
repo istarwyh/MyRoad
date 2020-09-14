@@ -149,20 +149,21 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * programming practices that are already so slow that this makes
      * little difference.)
      *
-     * Because TreeNodes are about twice the size of regular nodes, we
-     * use them only when bins contain enough nodes to warrant use
-     * (see TREEIFY_THRESHOLD). And when they become too small (due to
-     * removal or resizing) they are converted back to plain bins.  In
-     * usages with well-distributed user hashCodes, tree bins are
-     * rarely used.  Ideally, under random hashCodes, the frequency of
-     * nodes in bins follows a Poisson distribution
+     * Treenode占用的空间是常规节点的两倍，
+     * 所以只有当bin(即桶)中元素数量超过TREEIFY_THRESHOLD时才会使用treenode。
+     *  And when they become too small (due to
+     * removal or resizing) they are converted back to plain bins. 
+     * 在hash分布比较均匀的情况下，很少使用treenode。
+     *  Ideally, under random hashCodes, the frequency of
+     * nodes in bins follows a 泊松分布
      * (http://en.wikipedia.org/wiki/Poisson_distribution) with a
      * parameter of about 0.5 on average for the default resizing
      * threshold of 0.75, although with a large variance because of
      * resizing granularity. Ignoring variance, the expected
      * occurrences of list size k are (exp(-0.5) * pow(0.5, k) /
      * factorial(k)). The first values are:
-     *
+     * 假如在长度为length=16的数组中放入0.75*length=12个数据时，
+     * 数组中某一个下标放入k个数据（即数组后面的链表的数据量）的概率：
      * 0:    0.60653066
      * 1:    0.30326533
      * 2:    0.07581633
@@ -178,7 +179,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * sometimes (currently only upon Iterator.remove), the root might
      * be elsewhere, but can be recovered following parent links
      * (method TreeNode.root()).
-     *
+     * 所以选择大于8的时候转为treenode,相比转换的时间与double的空间是完全值得的
+     * 
      * All applicable internal methods accept a hash code as an
      * argument (as normally supplied from a public method), allowing
      * them to call each other without recomputing user hashCodes.
@@ -255,7 +257,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * Basic hash bin node, used for most entries.  (See below for
      * TreeNode subclass, and in LinkedHashMap for its Entry subclass.)
-     * Node是HashMap的一个内部类，实现了Map.Entry接口，本质是就是一个映射(键值对)的数据结构,用来存储put进去的每个k-v
+     * Node是HashMap的一个内部类，实现了Map.Entry<K,V>接口，本质是就是一个映射(键值对)的数据结构,用来存储put进去的每个k-v
      * 这种泛型？
      */
     static class Node<K, V> implements Map.Entry<K, V> {
@@ -314,15 +316,17 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Because the table uses power-of-two masking, sets of
      * hashes that vary only in bits above the current mask will
      * always collide. (Among known examples are sets of Float keys
-     * holding consecutive whole numbers in small tables.)  So we
-     * apply a transform that spreads the impact of higher bits
+     * holding consecutive whole numbers in small tables.
+     * 比如，在(n-1) 为15(0x1111)时，散列值真正生效的只是低4位。
+     * 当新增的键的hashcode()是2，18，34这样恰好以16的倍数为差的等差数列，就产生了大量碰撞。)  
+     * So weapply a transform that spreads the impact of higher bits
      * downward.
      * There is a tradeoff between speed, utility, and
-     * quality of bit-spreading. Because many common sets of hashes
-     * are already reasonably distributed (so don't benefit from
-     * spreading), and because we use trees to handle large sets of
-     * collisions in bins, we just XOR some shifted bits in the
-     * cheapest possible way to reduce systematic lossage, as well as
+     * quality of bit-spreading.因为现在大多数 hashes
+     * 已经被合理分布了 (so don't benefit from
+     * spreading), 而且因为我们已经使用树来处理在桶中万一发生的大量碰撞, 
+     * we just XOR some shifted bits in the
+     * cheapest possible way(就异或一次) to reduce 系统开销(systematic lossage), as well as
      * to incorporate impact of the highest bits that would otherwise
      * never be used in index calculations because of table bounds.
      */
@@ -331,10 +335,12 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         // 首先一个前提,key.hashCode()返回int型的hash值，2……31 * 2的空间太大不能直接用来做索引
         // 所以必须要借用余数或者异或操作来保留hash值特征的同时映射到较小范围做索引
 
-        
-        //1.8中替换了1.7中取模运算(这里没有出现),因为位运算更快
+
+        //取模运算 -> 1.7四次移位和四次异或位运算 ->  1.8一次异或
+            // **扰动**一次就够了
         //1.取key得hashcode值
-        //2.高位参与运算--h和h右移16位做异或运算,事实上是用右移后的数来保留hashCode的末几位的特征,比如
+        //2.高位参与运算--h和h右移16位做异或运算
+            //事实上是用混合后的低位掺杂高位的部分特征，变相保留高位信息作索引
         // 1000000的二进制: 00000000 00001111 01000010 01000000
         // 右移16位：       00000000 00000000 00000000 00001111
         // 异或后:          00000000 00001111 01000010 01001111
@@ -395,7 +401,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 // -1无符号右移27位, 所以值为2^32 -1 ==  31 == 00000000 00000000 00000000 00011111
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
         // 00011111
-        // -1无符号右移 m = Integer.numberOfLeadingZeros(cap - 1) 位的时候会获取一个2^(n+1)-1的值，最后+1就会是cap的两倍(n = siezeOf(int) - m)
+        // -1无符号右移 m = Integer.numberOfLeadingZeros(cap - 1) 位的时候会获取一个2^(n+1)-1的值，最后+1就会是cap的两倍(n = siezeOf(int)(32) - m)
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
@@ -594,10 +600,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         int n;
         K k;
         //table也就是节点表(为什么不叫节点树?因为其实的确是在数组坑位底下的链表节点里,在链表长度大于8时才变成红黑树)
-        // 保证table不为null且不为空,然后计算key在table中的索引位置
+        // 保证table不为null且不为空,然后计算key在table中的索引位置(通过hash值映射到数组长度内·)
         // 因为 n 永远是2的次幂，所以 n-1 通过 二进制表示，永远都是尾端以连续1的形式表示
         // 比如16的初始容量-->10000,16-1=15-->01111.这样当(n-1)和hash做与运算时,一定会保留hash中除(n-1)最后一位后的所有位置上的1(二进制)
-        // 事实上当n为2次幂的时候,一定有     (n-1)&hash = hash % n
+        // 事实上当n为2次幂的时候,一定有     
+        // (n-1)&hash = hash % n
         // 优势很明显:
         // 1.&操作速度比%快; 
         // 2.索引值在capacity中不会超出数组长度
@@ -646,7 +653,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * previously associated {@code null} with {@code key}.)
      */
     public V put(K key, V value) {
-        // 外观(Facade)模式的设计方法，为外部调用提供一个简单的接口
+        // 外观(Facade)模式设计，为外部调用提供一个简单的接口
         return putVal(hash(key), key, value, false, true);
     }
 
@@ -666,10 +673,15 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         Node<K, V> p;
         int n, i;
         // 数组为空则初始化数组
+
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
             // 数组不为空则计算桶位
                     // 如果桶位为空，则创建新结点并存放
+                        // 线程不安全！： 
+                        // 当A线程判断index位置为空后正好挂起，
+                        // B线程开始往index位置的写入节点数据，
+                        // 这时A线程恢复现场，执行赋值操作，就把A线程的数据给覆盖了
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
                     // 如果发生了hash冲突，即桶位根结点已被占
@@ -693,6 +705,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 for (int binCount = 0; ; ++binCount) {
                     // 正常插入
                     if ((e = p.next) == null) {
+                        // 链表的插入方式从头插法改为了尾插法
+                            // 1.7的头插法会使链表发生反转，多线程环境下会产生环
                         p.next = newNode(hash, key, value, null);
                         // 如果结点数超过TREEIFY_THRESHOLD==8，则转成红黑树
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
@@ -718,6 +732,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
         ++modCount;
         // 如果结点数大于阈值，扩容为2倍
+            //线程不安全!:
+            // 这里可能会造成多线程同时扩容
         if (++size > threshold)
             resize();
         afterNodeInsertion(evict);
@@ -730,7 +746,13 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Otherwise, because we are using power-of-two expansion, the
      * elements from each bin must either stay at same index, or move
      * with a power of two offset in the new table.
-     *
+     * 1.7需要对原数组中的元素进行重新hash定位在新数组的位置
+     * 1.8位置不变或索引+旧容量大小
+     *      那么1.8废除了1.7的indexFor()方法，不用rehash怎么找桶的位置？
+     *      因为 (n-1) & hash 这个公式中，hash值不变，二倍扩容后的n-1在高位变了1
+     *      如 (16 -1)  = 00001111 -> (32 -1) = 00011111
+     *      所以总结下来原来计算后就两种情况，高位为0，位置不变；高位为1，计算结果高位多个1，即索引+旧容量大小
+     *      那么干脆再省略一步，直接以判断代替计算！
      * @return the table
      */
     final Node<K, V>[] resize() {
@@ -744,6 +766,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 return oldTab;
             } else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
                     oldCap >= DEFAULT_INITIAL_CAPACITY)
+                    // 将当前数组长度扩大一倍
                 newThr = oldThr << 1; // double threshold
         } else if (oldThr > 0) // initial capacity was placed in threshold
             newCap = oldThr;
@@ -758,9 +781,11 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         }
         threshold = newThr;
         @SuppressWarnings({"rawtypes", "unchecked"})
+            // 扩容时创建新的数组
         Node<K, V>[] newTab = (Node<K, V>[]) new Node[newCap];
         table = newTab;
         if (oldTab != null) {
+            //  循环遍历老map中的所有数据，迁移到新数组中对应位置，进行扩容操作
             for (int j = 0; j < oldCap; ++j) {
                 Node<K, V> e;
                 if ((e = oldTab[j]) != null) {
@@ -775,6 +800,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                         Node<K, V> next;
                         do {
                             next = e.next;
+                            // 通过当前hash与数组长度进行 & 操作，判断是否为0 --> 判断高位大小
+                            // 来区分该元素是不变位置还是需要重新更换位置
                             if ((e.hash & oldCap) == 0) {
                                 if (loTail == null)
                                     loHead = e;
@@ -791,10 +818,12 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                         } while ((e = next) != null);
                         if (loTail != null) {
                             loTail.next = null;
+                            // 高位为0，位置不变
                             newTab[j] = loHead;
                         }
                         if (hiTail != null) {
                             hiTail.next = null;
+                            // 像上面已证明的，index + 现有数组的长度 就是新数组中的索引位置
                             newTab[j + oldCap] = hiHead;
                         }
                     }
@@ -807,16 +836,18 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * Replaces all linked nodes in bin at index for given hash unless
      * table is too small, in which case resizes instead.
+     * hashmap的设计是尽可能不用红黑树(S(n) = 2O(n))，所以要满足链表长度>8和数组长度>64
      */
     final void treeifyBin(Node<K, V>[] tab, int hash) {
         int n, index;
         Node<K, V> e;
+        // //容量小于MIN_TREEIFY_CAPACITY（默认64）也不进行转换，而是进行resize扩容
         if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
             resize();
         else if ((e = tab[index = (n - 1) & hash]) != null) {
             TreeNode<K, V> hd = null, tl = null;
-            do {
-                TreeNode<K, V> p = replacementTreeNode(e, null);
+            do { // 循环遍历链表，转化为红黑树
+                TreeNode<K, V> p = replacementTreeNode(e, null);//根据链表的node创建treenode
                 if (tl == null)
                     hd = p;
                 else {
@@ -881,6 +912,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     ((k = p.key) == key || (key != null && key.equals(k))))
                 node = p;
             else if ((e = p.next) != null) {
+                // 
                 if (p instanceof TreeNode)
                     node = ((TreeNode<K, V>) p).getTreeNode(hash, key);
                 else {
