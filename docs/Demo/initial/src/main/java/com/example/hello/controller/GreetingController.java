@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 告诉Spring MVC不需要使用服务器端视图层(view)渲染对象,而应该直接返回一个ResponseBody
  * Spring Boot 中默认使用的 Json 解析技术框架是 jackson,来自于spring-boot-starter-json 依赖
- * 还可以采用阿里的fastJson
  */
 @ResponseBody
 @RequestMapping("/test")

@@ -12,6 +12,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.io.IOException;
 
+/**
+ * jackson json配置示例：所有的 null 在转 json 时都变成 "" 这种空字符串
+ */
 @Configuration
 public class JacksonConfig {
     @Bean

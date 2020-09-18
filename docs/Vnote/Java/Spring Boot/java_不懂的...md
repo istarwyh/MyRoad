@@ -15,3 +15,5 @@ ORM（Object Relational Mapping）框架采用**元数据**来描述对象与关
 #### 3.1.1. Hibernate
 #### 3.1.2. Mybatis
 对底层封装的多,学习成本低,但是框架间没有统一的接口标准
+## 4. 面向对象与数据库的不协调
+[分库分表常见玩法及跨库查询/事务等问题](https://www.jianshu.com/p/6f5662908dae)

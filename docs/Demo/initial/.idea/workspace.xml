@@ -24,11 +24,17 @@
   <component name="ChangeListManager">
     <list default="true" id="4c2aa751-2809-423d-8e4c-d0738b50c127" name="默认的" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/hello/Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../LookAtEssence/HashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hello/config/JacksonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hello/config/JacksonConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hello/controller/GreetingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hello/controller/GreetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/Sping ini.md.vswp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/_vnote.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/java_不懂的...md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/Java/Spring Boot/java_不懂的...md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/Java/基础知识/IO.md.vswp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md.vswp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md.vswp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/HashMap Use.md.vswp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/_v_images/20200914150224213_24914.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/_vnote.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Vnote/程序员练级之路/算法足迹/_vnote.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +84,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../csv2InfluxDB/pom.xml" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.15" />
@@ -92,6 +98,13 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="H:\桌面\TestCode\docs\Demo\initial\src\main\resources\templates\error" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Application.Solution">
     <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -183,8 +196,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Solution" />
-        <item itemvalue="Application.Tmp" />
         <item itemvalue="Spring Boot.MybatisApplication" />
+        <item itemvalue="Application.Tmp" />
         <item itemvalue="JUnit.com.example.mybatistest.entity在rest-service" />
         <item itemvalue="Spring Boot.Application" />
       </list>
@@ -215,7 +228,9 @@
       <workItem from="1599645778948" duration="7733000" />
       <workItem from="1599912123002" duration="2023000" />
       <workItem from="1599914255894" duration="12779000" />
-      <workItem from="1600001566064" duration="6422000" />
+      <workItem from="1600001566064" duration="7320000" />
+      <workItem from="1600226573274" duration="7875000" />
+      <workItem from="1600324782934" duration="11695000" />
     </task>
     <servers />
   </component>
@@ -282,55 +297,59 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="779" y="113" key="#检查/0.0.1536.864@0.0.1536.864" timestamp="1593153118235" />
-    <state x="726" y="181" key="FileChooserDialogImpl" timestamp="1599901651894">
+    <state x="726" y="181" key="FileChooserDialogImpl" timestamp="1600306854680">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state x="549" y="130" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1593671922757" />
-    <state x="726" y="181" key="FileChooserDialogImpl/62.0.1858.1200@62.0.1858.1200" timestamp="1599901651894" />
-    <state width="1815" height="438" key="GridCell.Tab.0.bottom" timestamp="1600067830299">
+    <state x="726" y="181" key="FileChooserDialogImpl/62.0.1858.1200@62.0.1858.1200" timestamp="1600306854680" />
+    <state width="1815" height="411" key="GridCell.Tab.0.bottom" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
-    <state width="1261" height="256" key="GridCell.Tab.0.bottom/62.0.1304.768@62.0.1304.768" timestamp="1599666480721" />
-    <state width="1815" height="438" key="GridCell.Tab.0.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
-    <state width="1815" height="438" key="GridCell.Tab.0.center" timestamp="1600067830299">
+    <state width="1815" height="411" key="GridCell.Tab.0.bottom/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.0.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.0.center" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
-    <state width="1261" height="256" key="GridCell.Tab.0.center/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="438" key="GridCell.Tab.0.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
-    <state width="1815" height="438" key="GridCell.Tab.0.left" timestamp="1600067830298">
+    <state width="1815" height="411" key="GridCell.Tab.0.center/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.0.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.0.left" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
-    <state width="1261" height="256" key="GridCell.Tab.0.left/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="438" key="GridCell.Tab.0.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830298" />
-    <state width="1815" height="438" key="GridCell.Tab.0.right" timestamp="1600067830299">
+    <state width="1815" height="411" key="GridCell.Tab.0.left/62.0.1304.768@62.0.1304.768" timestamp="1600226524568" />
+    <state width="1815" height="411" key="GridCell.Tab.0.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.0.right" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="85" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1593745473658" />
-    <state width="1261" height="256" key="GridCell.Tab.0.right/62.0.1304.768@62.0.1304.768" timestamp="1599666480720" />
-    <state width="1815" height="438" key="GridCell.Tab.0.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600067830299" />
-    <state width="1815" height="411" key="GridCell.Tab.1.bottom" timestamp="1600002362620">
+    <state width="1815" height="411" key="GridCell.Tab.0.right/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.0.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.1.bottom" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="217" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1593329639468" />
-    <state width="1815" height="411" key="GridCell.Tab.1.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362620" />
-    <state width="1815" height="411" key="GridCell.Tab.1.center" timestamp="1600002362619">
+    <state width="1815" height="411" key="GridCell.Tab.1.bottom/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.1.bottom/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.1.center" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="217" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1593329639467" />
-    <state width="1815" height="411" key="GridCell.Tab.1.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
-    <state width="1815" height="411" key="GridCell.Tab.1.left" timestamp="1600002362619">
+    <state width="1815" height="411" key="GridCell.Tab.1.center/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.1.center/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.1.left" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="217" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1593329639467" />
-    <state width="1815" height="411" key="GridCell.Tab.1.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
-    <state width="1815" height="411" key="GridCell.Tab.1.right" timestamp="1600002362619">
+    <state width="1815" height="411" key="GridCell.Tab.1.left/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.1.left/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
+    <state width="1815" height="411" key="GridCell.Tab.1.right" timestamp="1600327261686">
       <screen x="62" y="0" width="1858" height="1200" />
     </state>
     <state width="1492" height="217" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1593329639468" />
-    <state width="1815" height="411" key="GridCell.Tab.1.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600002362619" />
+    <state width="1815" height="411" key="GridCell.Tab.1.right/62.0.1304.768@62.0.1304.768" timestamp="1600226524569" />
+    <state width="1815" height="411" key="GridCell.Tab.1.right/62.0.1858.1200@62.0.1858.1200" timestamp="1600327261686" />
     <state x="698" y="166" key="IDE.errors.dialog" timestamp="1593139291548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -363,17 +382,6 @@
     <state x="814" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1593329415214" />
     <state x="1018" y="248" width="840" height="911" key="search.everywhere.popup/0.0.1920.1160@0.0.1920.1160" timestamp="1596513173157" />
     <state x="1047" y="257" width="813" height="943" key="search.everywhere.popup/62.0.1858.1200@62.0.1858.1200" timestamp="1599918048027" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/hello/Solution.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/demo_training$Tmp.ic" NAME="Tmp Coverage Results" MODIFIED="1599128333427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
