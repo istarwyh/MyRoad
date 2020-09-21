@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 就当前的项目来说,换成@Component,@Configuration其实对于将UserService作为一个类放到IOC容器中被其管理都是可行的
+ * 就当前的项目来说,
+ * 换成@Component,@Configuration其实对于将UserService作为一个类放到IOC容器中被其管理都是可行的
  */
 @Service
 public class UserService {

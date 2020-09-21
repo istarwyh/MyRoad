@@ -39,6 +39,6 @@ public class ThymeleafController {
 //        TODO:对象放到model中,但是model谁给的?model的参数又怎么传到thymeleaf页面的?Model支持的多种构造方式默认的应该怎么用?
         model.addAttribute(userList);
         //      指按MVC view的方式解析list,即找templates底下的list.html
-        return "list";
+        return "userList";
     }
 }

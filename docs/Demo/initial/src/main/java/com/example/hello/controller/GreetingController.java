@@ -61,7 +61,7 @@ public class GreetingController {
     }
 
     /**
-     * 使用实体类来接收前端传过来的数据
+     * 使用实体类来接收前端传过来的数据???
      *
      * @param greeting
      * @return

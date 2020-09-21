@@ -25,13 +25,13 @@ public class UserController {
         return userService.selectAllUser();
     }
 
-    @RequestMapping("delete")
+    @RequestMapping("/delete")
     public String testDelete() {
         userService.deleteService(3);
         return "OK";
     }
 
-    @RequestMapping("update")
+    @RequestMapping("/update")
     public String testUpdate() {
         userService.updateService();
         return "OK";
