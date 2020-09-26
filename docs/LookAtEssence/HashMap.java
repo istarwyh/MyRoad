@@ -729,8 +729,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 afterNodeAccess(e);
                 return oldValue;
             }
-        }
-        ++modCount;
+            ++modCount;
         // 如果结点数大于阈值，扩容为2倍
             //线程不安全!:
             // 这里可能会造成多线程同时扩容
@@ -739,7 +738,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         afterNodeInsertion(evict);
         return null;
     }
-
+  
     /**
      * Initializes or doubles table size.  If null, allocates in
      * accord with initial capacity target held in field threshold.
