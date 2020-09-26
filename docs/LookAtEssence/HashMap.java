@@ -683,8 +683,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                         // B线程开始往index位置的写入节点数据，
                         // 这时A线程恢复现场，执行赋值操作，就把A线程的数据给覆盖了
         if ((p = tab[i = (n - 1) & hash]) == null)
+                        // 只得注意的是,这里即使是 null 也可以被当作key创立一个空结点然后放入桶中
             tab[i] = newNode(hash, key, value, null);
-                    // 如果发生了hash冲突，即桶位根结点已被占
+        else{            // 如果发生了hash冲突，即桶位根结点已被占
             Node<K, V> e;
             K k;
             // 比较现有p与要插入的key
@@ -721,6 +722,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     p = e;
                 }
             }
+        
             // 覆盖旧结点的值并返回旧结点
             if (e != null) { // existing mapping for key
                 V oldValue = e.value;
@@ -729,7 +731,8 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 afterNodeAccess(e);
                 return oldValue;
             }
-            ++modCount;
+        }
+        ++modCount;
         // 如果结点数大于阈值，扩容为2倍
             //线程不安全!:
             // 这里可能会造成多线程同时扩容
