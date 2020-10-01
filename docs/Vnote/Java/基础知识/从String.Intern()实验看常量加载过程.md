@@ -1,4 +1,24 @@
 
+
+## 1. 初识字符串源码
+```java
+`public final class String {
+    private final char value[];
+    ...
+}
+```
+两个`final`，一个`private`，并且不提供`set()`决定了String是一个不可变类。为何这样设计呢？
+
+- 为了复用（字符串常量池）
+- 安全：
+    - String在Java中被广泛应用于类的参数，包括网络请求，打开文件等操作，若String是可变的，String字面量的更改可能会引起连接或文件被错误访问
+    - String这样的核心类，需要通过`JNI`(Java Native Interface)结合操作系统完成，如果String可以被继承并重写方法，很有可能对操作系统带来威胁[^String设计]
+- 并发：String的方法均没有加任何锁，但由于它的不可变性，使得String对象可以在多个线程之间自由共享
+
+[^String设计]:[深入理解String、StringBuffer与StringBuilder](https://blog.csdn.net/qq_40401156/article/details/108464386)
+
+## 2. 创建字符串与字符串常量池
+
 >**字符串常量池本质上是个哈希表，它存储的是字符串实例对象的引用![^jvm]**
 
 [^jvm]:[从字符串到常量池，一文看懂String类](https://mp.weixin.qq.com/s?__biz=MzU5ODg2Njk4OA==&mid=2247484037&idx=1&sn=5f0805bd6c62f690ffa06c3982959889&chksm=febcefc6c9cb66d0cb70d70fac2e4fee73ef2fa32d91f16cb0c6510f5b32ae78f629bb612ddb&mpshare=1&scene=1&srcid=&sharer_sharetime=1593613925350&sharer_shareid=f059618cb093f5efb49a39cd6562e90e&key=7a6ffc80620031bc540a4b92b391e87157b55c88e52904cbb835bda526e0ff1a586d1c6101fb542490828c08cdfce2866392d015927be5907d84463dc26371ef31dd9fe02f79e0fb09eb956dbbf22976&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&exportkey=A8edtILws1QNJsxnTLC8Iqs%3D&pass_ticket=aFoiqjOTcc8UhC9qVxDI%2BkM0NqWcoqXdVcdpjeCgXbTcKBGqej6Xds48IfMw5j8m)
@@ -70,3 +90,42 @@ public class Solution {
 }
 
 ```
+
+## 3. 字符串拼接中“+”的重载
+```java
+public class Test {
+    // 字符串常量会被放入字符串常量池中
+    public static final String R = "lianxiang";
+    public static String a = "lian";
+    public static String b = "xiang";
+    public static final String A = "lian";
+    public static final String B  = "xiang";
+    public static void main(String[] args) {
+        String i = "lian"+"xiang";
+        String j = "lian";String k = "xiang";
+        String h = new StringBuilder("lian").append("xiang").toString();
+        String y = R.substring(0);
+        // 字符串字面量会被解析为字符串常量
+        /** 
+         * "+"号对于  字符串常量  会优先查找字符串常量池中有没有对应的字符串引用({1})
+         */
+        System.out.println( i == R); // true
+        // 与{1}同理
+        System.out.println( (A+B) == R); // true
+
+        // StringBuilder与StringBuffer底层的可变数组是一定会在堆中创建新对象并返回引用的({3})
+        System.out.println( h == R); // false
+        /** 
+         * "+"号对于  字符串引用 则实际上等于调用append()方法({2})
+         */
+        System.out.println( (a+b) == R); // false
+        // 与{2}同理
+        System.out.println( (j+k) == R); // false
+
+        // 与{3}同理
+        System.out.println( y == R); // true
+    }
+}
+
+```
+
