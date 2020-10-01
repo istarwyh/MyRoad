@@ -39,10 +39,8 @@ public class Test2 {
             System.out.print("请输入要生成的随机数数目: ");
             int n = input.nextInt();
             //随机数生成返回随机数组
-            Object[] randomValues = t.test4(equalClass, n);
-            for (int i = 0; i < randomValues.length; i++) {
-                HashSet<Integer> row = (HashSet<Integer>) randomValues[i];
-                System.out.println(row.toString());
+            for (HashSet<?> row : (HashSet<Integer>[]) t.test4(equalClass, n)) {
+                System.out.println( row.toString() );
             }
 
             input.close();
@@ -122,7 +120,7 @@ public class Test2 {
         if (!isLegalRangeArray(rangeArray, n)) {
             throw new RuntimeException("区间过小不足以生成指定数目的随机数");
         }
-        Object[] randomValues = new Object[3];
+        HashSet<?>[] randomValues = new HashSet[3];
         for (int i = 0; i < randomValues.length; i++) {
             randomValues[i] = this.randomValueSet(i, n, rangeArray);
         }
