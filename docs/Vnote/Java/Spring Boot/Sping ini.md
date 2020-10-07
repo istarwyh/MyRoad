@@ -1,26 +1,28 @@
 [toc]
 
-## 1. JavaEE
-`Java EE`，Java 平台企业版（Java Platform Enterprise Edition），之前称为Java 2 Platform Enterprise Edition (`J2EE`)，2018年因为Java被收购的原因更名为 `Jakarta EE`,是一种利用Java平台来简化企业解决方案的开发、部署和管理相关的复杂问题的体系结构。
-JavaEE 当年号称有十三种核心技术[^javaEE]用以解决**企业开发**多方面的问题，如：
-- EJB负责核心业务逻辑，且支持分布式
+## 1. J2EE/Jakarta EE与Spring
+### 1.1 J2EE概述
+现名为`Java EE`，Java 平台企业版（Java Platform Enterprise Edition）,是一种利用Java平台来简化企业解决方案的开发、部署和管理相关的复杂问题的体系结构.之前称为Java 2 Platform Enterprise Edition (`J2EE`)，2018年因为Java被收购的原因更名为 `Jakarta EE`,这里仍采用经典称呼`J2EE`.
+J2EE当年号称有十三种核心技术[^javaEE]用以解决**企业开发**多方面的问题，如：
+[^javaEE]:[javaEE的13种核心技术](https://blog.csdn.net/zyb_icanplay7/article/details/8492996)
+
+- EJB(Enterprise Java Beans)负责核心业务逻辑，且支持分布式
 - JMS管理消息队列
 - JAXP处理XML
 - JTA管理事务
 - Java Mail发邮件...
 
-现在它们都成为了经典，下面再介绍几个经典:
+现在它们都成为了经典(凉了...)，下面再介绍几个经典:
+
 - JSP
 JSP（全称JavaServer Pages）是由 Sun 公司主导创建的一种动态网页技术标准。JSP 部署于网络服务器上，可以响应客户端发送的请求，并根据请求内容动态地生成 HTML、XML 或其他格式文档的 Web 网页，然后返回给请求者。
 - Servlet
 Servlet（Server Applet），是用 Java 编写的**服务器端程序**。其主要功能在于交互式地浏览和修改数据，生成动态 Web 内容。
 狭义的 Servlet 是指 Java 语言实现的一个接口，广义的 Servlet 是指任何实现了这个 Servlet 接口的类，一般情况下，人们将 Servlet 理解为后者。
-- JDBC
+- JDBC(还在用)
 Java 数据库连接，（Java Database Connectivity，JDBC）是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口，提供了诸如查询和更新数据库中数据的方法。
-从`spring boot`到`spring cloud`的大型分布式应用,官方都为你~
 
-
-### 1.1. Spring 框架
+### 1.2. Spring 框架
 广义的 Java EE 包含各种框架，其中最重要的就是 Spring 全家桶。
 ![Spring Frameeork](https://gitee.com/istarwyh/images/raw/master/1584083693_20200313151343065_16877.png)
 Spring 诞生之初是为了改进 Java EE 开发的体验，后来逐渐成为了 Java Web [^JavaWeb]开发的实际标准.目前Spring 是用于构建 Java 应用的一套工具的集合，包括
@@ -31,9 +33,11 @@ Spring 诞生之初是为了改进 Java EE 开发的体验，后来逐渐成为�
 - Spring Data:提供对**非关系型与关系型数据库**的支持，为数据访问提供熟悉且一致的基于Spring的编程模型，同时仍保留底层数据存储的特殊特性[^SpringDataJPA]。
 - Spring Cloud:协调,一个基于 Spring Boot 实现的云应用/分布式开发工具,允许服务发现和注册、负载均衡、配置中心、熔断机制等开箱即用[^SpringDataJPA]. 
 [^SpringDataJPA]: [Spring Data JPA是什么（Spring家族）](https://www.cobing.com/archives/669)
+
 - Spring Cloud Data Flow:连接,基于 Spring Boot 的工具，用于简化专注于数据处理用例的应用程序的开发和部署。
 ![](https://img-blog.csdnimg.cn/20190319115652186.png)
 目前比较常见的Spring框架组合:
+
 - SSH
 Structs + Spring + Hibernate
 - SSM
@@ -41,10 +45,10 @@ Spring +SpringMVC + MyBatis
 
 所以再解释几个名词:
 
-- Spring MVC: 基于 Spring 的 MVC 框架，包含了 Spring 的功能核心,是spring 处理web层请求的一个模块。
-- Hibernate 与Mybatis: ORM（Object Relational Mapping）持久层开发框架,一个实现了POJO 和数据库表之间的映射,一个实现了POJO(Plain Ordinary Java Object,实体类) 与SQL之间的映射关系,都可以自动生成简单基本的DAO层方法。
+- Spring MVC: 基于 Spring 的 MVC 框架(Model-View-Controller),是spring 处理web层请求的现有实践模块
+- Hibernate 与Mybatis: ORM（Object Relational Mapping）持久层开发框架,一个实现了POJO 和数据库表之间的映射,一个实现了POJO(Plain Ordinary Java Object,实体类) 与SQL之间的映射关系,都可以自动生成简单基本的DAO层方法
 - JPA:Java Persistence API规范,整合ORM标准,Hibernate JPA是其具体实现之一
-- Spring Data JPA,对JPA规范的再次抽象,包含了JPA规范和Spring项目的增加功能:分页、排序、复杂查询等.
+- Spring Data JPA,对JPA规范的再次抽象,包含了JPA规范和Spring项目的增加功能:分页、排序、复杂查询等
 
 ### 1.2. Spring思想
 #### 1.2.1. 从面向过程到面向对象
@@ -80,7 +84,7 @@ IOC容器的作用就是管理类之间复杂的依赖关系,即降低类之间�
 Spring AOP采用JDK的动态代理（反射）实现AOP代理，在运行时完成AOP的aspect代码内联如原代码中。从业务的角度，AOP便是实现了在已有类和方法的前后加上事务管理,日志管理等功能，
 
 >[比如](https://cloud.tencent.com/developer/article/1579202)现在有5个类，每个类有5个方法，如果我想要在每个方法执行完成之后打印方法名，按照没有AOP的思想就是在每个方法后面加上logger.info或者system.out.println。
->一共就需要些25行代码，这个时候aop登场。建立一个切面类，然后定位到这5个类的每个方法，加一个后置通知（就是方法执行完之后会执行这个通知，本质上是一个方法）。
+>一共需要25行代码.这个时候AOP登场,t建立一个切面类，然后定位到这5个类的每个方法，加一个后置通知（就是方法执行完之后会执行这个通知，本质上是一个方法）。
 >这样25行的代码简化成了一个方法加方法体的一行代码.
 
 这样的设计遵循了面向对象的封装复用理念，即把**核心业务功能**（登录、CRUD 等）与周边功能（性能统计、日志、**事务管理**等）区分开。如下图所示：
@@ -88,6 +92,7 @@ Spring AOP采用JDK的动态代理（反射）实现AOP代理，在运行时完�
 
 简单说AOP将重复的功能形成组件，**在需要处切入**,是一种粒度更大的面向对象编程。
 
+接下来重点介绍Spring全家桶中的SpringBoot.
 ## 2. 从WWW到SpringBoot
 >只有知晓了历史,才可能把握未来
 
@@ -365,7 +370,7 @@ OSI：
 ##### 2.8.2.3. 软件开发分层
 参考《阿里巴巴开发手册》：
 ![](https://gitee.com/istarwyh/images/raw/master/1598959010_20200901163716527_21626.png)
-#### 2.8.3. 与程序的关系
+#### 2.8.3. 与程序的关系i
 这背后是基于对
 <center><strong>Program = Logic+Control+Data Structure</strong></center>
 
@@ -377,7 +382,7 @@ OSI：
 - `Controller`层则响应客户端的请求,控制业务逻辑的调用,代表`Control`的部分
 
 >面向对象的本质是面向数据库开发
-## 3. 微服务
+## 3. 从一个SpringBoot到微服务
 ### 3.1. 单体架构的无奈
 在同一个服务器上部署同一个系统，往往是比较容易部署于测试的。但是随着需求的不断膨胀，单体应用欲图通过使用统一的技术平台解决所有的问题是不现实的（Node.js想统一前后端也受限于此）。
 ### 3.2. SOA的诞生
@@ -392,7 +397,7 @@ OSI：
 同时不同服务之间的交互通过RPC实现。
 ![](https://gitee.com/istarwyh/images/raw/master/1600307355_20200916212743655_1611.png)
 #### 3.2.2. RPC的沿革
-,早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现消息异步处理。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
+早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现消息异步处理。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
 
 `http`作为一种最常用的交互方式，在内部系统服务调用很复杂的情况下，包括效率和安全性在内，需要一个内部服务的管理系统--即RPC。本地调用的过程至少需要涉及
 - 确定的类或参数
