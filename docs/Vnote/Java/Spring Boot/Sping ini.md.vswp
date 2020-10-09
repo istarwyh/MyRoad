@@ -201,10 +201,9 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
 -  `@AutoConfigurationPackage`将主配置类(`@SpringBootApplication`)的所在包以及下面所有子包里面的所有组件扫描到Spring容器
 -  http方法映射
     - `@RequestMapping`提供路由信息，负责URL到Controller中的具体函数的映射。 如果没有指定请求方式，将接收`Get、Post、Head、Options`等所有的请求方式。
-        -  `@GetMapping`==`@RequestMapping(method = 
-RequestMethod.GET)`的缩写。该注解将HTTP Get 映射到特定的处理方法上。 
+        -  `@GetMapping`==`@RequestMapping(method = RequestMethod.GET)`的缩写。该注解将HTTP Get 映射到特定的处理方法上。 
         - - Get示例:
-        >`https://ganzhiqiang.wang/ares/goods/detail/?goods_id=55`
+        >`https://yihui.wang/ares/goods/detail/?goods_id=55`
        
        - 同理`PostMapping`==`@RequestMapping(method = RequestMethod.POST)`
        -  - Post示例:
