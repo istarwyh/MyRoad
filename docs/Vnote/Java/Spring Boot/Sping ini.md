@@ -180,14 +180,20 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
 - `JSP`* -->`View`
     - `ViewResolver`来处理逻辑视图名与具体View实例之间的映射关系
 #### 2.5.2. 基于注解的Spring MVC
-以Controller为例,基于注解的Controller和传统的Controller没有什么区别,都是普通的POJO.注解的本质也是语法糖,利用的是Java的反射.对于基于注解的Controller,它至少需要解决两个问题:
+以Controller为例,基于Annotation的Controller和传统的Controller没有什么区别,都是普通的POJO.Java 通过元注解[^Metadata]定义在被注解的类结构上得到注解，然后这个注解再被使用，借助Java反射实现被注解的类功能。即Java注解的形式和功能是分离的，本质是语法糖,这不同于 Python 的装饰器[^DisSpringBoot]会直接传递功能类，两者好比[引用传递和值拷贝](https://juejin.im/post/6867121018897432590)的关系。
+对于基于注解的Controller,它至少需要解决两个问题:
 - Spring MVC框架类(DispatcherServlet)怎么知道当前Web请求应该由哪个基于注解的Controller处理?
 - Spring MVC框架类怎么知道基于注解的Controller的哪个方法来处理具体的Web请求?
+
+[^Metadata]:即定义注解的注解，与元数据类似，如@Target({ElementType.TYPE})注解适用类型与@Retention(RetentionPolicy.RUNTIME)注解生命周期等
+
+[^DisSpringBoot]:[DisSpringBoot](https://zhuanlan.zhihu.com/p/54146400)
 
 解决方法简单说:
 
 1. 注解中附加了有用的元数据信息与基础类
-2. 基于约定或配置的扫描件基于注解的类纳入IoC容器进行管理
+2. 基于约定或配置扫描有关注解类并纳入IoC容器进行管理
+    - 比如将`@Controller` 注解的类作为 URL 路由注册到 `DispatcherServlet`中，并在创建 Tomcat Server 时传入请求处理器
 3. AOP动态代理
 
 
@@ -228,6 +234,11 @@ public class UserController {
    ......
 }
 ```
+
+**非空校验注解**
+- `@NotEmpty`用在集合类上面,不能为null，并且长度必须大于0
+- `@NotBlank`用在String上面,只能作用在String上，不能为null，而且调用trim()后，长度必须大于0
+- `@NotNull` 用在基本类型上,不能为null，但可以为空字符串
 
 后来人们越来越喜欢用注解,并且发现还有大量重复的代码可以打包变成依赖,或者干脆基于`Convention Over Configuration`(约定优于配置)的方式省略这些代码,于是诞生了Spring Boot.
 #### 2.5.3. 新一代的模板引擎thymeleaf
@@ -324,11 +335,13 @@ Spring本质上就一个`IOC`容器，SpringBoot相对Spring像一个全家桶�
      - Spring Boot框架尽管通过组合注解方式实现了诸多Spring注解的组合，但是注解依旧会被大量重复地用到各个类或者方法中
 - tomcat、jetty等只是被内置了简化了部署，但是要想容器调优除了依旧要深入tomcat等具体的容器知识，还必须知道在SpringBoot的体系下tomcat怎么配置
 
-[^NileMichael] :[ SpringBoot vs Spring](https://www.zhihu.com/question/39483566/answer/603515756)
+[^NileMichael]:[ SpringBoot vs Spring](https://www.zhihu.com/question/39483566/answer/603515756)
 
 此外(这个说到底是自己的问题)：
 
 - 开箱即用也带来了相当的黑盒恐惧感，比如AutoConfiguration配置了哪些东西?我自己要覆盖配置怎么办？
+
+
 #### 2.8.2. 与SpringBoot相关的痛点
 - IO耗时过长  **->**  增加Cache(如`Reids`),以避免频繁调用一些不变的数据
 - 业务模式比较复杂 **->** 对代码做非空校验，引入注解/配置等[^Mybatis+isnull]
@@ -486,12 +499,10 @@ OSI：
 - Linux 每个进程中的线程数不允许超过 1000
 - Java 中每开启一个线程需要耗用 1MB 的 JVM 内存空间用于作为线程栈之用
 
-
-
 ## 4. Other Concept
 ### 4.1. **.json**
 #### 4.1.1. 概念
-JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换文本信息的语法。类似 XML。如:
+JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换文本信息的语法，类似 XML。如:
 ```json
 {
     "employees": [
