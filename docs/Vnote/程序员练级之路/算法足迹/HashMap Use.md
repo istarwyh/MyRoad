@@ -49,7 +49,7 @@ LinkedHashMap定义Entry结点，除了继承HashMap的Node属性，还有`befor
 ### 3.2. TreeMap
 TreeMap则以Key为基础，按照Key的自然顺序或者Comprator（实现Comparable接口，自己实现比较功能）的顺序进行排序，也通过红黑树来实现。
 ## 4. 去重
-### 4.1. HashSet
+### 4.1. HashSet利用HashMap的<key,>不重复去重
 HashSet实现不重复的集合，实际底层就是HashMap放弃了`<,value>`部分的实现来实现的（白白浪费空间?）
 ```java
     public HashSet() {
@@ -63,4 +63,33 @@ HashSet实现不重复的集合，实际底层就是HashMap放弃了`<,value>`�
     }
 
 ```
-对于每一个Key的重复判断依赖于
+对于每一个要插入的key的重复判断依赖于`putVal()`这个算法中一段:
+```java
+    // 比较现有p与要插入的key
+    // 比较数据与对象的hash值
+    // 如果是基本数据类型，直接比较值
+    // 如果是对象，多态调用equals()方法比较
+if (p.hash == hash &&
+        ((k = p.key) == key || (key != null && key.equals(k))))
+        //局部工具结点e来保存旧的结点信息
+    e = p;
+    // 如果已经是红黑树结点，即已经转成了红黑树，调用插入红黑树的方法
+        // 传入红黑树结点指针
+else if (p instanceof TreeNode)
+    e = ((TreeNode<K, V>) p).putTreeVal(this, tab, hash, key, value);
+...
+```
+### 4.2. BitMap利用多次hash去重
+#### 4.2.1. BitMap简介
+BitMap又称布隆过滤器,它其实是一块分配在内存中由连续二进制位组成的数据结构.它的功能定位是在海量数据集中过滤外部新的重复数据,应用场景包括
+
+- 亿级url(爬虫url,邮件链接等)的去重
+- 短时并发重复请求的查询或防御
+    - 秒杀系统,查看用户是否重复购买
+    - 解决如Redis缓存击穿问题:黑客攻击服务器时会构建大量不存在于缓存中的key发起请求,利用短时高并发查询请求造成数据库挂机
+#### 4.2.2. 多次hash降低冲突概率
+我们的数据假设是String类型,并假设String的hashcode可能发生重复的概率都是`p`,那么`n`个hash函数同时对一个字符串hash,由这n个hash值组成的**唯一索引**`<h1,h2,h3...hn>`同样的重复概率就是$p^{n}$.至此理想很丰满,不过又来了问题,难道对于每一个需要多次hash的String都要存储它们的`<h1,h2,...hn>`?
+所以我们要把hash值用映射到bitMap中的**再hash**[^hash的本质]一遍,缩小对hash值的存储空间,同时还可以复用一个bitMap--将多个不同hash函数hash得到的值都放入同一个bitMap中.这样对这个唯一索引的存储和查询所耗资源就会尽可能少.不过注意因为bitMap**位数**有限,再hash得到hash值本身也会重复,所以最后唯一索引重复概率达不到$p^{n}$.
+如果要尽可能降低重复概率,避免误杀,可以增大`n`或者添加白名单.
+
+[^hash的本质]:hash除了给数据打上标签,还是为了缩小数据本身的变化范围
