@@ -50,14 +50,17 @@ LinkedHashMap定义Entry结点，除了继承HashMap的Node属性，还有before
 TreeMap则以Key为基础，按照Key的自然顺序或者Comprator（实现Comparable接口，自己实现比较功能）的顺序进行排序，也通过红黑树来实现。
 ## 4. 去重
 ### 4.1. HashSet
+HashSet实现不重复的集合，实际底层就是HashMap放弃了`<,value>`部分的实现来实现的（白白浪费空间?）
 ```java
     public HashSet() {
         map = new HashMap<>();
     }
-```  
-实际上放弃了HashMap中的Node中另一个值:
-```java    
-public HashSet() {
-        map = new HashMap<>();
-    }
 ```
+把要添加进HashSet中的元素当做`key`存入，而value则是一个固定Object常量`PRESENT`:
+```java
+    public boolean add(E e) {
+        return map.put(e, PRESENT)==null;
+    }
+
+```
+对于每一个Key的重复判断依赖于
