@@ -22,7 +22,7 @@ ConcurrentHashMap成员变量使用volatile 修饰，通过内存屏障强制“
 
 ## 3. 有序性
 ### 3.1. LHM
-LinkedHashMap定义Entry结点，除了继承HashMap的Node属性，还有before 和 after结点用于标识前置节点和后置节点，可以实现按插入的顺序或访问顺序排序。完美实现组合设计模式。
+LinkedHashMap定义Entry结点，除了继承HashMap的Node属性，还有`before`和 `after`结点用于标识前置节点和后置节点，可以实现按**插入的顺序**(`LFU`)或**访问顺序**(`LRU`)排序。
 ```java
     /**
      * HashMap.Node subclass for normal LinkedHashMap entries.
