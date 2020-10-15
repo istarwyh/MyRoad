@@ -680,7 +680,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     // 如果桶位为空，则创建新结点并存放
                         // 线程不安全！： 
                         // 当A线程判断index位置为空后正好挂起，
-                        // B线程开始往index位置的写入节点数据，
+                        // B线程开始往index位置写入节点数据，
                         // 这时A线程恢复现场，执行赋值操作，就把A线程的数据给覆盖了
         if ((p = tab[i = (n - 1) & hash]) == null)
                         // 只得注意的是,这里即使是 null 也可以被当作key创立一个空结点然后放入桶中
