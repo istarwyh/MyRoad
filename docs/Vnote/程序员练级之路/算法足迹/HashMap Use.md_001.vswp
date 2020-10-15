@@ -1,4 +1,3 @@
-vnote_backup_file_826537664 H:/桌面/MyRoad/docs/Vnote/程序员练级之路/算法足迹/HashMap Use.md
 ## 1. HashMap整体认识
 HashMap按照组合模式的设计模式进行设计[^组合模式]，顶层接口声明类型，子接口定义功能，抽象类实现部分通用功能，HashMap作为Map子类之一实现自己的方法。接下来实现接口对Map的操作同于Map对于自己子结点的操作。HashMap作为容器，存储叶子结点Node<K,V>.对于叶子结点的内部类又是一个容器，包括了K和V；K和V是泛型，可以由用户自己装填任意类型，最终实现俄罗斯套娃的设计。
 HashMap首先要解决的问题是Node的Key应该怎么映射，使得放进去的效率高同时查找的时候效率依然高。首先还是利用取余的分类功能，选取的是hash(key)的二进制尾数，为了保留高位的特征减少碰撞的概率，设计了高位取余算法；其次选取Hash的地址空间和扩容的阈值，初始定为16个桶，并且当达到12个桶的时候，即为了平衡发生碰撞时put元素的平均效率 和 空间很大更少碰撞但是空间紧张 之间的矛盾，默认负载因子为0.75；最后设计Node存在的数据结构形式：采用开地址法，每个Hash桶连接着链表--尾插法，并通过实验选择了当链表长度为8时转化为红黑树，又因为需要防止链表与红黑树在8这个长度处因为增加与删除导致反复转化，引起时间复杂度的震荡，选择红黑树元素存储为6时转化回链表。
@@ -51,10 +50,15 @@ LinkedHashMap定义Entry结点，除了继承HashMap的Node属性，还有`befor
 TreeMap则以Key为基础，按照Key的自然顺序或者Comprator（实现Comparable接口，自己实现比较功能）的顺序进行排序，也通过红黑树来实现。
 ## 4. 去重
 ### 4.1. HashSet
+<<<<<<< HEAD
+=======
+HashSet实现不重复的集合，实际底层就是HashMap放弃了`<,value>`部分的实现来实现的（白白浪费空间?）
+>>>>>>> 4b0918cb2d77330e3fef4b8ba8fc01fe60baaa7f
 ```java
     public HashSet() {
         map = new HashMap<>();
     }
+<<<<<<< HEAD
 ```  
 实际上放弃了HashMap中的Node中另一个值:
 ```java    
@@ -62,3 +66,14 @@ public HashSet() {
         map = new HashMap<>();
     }
 ```
+=======
+```
+把要添加进HashSet中的元素当做`key`存入，而value则是一个固定Object常量`PRESENT`:
+```java
+    public boolean add(E e) {
+        return map.put(e, PRESENT)==null;
+    }
+
+```
+对于每一个Key的重复判断依赖于
+>>>>>>> 4b0918cb2d77330e3fef4b8ba8fc01fe60baaa7f
