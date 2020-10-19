@@ -153,7 +153,7 @@ TCP工作在全双工模式，建立连接后TCP允许同时进行双向数据�
 HTTP协议是无状态的，而服务器端的业务必须是有状态的,如用户的登录次数,账号密码等。因此服务器端生成Cookie，发送给User-Agent,User-Agent会将`Cookie`的`key/value`保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器,如:
 `__gads:ID=5ce68c103a29bff9:T=1584344058:S=ALNI_MaEB9uF5WNppBI895U2UNX44CMb0Q1`
 #### 4.2.2. Session
-在服务器端程序运行的过程中创建,Java中是通过调用`HttpServletRequest.getSession()`方法创建Session保存在服务器上,发到客户端的只有`Session id`；当客户端再次发送请求会将这个**存储在cookie中**的`Session id`带上，服务器接受到请求H之后就会依据Session id找到相应的`Session`
+在服务器端程序运行的过程中创建,Java中是通过调用`HttpServletRequest.getSession()`方法创建Session保存在服务器上,发到客户端的只有`Session id`；当客户端再次发送请求会将这个**存储在cookie中**的`Session id`带上，服务器接受到请求之后就会依据Session id找到相应的`Session`
 
 
 #### 4.2.3. 应用场景
