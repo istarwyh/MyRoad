@@ -42,3 +42,7 @@ https://zhuanlan.zhihu.com/p/146995089
 - 使用for循环倒序遍历
 - stream+filter
 - list.removeIf(s -> s.contains("要删除的"));
+## 5. 函数式接口传递代码块
+https://zhuanlan.zhihu.com/p/166566005
+
+https://blog.csdn.net/itguangit/article/details/78623964     

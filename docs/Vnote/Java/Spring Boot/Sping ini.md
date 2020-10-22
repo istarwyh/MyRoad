@@ -423,7 +423,8 @@ OSI：
 早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现消息异步处理。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
 
 `http`作为一种最常用的交互方式，在内部系统服务调用很复杂的情况下，包括效率和安全性在内，需要一个内部服务的管理系统--即RPC。本地调用的过程至少需要涉及
-- 确定的类或参数
+
+- 确定的类或参数或方法名
 - 类或函数的参数
 - 类或函数的返回值
 
@@ -451,12 +452,42 @@ OSI：
 - 负载均衡等
 
 #### 3.2.3. RPC的实现
-- 基于TCP实现：底层自定制字段，减少网络开销
-- 基于HTTP实现：
-    - 可以使用JSON或XML格式的请求或响应数据
-    - HTTP无状态便于联系同时降低复用
-    - 先得建立TCP连接，字节数占用多
+微服务之间通过RPC跨进程调用，
+##### 3.2.3.1. 默认基于HTTP实现
 
+- 可以使用JSON或XML格式的请求或响应数据
+- HTTP无状态便于联系同时降低复用
+- 先得建立TCP连接，字节数占用多
+
+但是http协议原本只是为了C/S架构实现的，比如下面的http报文头中
+
+```s
+Remote Address:61.135.169.125:80
+Request URL:http://www.baidu.com/
+Request Method:GET
+Status Code:200 OK
+Request Headersview source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:zh-CN,zh;q=0.8,en;q=0.6
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:~
+Host:www.baidu.com
+Referer:http://tieba.baidu.com/
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36
+```
+User-Agent、Accept-Language这些字段对于RPC支持的调用过程所需要的
+
+- 确定的类或参数或方法名
+- 类或函数的参数
+- 类或函数的返回值
+
+来说则是冗余的。
+
+
+##### 3.2.3.2. 基于TCP实现
+底层自定制字段，减少网络开销
 
 ### 3.3. Spring Cloud的诞生
 当系统复杂度再跳，进一步将系统拆分成许多小应用（也是服务，但是有更强的独立部署能力）。微服务将业务逻辑分散到不同的物理机，不同的进程下.[^从rpc到微服务]单应用的故障与负载不会影响到其他应用。最吸引人的在于**每个微服务可以使用自己适宜的技术栈** 。Java领域以Spring Cloud与Dubbo为代表框架实现微服务。
