@@ -534,7 +534,7 @@ User-Agent、Accept-Language这些字段对于RPC支持的调用过程所需要�
 ## 4. Other Concept
 ### 4.1. **.json**
 #### 4.1.1. 概念
-JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换文本信息的语法，类似 XML。如:
+JavaScript 对象表示法（`JavaScript Object Notation`).JSON 是存储和交换文本信息的语法，类似 XML。如:
 ```json
 {
     "employees": [
@@ -546,45 +546,56 @@ JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换
 ```
 
 ### 4.2. maven项目管理
-maven自己定义了
-- 一个项目对象模型(Project Object Model)
-- 一个项目生命周期(project Lifecycle)
-    - validate
-    - compile
-    - test
-    - package
-    - verify:再次验证？
-    - install
-    - deploy
+maven项目管理分为以下常用组成部分，共同组成了一个项目对象模型(Project Object Model)：
 
-- 一个依赖管理系统(Dependency Managemnet System)
-    - groupId:如Apache Software以org.apche开头的groupId
-    - artifactId:对于该项目的唯一标识符
-    - SNAPSHOT：不稳定版本
-    - RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
+![](https://gitee.com/istarwyh/images/raw/master/1604396383_20201103173342284_2170.png)
 
-- 一个运行定义在生命周期阶段中插件目标的逻辑
-    1. clean
-    2. resources
-    3. compile
-    4. testResource
-    5. testCompile
-    6. test
-    7. jar(打包)
-    8. install
-    9. deploy
+#### 4.2.1. 一个项目生命周期(project `Lifecycle`)
+- clean
+- validate
+- compile
+- test
+- package
+- verify
+- install
+- site
+- deploy
+
+#### 4.2.2. 一个依赖管理系统(`Dependency` Managemnet System)
+- groupId:如Apache Software以org.apche开头的groupId
+- artifactId:对于该项目的唯一标识符
+- SNAPSHOT：不稳定版本
+- RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
+
+#### 4.2.3. 一个在生命周期阶段中插件(`plugin`)运行的目标
+1. clean
+2. resources
+3. compile
+4. testResource
+5. testCompile
+6. test
+7. jar(打包)
+8. install
+9. deploy
 
     - `mvn clean package`执行到第七步打好`jar`包,但是没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库
-    - `mvn clean install`到`8`
-    - `mvn clean deploy`完成全部步骤,部署到local和remote
+    - `mvn clean install`到`8`，部署到本地maven仓库
+    - `mvn clean deploy`完成全部步骤,部署[^远程发布jar]到local和remote
 
-如下图所示：
+[^远程发布jar]:[发布Artifact](https://www.liaoxuefeng.com/wiki/1252599548343744/1347981037010977)
 
-![aw5jBR.png](https://s1.ax1x.com/2020/08/04/aw5jBR.png)
+**当默认没有在pom.xml 指定任何 `plugin`，但是也能正常构建工程是为什么？**
+这是Maven 自己默认指定了 plugin。如cmd执行 `mvn install` 的输出日志中可以看到一系列的 插件:版本号:目标(phase)[^Maven生命周期]：
+```sh
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ my-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/zhangguanghui/git/my-app/target/classes
+```
 
+[^Maven生命周期]:[Maven生命周期](https://www.jianshu.com/p/fd43b3d0fdb0)
 
+## 5. About Me & References
 
-## 5. About Me
 
 [
     ![wangyihui's github stats](https://github-readme-stats.vercel.app/api?username=istarwyh "![wangyihui's github stats")

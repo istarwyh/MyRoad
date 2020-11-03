@@ -35,6 +35,7 @@ async/await是「使用同步调用的方法调用异步过程」，是「语法
 ## 3. 上课挑刺儿
 老师写的代码充斥着很多 for 循环，我会改成 stream，forEach 或者 map 等；null 的判断借助 Optional；复杂对象的创建采用 builder 模式；代码规范按照《Effective Java》和《阿里巴巴开发规约》进行改进
 ## 4. Java中的那些坑
+### 4.1. List
 List不能直接一边遍历一边删除？因为for each循环每次都会调用 Iterator，然后修改modCoun，最后造成与expectedModCoun不等报错。
 https://zhuanlan.zhihu.com/p/146995089
 - 使用Iterator的remove()方法
@@ -42,6 +43,9 @@ https://zhuanlan.zhihu.com/p/146995089
 - 使用for循环倒序遍历
 - stream+filter
 - list.removeIf(s -> s.contains("要删除的"));
+### 4.2. Stack
+https://www.cnblogs.com/cosmos-wong/p/11845934.html
+基于 Vector 实现的栈 Stack。底层实际上还是数组，所以还是存在需要扩容。Vector 是由数组实现的集合类，它包含了大量集合处理的方法。而 Stack 之所以继承 Vector，是为了复用 Vector 中的方法，来实现进栈（push）、出栈(pop)等操作。这里就是 Stack 设计不好的地方，既然只是为了实现栈，不用链表来单独实现，而是为了复用简单的方法而迫使它继承 Vector，Stack 和 Vector 本来是毫无关系的。这使得 Stack 在基于数组实现上效率受影响，另外因为继承 Vector 类，Stack 可以复用 Vector 大量方法，这使得 Stack 在设计上不严谨。
 ## 5. 函数式接口传递代码块
 https://zhuanlan.zhihu.com/p/166566005
 
