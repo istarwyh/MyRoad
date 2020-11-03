@@ -1,3 +1,14 @@
+
+### 1. Step
+把ts服务器与客户端改造成java写的
+凑文献
+
+
+### 2. 未知的
+#### 2.1. 读取pdf
+elctron+pdf.js+云函数
+React Native 做订阅
+#### 2.2. 异步调用
 ```ts
 function lazyHookCreation() {
   const inspector = internalBinding('inspector');

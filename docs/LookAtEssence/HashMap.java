@@ -319,7 +319,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * holding consecutive whole numbers in small tables.
      * 比如，在(n-1) 为15(0x1111)时，散列值真正生效的只是低4位。
      * 当新增的键的hashcode()是2，18，34这样恰好以16的倍数为差的等差数列，就产生了大量碰撞。)  
-     * So weapply a transform that spreads the impact of higher bits
+     * So we apply a transform that spreads the impact of higher bits
      * downward.
      * There is a tradeoff between speed, utility, and
      * quality of bit-spreading.因为现在大多数 hashes
