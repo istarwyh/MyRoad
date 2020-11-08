@@ -562,11 +562,26 @@ maven项目管理分为以下常用组成部分，共同组成了一个项目对
 - deploy
 
 #### 4.2.2. 一个依赖管理系统(`Dependency` Managemnet System)
-- groupId:如Apache Software以org.apche开头的groupId
-- artifactId:对于该项目的唯一标识符
+- groupId:如Apache Software以org.apche开头的, 实际对应JAVA的包的结构，是main目录里java的目录结构
+- artifactId:对于该项目的唯一标识符,实际对应项目的名称，就是项目根目录的名称
 - SNAPSHOT：不稳定版本
 - RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
 
+以惯用父依赖导入为例:
+```xml
+    <parent>
+<!--        快速导入开发一个Web容器所需要的依赖-->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.0.RELEASE</version>
+        <relativePath/> 
+    </parent>
+```
+maven解析到这样的配置时,所做的工作其实是:
+```cmd
+Downloading from central-repository: http://central.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.3.0.RELEASE/spring-boot-starter-parent-2.3.0.RELEASE.pom
+```
+**所以如果是自己发布,网站目录应当遵循这样的约定:`groupId/artifactId/version/artifactId-version.pom`**(虽然`mvn clean package deploy`这样的命令会帮我们完成这一步)
 #### 4.2.3. 一个在生命周期阶段中插件(`plugin`)运行的目标
 1. clean
 2. resources
