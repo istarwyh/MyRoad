@@ -562,7 +562,9 @@ maven项目管理分为以下常用组成部分，共同组成了一个项目对
 - deploy
 
 #### 4.2.2. 一个依赖管理系统(`Dependency` Managemnet System)
-- groupId:如Apache Software以org.apche开头的, 实际对应JAVA的包的结构，是main目录里java的目录结构
+- groupId:依赖所有组织的代码,可以是依赖的网址或公司网址,如Apache Software以org.apche开头, 实际对应JAVA的包的结构即`src--main--java`下的目录结构
+    - 当发布一个包的时候应该考虑到groupId的标志性与指示性,如istarwyh在github上的私人库`Initial`的目录就可以为:`com.github.istarwyh.Initial`
+    - 当发布包时,发布的包网址也会遵循这样的约定:**`groupId/artifactId/version/(artifactId-version.jar + artifactId-version.pom +)...`**(虽然`mvn clean package deploy`这样的命令会帮我们完成这一步)
 - artifactId:对于该项目的唯一标识符,实际对应项目的名称，就是项目根目录的名称
 - SNAPSHOT：不稳定版本
 - RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
@@ -581,7 +583,8 @@ maven解析到这样的配置时,所做的工作其实是:
 ```cmd
 Downloading from central-repository: http://central.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.3.0.RELEASE/spring-boot-starter-parent-2.3.0.RELEASE.pom
 ```
-**所以如果是自己发布,网站目录应当遵循这样的约定:`groupId/artifactId/version/artifactId-version.pom`**(虽然`mvn clean package deploy`这样的命令会帮我们完成这一步)
+- maven的依赖查找与DNS解析过程类似,即 `local > mirror > central(default) > reporitory`
+    - 必须注意的是,在`setting.xml`中只能配置一个`mirror`,而一旦配置了mirror,便不会再往低优先级的地方查找,即自己如果配了`repository`将会失效
 #### 4.2.3. 一个在生命周期阶段中插件(`plugin`)运行的目标
 1. clean
 2. resources
