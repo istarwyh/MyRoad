@@ -4,10 +4,6 @@
 [分库分表常见玩法及跨库查询/事务等问题](https://www.jianshu.com/p/6f5662908dae)
 #### 1.1.1. 数据库优化
 [鏖兵](https://juejin.im/post/5ee193a1e51d45783d0eb8b2)
-#### 1.1.2. 使用
-1. [js返回json格式](https://www.jianshu.com/p/04127d74d88c)
-2. [java返回json格式]
-2. [后台返回json数据给前台和前台解析json数据](https://blog.csdn.net/ITBigGod/article/details/83754397)  
 
 ## 2. Java语言特性
 java语法特性差是公认的事实，对比起同样是静态OO语言的C#和kotlin半毛线的优势都没有，除了在KPI按代码行数算的公司里。
