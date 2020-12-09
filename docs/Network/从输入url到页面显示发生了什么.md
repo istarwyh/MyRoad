@@ -1,7 +1,7 @@
 总体流程如下图:[^0]
 [^0]:[从URL输入到页面展现到底发生什么？](https://github.com/ljianshu/Blog/issues/24)
 
-![从url到页面加载](_v_images/20200405092713491_10841.png =992x)
+![从url到页面加载](https://gitee.com/istarwyh/images/raw/master/1607485047_20200405092713491_10841.png)
 ## 1. DNS解析
 通过URL寻找用IP地址标志的哪台机器上有你需要资源的过程或者说技术。[^1]
 
@@ -66,7 +66,7 @@
 ### 2.1. 实际TCP连接
 #### 2.1.1. 网络请求耗时图
 [Timing tab](https://developers.google.com/web/tools/chrome-devtools/network/reference#timing-explanation)源于调试浏览器的Network部分
-![](_v_images/20200420091553382_4889.png)
+![](https://gitee.com/istarwyh/images/raw/master/1607485053_20200420091553382_4889.png)
 
 #### 2.1.2. 以LSP为例
 1. Create Connection
@@ -133,7 +133,7 @@ connection.onDidChangeWatchedFiles(_change => {
 - 1080端口: Socks代理服务使用的端口,允许防火墙后面的人通过一个IP地址访问INTERNET
 - 4000端口: QQ服务端端口
 浏览器可以在第三次握手的时候携带信息,此时可将 IP 地址打在协议上，同时协议搭载请求参数，然后一并发送给对应的服务器。
-![http请求](_v_images/20200405093134782_28679.jpg)
+![http请求](https://gitee.com/istarwyh/images/raw/master/1607485052_20200405093134782_28679.jpg)
 
 ## 4. 服务器处理请求并返回HTTP报文
 ### 4.1. 序列号的同步
