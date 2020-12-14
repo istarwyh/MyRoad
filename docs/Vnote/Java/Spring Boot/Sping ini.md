@@ -1,5 +1,3 @@
-[toc]
-
 ## 1. J2EE/Jakarta EE与Spring
 ### 1.1. J2EE概述
 现名为`Java EE`，Java 平台企业版（Java Platform Enterprise Edition）,是一种利用Java平台来简化企业解决方案的开发、部署和管理相关的复杂问题的体系结构.之前称为Java 2 Platform Enterprise Edition (`J2EE`)，2018年因为Java被收购的原因更名为 `Jakarta EE`,这里仍采用经典称呼`J2EE`.
@@ -240,7 +238,7 @@ public class UserController {
 - `@NotBlank`用在String上面,只能作用在String上，不能为null，而且调用trim()后，长度必须大于0
 - `@NotNull` 用在基本类型上,不能为null，但可以为空字符串
 
-后来人们越来越喜欢用注解,并且发现还有大量重复的代码可以打包变成依赖,或者干脆基于`Convention Over Configuration`(约定优于配置)的方式省略这些代码,于是诞生了Spring Boot.
+后来人们越来越喜欢用注解,并且发现还有大量重复的代码可以打包变成依赖.正好当时还流行`RoR`(`Ruby on Rail`),于是也学习它将以基于`Convention Over Configuration`(约定优于配置)的方式省略这些代码,于是诞生了Spring Boot.
 #### 2.5.3. 新一代的模板引擎thymeleaf
 类似于Angular的值引用,将大量的data可以通过`{user}`这种方式填充在对应的模板里,最后生成html时由自己再转化
 ### 2.6. Spring Boot 的诞生
@@ -425,7 +423,8 @@ OSI：
 早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现消息异步处理。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
 
 `http`作为一种最常用的交互方式，在内部系统服务调用很复杂的情况下，包括效率和安全性在内，需要一个内部服务的管理系统--即RPC。本地调用的过程至少需要涉及
-- 确定的类或参数
+
+- 确定的类或参数或方法名
 - 类或函数的参数
 - 类或函数的返回值
 
@@ -453,25 +452,50 @@ OSI：
 - 负载均衡等
 
 #### 3.2.3. RPC的实现
-- 基于TCP实现：底层自定制字段，减少网络开销
-- 基于HTTP实现：
-    - 可以使用JSON或XML格式的请求或响应数据
-    - HTTP无状态便于联系同时降低复用
-    - 先得建立TCP连接，字节数占用多
+微服务之间通过RPC跨进程调用，
+##### 3.2.3.1. 默认基于HTTP实现
 
+- 可以使用JSON或XML格式的请求或响应数据
+- HTTP无状态便于联系同时降低复用
+- 先得建立TCP连接，字节数占用多
+
+但是http协议原本只是为了C/S架构实现的，比如下面的http报文头中
+
+```s
+Remote Address:61.135.169.125:80
+Request URL:http://www.baidu.com/
+Request Method:GET
+Status Code:200 OK
+Request Headersview source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:zh-CN,zh;q=0.8,en;q=0.6
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:~
+Host:www.baidu.com
+Referer:http://tieba.baidu.com/
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36
+```
+User-Agent、Accept-Language这些字段对于RPC支持的调用过程所需要的
+
+- 确定的类或参数或方法名
+- 类或函数的参数
+- 类或函数的返回值
+
+来说则是冗余的。
+
+
+##### 3.2.3.2. 基于TCP实现
+底层自定制字段，减少网络开销
 
 ### 3.3. Spring Cloud的诞生
-当系统复杂度再跳，进一步将系统拆分成许多小应用（也是服务，但是有更强的独立部署能力）。微服务将业务逻辑分散到不同的物理机，不同的进程下.[^从rpc到微服务]单应用的故障与负载不会影响到其他应用。最吸引人的在于**每个微服务可以使用自己适宜的技术栈** 。Java领域以Spring Cloud与Dubbo为代表框架实现微服务。
+当系统复杂度再跳，系统进一步被拆分成许多相对独立的小应用，小服务。每一个都有更强的独立部署能力，单元和单元之间的通信以`http`的`Rest`方式实现RPC。微服务将业务逻辑分散到不同的物理机，不同的进程下[^从rpc到微服务]，使得单应用的故障与负载不会影响到其他应用。其最吸引人的地方还在于**每个微服务可以使用自己适宜的技术栈** 。
+Java领域以Spring Cloud与Dubbo为代表框架实现微服务：
 
-<center>Spring Cloud=服务发现+负载均衡+限流熔断降级+网关+Spring Boot+分库分表+读写分离</center>
-
+<center>Spring Cloud=服务注册发现+负载均衡+限流熔断降级+网关+Spring Boot+分库分表+读写分离</center>
 
 [^从rpc到微服务]:[微服务发展沿革](https://cloud.tencent.com/developer/article/1051490)
-
-- 每一个功能元素放在一个独立的服务中---就像装配式建筑一样,不过要有**多微**?-->参考官方文档
-
-- 单元和单元之间的通信通过`http`方式(无协议状态)进行`Rest`方式的连接；不再使用RPC
-
 
 ### 3.4. 复杂化后的Service Mesh
 >一言以蔽之：Service Mesh是微服务时代的TCP协议。[^ServiceMesh]
@@ -479,13 +503,23 @@ OSI：
 [^ServiceMesh]:[什么是Service Mesh](https://zhuanlan.zhihu.com/p/61901608)
 
 ### 3.5. PaaS的诞生
-各自服务的单打独斗依然会带来重复劳动，比如各自部署自己的ES，开发某一个小服务。前者是资源需要整合以便弹性调用；后者或许可以通过共享库解决但是在多语言版本时也不可行。于是严谨思考业务场景各自的边界从而严格限制每个微服务的边界，并整合成大中台系统，即我们常说的PaaS层（平台即服务）。
+各自服务的单打独斗却会带来重复劳动，比如各自部署自己的ES或某一个相同的日志服务。前者是资源需要整合以便弹性调用；后者或许可以通过共享库解决但是在多语言版本时也不可行。于是华为提出“让听到炮火的人可以呼唤支援“，阿里提出“大中台，小前台”的概念。严谨思考业务场景各自的边界从而严格限制每个微服务的边界，各个微服务整合成的大中台系统，即我们常说的PaaS层（平台即服务）应运而生了。
 
 ![](https://gitee.com/istarwyh/images/raw/master/1600003101_20200913211809196_22674.png)
+
+PaaS层的建立往往意味着微服务的数量已经很庞大，对于一个中型公司就有上万个之多。其必然要面临两种问题：
+
+1. 新的功能应该被部署成新的微服务吗？还是融入到已有的微服务中？
+2. 已有的微服务是否承载的功能太多？已有的微服务是否边界不够清晰？
+
+上诉两个问题近来的DDD(`Domian Driven Design`)提供了一定的解决思路。
 ### 3.6. Serverless的窥视
 #### 3.6.1. 只管付钱的野心
 基于云计算，开发者能做到真正只关注业务。云端可以自动分配存储和计算资源，并提供标准REST API的接口。
-#### 3.6.2. 资源背后的故事
+曾经 Go 高并发、node.js 高并发和Java 高并发是炙手可热的技术追求,技术人才不断钻研如何在这些语言里选个好库, 有一个好的设计加上某些语言特性达成优异的性能,但是未来某一天这一些技术及技术人才或许都将被大公司垄断,就好像新的面向应用层的巨大的操作系统一样.
+#### 3.6.2. IaaS -> PaaS -> SaaS -> FaaS
+从基础设施到平台到可插拔软件最后到粒度更小的函数,它们最后可以被提供为服务.https://www.jianshu.com/p/6e86c42f85bd
+#### 3.6.3. 资源背后的故事
 在最开始单机上的多用户就有了分割计算机资源的想法，并诞生了虚拟化技术，将底层的计算机资源抽象成多组相互隔离的计算平台。下面图片来自码农翻身公众号：
 ![LXC1](https://gitee.com/istarwyh/images/raw/master/1600307459_20200917095053481_20039.png)
 
@@ -493,7 +527,7 @@ OSI：
 
 纯软件实现的虚拟化有两类，一类是在硬件上运行操作系统，在操作系统上安装虚拟化软件，创建各种虚拟机，这是2型虚拟化，由于中间隔着一个宿主操作系统，2型虚拟化的效率并不高。 还有一类是1型虚拟化，在硬件上安装Hypervisor、在其上运行各种虚拟机，这种方式更加彻底，更加可靠。和虚拟化相对的是更轻量级的容器，这种技术将操作系统内核虚拟化，允许用户空间的进程隔离起来，形成一个相对独立的运行环境[^码农翻身]。
 现在云端的资源分配只是历史的进程之一。
-#### 3.6.3. 列举一些资源细节
+#### 3.6.4. 列举一些资源细节
 - Tomcat 默认配置的最大请求数是 150，也就是说同时支持 150 个并发(传统BIO模式下)
 - Windows 每个进程中的线程数不允许超过 2000
 - Linux 每个进程中的线程数不允许超过 1000
@@ -502,7 +536,7 @@ OSI：
 ## 4. Other Concept
 ### 4.1. **.json**
 #### 4.1.1. 概念
-JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换文本信息的语法，类似 XML。如:
+JavaScript 对象表示法（`JavaScript Object Notation`).JSON 是存储和交换文本信息的语法，类似 XML。如:
 ```json
 {
     "employees": [
@@ -514,45 +548,74 @@ JavaScript 对象表示法（JavaScript Object Notation).JSON 是存储和交换
 ```
 
 ### 4.2. maven项目管理
-maven自己定义了
-- 一个项目对象模型(Project Object Model)
-- 一个项目生命周期(project Lifecycle)
-    - validate
-    - compile
-    - test
-    - package
-    - verify:再次验证？
-    - install
-    - deploy
+maven项目管理分为以下常用组成部分，共同组成了一个项目对象模型(Project Object Model)：
 
-- 一个依赖管理系统(Dependency Managemnet System)
-    - groupId:如Apache Software以org.apche开头的groupId
-    - artifactId:对于该项目的唯一标识符
-    - SNAPSHOT：不稳定版本
-    - RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
+![](https://gitee.com/istarwyh/images/raw/master/1604396383_20201103173342284_2170.png)
 
-- 一个运行定义在生命周期阶段中插件目标的逻辑
-    1. clean
-    2. resources
-    3. compile
-    4. testResource
-    5. testCompile
-    6. test
-    7. jar(打包)
-    8. install
-    9. deploy
+#### 4.2.1. 一个项目生命周期(project `Lifecycle`)
+- clean
+- validate
+- compile
+- test
+- package
+- verify
+- install
+- site
+- deploy
+
+#### 4.2.2. 一个依赖管理系统(`Dependency` Managemnet System)
+- groupId:依赖所有组织的代码,可以是依赖的网址或公司网址,如Apache Software以org.apche开头, 实际对应JAVA的包的结构即`src--main--java`下的目录结构
+    - 当发布一个包的时候应该考虑到groupId的标志性与指示性,如istarwyh在github上的私人库`Initial`的目录就可以为:`com.github.istarwyh.Initial`
+    - 当发布包时,发布的包网址也会遵循这样的约定:**`groupId/artifactId/version/(artifactId-version.jar + artifactId-version.pom +)...`**(虽然`mvn clean package deploy`这样的命令会帮我们完成这一步)
+- artifactId:对于该项目的唯一标识符,实际对应项目的名称，就是项目根目录的名称
+- SNAPSHOT：不稳定版本
+- RELEASE：在SNAPSHOT中选择一个最稳定的作为发布版
+
+以惯用父依赖导入为例:
+```xml
+    <parent>
+<!--        快速导入开发一个Web容器所需要的依赖-->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.0.RELEASE</version>
+        <relativePath/> 
+    </parent>
+```
+maven解析到这样的配置时,所做的工作其实是:
+```cmd
+Downloading from central-repository: http://central.maven.org/maven2/org/springframework/boot/spring-boot-starter-parent/2.3.0.RELEASE/spring-boot-starter-parent-2.3.0.RELEASE.pom
+```
+- maven的依赖查找与DNS解析过程类似,即 `local > mirror > central(default) > reporitory`
+    - 必须注意的是,在`setting.xml`中只能配置一个`mirror`,而一旦配置了mirror,便不会再往低优先级的地方查找,即自己如果配了`repository`将会失效
+#### 4.2.3. 一个在生命周期阶段中插件(`plugin`)运行的目标
+1. clean
+2. resources
+3. compile
+4. testResource
+5. testCompile
+6. test
+7. jar(打包)
+8. install
+9. deploy
 
     - `mvn clean package`执行到第七步打好`jar`包,但是没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库
-    - `mvn clean install`到`8`
-    - `mvn clean deploy`完成全部步骤,部署到local和remote
+    - `mvn clean install`到`8`，部署到本地maven仓库
+    - `mvn clean deploy`完成全部步骤,部署[^远程发布jar]到local和remote
 
-如下图所示：
+[^远程发布jar]:[发布Artifact](https://www.liaoxuefeng.com/wiki/1252599548343744/1347981037010977)
 
-![aw5jBR.png](https://s1.ax1x.com/2020/08/04/aw5jBR.png)
+**当默认没有在pom.xml 指定任何 `plugin`，但是也能正常构建工程是为什么？**
+这是Maven 自己默认指定了 plugin。如cmd执行 `mvn install` 的输出日志中可以看到一系列的 插件:版本号:目标(phase)[^Maven生命周期]：
+```sh
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ my-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/zhangguanghui/git/my-app/target/classes
+```
 
+[^Maven生命周期]:[Maven生命周期](https://www.jianshu.com/p/fd43b3d0fdb0)
 
+## 5. About Me & References
 
-## 5. About Me
 
 [
     ![wangyihui's github stats](https://github-readme-stats.vercel.app/api?username=istarwyh "![wangyihui's github stats")

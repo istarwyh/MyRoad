@@ -141,7 +141,8 @@ input.close();
 
 简单总结如下:
 ![](https://gitee.com/istarwyh/images/raw/master/1597571664_20200816175308306_11966.png)
-## 2. IO中的阻塞问题
+## 2. 优雅的关闭IO流
+### 2.1. 关闭中的阻塞问题
 
 ```java
 BufferedReader reader = .....
@@ -172,9 +173,43 @@ if (len < 1024) {
 
 4. 指定等待时间,超时退出`read()`
 5. 商定结束标志,如`\n`或`EOF`等
+### 2.2. Apache Commons IO之IOUtils
+脏活累活库给你封装[^IOUtils]：
+[^IOUtils]:[Apache Commons IO之IOUtils优雅操作流](https://www.jianshu.com/p/6b4f9e5e2f8e)
 
-## 3. NIO(New IO)
-但是面对成百上千个文件需要读取,就必须改成非阻塞的,即允许同时处理---通过轮询操作循环检查是否可以关闭输入流.
+```java
+FileInputStream fileInputStream = new FileInputStream(new File("d://demo.txt"));
+List<String> list = IOUtils.readLines(fileInputStream, "UTF-8");//只要是InputStream流都可以，比如http响应的流
+//直接把流读取为String
+String content = IOUtils.toString(inputStream,"UTF-8");
+
+try {
+// 复制输入流至输出流
+     return IOUtils.copy(inputStream, outputStream);
+ } finally {
+     //优雅的关闭流
+     IOUtils.closeQuietly(inputStream);
+     IOUtils.closeQuietly(outputStream);
+ }
+```
+## 3. IO太慢必须要Cache
+### 3.1. 从内存屏障说起
+1. **缓存一致性**必须读写屏障
+2. 编译器优化程序指令执行会指令重排
+3. 多个执行线程共享数据保障按指定顺序执行
+
+以上三种情况都需要内存屏障指令在硬件级别解决重排序问题。`Memory barrier` 也称为 `membar`，其可以保证在屏障之前发布的操作可以在屏障之后发布的操作之前执行[^cacheCoherency]：
+[^cacheCoherency]:[锁（Lock）、内存屏障（Memory barrier）与 缓存一致性](https://blog.csdn.net/weixin_40539125/article/details/104215766?utm_medium=distribute.pc_relevant_t0.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-searchFromBaidu-1.control)
+
+- 读屏障：在读屏障之前所有`Invalidate queue`中所有的无效化指令都执行
+- 写屏障: 在写屏障之前所有`store buffer`中的指令都真正的写入了缓存
+
+先使用写屏障再使用读屏障的结果就是 各cpu核心的缓存被更新，并将缓存回写到主存中，同时当前cpu因为缓存失效回去主存拿数据再放到缓存中。
+
+### 3.2. Cache不能太大必须取舍
+LRU算法
+## 4. NIO(New IO)
+但是面对成百上千个文件需要读取,就必须改成非阻塞的,即允许同时处理---通过**轮询**操作循环检查是否可以关闭输入流.
 
 **文字解释**
 具体的实现方式如NIO(`non-blocking IO`),使用**一个线程**管理高并发的多个socket连接线程.
@@ -201,15 +236,17 @@ while(true){
 ```
 **图表解释**
 ![](https://gitee.com/istarwyh/images/raw/master/1589943618_20200520105140401_10630.png)
-### 3.1. NIO的易用性
-因为JDK 原生API开发NIO需要开发者理解`Selector`、`Channel`和`ByteBuffer`三大组件,编程模式较为复杂;原生实现也不够稳定.所以应运而生`Netty`,将三大组件封装在了内部.
+### 4.1. NIO的易用性
+因为JDK 原生API开发NIO需要开发者理解`Selector`、`Channel`和`ByteBuffer`三大组件,编程模式较为复杂;原生实现也不够稳定(包括有`bug`).所以应运而生`Netty`,将三大组件封装在了内部,支持自定义协议，解决了原生NIO拆包粘包，客户端重连，网络拥塞等问题。
 `dubbo`、`spark`、`zookeeper`和`elasticSearch`等框架使用`Netty`作为底层通信IO框架.
-## 4. IO处理多个线程与对象
+### 4.2. NIO的不足
+NIO用一个线程处理多个Socket，跟踪和调试难以捉摸，只能靠日志分析。
+## 5. IO处理多个线程与对象
 对于服务器往往会接触多个线程与对象,直接使用Java IO的API来操作IO并不常见.通常配置文件(`xml`,`properties`等)被框架读取后,框架会把**配置数据**变成**Java对象**方便程序员调用,而不用程序员关注IO细节.不过框架本身是怎么做的呢?
-### 4.1. Ngnix
+### 5.1. Ngnix
 - 静态连接处理
 - 维持动态连接,将连接请求分发给Tomcat集群
-### 4.2. Tomcat
+### 5.2. Tomcat
 Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出一个单独的`servlet`线程去处理请求.同一时刻,可能有多个线程在处理多个请求:
 
 - 执行`servlet`代码
@@ -219,38 +256,39 @@ Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出
 - 网络IO(例如http服务,30~100ms)
 
 线程往往只能阻塞.而垃圾服务器,CPU核心一般不超过4核,线程之间还需要常常切换.
-### 4.3. Spring框架
+### 5.3. Spring框架
 
-#### 4.3.1. Bean的作用域
+#### 5.3.1. Bean的作用域
 1. Singleton:单例模式，默认模式
 2. Prototype:原型模式,每次创建该bean后都会产生一个新实例，创建后Spirng不再对其管理
     如对于Dao层的bean对象,Spring对于`ThreadLocal`对象,区别常用的加锁方式,用空间换时间--**给每个线程复制一份独立的变量副本**,从而隔离多线程访问对于数据访问的冲突.
 3. request: 每次请求都创建一个新的实例，不过Spring不放弃监听
-4. session: 每次会话同上
+4. session: 每次会话同上（session是指拿到cookie后服务器端创建的）
 5. global session:全局的web域，类似于servlet中的application
-#### 4.3.2. 默认单例
+#### 5.3.2. 默认单例
 1. Spring的单例保证在一个IOC容器中只有一个action单例,从而保证开发者使用的是同一个实例.
 2. 正因为是单例的，所以对于成员变量会被重复使用，不是线程安全的[^Singleton].
 
 [^Singleton]:[spring的controller是单例还是多例，怎么保证并发的安全?](https://blog.csdn.net/riemann_/article/details/97698560)
 
 
-### 4.4. Redis
+### 5.4. Redis
 因为对Redis的请求都是访问内存,不涉及文件/DB/IO等操作,时间很短(`100ns`左右),所以用**同一线程**就可处理多个请求.同时也避免了线程切换的开销和共享数据的问题.
-### 4.5. Node.js
+### 5.5. Node.js
 事件驱动编程
 
-- 对于大部分非阻塞的线程,用一个线程处理所有请求,遇到耗时长的IO等操作,留下**回调函数**,等到I/O操作完成后再去执行回调函数
+- 对于大部分非阻塞的线程,用一个线程处理所有请求,遇到耗时长的IO等操作,留下**回调函数**[^callfunctions],等到I/O操作完成后再去执行回调函数
 - 个别会阻塞的线程,例如Linux文件I/O,CPU密集型的任务如加密/压缩等,从线程池拿线程
 
+[^callfunctions]:这种函数对象并不直接调用函数本身，而是Runtimes环境（如浏览器）在事件发生时的适当时间调用函数。
 
-#### 4.5.1. 代表产品
+#### 5.5.1. 代表产品
 Electron桌面开发
 高并发异步减少线程
-#### 4.5.2. 缺点
+#### 5.5.2. 缺点
 - 单一主线程不能发挥多核优势
 - 对于计算密集型的项目应当考虑其他技术
-### 4.6. Node.x->Vert.x
+### 5.6. Node.x->Vert.x
 
 Verticle循环关联事件:
 ```java
@@ -301,8 +339,8 @@ public class DatabaseVerticle extends AbstractVerticle{
 ```
 
 同时这里使用了`Event Bus`，让不同的`Verticle`之间通过消息传递.因为不用共享内存,所以不用加锁.
-## 5. 其他
-### 5.1. JdbcType类型和Java类型[^Jdbc]
+## 6. 其他
+### 6.1. JdbcType类型和Java类型[^Jdbc]
 [^Jdbc]:[JdbcType类型和Java类型的对应关系](https://blog.csdn.net/qq_39019865/article/details/80800649)
 
 ![](https://gitee.com/istarwyh/images/raw/master/1596795260_20200807181300916_6888.png)

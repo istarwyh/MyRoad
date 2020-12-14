@@ -319,7 +319,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * holding consecutive whole numbers in small tables.
      * 比如，在(n-1) 为15(0x1111)时，散列值真正生效的只是低4位。
      * 当新增的键的hashcode()是2，18，34这样恰好以16的倍数为差的等差数列，就产生了大量碰撞。)  
-     * So weapply a transform that spreads the impact of higher bits
+     * So we apply a transform that spreads the impact of higher bits
      * downward.
      * There is a tradeoff between speed, utility, and
      * quality of bit-spreading.因为现在大多数 hashes
@@ -680,7 +680,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     // 如果桶位为空，则创建新结点并存放
                         // 线程不安全！： 
                         // 当A线程判断index位置为空后正好挂起，
-                        // B线程开始往index位置的写入节点数据，
+                        // B线程开始往index位置写入节点数据，
                         // 这时A线程恢复现场，执行赋值操作，就把A线程的数据给覆盖了
         if ((p = tab[i = (n - 1) & hash]) == null)
                         // 只得注意的是,这里即使是 null 也可以被当作key创立一个空结点然后放入桶中

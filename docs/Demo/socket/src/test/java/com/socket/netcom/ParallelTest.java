@@ -21,7 +21,13 @@ public class ParallelTest {
                 e.printStackTrace();
             }
         };
-        pool = new ThreadPoolExecutor(0, 1000, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        pool = new ThreadPoolExecutor(
+                0,
+                1000,
+                60L,
+                TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>(),
+                new ClientThreadFactory("test"));
         for (int i = 0; i < 1000; i++) {
             pool.execute(() -> {
                 Thread t = clientThread.newThread(r);
@@ -47,7 +53,7 @@ public class ParallelTest {
         @Override
         public Thread newThread(Runnable task) {
             String name = namePrefix + nextId.getAndIncrement();
-            Thread thread = new Thread(null, task, name, 0, false);
+            Thread thread = new Thread(null, task, name);
             System.out.println(thread.getName());
             return thread;
         }
