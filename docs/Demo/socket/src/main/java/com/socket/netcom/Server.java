@@ -3,10 +3,7 @@ package com.socket.netcom;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * 要求:
@@ -35,6 +32,7 @@ public class Server {
     private static final ExecutorService POOL;
 
     static {
+
         POOL = new ThreadPoolExecutor(0, 1000, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
     }
 

@@ -2,12 +2,6 @@
 
 ## 1. 面向对象与数据库的不协调
 [分库分表常见玩法及跨库查询/事务等问题](https://www.jianshu.com/p/6f5662908dae)
-#### 1.1.1. 数据库优化
-[鏖兵](https://juejin.im/post/5ee193a1e51d45783d0eb8b2)
-#### 1.1.2. 使用
-1. [js返回json格式](https://www.jianshu.com/p/04127d74d88c)
-2. [java返回json格式]
-2. [后台返回json数据给前台和前台解析json数据](https://blog.csdn.net/ITBigGod/article/details/83754397)  
 
 ## 2. Java语言特性
 java语法特性差是公认的事实，对比起同样是静态OO语言的C#和kotlin半毛线的优势都没有，除了在KPI按代码行数算的公司里。
@@ -34,6 +28,8 @@ async/await是「使用同步调用的方法调用异步过程」，是「语法
 @Async和2的观点是一样的，更加印证了Java语法特性烂的这一回事。
 ## 3. 上课挑刺儿
 老师写的代码充斥着很多 for 循环，我会改成 stream，forEach 或者 map 等；null 的判断借助 Optional；复杂对象的创建采用 builder 模式；代码规范按照《Effective Java》和《阿里巴巴开发规约》进行改进
+
+[Spring中的设计模式](https://blog.csdn.net/caoxiaohong1005/article/details/80039656)
 ## 4. Java中的那些坑
 ### 4.1. List
 List不能直接一边遍历一边删除？因为for each循环每次都会调用 Iterator，然后修改modCoun，最后造成与expectedModCoun不等报错。
