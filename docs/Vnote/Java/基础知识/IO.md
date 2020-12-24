@@ -12,6 +12,9 @@
     - 路径列表分隔符的不同,使用`pathSeparator`
 
 ### 1.2. 节点流与包装流
+
+>Stream API可以方便支持一块一块的处理数据，而不是一次性全部读取出来再操作，以至于占用大量内存
+
 为了屏蔽这样的异构性一般需要一个中间件解耦,这里采用装饰器设计模式,通过使用`包装流`(又称处理流)来包装不同的`节点流`[^IO]
 [^IO]:[Java IO流详解（二）](https://lrh1993.github.io/2017/02/22/Java-IO流详解（二）——IO流的框架体系/)
 
@@ -31,7 +34,7 @@ BufferedInputStream bis = new BufferedInputStream(fis);
 2. 不过为了提高对纯文本文件,也即全部都是字符(`char`)的文件的处理效率,在原本按字节(`8bit`)读取流的基础上,通过指定字符格式而可以一次按字符大小一次读取多个字节.当然另一方面字符流也只能处理字符类型的数据。
 3. 字节流与字符流之间也需要一个桥梁,即转换流
 
-- 字节流:InputStream/OutputStream 
+- 字节流:InputStream/OutputStream:
 - 字符流: Reader/Writer
     - 将平台缺省的编码集编码的字节转换为`Unicode`字符
 - 转换流
