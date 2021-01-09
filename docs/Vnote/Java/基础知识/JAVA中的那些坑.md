@@ -18,3 +18,40 @@ https://zhuanlan.zhihu.com/p/146995089
 - list.removeIf(s -> s.contains("要删除的"));
 
 https://www.cnblogs.com/maoyali/p/8805975.html
+## 4. 与操作系统之坑
+### 4.1. 操作系统命令行长度限制
+1. 在容器中运行测试类报错：
+>Error running 'ServiceStarter': Command line is too long. Shorten command line for ServiceStarter or also for Application default configuration.
+
+2. [解决办法](https://stackoverflow.com/questions/47926382/how-to-configure-shorten-command-line-method-for-whole-project-in-intellij):
+
+```xml
+Inside your .idea folder, change workspace.xml file
+
+Add
+
+<property name="dynamic.classpath" value="true" />
+to
+
+  <component name="PropertiesComponent">
+.
+.
+.
+  </component>
+Example
+
+ <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="dynamic.classpath" value="true" />
+  </component>
+If you don't see one, feel free to add it yourself
+
+ <component name="PropertiesComponent">
+    <property name="dynamic.classpath" value="true" />
+  </component>
+```
+3. **原理**
+该选项控制如何将classpath传递给JVM：通过命令行或通过文件。大多数操作系统都有最大的命令行限制，当它超过时，IDEA将无法运行您的应用程序。 当命令行长于32768个字符时，IDEA建议您切换到动态类路径。长类路径被写入文件，然后由应用程序启动器读取并通过系统类加载器加载。 如果您对实施细节感兴趣，可以查看IDEA社区版的源代码，JdkUtil.java文件，setupJVMCommandLine方法。

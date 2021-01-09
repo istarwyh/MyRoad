@@ -428,9 +428,10 @@ OSI：
 同时不同服务之间的交互通过RPC实现。
 ![](https://gitee.com/istarwyh/images/raw/master/1600307355_20200916212743655_1611.png)
 #### 3.2.2. RPC的沿革
-早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现消息异步处理。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
-
-`http`作为一种最常用的交互方式，在内部系统服务调用很复杂的情况下，包括效率和安全性在内，需要一个内部服务的管理系统--即RPC。本地调用的过程至少需要涉及
+早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现**消息异步处理**。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
+注意RPC的客户端调用还会被代理，后来这个代理的部分发展为Dubbo中的注册中心。
+![](https://pic1.zhimg.com/80/v2-ff075d7ff3df91d0fbce357456828d1e_720w.jpg?source=1940ef5c)
+本地调用的过程至少需要涉及
 
 - 确定的类或参数或方法名
 - 类或函数的参数
@@ -462,6 +463,7 @@ OSI：
 #### 3.2.3. RPC的实现
 微服务之间通过RPC跨进程调用，
 ##### 3.2.3.1. 默认基于HTTP实现
+如SpringCloud,
 
 - 可以使用JSON或XML格式的请求或响应数据
 - HTTP无状态便于联系同时降低复用
@@ -495,15 +497,37 @@ User-Agent、Accept-Language这些字段对于RPC支持的调用过程所需要�
 
 
 ##### 3.2.3.2. 基于TCP实现
-底层自定制字段，减少网络开销
+如`Apache Thrift`，它也是二进制RPC。
+省去大量的http冗余字段但也缺少了http提供的状态和交互方式，所以需要自定制字段并C/S约定好,大大降低网络开销,但是据说无法穿透防火墙[^Jager]。
+[^Jager]:[RPC vs RESTful](https://www.cnblogs.com/jager/p/6519321.html)
 
 ### 3.3. Spring Cloud的诞生
-当系统复杂度再跳，系统进一步被拆分成许多相对独立的小应用，小服务。每一个都有更强的独立部署能力，单元和单元之间的通信以`http`的`Rest`方式实现RPC。微服务将业务逻辑分散到不同的物理机，不同的进程下[^从rpc到微服务]，使得单应用的故障与负载不会影响到其他应用。其最吸引人的地方还在于**每个微服务可以使用自己适宜的技术栈** 。
-Java领域以Spring Cloud与Dubbo为代表框架实现微服务：
+#### 3.3.1. SpringCloud的组成
+当系统复杂度再跳，系统进一步被拆分成许多相对独立的小应用，小服务。每一个都有更强的独立部署能力，单元和单元之间的交互或者具体的RPC调用可以选择多种方式实现，比如`http`的`Rest`方式。微服务将业务逻辑分散到不同的物理机，不同的进程下[^从rpc到微服务]，使得单应用的故障与负载不会影响到其他应用。其最吸引人的地方还在于**每个微服务可以使用自己适宜的技术栈** 。
+SpringCloud是一套开源工具的集合，由它实现的微服务通常包含：
 
-<center>Spring Cloud=服务注册发现+负载均衡+限流熔断降级+网关+Spring Boot+分库分表+读写分离</center>
+<center>Spring Cloud=服务注册发现+（负载均衡+限流熔断降级）RPC框架+网关+Spring Boot+分库分表+读写分离</center>
 
 [^从rpc到微服务]:[微服务发展沿革](https://cloud.tencent.com/developer/article/1051490)
+
+#### 3.3.2. 服务注册发现
+##### 3.3.2.1. Dubbo
+##### 3.3.2.2. Zookeeper/Eureka
+
+#### 3.3.3. RPC框架
+
+##### 3.3.3.1. Dubbo
+##### 3.3.3.2. Feign
+Feign使用 `Rest-like`风格的HTTP交互方式实现`json-rpc`,封装了
+
+- Ribbon
+     - RestTemplate：封装Http请求-->客户端负载均衡
+- Hystrix
+    - 服务容错保护
+
+
+**当使用RPC要不要遵循RestFul**？
+>RPC的思想是把本地函数映射到API，本地有一个getAllUsers，远程也能通过某种约定的协议来调用这个getAllUsers。至于这个协议是Socket、是HTTP还是别的什么并不重要； RPC中的主体都是动作，是个动词，表示我要做什么。 而REST则不然，它的URL主体是资源，是个名词，也仅支持HTTP协议，规定了使用HTTP Method表达本次要做的动作，这些动作表达了对资源仅有的几种转化方式。--[Vincross](https://www.zhihu.com/question/28570307/answer/163638731)
 
 ### 3.4. 复杂化后的Service Mesh
 >一言以蔽之：Service Mesh是微服务时代的TCP协议。[^ServiceMesh]

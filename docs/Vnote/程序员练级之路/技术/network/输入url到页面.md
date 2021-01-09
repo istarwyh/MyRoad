@@ -130,14 +130,16 @@ connection.onDidChangeWatchedFiles(_change => {
 6. Start listening on the input stream for messages to process.
 一开始客户端和服务端都处于`Closed`状态,服务端主动监听某个端口,处于`listen`状态.这里是对本地文本输入流的监听?
 `connection.listen();`
+
+
 ## 3. 发送HTTP请求
-
-HTTP最早被用来做浏览器与服务器之间交互HTML和表单的通讯协议；后来又被被广泛的扩充到接口格式的定义上。浏览器可以在第三次握手的时候携带信息,此时可将 IP 地址打在协议上，同时协议搭载请求参数,
+### 3.1. Http的诞生
+`HyperText Transfer Protocol`是为了实现网络中主机**资源**（注意是个名词）共享而提出的通讯协议，最早用作B/S之间交互HTML和表单；后来又被被广泛的扩充到接口格式的定义上。浏览器可以**在第三次TCP握手的时候携带信息**,此时可将 IP 地址打在协议上，同时协议搭载请求参数,
 ![http请求](https://gitee.com/istarwyh/images/raw/master/1605671350_20200405093134782_28679.jpg)
-然后和还有一些必要的信息,但是我们看不到的一并发给服务器:
 
-### 3.1. Http请求格式
-#### 3.1.1. 原生请求格式
+一个http请求中的url原意描述的是一个资源。
+### 3.2. Http请求格式
+#### 3.2.1. 原生请求格式
 
 ```xml
 <request-line>
@@ -178,7 +180,9 @@ User-Agent是帮助我出去的浏览器"指纹"信息:User-Agent，这里它是
 <blank line>
 
 ```
-此外,GET请求的附加参数通常作为queryString的形式位于请求后部,是因为浏览器发出的请求只能由url触发,但其实http协议对此没有规定.
+通常,GET请求的附加参数以queryString的形式位于请求后部，但其实http协议对此没有规定.
+
+>浏览器上方的地址栏中直接输入地址触发的一般就是GET请求
 
 **POST请求**
 可以看到这里的POST请求的header多了两个必要的参数:Content-Type与Content-Length.
@@ -199,11 +203,16 @@ Connection: Keep-Alive
 - multipart/form-data格式,用来传文件
 - GraphQL
 
-**注意以上都是浏览器的情境下**
+**注意以上都是在浏览器的情境下**
 http其实相当自由,理论上允许参数放url的path里，querystring里，body里或header里.
 而且如果是Ajax或者其他HTTP Client发出去的POST请求，其body格式也非常自由了，常用的有json，xml，文本，csv……甚至是你自己发明的格式。只要前后端能约定好即可[^深入理解GET与POST]。
 所以原生的http扯皮也会比较多,于是诞生了一些接口规范/风格,比如著名的`Restful`.
-#### 3.1.2. Rest请求格式
+
+#### 3.2.2. Rest请求格式
+REST的设计目标是解决互联网级别的信息共享和互操作问题[^大宽宽]，url主体是资源，是个名词[^Vincross]。
+[^Vincross]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/163638731)
+[^大宽宽]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/541465581)
+
 - `GET` + URL : 获取资源或者资源列表
     - <Header>
 -  `POST` + URL : **创建**一个资源
@@ -223,7 +232,7 @@ http其实相当自由,理论上允许参数放url的path里，querystring里，
 - GET与POST具体怎么用还是要看实际:
     - Elastic Search的_search接口使用GET+body来查询.因为查询很复杂，用querystring很麻烦,在请求体中用json编码又更加容易,不用折腾percent encoding。那为什么不用POST?因为语义更重要.
 
-#### 3.1.3. GET与POST的[比较](https://www.w3school.com.cn/tags/html_ref_httpmethods.asp)
+#### 3.2.3. GET与POST的[比较](https://www.w3school.com.cn/tags/html_ref_httpmethods.asp)
 
 <div>
 
@@ -297,14 +306,13 @@ http其实相当自由,理论上允许参数放url的path里，querystring里，
 受到S端限制8000+.
 
 - <strong>在发送密码或其他敏感信息时绝不要使用 GET ！</strong>但其实用POST放Body里也不安全,还是得上`https`
-### 3.2. 应用层
-常见进程port
+### 3.3. 应用进程
 之前为了支持HTTP,开放了80端口以建立TCP连接:
 
 - 80端口,主要用于在WWW(`World Wide Web`，万维网)服务上传输信息(网页浏览)
 - 8080端口：同80端口，一般用于WWW代理服务
 
-自然根据应用**进程**需要协议的不同,还有其他端口的对应各自的应用进程,如:
+自然根据应用**进程**需要协议的不同,还有其他port对应各自的应用进程,如:
 
 - 21端口：主要用于`FTP`(File Transfer Protocol，文件传输协议)服务
 - 23端口: 主要用于`Telnet`(远程登录)服务，是Internet上普遍采用的登录和仿真程序
@@ -317,10 +325,9 @@ http其实相当自由,理论上允许参数放url的path里，querystring里，
 - 1080端口: Socks代理服务使用的端口,允许防火墙后面的人通过一个IP地址访问INTERNET
 - 4000端口: QQ服务端端口
 
+### 3.4. 数据包分组发送
 
-## 4. 服务器处理请求并返回HTTP报文
-### 4.1. 序列号的同步
-TCP工作在全双工模式，建立连接后TCP允许同时进行双向数据传输。这里说明S->B,B->S一样.
+TCP工作在全双工模式，建立连接后TCP会将需要传输的数据包划分为`TCP Segment`在B/S之间双向数据传输，并允许同时进行。
 1)  发送数据 ：服务器向客户端发送一个带有数据的数据包，该**数据包中的序列号**和确认号与建立连接第三步的数据包中的序列号和确认号相同；
 
 2)  确认收到 ：客户端收到该数据包，向服务器发送一个确认数据包，该数据包中`序列号`为`上一个数据包中的确认号值`，而`确认号`为服务器发送的`上一个数据包中的序列号+该数据包中所带数据的大小`。
@@ -331,9 +338,10 @@ TCP工作在全双工模式，建立连接后TCP允许同时进行双向数据�
 - 接受方可以根据数据包的序列号按序接受
 
 因此不能省略序列号.
+## 4. 服务器处理请求并返回HTTP报文
 
-### 4.2. Http响应格式
-#### 4.2.1. 原生响应格式
+### 4.1. Http响应格式
+#### 4.1.1. 原生响应格式
 ```xml
 <status-line>
 <headers>
@@ -358,7 +366,7 @@ Content-Length: 2333
 </html>
 ```
 
-#### 4.2.2. Http状态信息
+#### 4.1.2. Http状态信息
 
 位于响应报文的开始行中,常见的http状态码分为
 
@@ -385,24 +393,24 @@ Content-Length: 2333
 502 Bad Gateway |请求未完成。服务器从上游服务器收到一个无效的响应
 504 Gateway Timeout | 网关超时(网关不可达?)
 505 HTTP Version Not Supported | 服务器不支持请求中指明的HTTP协议版本
-### 4.3. 记录客户端状态
-#### 4.3.1. http无状态
+### 4.2. 记录客户端状态
+#### 4.2.1. http无状态
 设计决策基于以下想法：上传到网站的内容可以位于多个不同的服务器上。[^full-stack]大多数Web流量与检索未更改的内容有关，服务器和浏览器软件的实现者不一定需要预留资源维护用户空间。
 
 [^full-stack]: [HTTP协议无状态性和cookie](https://materiaalit.github.io/wepa-s17/part3/)
 
-#### 4.3.2. Cookie
+#### 4.2.2. Cookie
 但是服务器端的业务往往需要是有状态的,如用户的登录次数,账号密码等。因此HTTP / 1.1允许服务器端生成Cookie，发送给**浏览器端**的`User-Agent`,User-Agent会将`Cookie`的`key/value`保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器,如:
 `__gads:ID=5ce68c103a29bff9:T=1584344058:S=ALNI_MaEB9uF5WNppBI895U2UNX44CMb0Q1`.
 第三方传递cookie,最常见的是共享域名的方式.
 
-#### 4.3.3. Session
+#### 4.2.3. Session
 `HttpServletRequest.getSession()`方法创建Session保存在服务器上,发到客户端的只有`Session id`；
 当客户端再次发送请求会将这个**存储在cookie中**的`Session id`带上，服务器接受到请求之后就会依据Session id找到相应的`Session`;
 如果没有找到,则将新的Cookie返回浏览器并启动新的Session.
 
 
-#### 4.3.4. 应用场景
+#### 4.2.4. 应用场景
 1. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，考虑到安全应当使用session；
 
 2. session会在一定时间内保存在服务器上,并且cookie--ascii,session却可以string,故Session的使用比Cookie方便,但访问加大会占用服务器的资源,降低性能。考虑到减轻服务器负担，应当使用COOKIE；
