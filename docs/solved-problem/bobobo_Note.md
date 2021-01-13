@@ -37,18 +37,19 @@ Title
 因此O(n)其实是与用例相关的,得看实际.
 
 ### 递归的时间复杂度
-求x^n
+以下列求x^n的算法为例,
+递归深度:O(log n)
+每次时间复杂度:O(1)
 ```java
 public double pow(double x,int n) {
-    if(n <=0) throw new IllegalArgumentException;
+    if(n <= 0) throw new IllegalArgumentException;
     if(n==0) return 1.00;
-    // 思路一:计算x^n不好控制次数,可以先计算x^(n/2),这样x^(n/2) * x^(n/2) == x^(n)
-    double t =pow(x,n/2);
-    // 奇数会舍掉一个,自己补一个x
-    if(x %2 !=0) 
-        return x*t*t;
-        // 思路二:logn个x,t*t就是n个x
+    // 思路一:计算x^n不好控制次数,可以先计算x^(n/2),这样x^(n/2) * x^(n/2) == x^(n),所以最后return t*t
+    // 每一次都除2,一直到等于0,因此深度是O(logn)
         // logn是因为"除了多少次2之后会变成0"(实际是1+logn次),这正是对数的定义
+    double t =pow(x,n/2);
+    if(n % 2 != 0) // 细节: 如果n为奇数,因为奇数/2会舍掉一次,自己补一个x作为因子乘上去
+        return x*t*t;
     return t*t;
 }
 ```
