@@ -17,7 +17,7 @@
  2. 安装MySQL并配置
  注意结尾为`deb`,为`Debian`系发行版,可使用Debian Package,即`dpkg`来安装这个主面板,`-i`应该是`--install`的短命令版本:
  `sudo dpkg -i mysql-apt-config_0.8.15-1_all.deb`
- - `Enter`之后可以选择**5.7版本**,这里才开始下载服务器端`mysql-server`
+ - `Enter`之后可以选择**5.7版本**,这里才开始下载服务器端`mysql-server`(默认就是5.7),可以指定版本:`sudo apt-get install mysql==version`
 
 3. 开始更新安装
 - `sudo apt-get update`
@@ -26,7 +26,8 @@
 4. 验证安装
 - MySQL安装完成后默认是启动的,以下命令分别是查看mysql状态|启动mysql|停止mysql|重启mysql
 `sudo service mysql status|start|stop|restart`
-- 或者使用`mysql -u root -p` ,然后`show databases`
+- 或`mysql -u root -p` ,然后`show databases`
+- 或`sudo netstat -tap | grep mysql`
 
 #### 2.1.1. 导入数据库
 1. 建空数据库
