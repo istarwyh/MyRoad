@@ -1,5 +1,5 @@
 2020年12月12日 众安*ThoughWorks "领域驱动设计，科技赋能保险"
-## 1. 核心概念
+## 1. 核心概念i
 ### 1.1. 从字面理解
 2004年 Eric Evans 《Domain Driven Design》提到
 
@@ -9,12 +9,15 @@
 - 战术设计
 	○ 实体、值对象、聚合、**聚合根**
 ### 1.2. 从比较中理解
-**领域模型** vs **数据驱动模型**
-先定义表字段再去做开发，即面向数据表开发的方式效率可能更高。但是其不适合微服务背景下的全链路调整，比如线上的存储过程的遗留代码相当多,调用顺序难以统一改造,从而必须整体性去把握模型的变化。某种程度上，国内普遍使用Mybatis而不是JPA则是基于效率习惯于操作sql本身。事实上某些时候宁愿代码中做筛选更好表示业务逻辑,也不要只是黑盒sql去实现.DDD之后应当使得代码和模型相匹配,做到
+- **领域驱动型** vs **数据驱动型**
+
+一般直接的开发方式便是先定义表字段,再面向数据表开发,典型的场景是使用Mybatis生成模板CRUD`sql`,后续直接操作sql.这便是数据驱动开发.相比于使用JPA(Java Persistence API)，国内普遍这样做可能是因为其效率更高。
+但是其不适合**微服务背景下的全链路调整**，比如线上的存储过程的遗留代码相当多,调用顺序难以统一改造,从而必须整体性去把握模型的变化。有时候在代码中做筛选或者策略来更好表示业务逻辑,而不只是依靠黑盒sql去实现表字段的更改时有利于后续维护扩展的.
+基于上述考虑着眼于整体业务模型的统一与同步的开发方式便是领域驱动型开发.DDD致力于代码和模型相匹配:
 >模型即设计,设计即代码
 
 
-**领域模型** vs **UseCase**
+- **领域模型** vs **UseCase**
 Usecase之间不突出相互交互。另一方面，领域事件可以通过IOC的方式,让IOC容器管理事件，摆脱每次只能更新一个聚合根的问题
 
 - 发布事件的代码
@@ -37,12 +40,12 @@ public class PolicyProduct implements DomainSubscriber{
 
 1. 便利贴每个人对于业务流程小到**事件**的认知贴在上面
     - 每个人包括需求，产品，技术等，重点是**多视角**
-2. 怎么触发事件(黄色,橙色事件,蓝色命令/定时/回调/异常),谁**触发**事件?
-3. 归纳UseCase,找**聚合**.不一致的重定义通用语言.突出操纵事件的角色(绿色人工,浅绿色系统角色)
+2. 怎么触发事件(<font color= "yellow">黄色</font>内部事件,<font color= "orange">橙色</font>外部事件),谁(<font color= "blue">蓝色</font>命令/定时/回调/异常)**触发**事件?
+3. 归纳UseCase,找**聚合**.不一致的重定义通用语言.突出操纵事件的角色(<font color= "green">绿色</font>人工,<font color= "#00FFFF">浅绿色</font>系统角色)
 4. 拆分职责过多的"上帝对象",找出**限界上下文**(ContextDTO?),归纳到不同部门(虚线域)
 即虚线圈出的域负责域内事件，对于每个事件则是<font color= "green">绿色</font>操纵<font color= "blue">蓝色</font>触发<font color= "yellow">黄色</font>/<font color= "orange">橙色</font>。
 
-5. 梳理事件流，争取围绕聚合根实现原子性，从战略视角区分不同域的支撑方式
+5. 梳理事件流，争取围绕**聚合根**实现原子性，并从战略视角以各自所需的实现方式将聚合根放入三个域:
 - 核心域(价值链)
 - 通用域(现有的开源的或商业的产品)
 - 支撑域(具有业务特色的监控,运营等)
@@ -50,6 +53,7 @@ public class PolicyProduct implements DomainSubscriber{
 - 以电商领域为例，划分后可初步得到下图结果：
 ![](https://gitee.com/istarwyh/images/raw/master/1607862391_20201213195946623_20186.png)
 - 以保险领域为例：
+
 ```mermaid
 graph TD
 保险--> A(核心域)
@@ -74,10 +78,51 @@ C-->C2(再保)
 
 保险-->D(...)
 ```
-### 2.2. 分布式的质量确保
+
+### 2.2. Domain Model 与DataBase交互
+在得到聚合根以建立微服务后,传统的操作下,上游意图在经过泛Service层之后会全部被分解为CRUD(`Create`/`Retrieve`/`Update`/`Delete`)操作,但是<i class="gg-danger">在Domain Model中无法体现</i>是哟
+
+<style type="text/css">
+ .gg-danger {
+ box-sizing: border-box;
+ position: absolute;
+ display: block;
+ transform: scale(var(--ggs,1));
+ width: 20px;
+ height: 20px;
+ border: 2px solid;
+ border-radius: 40px;
+ align-items: center;
+ white-space:nowrap;
+}
+.gg-danger::after,.gg-danger::before {
+ content: "";
+ display: block;
+ box-sizing: border-box;
+ position: absolute;
+ border-radius: 3px;
+ width: 2px;
+ background: currentColor;
+ left: 7px
+}
+.gg-danger::after {
+ top: 2px;
+ height: 8px
+}
+
+.gg-danger::before {
+ height: 2px;
+ bottom: 2px
+}
+</style>
+
+了解springBoot的自动配置的实现原理 - 一点点的视频 - 知乎
+https://www.zhihu.com/zvideo/1333761249734217728
+
+### 2.3. 分布式的质量确保
 1. 前后对比：
 从代码的层面找出调用链，并"录制"http调用过程,那么当代码修改后,重放一遍同时重检查每个库的变化,保证每一次修改至少不会引入破坏原有功能的bug
-    - 复杂的业务模型种，`TDD`造数据的成本比较高,同时对于函数调用的测试覆盖不了业务流程
+    - 复杂的业务模型中，`TDD`造数据的成本比较高,同时对于函数调用的测试覆盖不了业务流程
     - 因此DDD中侧重以数据库或者某些共享媒介做中心检查
 
 2. ArchUnit检验分层开发是否符合规范,比如Service只能被Service或者Controller访问
