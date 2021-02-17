@@ -74,7 +74,7 @@ https://www.cnblogs.com/edisonchou/p/4458219.html
 split->map->(combine->partition)->reduce->result
 所谓reduce生成list,其实也是并行的许多次reduce,逐个累积生成list的.
 
-## 相关的
+## 2. 相关的
 CAP
 zookeeper能保持强一致性，但是又主节点，master一旦发生故障之后会重新选举出新的主节点，保持一致性但是选举时间较长。Eureka 保持的是最终一致性，只要还有节点存在，那么就可以快速的响应。弱一致性可能会对项目造成一定的影响，比如所见的信息不是最新信息。
 
@@ -82,7 +82,7 @@ zookeeper能保持强一致性，但是又主节点，master一旦发生故障�
 链接：https://www.zhihu.com/question/289129028/answer/1065600854
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-## 2. 问题与解决方案
+## 3. 问题与解决方案
 >1. ubuntu重启不断闪屏
 
 据说是gdm启动过程与什么冲突了,然后不断崩溃又重启造成了这个效果.重启两次之后偶尔会出现这个bug.
@@ -113,7 +113,7 @@ ubuntu默认禁止root账户的ssh连接,可以选择[不让ssh检查了](https:
 *简记过程:*
 造成这种问题可以有很多原因,比如[namenode格式化失败](https://www.cnblogs.com/zwgblog/p/6064022.html),比如[namenode与datanode参数不匹配](https://blog.csdn.net/qq_43193797/article/details/85674720),比如防火墙原因.排查后发现`datanode`根本就没有生成`VERSION`文件,那些专注于解决datanodeSHUTDOWN的方法只会让debug越走越远.
 排除了路径错误,文件权限,`hdfs-site.xml`或`core-site.xml`各种问题,在[这个帖子](https://blog.csdn.net/fireblue1990/article/details/51096350?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)受到了启发:
-- **发现问题最好的方法就是查看日志，根据日志提示找问题**
+- **发现问题最好的方法就是查看日志，根据日志提示找问题** grep error:xxx xxx.log
 
 data1的日志中记载它反复尝试连接`master:9000`失败,以及发生了`java.lang.IOException`,此前尽管已经反复检查过`interfaces`中的配置,没有使用`telnet检查端口连接`,最后原因应该是其前两行干扰了主机ip与主机名的映射,把它们注释掉问题终于解决了.
 

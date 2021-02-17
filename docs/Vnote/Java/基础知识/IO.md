@@ -263,21 +263,26 @@ Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出
 线程往往只能阻塞.而垃圾服务器,CPU核心一般不超过4核,线程之间还需要常常切换.
 ### 5.3. Spring框架
 
-#### 5.3.1. Bean的作用域
-1. Singleton:单例模式，默认模式
-2. Prototype:原型模式,每次创建该bean后都会产生一个新实例，创建后Spirng不再对其管理
+### 5.4. Spring三级缓存
+Spring中为了性能考虑有三级缓存:
+
+1. `SingletonObjects`:一级缓存,用于保存实例化、注入、初始化完成的bean实例-->代理对象
+2. `earlySingletonObjexts`:二级缓存,用于保存实例化完成的bean实例-->代理对象
+3. `singletonFactories`:用于保存bean创建工厂,以便于后面扩展有机会创建代理对象-->原始对象
+#### 5.4.1. Bean的作用域
+1. `Singleton`:单例模式:Spring的单例保证在一个IOC容器中只有一个action单例,从而保证开发者使用的是同一个实例.**默认模式**
+2. `Prototype`:原型模式,每次创建该bean后都会产生一个新实例，创建后Spirng不再对其管理
     如对于Dao层的bean对象,Spring对于`ThreadLocal`对象,区别常用的加锁方式,用空间换时间--**给每个线程复制一份独立的变量副本**,从而隔离多线程访问对于数据访问的冲突.
-3. request: 每次请求都创建一个新的实例，不过Spring不放弃监听
-4. session: 每次会话同上（session是指拿到cookie后服务器端创建的）
-5. global session:全局的web域，类似于servlet中的application
-#### 5.3.2. 默认单例
-1. Spring的单例保证在一个IOC容器中只有一个action单例,从而保证开发者使用的是同一个实例.
-2. 正因为是单例的，所以对于成员变量会被重复使用，不是线程安全的[^Singleton].
+3. `request`: 每次请求都创建一个新的实例，同时Spring对其管理
+4. `session`: 每次会话同上（session是指拿到cookie后服务器端创建的）
+5. `global session`:全局的web域，类似于servlet中的application
+#### 5.4.2. 默认单例
+正因为是单例的，所以对于成员变量会被重复使用，不是线程安全的[^Singleton].
 
 [^Singleton]:[spring的controller是单例还是多例，怎么保证并发的安全?](https://blog.csdn.net/riemann_/article/details/97698560)
 
 
-### 5.4. Redis
+### 5.5. Redis
 因为对Redis的请求都是访问内存,不涉及文件/DB/IO等操作,时间很短(`100ns`左右),所以用**同一线程**就可处理多个请求.同时也避免了线程切换的开销和共享数据的问题.
 Redis使用的是文本协议，但不是http，兼具WebSocket/Dubbo/grpc这种二进制协议的优点。因为自己设计的更简洁：
 
@@ -285,7 +290,7 @@ Redis使用的是文本协议，但不是http，兼具WebSocket/Dubbo/grpc这种
 >
 ![](_v_images/20201223210629658_12257.png)
 
-### 5.5. Node.js
+### 5.6. Node.js
 事件驱动编程
 
 - 对于大部分非阻塞的线程,用一个线程处理所有请求,遇到耗时长的IO等操作,留下**回调函数**[^callfunctions],等到I/O操作完成后再去执行回调函数
@@ -293,18 +298,18 @@ Redis使用的是文本协议，但不是http，兼具WebSocket/Dubbo/grpc这种
 
 [^callfunctions]:这种函数对象并不直接调用函数本身，而是Runtimes环境（如浏览器）在事件发生时的适当时间调用函数。
 
-#### 5.5.1. 代表产品
+#### 5.6.1. 代表产品
 Electron桌面开发
 高并发异步减少线程
-#### 5.5.2. 缺点
+#### 5.6.2. 缺点
 - 单一主线程不能发挥多核优势
 - 对于计算密集型的项目应当考虑其他技术
 
-### 5.6. Netty
+### 5.7. Netty
 Netty的主线程和工作线程可以设置多个。因为主线程只负责连接与注册，工作线程是真正忙碌的线程，可以依据CPU核数多开。
 ![](_v_images/20201223220833179_4499.png)
 ![](_v_images/20201223214444169_21765.png)
-### 5.7. Node.x->Vert.x
+### 5.8. Node.x->Vert.x
 
 Verticle循环关联事件:
 ```java
