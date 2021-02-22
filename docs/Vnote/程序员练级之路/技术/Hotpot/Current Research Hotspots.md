@@ -38,7 +38,7 @@ C语言并不受限于任何一种操作系统或者机器,也被用作编写编
 >Windows、.NET、ASP.NET、C#、Azure、SQL Server
 - Java圈 
 >Java、Spring
-值得一提的是，Java不是任何一个平台的亲儿子，二它本身又是可以适配任何平台。Java的发展趋势主要在跨平台应用和大型非实时应用上。
+值得一提的是，Java不是任何一个平台的亲儿子，而它本身又是可以适配任何平台。Java的发展趋势主要在跨平台应用和大型非实时应用上。
 - 手机圈 
 >Android、 iOS、Kotlin、Swift、Firebase
 - 前端圈 
@@ -49,3 +49,9 @@ C语言并不受限于任何一种操作系统或者机器,也被用作编写编
 > Linux、Shell、Vim、Docker、Kubernetes、Elasticsearch、Redis……
 - 其它圈子
 > C/C++/汇编圈子、Ruby圈子、Hadoop/Spark圈子、……
+
+## 3. Coding Course
+
+https://codekingdoms.com/
+### 3.1. Blog
+https://archivy.github.io/

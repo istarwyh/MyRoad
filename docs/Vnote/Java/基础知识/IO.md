@@ -262,13 +262,17 @@ Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出
 
 线程往往只能阻塞.而垃圾服务器,CPU核心一般不超过4核,线程之间还需要常常切换.
 ### 5.3. Spring框架
-
+Spring依赖注入Bean实例默认是单例的,其基本流程如下:
+```mermaid
+graph LR
+   A -- text --> B -- text2 --> C
+```
 ### 5.4. Spring三级缓存
 Spring中为了性能考虑有三级缓存:
 
 1. `SingletonObjects`:一级缓存,用于保存实例化、注入、初始化完成的bean实例-->代理对象
 2. `earlySingletonObjexts`:二级缓存,用于保存实例化完成的bean实例-->代理对象
-3. `singletonFactories`:用于保存bean创建工厂,以便于后面扩展有机会创建代理对象-->原始对象
+3. `singletonFactories`:三级缓存,用于保存bean创建工厂,以便于后面扩展有机会创建代理对象-->原始对象
 #### 5.4.1. Bean的作用域
 1. `Singleton`:单例模式:Spring的单例保证在一个IOC容器中只有一个action单例,从而保证开发者使用的是同一个实例.**默认模式**
 2. `Prototype`:原型模式,每次创建该bean后都会产生一个新实例，创建后Spirng不再对其管理
