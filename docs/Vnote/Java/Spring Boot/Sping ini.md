@@ -203,14 +203,24 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
 3. AOP动态代理
 
 
-**常用注解介绍**
+**核心注解介绍**
 
 - `@Bean`[^Bean]
 [^Bean]:[Spring中Bean及@Bean的理解](https://www.cnblogs.com/bossen/p/5824067.html)
 
+-  `@ComponentScan`开启组件扫描功能,默认将**包**下正确注解的类纳入IoC容器.
+- `@SpringBootConfiguration`/`@Configuration`表示被注解的类是一个需要被IoC管理的配置类/`@interface`类
 - `@EnableAutoConfiguration`开启*自动*配置功能
+    - Import `AutoConfigurationImportSelector` 激活SpringFactoriesLoader
+    - 通过SpringFactoriesLoader(类加载器<svg t="1613551927172" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1221" width="15" height="15"><path d="M665.6 374.4c-12.8-57.6-57.6-105.6-118.4-118.4-67.2-16-131.2 9.6-169.6 64-28.8 41.6 0 60.8 16 73.6 6.4 3.2 12.8 9.6 22.4 19.2 12.8 12.8 32 9.6 44.8-3.2 12.8-12.8 9.6-32-3.2-44.8-9.6-6.4-16-12.8-22.4-19.2 22.4-25.6 60.8-38.4 96-28.8 35.2 9.6 60.8 35.2 70.4 70.4 9.6 48-12.8 92.8-54.4 112-41.6 19.2-70.4 57.6-70.4 102.4l0 22.4c0 19.2 12.8 32 32 32 0 0 0 0 0 0 16 0 32-12.8 32-32l0-22.4c0-19.2 12.8-38.4 32-44.8C643.2 528 681.6 451.2 665.6 374.4zM480 729.6c-9.6 9.6-12.8 22.4-12.8 35.2 0 12.8 6.4 25.6 12.8 35.2 9.6 9.6 22.4 12.8 35.2 12.8 12.8 0 25.6-6.4 35.2-12.8 9.6-9.6 12.8-22.4 12.8-35.2 0-12.8-6.4-25.6-12.8-35.2C531.2 710.4 499.2 710.4 480 729.6zM512 67.2c-80 0-160 22.4-227.2 64C246.4 86.4 188.8 64 124.8 64 115.2 64 102.4 70.4 96 80c-6.4 9.6-6.4 22.4 0 32 0 0 32 54.4 41.6 137.6 3.2 16 16 28.8 32 28.8 0 0 3.2 0 3.2 0C192 275.2 204.8 262.4 204.8 243.2 198.4 201.6 188.8 163.2 179.2 137.6 204.8 144 230.4 160 249.6 188.8c0 0 0 0 0 0 0 0 0 0 0 0C252.8 192 252.8 192 252.8 195.2c0 0 3.2 3.2 3.2 3.2 3.2 0 3.2 3.2 6.4 3.2 3.2 0 3.2 3.2 6.4 3.2 3.2 0 3.2 0 6.4 0 3.2 0 3.2 0 6.4 0 3.2 0 3.2 0 6.4-3.2 3.2 0 3.2 0 6.4-3.2 0 0 0 0 0 0 0 0 0 0 0 0 64-44.8 140.8-67.2 217.6-67.2 211.2 0 384 172.8 384 384s-172.8 384-384 384-384-172.8-384-384c0-54.4 9.6-105.6 32-156.8 6.4-16 0-35.2-16-41.6-16-6.4-35.2 0-41.6 16C76.8 390.4 64 451.2 64 515.2c0 246.4 201.6 448 448 448 246.4 0 448-201.6 448-448C960 268.8 758.4 67.2 512 67.2z" p-id="1222" fill="#1296db"></path></svg>)加载`EnableAutoConfiguration.class`,从而启动Jar包中`Springfactories`中的自动配置类,并利用`@Conditional`系列注解(允许`exclude`等自定义配置规则)完成基于项目的自动配置
+
 -  `@AutoConfigurationPackage`将主配置类(`@SpringBootApplication`)的所在包以及下面所有子包里面的所有组件扫描到Spring容器
--  http方法映射
+- `@Controller`用于定义控制器**类**，在spring项目中由控制器负责将用户发来的URL请求转发到*对应的服务接口*（service层），
+    - 配合注解`@RequestMapping`,返回一个视图(前后端不分离)
+    - 配合`@ResponseBody`当返回值是String，返回的字符串将不再通过ViewResolver查找视图(即`.jsp`或`.html`文件)，会被直接以 `JSON `或` XML `形式数据展示在浏览器里
+
+- `@AutoWired`自动导入依赖的组装好属性、方法的`Bean`,可以对类成员变量、方法及构造函数进行标注，把配置好的Bean拿来用.比如:Service 类注入到 Controller 类中。
+-  HTTP 方法映射
     - `@RequestMapping`提供路由信息，负责URL到Controller中的具体函数的映射。 如果没有指定请求方式，将接收`Get、Post、Head、Options`等所有的请求方式。
         -  `@GetMapping`==`@RequestMapping(method = RequestMethod.GET)`的缩写。该注解将HTTP Get 映射到特定的处理方法上。 
         - - Get示例:
@@ -220,12 +230,6 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
        -  - Post示例:
         >`http://localhost:8080/wx/auth/profile?username=user123&password= user123`
         
-- `@Controller`用于定义控制器**类**，在spring项目中由控制器负责将用户发来的URL请求转发到*对应的服务接口*（service层），
-    - 配合注解`@RequestMapping`,返回一个视图(前后端不分离)
-    - 配合`@ResponseBody`当返回值是String，返回的字符串将不再通过ViewResolver查找视图(即`.jsp`或`.html`文件)，会被直接以 `JSON `或` XML `形式数据展示在浏览器里
-
-- `@AutoWired`自动导入依赖的组装好属性、方法的`Bean`,可以对类成员变量、方法及构造函数进行标注，把配置好的Bean拿来用.比如:Service 类注入到 Controller 类中。
-
 ```java
 @Service
 public class UserService {

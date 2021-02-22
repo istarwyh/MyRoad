@@ -1,88 +1,84 @@
-## 1. 概述
-分布式/关系式
-- 宽带是什么?带宽?
-宽带指运营商给用户接入的使其能上网的服务,有10M宽带,100M宽带等类型.以这两种类型为例,它们分别指的是此宽带预计提供给用户的最高下载速度是10Mb/s也写作10Mbps),100Mb/s.
-带宽则就是指刚刚的10Mbps,100Mbps,指的是线路的信息传输速率.
-带宽在网络术语中也指线路传输的频段宽度.
-By the way,流量是指对外发送数据与接受数据包的大小总和.
-- 视频流是什么?
-基于视频流传输协议RTP/HTTP等的视频传输技术
+## 1. Hadoop的诞生
+大型机和高端机的服务不能随便重启.而在信息时代,一个文件几十上百G,集群处理64M一块,冗余存储与崩溃是常态(硬盘大约5%故障率).Google公布了三驾马车HDFS/MapReduce/Zookeeper**以解决**
 
-大机和高端机都是不能随便重启的.然后我们使用软件使得普通PC的重启在处理中被当作一种常态.
-信息时代,一个文件几十上百G,集群处理
-64M一块,冗余存储,假设崩溃是常态.
-Google公布了三驾马车---因为它已经有了新的三驾马车.尽管这个是20前的技术.**各自解决了什么问题?**
 - 硬件成本
 - 可靠性
 - 并行计算
-认真读这三篇文章.
 
-抓取网页,存取网页,提供搜索引擎的数据
-- 搭建大型数据仓库,实现PB级的数据存储/处理/分析/统计
-
-hadoop大数据平台是事实上的标准.hadoop在硬盘中操作,延迟高,计算慢是一个弱点.
+之所以是Google来做这件事,因为抓取网页,存取网页,搭建大型数据仓库,实现PB级的数据存储/处理/分析/统计,实现搜索引擎是它的老本行.
+现在Hadoop大数据平台是事实上的标准.
 
 ### 1.1. HDFS
-**HDFS的设计初衷**:
+#### 1.1.1. HDFS的设计初衷
+
 - 一次写入,多次读取
 - 不支持文件并发写入
 - 不支持文件修改
 
-HDFS的使用范围
+#### 1.1.2. HDFS的使用范围
 - 存储并管理**PB**级数据
 - 处理非结构化数据(网页时非结构化的);结构化数据每一行时必有每一列.
 - 注重吞吐,对延时不敏感
-(21号ftp一般连接,20号端口传输数据,20号就是注重的吞吐量)
 - 一次写入,多次读取的模式
 
-Namenode,管理结点,放的是数据的数据--元数据--Metadata.Metadata由文件扫描系统得到.
+#### 1.1.3. Namenode管理结点
+Namenode放的是数据的数据--元数据--Metadata.Metadata由文件扫描系统得到.
+为了数据可靠性,备份三份数据,并且三份存储硬盘位置距离要远(不同机箱不同层),配之以Metadata存储各数据的位置.每次一写写三份,全部写完了再close.
+不过Namenode挂了Metadata也可能丢失,怎么防止?Namenode中依然是一个集群,且相对datanode结点的设备性能较高.而且同样有备份,尽管时间差依然会造成数据丢失.
+### 1.2. MapReduce是一个组件之一
+#### 1.2.1. MapReduce也代指一系列过程
+它允许上千cpu并行处理,进而充分利用廉价的低等CPU的性能,其中最重要的两个过程
 
-**在大数据中故障是常态,5%**
-一个硬盘坏了就很快换,一个网卡坏了也很快换.但是如果硬盘挂了,数据取不出来就完了,所以备份三份数据,但是这三份各自存储在很多个硬盘上,Metadata存储各数据的位置.可以从不同的地方取备份数据最后恢复换掉的硬盘.之所以不把三份都放在一个datanode结点上,降低三份都挂掉的概率.那么Namenode挂了元数据也可能丢失,怎么防止?有策略依然有备份,尽管时间差依然会造成数据丢失.
-此外,实际环境中,Namenode中依然是一个集群,不过相对datanode存在的设备性能较高.
+- Map: 任务拆解
+- Reduce: 任务汇总分析
 
-一写写三份,全部写完了再close
-
-### 1.2. Mapreduce
-上千cpu并行处理
-来源于函数式编程语言,Map+Reduce两部分
-Map: 任务拆解
-Reduce: 任务汇总分析.为了提高速度,并不是结果直接写入硬盘,而是先在缓存中进行缓存和排序.
+为了提高速度,并不是结果直接写入硬盘,而是先在缓存中进行缓存和排序.
 ![](https://images2015.cnblogs.com/blog/923309/201604/923309-20160406215236172-340369929.jpg)
 
+[完整过程](https://www.cnblogs.com/zjfstudio/p/3887551.html):
+
+>1. 输入(input):将输入数据分成一个个split，并将split进一步拆成<key, value>。
+2. 映射(map)：根据输入的<key, value>进生处理，
+3. 合并(combiner)：合并中间相两同的key值。
+4. 分区(Partition)：将<key, value>分成N分，分别送到下一环节。
+5. 化简(Reduce)：将中间结果合并，得到最终结果
+6. 输出(output)：负责输入最终结果。
+其中第3、4步又成洗牌(shuffle)过程。
+
+#### 1.2.2. WordCount
 **以wordcount为例,应该这个例子完全搞明白,或者遇到问题先想着搞明白啊!**
 [TextInputFormat](https://www.cnblogs.com/pengyingzhi/p/5361008.html)是Hadoop默认的输入方法，在TextInputFormat中，每个文件（或其一部分）都会单独作为Map的输入，之后，每一行数据都会产生一个<key,value>形式：其中key值是每个数据的记录在数据分片中的字节偏移量，而value值是每行的内容。所以，图5中画红圈的两个数据应该是有误的（在上面只是为了方便表示），正确的值应该是第二行第一个字符的偏移量才对。
 [WordCount](https://www.cnblogs.com/huxinga/p/6939896.html)
 [wordcount补充](https://blog.csdn.net/xiaoxiaolove_i/article/details/98737608?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1)
 [数据清洗](https://blog.csdn.net/xiaoxiaolove_i/article/details/98737608?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1)
 https://www.cnblogs.com/edisonchou/p/4458219.html
-
-[!!!](https://www.cnblogs.com/zjfstudio/p/3887551.html)
 [!!!](https://www.cnblogs.com/xia520pi/archive/2012/05/16/2504205.html#_label4)
 
 
 ![映射-洗牌-重组](_v_images/20200227084436177_31314.png)
-### 1.3. Ques
-1. Job running in uber mode : false;但是可以正常运行
+
+## 2. Hadoop的弱点
+事实上Google开源Hadoop时它早已有其他更先进的产品了.
+hadoop在硬盘中操作,延迟高,计算慢.
+zookeeper能保持强一致性，master一旦发生故障之后会重新选举出新的主节点，保持一致性但是选举时间较长。Eureka 保持的是最终一致性，只要还有节点存在，那么就可以快速的响应。不过也很明显Eureka的弱一致性不能保证所见的信息是最新信息。
+## 3. 问题与解决方案
+### 3.1. 运行问题
+>1. Job running in uber mode : false;但是可以正常运行
+
 [What is the purpose of “uber mode” in hadoop?](https://stackoverflow.com/questions/30284237/what-is-the-purpose-of-uber-mode-in-hadoop)
 >If you have a small dataset or you want to run MapReduce on small amount of data, Uber configuration will help you out, by reducing additional time that MapReduce normally spends in mapper and reducers phase
 
-2. 为什么hadoop要对基本数据类型封装一遍,如`int`->`IntWritable`,`String`->`Text`?能互转吗?
+>2. 为什么hadoop要对基本数据类型封装一遍,如`int`->`IntWritable`,`String`->`Text`?能互转吗?
 在hadoop中能运行的格式,估计得看源码如何封装.
-关于互转,一边,以传统数据格式作参数`new`可;另一边,对于`IntWritable`提供了`get()`方法转换为`int`,`Text`提供了`toString()`转换为`String`,且相比于原生`String`,也提供了`set()`可改变自身.
-3. 怎么样就生成了`<key,List>`?
-split->map->(combine->partition)->reduce->result
-所谓reduce生成list,其实也是并行的许多次reduce,逐个累积生成list的.
 
-## 2. 相关的
-CAP
-zookeeper能保持强一致性，但是又主节点，master一旦发生故障之后会重新选举出新的主节点，保持一致性但是选举时间较长。Eureka 保持的是最终一致性，只要还有节点存在，那么就可以快速的响应。弱一致性可能会对项目造成一定的影响，比如所见的信息不是最新信息。
+关于互转,一边,以传统数据格式作参数`new`可;另一边,对于`IntWritable`提供了`get()`方法转换为`int`,`Text`提供了`toString()`转换为`String`,且相比于原生`String`,也提供了`set()`可改变自身.  
 
-作者：悬壶醉世
-链接：https://www.zhihu.com/question/289129028/answer/1065600854
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-## 3. 问题与解决方案
+>3. 怎么样就生成了`<key,List>`?
+
+<center>split->map->(combine->partition)->reduce->result</center>
+所谓reduce生成list,其实也是并行的许多次reduce,逐个累积生成list的.  
+
+### 3.2. 安装问题
 >1. ubuntu重启不断闪屏
 
 据说是gdm启动过程与什么冲突了,然后不断崩溃又重启造成了这个效果.重启两次之后偶尔会出现这个bug.
