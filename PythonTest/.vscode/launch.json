@@ -7,7 +7,7 @@
       "request": "launch",
       //"cwd":"${workspaceFolder}",
       "stopOnEntry": false,
-      "pythonPath": "D:\\Python",
+      "python": "D:\\Python",
       "program": "${file}"
     }
   ]
