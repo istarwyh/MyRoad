@@ -257,10 +257,28 @@ NIO用一个线程处理多个Socket，跟踪和调试难以捉摸，只能靠�
     - 
 **Output**
 
+```mermaid
+	graph LR
+	Output--> A(对应给客户端)
+	A-->为了向Client屏蔽集群信息,Ngnix修改IP Packet的起始地
+	Output--> 分隔符_Delimiters
+	分隔符_Delimiters-->小中大括号,竖杠,绝对值等分隔符的反斜杠写法
+```
+
 - 将响应对应[^对应]给客户端
+- 
+
+```mermaid
+	graph LR
+	Output--> A(对应给客户端)
+	A-->撇Ngnix修改IPPacket的起始地
+	Output--> 分隔符_Delimiters
+	分隔符_Delimiters-->小中大括号,竖杠,绝对值等分隔符的反斜杠写法
+
+```
 
 [^分发]:根据负载均衡策略,修改IP Packet的目的地IP以及TCP Segment的目的地port
-[^对应]:为了向Client屏蔽集群信息,Ngnix修改IP Packet的初始地
+[^对应]:为了向Client屏蔽集群信息,Ngnix修改IP Packet的起始地
 [^负载均衡策略]:轮询/加权轮询/最少连接
 
 
