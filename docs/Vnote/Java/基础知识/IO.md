@@ -253,32 +253,23 @@ NIO用一个线程处理多个Socket，跟踪和调试难以捉摸，只能靠�
 
 - 静态连接处理,一个IP对外,一个IP对内
 - 维持动态连接,将连接请求分发[^分发]给Tomcat集群
-    - 网站同一域名映射到多个服务器IP
-    - 
+    - 网站同一域名映射到多个服务器IP(`NAT`,Network Address Translation)
+
 **Output**
 
 ```mermaid
 	graph LR
-	Output--> A(对应给客户端)
-	A-->为了向Client屏蔽集群信息,Ngnix修改IP Packet的起始地
-	Output--> 分隔符_Delimiters
-	分隔符_Delimiters-->小中大括号,竖杠,绝对值等分隔符的反斜杠写法
-```
+	Output--> NAT(对应给客户端)
+	NAT-->为了向Client屏蔽集群信息,Ngnix修改IP-Packet的起始地
 
-- 将响应对应[^对应]给客户端
-- 
-
-```mermaid
-	graph LR
-	Output--> A(对应给客户端)
-	A-->撇Ngnix修改IPPacket的起始地
-	Output--> 分隔符_Delimiters
-	分隔符_Delimiters-->小中大括号,竖杠,绝对值等分隔符的反斜杠写法
-
+	Output--> DR(Direct-Server模式)
+	DR-->处理服务器直接返回给Client
+	DR-->Loopback(包括LoadBalance在内全都是同一IP)
+    Loopback-->为了ARP可以定位LoadBalance,抑制除LR外的ARP响应
 ```
 
 [^分发]:根据负载均衡策略,修改IP Packet的目的地IP以及TCP Segment的目的地port
-[^对应]:为了向Client屏蔽集群信息,Ngnix修改IP Packet的起始地
+
 [^负载均衡策略]:轮询/加权轮询/最少连接
 
 
