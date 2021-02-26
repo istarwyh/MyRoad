@@ -98,7 +98,7 @@ connection.onInitialize((params: InitializeParams) => {
 	return {
 		capabilities: {
             // 双工通信?
-			textDocument`Syn`c: TextDocument`Syn`cKind.Full,
+			textDocumentSync: TextDocumentSyncKind.Full,
 			completionProvider: {
 				resolveProvider: false,
 				triggerCharacters: ['<', '-', '+', '[', '(']
@@ -124,12 +124,17 @@ connection.onDidChangeWatchedFiles(_change => {
 	connection.console.log('We received an file change event');//用于调试
 });
 ```
-5. Make the text document manager listen on the connection;for open, change and close text document events.这里是本地文本管理器对服务器响应的监听?
-`documents.listen(connection);`
+5. Make the text document manager listen on the connection;for open, change and close text document events.
 
+```ts
+documents.listen(connection);//猜测是服务器文本管理器对服务器响应的监听
+```
 6. Start listening on the input stream for messages to process.
-一开始客户端和服务端都处于`Closed`状态,服务端主动监听某个端口,处于`listen`状态.这里是对本地文本输入流的监听?
-`connection.listen();`
+一开始客户端和服务端都处于`Closed`状态,后来服务端打开端口,主动监听某个端口,处于`listen`状态.但是之后仍
+
+```ts
+connection.listen();//这里是必须的吗,保持监听?
+```
 
 
 ## 3. 发送HTTP请求
