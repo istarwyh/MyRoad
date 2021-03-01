@@ -50,6 +50,8 @@ C语言并不受限于任何一种操作系统或者机器,也被用作编写编
 - 其它圈子
 > C/C++/汇编圈子、Ruby圈子、Hadoop/Spark圈子、……
 
+#### 2.1.1. new NET
+`QUIC`开启: `chrome://flags/#enable-quic`
 ## 3. Coding Course
 
 https://codekingdoms.com/
