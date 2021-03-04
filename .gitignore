@@ -34,7 +34,7 @@ build/
 .DS_Store
 Thumbs.db
 
-./Solution.java
 *.vswp
-./docs/Vnote/程序员练级之路/TODO/开题综合.md
 *S2E.md
+./Solution.java
+docs/Vnote/程序员练级之路/TODO/开题笔记.md
