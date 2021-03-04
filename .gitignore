@@ -1,7 +1,40 @@
+#java
+*.class
+
+#package file
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+#maven ignore
+target/
+build/
+
+#eclipse ignore
+.settings/
+.project
+.classpatch
+
+#Intellij idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
+
+# temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
 ./Solution.java
-./Solution.class
-docs/Vnote/Java/Spring Boot/Sping ini.md.vswp
 *.vswp
-Intern/S2E.md
-docs/Vnote/程序员练级之路/TODO/开题综合.md
-docs/Vnote/程序员练级之路/TODO/开题综合.vswp
+./docs/Vnote/程序员练级之路/TODO/开题综合.md
+*S2E.md

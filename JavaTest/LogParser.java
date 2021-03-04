@@ -1,14 +1,15 @@
 import java.util.Arrays;
 
+import javax.swing.text.PasswordView;
+
 class LogParser {
     public static void main(String[] args) {
         String S1 = "abc dfg";
         System.out.println(S1);
 
-        S1 = S1.replace(" ", "\t");
+        S1 = S1.replace(" ", "\t"); 
         System.out.println(S1);
     }
-
     /**
      * 解析日志的行记录
      *
