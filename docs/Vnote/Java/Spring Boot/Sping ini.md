@@ -370,7 +370,7 @@ SpringBoot通常分为
 - Controller
 - Service
 
-分层设计基于单一职责原则（SRP-Single responsibility principle）让每个对象**各司其职、各尽其能**，达到软件架构“**高内聚、低耦合**”的要求。
+分层设计基于单一职责原则（SRP-Single responsibility principle）让每个对象**各司其职、各尽其能**，同时易于复用,达到软件架构“**高内聚、低耦合**”的要求。
 
 #### 2.9.2. 其他领域的分层
 ##### 2.9.2.1. 通信领域
