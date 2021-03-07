@@ -16,7 +16,8 @@ def wifiConnect(ifaces,pwd):
         # 创建wifi连接文件
         profile = pywifi.Profile()
         # 要连接的wifi名称--Not Chinese
-        profile.ssid = 'SISUBOOKstore'
+        profile.ssid = 'i-shxdf'
+        # profile.ssid = 'SISUBOOKstore'
         # 网卡的开放状态 | auth - AP的认证算法
         profile.auth = const.AUTH_ALG_OPEN
         # wifi的加密算法，一般wifi 加密算法时wps  
@@ -32,7 +33,7 @@ def wifiConnect(ifaces,pwd):
         tep_profile = ifaces.add_network_profile(profile)
         ifaces.connect(tep_profile)
         # wifi连接时间
-        time.sleep(2.5)
+        time.sleep(3)
         if ifaces.status() == const.IFACE_CONNECTED:
             return True
         else:
