@@ -22,7 +22,7 @@ class LogParser {
         String status = parseStatus(line);
         return new String[]{id, mail, status};
     }
-
+    ??
     public String parseID(String line) {
         int index = line.indexOf("delivery");
         if (index != -1) {

@@ -138,3 +138,8 @@ class KMP {
         input.close();
     }
 }
+class Test{
+  private static Type name() {
+    System.out.append(csq);
+  }
+}

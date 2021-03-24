@@ -1,11 +1,16 @@
 
 
 ## 1. 初识字符串源码
+### 1.1. JDK8
 ```java
-`public final class String {
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence  {
     private final char value[];
-    ...
+    public String(){
+        this.value = "".value;
+    }
 }
+
 ```
 两个`final`，一个`private`，并且不提供`set()`决定了String是一个不可变类。为何这样设计呢？
 
@@ -17,7 +22,37 @@
 
 [^String设计]:[深入理解String、StringBuffer与StringBuilder](https://blog.csdn.net/qq_40401156/article/details/108464386)
 
-## 2. 创建字符串与字符串常量池
+### 1.2. JDK 11
+```java
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence  {
+    private final byte value[];
+    // The identifier of the encoding used to encode the bytes in value. The supported values in this implementation are LATIN1 UTF16
+    private final byte coder;
+        public String() {
+        this.value = "".value;
+        this.coder = "".coder;
+    }
+}
+```
+
+1char = 2byte,而在经过调查后发现程序中大多只包含英文字母数字这种1bye字符,因此JDK11相比8将`char[]`数组改为了`byte[]`数组,并且引入coder以指明String的编码格式:
+
+- LATIN1:1byte存储,只能纯传统ASCII字符
+- UTF16:2byte或4byte存储
+
+改进后在程序中LATIN1字符多时,程序可以减少内存占用,进而也减少GC次数.
+## 2. 字符串间什么时候相等?
+### 2.1. 创建字符串
+```java
+String str = "abc";
+```
+is equivalent to:
+```java
+char data[] = {'a', 'b', 'c'};
+String str = new String(data);
+```
+### 2.2. 字符串常量池
 
 >**字符串常量池本质上是个哈希表，它存储的是字符串实例对象的引用![^jvm]**
 
@@ -91,7 +126,12 @@ public class Solution {
 
 ```
 
-## 3. 字符串拼接中“+”的重载
+### 2.3. 字符串拼接中“+”的重载
+
+>The implementation of the string concatenation operator is left to the discretion of a Java compiler, as long as the compiler ultimately conforms to The Java™ Language Specification. For example, the javac compiler may implement the operator with StringBuffer, StringBuilder, or java.lang.invoke.StringConcatFactory depending on the JDK version. 
+
+如何重载依赖于编译器的具体实现,可以利用` StringBuffer`, `StringBuilder`, 或` java.lang.invoke.StringConcatFactory`,只要符合Java语言规范就好.字符串之间如何相等实验如下:
+
 ```java
 public class Test {
     // 字符串常量会被放入字符串常量池中

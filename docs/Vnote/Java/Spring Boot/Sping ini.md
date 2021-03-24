@@ -82,7 +82,17 @@ IoC容器的作用就是管理类之间复杂的依赖关系,即降低类之间�
 ##### 1.3.3.1. 传递代码块
 >函数式编程语言操纵代码片段就像操作数据一样容易。[^JAVA编程思想]
 
-设计模式一个重心就是将重复的或者不变的代码与反复变化的代码分开，因此希望将代码块或方法更简洁地**内联**到其他代码中，或者像**参数**一样进行传递。Java借鉴了函数式编程的成功实践在Java8中引入了Lambda表达式用以实现这种功能：通过Lambda实现**只有一个方法的接口**(函数式接口)并允许这个接口当做方法参数传入。
+设计模式一个重心就是将重复的或者不变的代码与反复变化的代码分开，因此希望将代码块或方法更简洁地**内联**到其他代码中，或者像**参数**一样进行传递。Java借鉴了函数式编程的成功实践在Java8中引入了`Lambda`表达式用以实现这种功能：Lambda实现**只有一个方法的接口**(函数式接口)并允许将这个接口的函数当做方法参数传入,如下图中函数参数中的函数:
+
+```typescript
+Phrases.filter(
+    (phrase)=>{
+        return issueKey === phrase[CollocationDetail.issueStr()][0]
+    }
+).forEach( matchedphrase => {
+    matchedKeys.push(matchedphrase[CollocationDetail.collocationStr()]);
+});
+```
 
 而面向切面编程则是在Spring的帮助下实现了在代码自己定义的切面处内联代码块。
 
@@ -185,6 +195,21 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
 - `JavaBean`-->`Model`
 - `JSP`* -->`View`
     - `ViewResolver`来处理逻辑视图名与具体View实例之间的映射关系
+
+可简单表示如下:
+```mermaid
+graph RL
+id1[浏览器]--请求-->id2[Dispatch Servelt]
+    subgraph Web容器
+    id2--路由-->id3[ModelAadView]
+    id3--数据模型-->id2
+    id2--路由-->id4[ViewResolver]
+    end
+id3--Query/Command-->id5[DataBase]
+id5--响应-->id3
+id4--页面渲染-->id1
+```
+
 #### 2.5.2. 基于注解的Spring MVC
 以Controller为例,基于Annotation的Controller和传统的Controller没有什么区别,都是普通的POJO.Java 通过元注解[^Metadata]定义在被注解的类结构上得到注解，然后这个注解再被使用，借助Java反射实现被注解的类功能。即Java注解的形式和功能是分离的，本质是语法糖,这不同于 Python 的装饰器[^DisSpringBoot]会直接传递功能类，两者好比[引用传递和值拷贝](https://juejin.im/post/6867121018897432590)的关系。
 对于基于注解的Controller,它至少需要解决两个问题:
@@ -432,7 +457,7 @@ OSI：
 同时不同服务之间的交互通过RPC实现。
 ![](https://gitee.com/istarwyh/images/raw/master/1600307355_20200916212743655_1611.png)
 #### 3.2.2. RPC的沿革
-早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如RocketMQ)解决**被动调用问题**，通过发布与订阅实现**消息异步处理**。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
+早期实现跨物理机的远程访问另一个`进程`唯一的方式就是RPC（`Remote Procedure Call`）（Socket 属于私有协议数据通信）.在SOA提出后，RPC通过消息队列(如`RocketMQ`)解决**被动调用问题**，通过发布与订阅实现**消息异步处理**。如今RPC既作为一种比`tcp`或`http`等更高层的服务请求协议存在，也作为**内部服务管理框架**在发展。
 注意RPC的客户端调用还会被代理，后来这个代理的部分发展为Dubbo中的注册中心。
 ![](https://pic1.zhimg.com/80/v2-ff075d7ff3df91d0fbce357456828d1e_720w.jpg?source=1940ef5c)
 本地调用的过程至少需要涉及
