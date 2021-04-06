@@ -5,7 +5,8 @@ https://www.cnblogs.com/cosmos-wong/p/11845934.html
 ## 2. 有意为之之坑
 ## 3. 不好说之坑
 ### 3.1. List
-List不能直接一边遍历一边删除？因为for each循环每次都会调用 Iterator，然后修改modCoun，最后造成与expectedModCoun不等报错。
+#### 3.1.1. List不能直接一边遍历一边删除？
+因为for each循环每次都会调用 Iterator，然后修改modCoun，最后造成与expectedModCoun不等报错。
 https://zhuanlan.zhihu.com/p/146995089
 - 使用Iterator的remove()方法
 - 使用for循环正序遍历（i = i-1 ) 
@@ -18,6 +19,10 @@ https://zhuanlan.zhihu.com/p/146995089
 - list.removeIf(s -> s.contains("要删除的"));
 
 https://www.cnblogs.com/maoyali/p/8805975.html
+#### 3.1.2. asList()重写不够
+`Arrays.asList()`方法中的ArrayList是Arrays类的内部类,但没有重写add方法,调用add方法时才会抛出`java.lang.UnsupportedOperationException`异常。
+### 3.2. Property拿不到之坑
+![](_v_images/20210331190512257_21036.png)
 ## 4. 与操作系统之坑
 ### 4.1. 操作系统命令行长度限制
 1. 在容器中运行测试类报错：

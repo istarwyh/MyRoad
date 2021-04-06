@@ -69,14 +69,14 @@ class Solution{
             
         }
         // Key:为什么这里是j而不是i?这种不对称的感觉让人很奇怪
-        // 那么回归j所代表的意义,j所指向的一定是等于或小于pivot的值,而选择的轴值是最左边的!即a[j]调换后一定是在最左边
+        // 那么回归j所代表的意义,j所指向的一定是等于或小于pivot的值,而选择的轴值是最左边的lo!即a[j]调换后一定是在最左边
         // 换句话来说,如果轴值选择是a[hi],那么这里就是swap(a,hi,i)--当然其他的相关操作都要对应改变
         swap(a,lo,j);
         // 达成a[lo,j-1] <= a[j] <= a[j+1,hi]
         return j;
     }
     public static boolean less(int a ,int b){
-        return a >= b ? false : true; 
+        return a < b; 
     }
     public static void swap(int[] a,int i,int j){
         int tmp=a[i];

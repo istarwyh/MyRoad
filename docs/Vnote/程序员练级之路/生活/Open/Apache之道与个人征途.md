@@ -1,7 +1,4 @@
-#Apache之道与个人征途
 2019年9月27日 姜宁 Willem Jiang
-
-[TOC]
 
 ## 1. The Apache Software Foundation
 Apache开源软件基金会是世界最大的开源基金会,目前为止社区中 committers 7036人,Podings 48人,超出一半的开发者都受雇于大公司.今天的姜老师便是受雇于华为在这样开源社区中负责管理一些事务.**ASF致力于**为公众提供开源 & 免费的软件,第一个项目加入Apache已经超过20年,且已经成为了世界上使用最广的服务器.Apache的**License**,如GPL/MIT /Apache等被广泛应用,因为是有限制的开源对商业友好,云相关的软件大都支持Apache License,和大数据相关几乎也都在Apache.
@@ -109,12 +106,21 @@ PMC授权
 问几个问题:
 1. 自己的方向是什么?
 2. 现在选的这个继续发展状况如何吗?
-	- bug report记录
-	- contributor数量与commiter数量
-	- 提交次数/频率与时间
-	
+
+- bug report记录
+- contributor数量与commiter数量
+- 提交次数/频率与时间
+
 *注意star和fork的数量是可以刷的*
 3. 他们是按什么规范来的?
+
+issue规范:
+
+- Describe the bug
+- To Reproduce
+- Log File
+- xx Version:
+- Additional context
 
 ### 5.4. 现在如何加入
 我们在社区中角色的变化对应着我们做的贡献以及我们相应能力的提高,我们可以提交BUG报告,完善开源软件文档,参与邮件列表讨论,最后成为开发者贡献代码或者通过Github提交PR.
@@ -125,3 +131,5 @@ PMC授权
 - 完成商业服务支持
 - 自由选择工作内容
 - 基于邮件的开发方式
+
+
