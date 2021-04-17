@@ -302,9 +302,16 @@ NIO用一个线程处理多个Socket，跟踪和调试难以捉摸，只能靠�
 
 [^负载均衡策略]:轮询/加权轮询/最少连接
 
-
 ### 6.2. Web Server, like Tomcat
-Web容器(`Jetty`和`Tomcat`)对用户的每个请求都会从线程池中取出一个单独的`servlet`线程去处理请求.同一时刻,可能有多个线程在处理多个请求:
+Web容器(`Jetty`和`Tomcat`)其实核心是一个`socket`。这个socket监听并接受到达的TCP连接，一旦一个连接被建立，就可以通过这个新的连接读取、解析信息，然后将这些信息包装成一个HTTP请求给处理web请求的框架（如Spring Web）.为了单线程不因为IO被阻塞，如果是用户的每个请求都会从**线程池**中取出一个单独的`servlet`线程去处理请求：
+```java
+ServerSocket listener = new ServerSocket(8080);
+while(true){ 
+Socket socket = listener.accept(); 
+threadPool.execute(new HandleRequestRunnable(socket);
+}
+```
+同一时刻,可能有多个线程在处理多个请求:
 
 - 执行`servlet`代码
 - 访问Database
