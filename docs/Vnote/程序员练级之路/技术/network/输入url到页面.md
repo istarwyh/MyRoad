@@ -10,7 +10,7 @@
 
 **总体流程如下图:[^0]
 
-[^0]:[从URL输入到页面展现到底发生什么？](https://github.com /ljianshu/Blog/issues/24)
+[^0]:[从URL输入到页面展现到底发生什么?](https://github.com/ljianshu/Blog/issues/24)
 
 ![](https://gitee.com/istarwyh/images/raw/master/1617621094_20210405191108954_15113.png)
 
@@ -198,6 +198,7 @@ id5-.在.->id1
    * 服务器端选择它自己的初始序列号
    * 服务器端设置 SYN 位，表明自己选择了一个初始序列号
    * 服务器端把 (`客户端ISN + 1`) 复制到 ACK 域，并且设置 `ACK` 位，表明自己接收到了客户端的第一个TCP segment
+        * `+x`原本是表明接受了x Byte的数据,但是因为含有SYN或FIN标志位的包并不携带有效数据,所以这里不会对有效数据的计数产生影响
 3.  客户端通过发送下面一个TCP segment来确认这次连接：
    * 自己的序列号+1
    * 接收端 ACK+1
@@ -254,7 +255,7 @@ id5-.在.->id1
 * 服务器端向客户端**明文**返回一个 ``Server hello`` 消息，消息中包含了服务器端的TLS版本，服务器选择了哪个加密和压缩算法，以及服务器的公开证书，证书中包含了公钥。客户端会使用这个**公钥加密接下来的握手过程，直到协商生成一个新的对称密钥**。
 * 客户端根据可信`CA`(Certification Authority)列表，验证服务器端的证书是否有效。如果基于CA建立了信任，客户端会生成**一串伪随机数**，并使用服务器的**公钥加密**它并发送。这串随机数被用于生成新的对称密钥。
 * 服务器端使用自己的私钥解密上面提到的随机数，然后同样使用这串随机数生成自己的对称密钥
-* 客户端发送一个 ``Finished`` 消息给服务器端，其中使用了**对称密钥加密**以下可能的4种内容生成hash值（The client sends a Finished message to the server, encrypting a hash of the transmission up to this point with the symmetric key.）
+* 客户端发送一个 ``Finished`` 消息给服务器端，其中使用了对称密钥加密以下可能的4种内容生成hash值（The client sends a Finished message to the server, encrypting a hash of the transmission up to this point with the symmetric key.）
     * 到此刻为止的所有通讯内容
     * `Finished`的内容
     * `Finished`的内容一部分
@@ -264,6 +265,7 @@ id5-.在.->id1
     * 之前两次发送过程中夹带发送的某一内容（如某个随机数）
 * 从现在开始，接下来整个 TLS 会话都使用对称秘钥进行加密，传输应用层（HTTP）内容
 ## 6. 发送HTTP请求
+注意如果浏览器是 Google 出品的，它不会使用 HTTP 协议来获取页面信息，而是会与服务器端发送请求，商讨使用 SPDY 协议。
 ### 6.1. Http的诞生
 `HyperText Transfer Protocol`是为了实现网络中主机**资源**（注意是个名词）共享而提出的通讯协议，最早用作B/S之间交互HTML和表单；后来又被被广泛的扩充到接口格式的定义上。浏览器可以**在第三次TCP握手的时候携带信息**,此时可将 IP 地址打在协议上，同时协议搭载请求参数,
 ![http请求](https://gitee.com/istarwyh/images/raw/master/1605671350_20200405093134782_28679.jpg)
@@ -286,7 +288,7 @@ id5-.在.->id1
 - 使用的HTTP版本
 - (querystring,不是必要的附加的参数)
 
-2. 紧接着才是俗称的http**首部**(`headers`)，用来说明服务器要使用的附加信息;头部一般会包括HOST
+2. 紧接着才是俗称的http**首部**(`headers`)，用来说明服务器要使用的附加信息;这里我们假设浏览器没有违反HTTP协议标准的bug，同时浏览器使用 ``HTTP/1.1`` 协议，不然的话头部可能不包含 ``Host`` 字段，同时 ``GET`` 请求中的版本号会变成 ``HTTP/1.0`` 或者 ``HTTP/0.9`` 。
 
     - 请求头一般指的是 `request-line`+ `headers`
 3. 在首部之后一定会跟一个空行
@@ -311,12 +313,14 @@ User-Agent是帮助我出去的浏览器"指纹"信息:User-Agent，这里它是
 <blank line>
 
 ```
-通常,GET请求的附加参数以queryString的形式位于请求后部，但其实http协议对此没有规定.
+在发送完这些请求和头部之后，浏览器发送一个换行符(即`<blank line>`)，表示要发送的内容已经结束了。
+如果发送者指示这次连接在响应结束之后会断开,则将`Keep-Alive`换为`close`。不支持持久连接的 HTTP/1.1 必须在每条消息中都包含 "close" 选项。 
+通常,GET请求的附加参数以queryString的形式位于url请求后部，但其实http协议对此没有规定.
 
 >浏览器上方的地址栏中直接输入地址触发的一般就是GET请求
 
 **POST请求**
-可以看到这里的POST请求的header多了两个必要的参数:Content-Type与Content-Length.
+可以看到这里的POST请求的header多了两个必要的参数:`Content-Type`与`Content-Length`.
 ```http
 POST / HTTP/1.1
 Host: www.baidu.com
@@ -335,12 +339,12 @@ Connection: Keep-Alive
 - GraphQL
 
 **注意以上都是在浏览器的情境下**
-http其实相当自由,理论上允许参数放url的path里，querystring里，body里或header里.
+http其实相当自由,理论上允许参数放url的path里、querystring里、body里或header里.
 而且如果是Ajax或者其他HTTP Client发出去的POST请求，其body格式也非常自由了，常用的有json，xml，文本，csv……甚至是你自己发明的格式。只要前后端能约定好即可[^深入理解GET与POST]。
 所以原生的http扯皮也会比较多,于是诞生了一些接口规范/风格,比如著名的`Restful`.
 
 #### 6.2.2. Rest请求格式
-REST的设计目标是解决互联网级别的信息共享和互操作问题[^大宽宽]。相比RPC中的主体都是动作/动词，表示我要做什么，url主体是资源，是个名词[^Vincross],表示这个资源本身的状态（如session/内存中的数据/task）。
+REST的设计目标是解决互联网级别的信息共享和互操作问题[^大宽宽]，url主体是资源，是个名词[^Vincross]。
 [^Vincross]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/163638731)
 [^大宽宽]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/541465581)
 
@@ -470,16 +474,29 @@ TCP工作在全双工模式，建立连接后TCP会将需要传输的数据包�
 
 因此不能省略序列号.
 ## 7. 服务器处理请求并返回HTTP报文
+### 7.1. HTTP 服务器请求处理
+HTTPD(HTTP Daemon)在服务器端处理请求/相应。最常见的 HTTPD 有 Linux 上常用的 Apache 和 nginx，以及 Windows 上的 IIS。
 
-### 7.1. Http响应格式
-#### 7.1.1. 原生响应格式
+* HTTPD 接收请求
+* 服务器把请求拆分为以下几个参数：
+    * HTTP 请求方法(GET, POST, HEAD, PUT 和 DELETE)。在访问 Google 这种情况下，使用的是 GET 方法
+    * 域名：google.com
+    * 请求路径/页面：/  (我们没有请求google.com下的指定的页面，因此 / 是默认的路径)
+* 服务器验证其上已经配置了 google.com 的虚拟主机
+* 服务器验证 google.com 接受 GET 方法
+* 服务器验证该用户可以使用 GET 方法(根据 IP 地址，身份信息等)
+* 如果服务器安装了 URL 重写模块（例如 Apache 的 mod_rewrite 和 IIS 的 URL Rewrite），服务器会尝试匹配重写规则，如果匹配上的话，服务器会按照规则重写这个请求
+* 服务器根据请求信息获取相应的响应内容，这种情况下由于访问路径是 "/" ,会访问首页文件（你可以重写这个规则，但是这个是最常用的）。
+* 服务器会使用指定的处理程序分析处理这个文件，假如 Google 使用 PHP，服务器会使用 PHP 解析 index 文件，并捕获输出，把 PHP 的输出结果返回给请求者
+### 7.2. Http响应格式
+#### 7.2.1. 原生响应格式
 ```xml
 <status-line>
 <headers>
 <blank line>
 [<response-body>]
 ```
-与请求唯一真正的区别在于第一行中用状态信息代替了请求信息。状态行（`status line`）通过提供一个状态码来说明所请求的资源情况。
+与请求唯一真正的区别在于第一行中用**状态信息**代替了**请求信息**。状态行（`status line`）通过提供一个状态码来说明所请求的资源情况。
 以下就是一个HTTP响应的例子：
 ```http
 HTTP/1.1 200 OK
@@ -496,8 +513,18 @@ Content-Length: 2333
 </body>
 </html>
 ```
+状态行之后是一个换行，接下来有效载荷(payload)，也就是 ``www.google.com`` 的HTML内容。服务器下面可能会关闭连接，如果客户端请求保持连接的话，服务器端会保持连接打开，以供以后的请求重用。
 
-#### 7.1.2. Http状态信息
+如果浏览器发送的HTTP头部包含了足够多的信息（例如包含了 Etag 头部，以至于服务器可以判断出，浏览器缓存的文件版本自从上次获取之后没有再更改过，服务器可能会返回这样的响应::
+```http
+304 Not Modified
+[响应头部]
+```
+这个响应没有有效载荷，浏览器会从自己的缓存中取出想要的内容。
+在解析完 HTML之后，浏览器和客户端会重复上面的过程，直到HTML页面引入的所有资源（图片，CSS，favicon.ico等等）全部都获取完毕，区别只是头部的 ``GET / HTTP/1.1`` 会变成 ``GET /$(相对www.google.com的URL) HTTP/1.1`` 。 
+
+如果HTML引入了 ``www.google.com`` 域名之外的资源，浏览器会回到上面解析域名那一步，按照下面的步骤往下一步一步执行，请求中的 ``Host`` 头部会变成另外的域名。
+#### 7.2.2. Http状态信息
 
 位于响应报文的开始行中,常见的http状态码分为
 
@@ -524,39 +551,101 @@ Content-Length: 2333
 502 Bad Gateway |请求未完成。服务器从上游服务器收到一个无效的响应
 504 Gateway Timeout | 网关超时(网关不可达?)
 505 HTTP Version Not Supported | 服务器不支持请求中指明的HTTP协议版本
-### 7.2. 记录客户端状态
-#### 7.2.1. http无状态
+### 7.3. 记录客户端状态
+#### 7.3.1. http无状态
 设计决策基于以下想法：上传到网站的内容可以位于多个不同的服务器上。[^full-stack]大多数Web流量与检索未更改的内容有关，服务器和浏览器软件的实现者不一定需要预留资源维护用户空间。
 
 [^full-stack]: [HTTP协议无状态性和cookie](https://materiaalit.github.io/wepa-s17/part3/)
 
-#### 7.2.2. Cookie
+#### 7.3.2. Cookie
 但是服务器端的业务往往需要是有状态的,如用户的登录次数,账号密码等。因此HTTP / 1.1允许服务器端生成Cookie，发送给**浏览器端**的`User-Agent`,User-Agent会将`Cookie`的`key/value`保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器,如:
 `__gads:ID=5ce68c103a29bff9:T=1584344058:S=ALNI_MaEB9uF5WNppBI895U2UNX44CMb0Q1`.
 第三方传递cookie,最常见的是共享域名的方式.
 
-#### 7.2.3. Session
+#### 7.3.3. Session
 `HttpServletRequest.getSession()`方法创建Session保存在服务器上,发到客户端的只有`Session id`；
 当客户端再次发送请求会将这个**存储在cookie中**的`Session id`带上，服务器接受到请求之后就会依据Session id找到相应的`Session`;
 如果没有找到,则将新的Cookie返回浏览器并启动新的Session.
 
 
-#### 7.2.4. 应用场景
-1. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，考虑到安全应当使用session；
+#### 7.3.4. 应用场景
+1. cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗，考虑到安全应当使用session;
 
-2. session会在一定时间内保存在服务器上,并且cookie--ascii,session却可以string,故Session的使用比Cookie方便,但访问加大会占用服务器的资源,降低性能。考虑到减轻服务器负担，应当使用COOKIE；
+2. session会在一定时间内保存在服务器上,并且cookie--ascii,session--string,故Session的使用比Cookie方便,但访问加大会占用服务器的资源,降低性能。考虑到减轻服务器负担，应当使用COOKIE；
 
-3. 综合安全和性能考虑,可以将登陆信息等重要信息存放为session,其他信息如果需要保留，则放在cookie中;
+3. 服务端的session的创建是依赖客户端的cookie的,所以cookie被清除,或者cookie过期时,服务端的session会被动丢失.而当浏览器完全禁掉cookie时,session将无法使用;
 
-4. 服务端的session的创建是依赖客户端的cookie的,所以cookie被清除,或者cookie过期时,服务端的session会被动丢失.而当浏览器完全禁掉cookie时,session将无法使用.
+4. 综合安全和性能考虑,可以将登陆信息等重要信息存放为session,其他信息如果需要保留，则放在cookie中.
 
 ## 8. 浏览器解析渲染页面[^DOM]
+浏览器解释和展示 HTML 文件的方法，在 HTML 和 CSS 的标准中有详细介绍。这些标准由 Web 标准组织 W3C(World Wide Web Consortium) 维护。
+
+不同浏览器的用户界面大都十分接近，有很多共同的 UI 元素：
+
+* 一个地址栏
+* 后退和前进按钮
+* 书签选项
+* 刷新和停止按钮
+* 主页按钮
+### 8.1. 浏览器高层架构
+* **用户界面** 用户界面包含了地址栏，前进后退按钮，书签菜单等等，除了请求页面之外所有你看到的内容都是用户界面的一部分
+* **浏览器引擎** 浏览器引擎负责让 UI 和渲染引擎协调工作
+* **渲染引擎** 渲染引擎负责展示请求内容。如果请求的内容是 HTML，渲染引擎会解析 HTML 和 CSS，然后将内容展示在屏幕上
+* **网络组件** 网络组件负责网络调用，例如 HTTP 请求等，使用一个平台无关接口，下层是针对不同平台的具体实现
+* **UI后端** UI 后端用于绘制基本 UI 组件，例如下拉列表框和窗口。UI 后端暴露一个统一的平台无关的接口，下层使用操作系统的 UI 方法实现
+* **Javascript 引擎** Javascript 引擎用于解析和执行 Javascript 代码
+* **数据存储** 数据存储组件是一个持久层。浏览器可能需要在本地存储各种各样的数据，例如 Cookie 等。浏览器也需要支持诸如 localStorage，IndexedDB，WebSQL 和 FileSystem 之类的存储机制
 
 [^DOM]:[从 HTML，CSS 和 JS 的解析，DOM 树的建立；到最终的渲染，布局和动态调整](https://shaunlebron.github.io/pacman-mazegen/)
 
 一个 Webkit 内核的浏览器工作流程图:
 ![](_v_images/20201126163521310_20314.png)
+### 8.2. HTML解析
+#### 8.2.1. DOM树
+浏览器渲染引擎从网络层取得请求的文档，一般情况下文档会分成`8kB`大小的分块传输。
+
+HTML 解析器的主要工作是对 HTML 文档进行解析，生成解析树。
+
+解析树是以 DOM 元素以及属性为节点的树。DOM是文档对象模型(`Document Object Model`)的缩写，它是 HTML 文档的对象表示，同时也是 HTML 元素面向外部(如Javascript)的接口。树的根部是"Document"对象。整个 DOM 和 HTML 文档几乎是一对一的关系。
+#### 8.2.2. 解析算法
+HTML不能使用常见的自顶向下或自底向上方法来进行分析。主要原因有以下几点:
+
+* 语言本身的“宽容”特性
+* HTML 本身可能是残缺的，对于常见的残缺，浏览器需要有传统的容错机制来支持它们
+* 解析过程需要反复。对于其他语言来说，源码不会在解析过程中发生变化，但是对于 HTML 来说，动态代码，例如脚本元素中包含的 `document.write()` 方法会在源码中添加内容，也就是说，解析过程实际上会改变输入的内容
+
+由于不能使用常用的解析技术，浏览器创造了专门用于解析 HTML 的解析器。解析算法在 HTML5 标准规范中有详细介绍，算法主要包含了两个阶段：标记化（tokenization）和树的构建。
+#### 8.2.3. 解析结束之后
+浏览器开始加载网页的外部资源（CSS，图像，Javascript 文件等）。
+
+此时浏览器把文档标记为“可交互的”，浏览器开始解析处于“推迟”模式的脚本，也就是那些需要在文档解析完毕之后再执行的脚本。之后文档的状态会变为“完成”，浏览器会进行“加载”事件。
+
+注意解析 HTML 网页时永远不会出现“语法错误”，浏览器会修复所有错误，然后继续解析。
+
+执行同步 Javascript 代码。
+### 8.3. CSS 解析
+* 根据 `CSS词法和句法`_ 分析CSS文件和 ``<style>`` 标签包含的内容
+* 每个CSS文件都被解析成一个样式表对象，这个对象里包含了带有选择器的CSS规则，和对应CSS语法的对象
+* CSS解析器可能是自顶向下的，也可能是使用解析器生成器生成的自底向上的解析器
+### 8.4. 页面渲染
+* 通过遍历DOM节点树创建一个“Frame 树”或“渲染树”，并计算每个节点的各个CSS样式值
+* 通过累加子节点的宽度，该节点的水平内边距(padding)、边框(border)和外边距(margin)，自底向上的计算"Frame 树"中每个节点首的选(preferred)宽度
+* 通过自顶向下的给每个节点的子节点分配可行宽度，计算每个节点的实际宽度
+* 通过应用文字折行、累加子节点的高度和此节点的内边距(padding)、边框(border)和外边距(margin)，自底向上的计算每个节点的高度
+* 使用上面的计算结果构建每个节点的坐标
+* 当存在元素使用 ``floated``，位置有 ``absolutely`` 或 ``relatively`` 属性的时候，会有更多复杂的计算，详见http://dev.w3.org/csswg/css2/ 和 http://www.w3.org/Style/CSS/current-work
+* 创建layer(层)来表示页面中的哪些部分可以成组的被绘制，而不用被重新栅格化处理。每个帧对象都被分配给一个层
+* 页面上的每个层都被分配了纹理(?)
+* 每个层的帧对象都会被遍历，计算机执行绘图命令绘制各个层，此过程可能由CPU执行栅格化处理，或者直接通过D2D/SkiaGL在GPU上绘制
+* 上面所有步骤都可能利用到最近一次页面渲染时计算出来的各个值，这样可以减少不少计算量
+* 计算出各个层的最终位置，一组命令由 Direct3D/OpenGL发出，GPU命令缓冲区清空，命令传至GPU并异步渲染，帧被送到Window Server。
+### 8.5. GPU渲染
+* 在渲染过程中，图形处理层可能使用通用用途的 CPU，也可能使用图形处理器 GPU
+* 当使用 GPU 用于图形渲染时，图形驱动软件会把任务分成多个部分，这样可以充分利用 GPU 强大的并行计算能力，用于在渲染过程中进行大量的浮点计算。
+### 8.6. 后期渲染与用户引发的处理
+渲染结束后，浏览器根据某些时间机制运行JavaScript代码(比如Google Doodle动画)或与用户交互(在搜索栏输入关键字获得搜索建议)。类似Flash和Java的插件也会运行，尽管Google主页里没有。这些脚本可以触发网络请求，也可能改变网页的内容和布局，产生又一轮渲染与绘制。
 ## 9. TCP挥手--连接结束
+服务器在返回HTTP报文完毕后会发起TCP挥手。
 
 1. 为什么要四次才会断开握手?
 

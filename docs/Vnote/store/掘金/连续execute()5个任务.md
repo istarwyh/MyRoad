@@ -31,7 +31,16 @@ Thread[istarwyh-MBinPC-utf-3,5,main]-执行任务
 Thread[istarwyh-MBinPC-utf-1,5,main]-执行任务
 Thread[istarwyh-MBinPC-utf-2,5,main]-执行任务
 ```
-这应该是因为正常运行execute()提交任务的速度大于线程执行完firstTask再去workQueue中拿线程的速度，因此来不及的时候就又建了一个线程。这一点通过连续提交6个线程，然后`task rejected`可以被证明。
+这应该是因为正常运行execute()提交任务的速度大于任一线程执行完firstTask再去workQueue中拿线程的速度，因此队列满的情况下又建了一个线程。因为线程池的主要处理流程如下：
+```mermaid
+graph LR
+id1(提交任务)-->id2{核心线程池<br>是否已满}--是-->id3{工作队列<br>是否已满}-->id4{线程池<br>是否已满}--是-->id5{按照策略处理<br>无法执行的任务}
+id3--否-->id31[任务放入队列等待]-->id32[唤醒等待队列<br>中线程]
+id2--否-->id21[创建线程执行任务]
+id4--否-->id21
+
+```
+而当连续提交6个线程，然后`task rejected`也可以证明这一点。
 ## 3. 分析
 ### 3.1. 添加worker
 ```mermaid
@@ -72,7 +81,7 @@ Worker(Runnable firstTask) {
  final ReentrantLock mainLock = this.mainLock; mainLock.lock();
 ```
 之后加入线程集合`workers.add(w);`，即一个`HashSet<Worker>`.
-### 3.2. 调用run()
+### 2.1. 调用run()
 之后启动线程`t.start();`,这将会x进入Thread内部方法，加入线程组`group.add(this);`,然后调用native方法向操作系统申请线程`start0();`去运行Worker中被重写的`run()`:
 ```java
 public void run() {
@@ -80,7 +89,7 @@ public void run() {
 }
 ```
 
-### 3.3. 从workQueue中拿线程
+### 2.2. 从workQueue中拿线程
 ```java
 final void runWorker(Worker w) {
     Thread wt = Thread.currentThread();//！！！
@@ -112,7 +121,7 @@ final void runWorker(Worker w) {
 而如果没有任务了，便触发`processWorkerExit();`，将这个打工线程worker移走`workers.remove(w);`
 
 - 移走后等待被GC？
-### 3.4. 将Task放入workQueue
+### 2.3. 将Task放入workQueue
 现在线程池里有线程了，而且线程池也在Running状态，那么继续被execute()提交的任务先放入工作队列`workQueue`里:
 ```java
 if (isRunning(c) && workQueue.offer(command)) {

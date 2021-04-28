@@ -4,8 +4,21 @@ https://www.cnblogs.com/cosmos-wong/p/11845934.html
 基于 Vector 实现的栈 Stack。底层实际上还是数组，所以还是存在需要扩容。Vector 是由数组实现的集合类，它包含了大量集合处理的方法。而 Stack 之所以继承 Vector，是为了复用 Vector 中的方法，来实现进栈（push）、出栈(pop)等操作。这里就是 Stack 设计不好的地方，既然只是为了实现栈，不用链表来单独实现，而是为了复用简单的方法而迫使它继承 Vector，Stack 和 Vector 本来是毫无关系的。这使得 Stack 在基于数组实现上效率受影响，另外因为继承 Vector 类，Stack 可以复用 Vector 大量方法，这使得 Stack 在设计上不严谨。
 ## 2. 有意为之之坑
 ## 3. 不好说之坑
-### 3.1. List
-#### 3.1.1. List不能直接一边遍历一边删除？
+### 3.1. String
+```java
+public static String valueOf(Object obj) {
+    return (obj == null) ? "null" : obj.toString();
+}
+```
+### 3.2. Integer
+- `Interger.parseInt("5.0")` X
+    - NumberUtils.parseInt() form hutool
+### 3.3. BigDecimal
+#### 3.3.1. 精度问题
+- $1 \neq 1.0 \Leftrightarrow 1 equlas 1.0$
+- $1 = 1.0 \Leftrightarrow 1compareTo 1.0$
+### 3.4. List
+#### 3.4.1. List不能直接一边遍历一边删除？
 因为for each循环每次都会调用 Iterator，然后修改modCoun，最后造成与expectedModCoun不等报错。
 https://zhuanlan.zhihu.com/p/146995089
 - 使用Iterator的remove()方法
@@ -19,9 +32,10 @@ https://zhuanlan.zhihu.com/p/146995089
 - list.removeIf(s -> s.contains("要删除的"));
 
 https://www.cnblogs.com/maoyali/p/8805975.html
-#### 3.1.2. asList()重写不够
+#### 3.4.2. asList()重写不够
 `Arrays.asList()`方法中的ArrayList是Arrays类的内部类,但没有重写add方法,调用add方法时才会抛出`java.lang.UnsupportedOperationException`异常。
-### 3.2. Property拿不到之坑
+#### 3.4.3. Collections.emptyList()只能作为只读的list
+### 3.5. Property拿不到之坑
 ![](_v_images/20210331190512257_21036.png)
 ## 4. 与操作系统之坑
 ### 4.1. 操作系统命令行长度限制
