@@ -1,160 +1,162 @@
 <html>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./test.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.font.im/css?family=Open+Sans" rel="stylesheet" type="text/css">
-        <title>Web前端基础笔试题</title>
-    </head>
-    <body>
-        <p>点击显示'javascript'</p>
-        <p id="showrepeat"></p>
-        <button onclick="showfunc()">点击显示</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./test.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.font.im/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <title>Web前端基础笔试题</title>
+</head>
+
+<body>
+    <p>点击显示'javascript'</p>
+    <p id="showrepeat"></p>
+    <button onclick="showfunc()">点击显示</button>
 
 
-        <div class="modal-wrapper">
-            <div class="modal">
-            </div>
+    <div class="modal-wrapper">
+        <div class="modal">
         </div>
-        <button id= "carForwardButton" type="button" name="button">前进</button>
-    </body>
-    
-    <script>
-        // 测试正则表达式
-        var str = "<d-button bsStyle=\"primary\">the book</d-button>";
-        var patt2 = /((d-[a-zA-Z0-9]*)\b)+(?=>)/g;
-        document.write(str.match(patt2)+"<br>");
-        
-        var str3="<span class = \"read-count\">the problem:12345</span>";
-        var patt3=/.+(?=<\/span>)/g;
-        document.write(str3.match(patt3)+"<br>");// document.write()不会把样式打出来
-        window.alert(str3.match(patt3));// 网页弹出,也可以把真正的匹配打出来
-        console.log(str3.match(patt3));// 网页上不会显示,在控制台上打印,这会把真正的所有的匹配都打出来
-    </script>
-        
-    <script>    
-        function Car(){
-            var moveForward = function() {
-                console.log('car moved forward');
-            };
-            this.turnOn = function(){
-                var forwardButton = document.getElementById('carForwardButton');
-                forwardButton.onclick = function(event) {
-                    moveForward();
-                }
-                return this;
-            };
-            // return {};否则就是返回空对象,this()将指向这个
+    </div>
+    <button id="carForwardButton" type="button" name="button">前进</button>
+</body>
+
+<script>
+    // 测试正则表达式
+    var str = "<d-button bsStyle=\"primary\">the book</d-button>";
+    var patt2 = /((d-[a-zA-Z0-9]*)\b)+(?=>)/g;
+    document.write(str.match(patt2) + "<br>");
+
+    var str3 = "<span class = \"read-count\">the problem:12345</span>";
+    var patt3 = /.+(?=<\/span>)/g;
+    document.write(str3.match(patt3) + "<br>");// document.write()不会把样式打出来
+    window.alert(str3.match(patt3));// 网页弹出,也可以把真正的匹配打出来
+    console.log(str3.match(patt3));// 网页上不会显示,在控制台上打印,这会把真正的所有的匹配都打出来
+</script>
+
+<script>
+    function Car() {
+        var moveForward = function () {
+            console.log('car moved forward');
         };
-        var car = new Car();
-        // 调用turnOn()时,this指向调用它的实例,即car,接着turn()内部再调用this.moveforward()时,this指向?所以去掉this
-        car.turnOn();
-
-        function showfunc(){
-            var str='JAVASCRIPT,'
-            document.getElementById('showrepeat').innerHTML=str.repeat(3);
-        }
-
-      
-        // 实现字符串转url
-        function convertToParamStr(paramObj) {
-            const requestParam = [];
-            for (let attr in paramObj) {
-                requestParam.push(`${attr}=${filter(paramObj[attr])}`);
+        this.turnOn = function () {
+            var forwardButton = document.getElementById('carForwardButton');
+            forwardButton.onclick = function (event) {
+                moveForward();
             }
-            return '?'+requestParam.join('&');
+            return this;
         };
+        // return {};否则就是返回空对象,this()将指向这个
+    };
+    var car = new Car();
+    // 调用turnOn()时,this指向调用它的实例,即car,接着turn()内部再调用this.moveforward()时,this指向?所以去掉this
+    car.turnOn();
 
-        function filter(str) {
-            str += ''; 
-            str = str.replace(/%/g, '%25');
-            str = str.replace(/\+/g, '%2B');
-            str = str.replace(/ /g, '%20');
-            str = str.replace(/\//g, '%2F');
-            str = str.replace(/\?/g, '%3F');
-            str = str.replace(/&/g, '%26');
-            str = str.replace(/\=/g, '%3D');
-            str = str.replace(/#/g, '%23');
-            // str = str.replace(/%/g, '%25').replace(/\+/g, '%2B').replace(/ /g, '%20').replace(/\//g, '%2F').replace(/\//g, '%2F').replace(/\?/g, '%3F').replace(/&/g, '%26').replace(/\=/g, '%3D').replace(/#/g, '%23');
-            return str;
+    function showfunc() {
+        var str = 'JAVASCRIPT,'
+        document.getElementById('showrepeat').innerHTML = str.repeat(3);
+    }
+
+
+    // 实现字符串转url
+    function convertToParamStr(paramObj) {
+        const requestParam = [];
+        for (let attr in paramObj) {
+            requestParam.push(`${attr}=${filter(paramObj[attr])}`);
         }
+        return '?' + requestParam.join('&');
+    };
 
-        // 对日期的排序
-        var data = [  
-            '2017-05-12',
-            '2020-07-24',
-            '2018-06-01',
-            '2019-01-01'
-        ]
-        // js真的牛批!a,b是啥这都传进去了?
-        data.sort(function(a,b){
-            return a < b ? 1 : -1
-        });
-        console.log(data);
+    function filter(str) {
+        str += '';
+        str = str.replace(/%/g, '%25');
+        str = str.replace(/\+/g, '%2B');
+        str = str.replace(/ /g, '%20');
+        str = str.replace(/\//g, '%2F');
+        str = str.replace(/\?/g, '%3F');
+        str = str.replace(/&/g, '%26');
+        str = str.replace(/\=/g, '%3D');
+        str = str.replace(/#/g, '%23');
+        // str = str.replace(/%/g, '%25').replace(/\+/g, '%2B').replace(/ /g, '%20').replace(/\//g, '%2F').replace(/\//g, '%2F').replace(/\?/g, '%3F').replace(/&/g, '%26').replace(/\=/g, '%3D').replace(/#/g, '%23');
+        return str;
+    }
 
-        // 实现对String内置的repeat方法!!!可以改String的内置方法?!!原型链...
-        String.prototype.repeatify = String.prototype.repeatify || function(times){
-            var str = '';
-            while (times>0) {
-                str += this;
-                times--;
-            }
-            return  str;
+    // 对日期的排序
+    var data = [
+        '2017-05-12',
+        '2020-07-24',
+        '2018-06-01',
+        '2019-01-01'
+    ]
+    // js真的牛批!a,b是啥这都传进去了?
+    data.sort(function (a, b) {
+        return a < b ? 1 : -1
+    });
+    console.log(data);
+
+    // 实现对String内置的repeat方法!!!可以改String的内置方法?!!原型链...
+    String.prototype.repeatify = String.prototype.repeatify || function (times) {
+        var str = '';
+        while (times > 0) {
+            str += this;
+            times--;
         }
-        let obj = {id:1, name:'小明', age:20,skills:['HTML','CSS','JavaScript']}
-        console.log(convertToParamStr(obj )) // id=1&name=小明&age=20
-        
-        console.log('Hi'.repeatify(3));
+        return str;
+    }
+    let obj = { id: 1, name: '小明', age: 20, skills: ['HTML', 'CSS', 'JavaScript'] }
+    console.log(convertToParamStr(obj)) // id=1&name=小明&age=20
+
+    console.log('Hi'.repeatify(3));
 
 
-        // 返回函数题
-        // 一个返回函数f(),但不会调用它,打印function f(){return scope;}
-        // 一个返回函数名并调用方法,打印局部变量scope的值"local scope"
-        var scope = "global scope";
-        function checkscope() {
-            var scope = "local scope";
-            // 内部函数嵌套
-            function f(){
-                return scope;
-            }
-            return f();
+    // 返回函数题
+    // 一个返回函数f(),但不会调用它,打印function f(){return scope;}
+    // 一个返回函数名并调用方法,打印局部变量scope的值"local scope"
+    var scope = "global scope";
+    function checkscope() {
+        var scope = "local scope";
+        // 内部函数嵌套
+        function f() {
+            return scope;
         }
-        checkscope();
-        console.log(checkscope());
+        return f();
+    }
+    checkscope();
+    console.log(checkscope());
 
-        var scope = "global scope";
-        function checkscope() {
-            var scope = "local scope";
-            function f(){
-                return scope;
-            }
-            return f;
+    var scope = "global scope";
+    function checkscope() {
+        var scope = "local scope";
+        function f() {
+            return scope;
         }
-        checkscope()();
-        console.log(checkscope()());
+        return f;
+    }
+    checkscope()();
+    console.log(checkscope()());
 
-        // 处理递归导致堆栈溢出
-        var list = readlist();// 可能返回一个很大的列表
-        var nextItem = function(){
-            var item = list.pop();
-            if(item){
-                // 处理下一列表中的元素
-                nextItem();
-            }
-        };
-        nextItem();
+    // 处理递归导致堆栈溢出
+    var list = readlist();// 可能返回一个很大的列表
+    var nextItem = function () {
+        var item = list.pop();
+        if (item) {
+            // 处理下一列表中的元素
+            nextItem();
+        }
+    };
+    nextItem();
     // 减少调用栈的次数,采用“循环”换掉“递归”
     // 1. 蹦床函数
     function trampoline(f) {
-        while(f && f instanceof Function){
-            f=f();
+        while (f && f instanceof Function) {
+            f = f();
             return f;
         }
     }
-   var nextItem = trampoline(nextItem());
+    var nextItem = trampoline(nextItem());
     // 2. 尾递归
-    </script>
+</script>
+
 </html>
-    
