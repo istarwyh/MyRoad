@@ -681,9 +681,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                         // 线程不安全！： 
                         // 当A线程判断index位置为空后正好挂起，
                         // B线程开始往index位置写入节点数据，
-                        // 这时A线程恢复现场，执行赋值操作，就把A线程的数据给覆盖了
+                        // 这时A线程恢复现场，执行赋值操作，就把B线程的数据给覆盖了
         if ((p = tab[i = (n - 1) & hash]) == null)
-                        // 只得注意的是,这里即使是 null 也可以被当作key创立一个空结点然后放入桶中
+                        // 值得注意的是,这里即使是 null 也可以被当作key创立一个空结点然后放入桶中
             tab[i] = newNode(hash, key, value, null);
         else{            // 如果发生了hash冲突，即桶位根结点已被占
             Node<K, V> e;
