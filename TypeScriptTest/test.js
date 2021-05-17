@@ -30,3 +30,33 @@ class Car {
 };
 // 调用turnOn()时,this指向调用它的实例,即car
 new Car().turnOn();
+
+// ----------------------------------------------------------------------------------------
+function showReapeat() {
+    var str = 'JAVASCRIPT,'
+    document.getElementById('showrepeat').innerHTML = str.repeat(3);
+}
+
+// ----------------------------------------------------------------------------------------
+var data = [
+    '2017-05-12',
+    '2020-07-24',
+    '2018-06-01',
+    '2019-01-01'
+]
+data.sort((a, b) => {
+    return a < b ? 1 : -1
+});
+console.log(data);
+
+// ----------------------------------------------------------------------------------------
+// 实现对String内置的repeat方法!!!可以改String的内置方法?!!原型链...
+String.prototype.repeatify = String.prototype.repeatify || function (times) {
+    var str = '-->';
+    while (times > 0) {
+        str += this;
+        times--;
+    }
+    return str;
+}
+console.log('Change'.repeatify(3));
