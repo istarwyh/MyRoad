@@ -196,12 +196,32 @@ Spring MVC是Spring的一个**web框架**。通过`Dispatcher Servlet`, `ModelAn
 - `JSP`* -->`View`
     - `ViewResolver`来处理逻辑视图名与具体View实例之间的映射关系
 
-可简单表示如下:
+
+Spring MVC中各角色交互图:
+
+```mermaid
+sequenceDiagram
+participant DispatcherServlet
+participant HandlerMapping
+participant Controller
+participant ModelAndView
+participant ViewResolver
+participant View
+DispatcherServlet ->> +HandlerMapping:1:getHandler(request)
+HandlerMapping -->> -DispatcherServlet:return Controller  
+DispatcherServlet ->> +Controller:2:handlerRequest(request.response)
+Controller ->> ModelAndView:2.1:<<create>> new()
+Controller -->> -DispatcherServlet:return ModelAndView
+DispatcherServlet ->> +ViewResolver:3:resolveViewName(viewName.locale)
+ViewResolver -->> -DispatcherServlet:return View
+DispatcherServlet ->> View:4:render(model.request.response)
+```
+各角色流程图:
 ```mermaid
 graph RL
 id1[浏览器]--请求-->id2[Dispatch Servelt]
     subgraph Web容器
-    id2--路由-->id3[ModelAadView]
+    id2--路由-->id3[ModelAndView]
     id3--数据模型-->id2
     id2--路由-->id4[ViewResolver]
     end
