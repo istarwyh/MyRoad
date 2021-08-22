@@ -30,7 +30,7 @@ build/
 *.patch
 *.tmp
 *.vswp
-*S2E.md
+
 # system ignore
 .DS_Store
 Thumbs.db
@@ -38,7 +38,9 @@ Thumbs.db
 # exe file
 *.exe
 
+#private
 ./Solution.java
 docs/Vnote/程序员练级之路/TODO/开题笔记.md
 CTest/algorithm/KMP.exe
-**/_v_recycle_bin
+docs/Vnote/vx_recycle_bin
+docs/Vnote/Thinking

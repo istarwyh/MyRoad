@@ -5,7 +5,7 @@
     "description": "",
     "image_folder": "vx_images",
     "name": "Vnote",
-    "next_node_id": "2",
+    "next_node_id": "3",
     "version": "1",
     "version_controller": "dummy.vnotex"
 }
