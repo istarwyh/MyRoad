@@ -3,6 +3,30 @@
     "config_mgr": "vx.vnotex",
     "created_time": "2020-07-13T03:10:17Z",
     "description": "",
+    "extra_configs": {
+    },
+    "history": [
+        {
+            "last_accessed_time": "2021-09-11T13:48:04Z",
+            "line_number": 271,
+            "path": "Thinking/公开信息/TairRedis.md"
+        },
+        {
+            "last_accessed_time": "2021-09-11T13:48:05Z",
+            "line_number": 479,
+            "path": "Java/Spring Boot/Sping ini.md"
+        },
+        {
+            "last_accessed_time": "2021-09-13T13:05:35Z",
+            "line_number": -1,
+            "path": "Thinking/公开信息/IO.md"
+        },
+        {
+            "last_accessed_time": "2021-09-13T13:05:35Z",
+            "line_number": 148,
+            "path": "程序员练级之路/技术/network/IO.md"
+        }
+    ],
     "image_folder": "vx_images",
     "name": "Vnote",
     "next_node_id": "3",
