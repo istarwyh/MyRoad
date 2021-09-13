@@ -7,11 +7,6 @@
     },
     "history": [
         {
-            "last_accessed_time": "2021-09-11T13:48:04Z",
-            "line_number": 271,
-            "path": "Thinking/公开信息/TairRedis.md"
-        },
-        {
             "last_accessed_time": "2021-09-11T13:48:05Z",
             "line_number": 479,
             "path": "Java/Spring Boot/Sping ini.md"
@@ -30,6 +25,11 @@
             "last_accessed_time": "2021-09-13T17:43:04Z",
             "line_number": -1,
             "path": "Thinking/公开信息/笔记.md"
+        },
+        {
+            "last_accessed_time": "2021-09-13T17:50:50Z",
+            "line_number": -1,
+            "path": "Thinking/公开信息/TairRedis.md"
         }
     ],
     "image_folder": "vx_images",
