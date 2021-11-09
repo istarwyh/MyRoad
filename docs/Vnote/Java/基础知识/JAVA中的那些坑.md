@@ -3,6 +3,9 @@
 https://www.cnblogs.com/cosmos-wong/p/11845934.html
 基于 Vector 实现的栈 Stack。底层实际上还是数组，所以还是存在需要扩容。Vector 是由数组实现的集合类，它包含了大量集合处理的方法。而 Stack 之所以继承 Vector，是为了复用 Vector 中的方法，来实现进栈（push）、出栈(pop)等操作。这里就是 Stack 设计不好的地方，既然只是为了实现栈，不用链表来单独实现，而是为了复用简单的方法而迫使它继承 Vector，Stack 和 Vector 本来是毫无关系的。这使得 Stack 在基于数组实现上效率受影响，另外因为继承 Vector 类，Stack 可以复用 Vector 大量方法，这使得 Stack 在设计上不严谨。
 ## 2. 有意为之之坑
+### 2.1. List/Set/Map这些容器里面都可以放入null
+### 2.2. 继承
+当子类拥有与父类同名的成员变量时，父类的成员变量并不会被覆盖，而是与子类的成员变量分别存储在不同的空间，其值仍然可以被改变和访问。
 ## 3. 不好说之坑
 ### 3.1. String
 ```java
@@ -29,7 +32,8 @@ https://zhuanlan.zhihu.com/p/146995089
     - 倒序遍历时,`i--`的下一位就是被删除元素的下一个元素,因此不需要做多余操作
     - 另一个方面也可以解释为指针`i`指向的元素被删除后,`i`因为来自右端,所以退回也是右端,即被删除元素的前一位,当被删除元素的前一位往左移动后,`i`恰好保持了与list元素移动的同步
 - stream+filter
-- list.removeIf(s -> s.contains("要删除的"));
+- list.removeIf(s -> s.contains("要删除的"))
+    - list.removeIf("要删除的"::equals)
 
 https://www.cnblogs.com/maoyali/p/8805975.html
 #### 3.4.2. asList()重写不够
