@@ -26,7 +26,6 @@ java语法特性差是公认的事实，对比起同样是静态OO语言的C#和
 async/await是「使用同步调用的方法调用异步过程」，是「语法特性」。
 线程什么的根本就不在这个点上。
 @Async和2的观点是一样的，更加印证了Java语法特性烂的这一回事。
-## 3. 上课挑刺儿
-老师写的代码充斥着很多 for 循环，我会改成 stream，forEach 或者 map 等；null 的判断借助 Optional；复杂对象的创建采用 builder 模式；代码规范按照《Effective Java》和《阿里巴巴开发规约》进行改进
+
 
 [Spring中的设计模式](https://blog.csdn.net/caoxiaohong1005/article/details/80039656)
