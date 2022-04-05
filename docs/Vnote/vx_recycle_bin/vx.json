@@ -1,25 +1,11 @@
 {
-    "created_time": "",
+    "created_time": "2022-04-05T07:29:27Z",
     "files": [
     ],
     "folders": [
-        {
-            "name": "20210822"
-        },
-        {
-            "name": "20210912"
-        },
-        {
-            "name": "20210914"
-        },
-        {
-            "name": "20211109"
-        },
-        {
-            "name": "20211230"
-        }
     ],
     "id": "0",
-    "modified_time": "",
-    "version": "1"
+    "modified_time": "2022-04-05T07:29:27Z",
+    "signature": "79316810199177",
+    "version": 3
 }
