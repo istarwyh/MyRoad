@@ -36,12 +36,17 @@ public final class String
 }
 ```
 
-1char = 2byte,而在经过调查后发现程序中大多只包含英文字母数字这种1bye字符,因此JDK11相比8将`char[]`数组改为了`byte[]`数组,并且引入coder以指明String的编码格式:
+**1char = 2byte**,而在经过调查后发现程序中大多只包含英文字母、数字这种1byte就可以表示的字符(比如采用LATIN1编码格式),这意味着:当String是奇数个英文字母或者[-128-127]时,存储为`char[]`至少浪费一位`byte`.
 
-- LATIN1:1byte存储,只能纯传统ASCII字符
-- UTF16:2byte或4byte存储
+因此JDK11相比8将`char[]`数组改为了`byte[]`数组,并且引入coder以指明String的编码格式:
 
-改进后在程序中LATIN1字符多时,程序可以减少内存占用,进而也减少GC次数.
+- LATIN1:1byte存储,存储传统ASCII字符
+- UTF16: 2byte或4byte存储
+
+Java会根据字符串的内容自动设置为相应的编码,要么Latin-1要么UTF16. 改进后程序在存储英文字母或[-128-127]内数字时,可以减少内存占用,进而也减少GC次数.
+那么为什么不采用UTF8呢?
+因为UTF8允许一个字符串中使用2个byte或3个byte或4个byte来存储,这样没有办法将字符串表示为多少多少char的形式,从而 对于substring、charAt这种以char为基本操作单位的方法就很不友好;而UTF16虽然也是变长的,但是因为都是2n(n<>0)个byte存储,所以对String的各种以char为基础的操作没有影响.
+
 ## 2. 字符串间什么时候相等?
 ### 2.1. 创建字符串
 ```java
