@@ -133,17 +133,19 @@ public static class PersonAggregator implements ArgumentsAggregator {
 ```java
 @ParameterizedTest
 @CsvFileSource(resources = "/two-column.csv", numLinesToSkip = 1)
-void testWithCsvFileSourceFromClasspath(String country, int reference) {
-    assertNotNull(country);
-    assertNotEquals(0, reference);
+void testWithCsvFileSourceFromClasspath(String input, int output) {
+    assertNotNull(input);
+    assertEquals(input, output);
 }
 ```
 
 ##### 评价
-事实上能通过外部文件作为参数构造文件,就可以**将测试逻辑与准备数据充分解耦**.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML
+1. 参数化测试相当于是合并了多个单元测试输入输出数据的"缩写",所以通常会有代表input和output的输入输出.当input都对应相同的output时,可以省略output.
 
-1. 可以转成对应的CSV
-2. 可以转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
+2. 通过外部文件作为参数构造文件,就可以**将测试逻辑与准备数据充分解耦**.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML
+
+    1. 可以转成对应的CSV
+    2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
 
 #### 对类中单元测试分组
 如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\
@@ -263,15 +265,58 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 4. 选择具体的测试引擎执行用例,以JupiterTestEngine为例,会构造JupiterEngineDescriptor
 - ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&mockito.md/90941715226840.png)
 5. 生成NodeTeskTask然后交给ExecutorService去执行(反射调用具体方法)
-6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的MockitoTestExecutionListener
+6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension
 
 ## Mockito
 ### Mockito原理
-### 常用注解说明
+### 常用注解
+#### 介绍
+|  Annotation  |                                         描述                                          |
+| ------------ | ------------------------------------------------------------------------------------ |
+| @Mock        | @Mock修饰的对象都是null,用到的每个方法都需要打桩模拟执行结果: Mockito.when().thenReturn() |
+| @Spy         | @Spy的对象会被无参实例化,在需要的时候可以打桩模拟执行结果: Mockito.doReturn().when()       |
+| @MockBean    | 启动Spring容器,替换Spring原本加载的Bean,但是默认对象没有行为                              |
+| @SpyBean     | 启动Spring容器,替换Spring原本加载的Bean,对象拥有默认行为                                 |
+| @InjectMocks | 注入mock代理对象;必须修饰实现类,修饰接口会报错                                            |
+
+其他说明:
+
+1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能注入mock代理对象。
+2. @Spy 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回null。
+
+@Spy 与 @Mock 测试案例:
+
+```java
+    @Test
+    public void whenCreateMock_thenCreated() {
+        List mockedList = Mockito.mock(ArrayList.class);
+
+        mockedList.add("one");
+        Mockito.verify(mockedList).add("one");
+
+        assertEquals(0, mockedList.size());
+    }
+
+    @Test
+    public void whenCreateSpy_thenCreate() {
+        List spyList = Mockito.spy(new ArrayList());
+
+        spyList.add("one");
+        Mockito.verify(spyList).add("one");
+
+        assertEquals(1, spyList.size());
+    }
+```
+#### 使用建议
+1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
+2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
+3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可\
+4. 当希望mock `void`方法时,可以使用`Mockito.doNothing()`
+4. 私有方法和静态方法希望mock可以使用powermock
+5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
 
 ## 推荐测试流程
 GWT 
 Given:情景/条件
 When:采取什么行动
 Then:得到什么结果
-## 参数化测试
