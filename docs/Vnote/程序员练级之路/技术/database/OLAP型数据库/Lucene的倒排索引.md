@@ -55,7 +55,7 @@ Trie 树即字典树，是一种空间换时间的数据结构，利用字符串
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/260867035940957.png)
 
 
-假设字符的种数有`ALPHABAT_SIZE`种，有`N`个长度为`L`的字符串构成了一个Trie树。则在最坏的情况下，每个节点的出度为ALPHABET_SIZE（即每个节点的可能子节点数量为ALPHABET_SIZE），Trie树的高度为L,此时Trie树的最坏空间复杂度为O(ALPHABET_SIZE*N*L)，相比二叉搜索树（BST）的O(N*L)毫无疑问是巨大的空间浪费。但是TRIE树总是可以沿着树的一个个分支高效的向下逐个字符的查询,其最坏时间复杂度O(L)，高于BST的O(L * logN),这正是空间换时间的体现。
+假设字符的种数有`ALPHABAT_SIZE`种，有`N`个长度为`L`的字符串构成了一个Trie树。则在最坏的情况下，每个节点的出度为ALPHABET_SIZE（即每个节点的可能子节点数量为ALPHABET_SIZE），Trie树的高度为L,此时Trie树的最坏空间复杂度为O(` ALPHABET_SIZE` * `N` * `L`)，相比二叉搜索树（BST）的`O(N*L)`毫无疑问是巨大的空间浪费。但是TRIE树总是可以沿着树的一个个分支高效的向下逐个字符的查询,其最坏时间复杂度`O(L)`，高于BST的`O(L * logN)`,这正是空间换时间的体现。
 ##### 2.2.2.2. FSM
 Term Index 与字典树Trie树类似，但是为了**极致的降低存储空间**，还进行了压缩，使用了一种称为确定无环状态转化器`FST`（`Deterministic Acyclic Finite State Transducer`）的结构来构建词典。FST首先是一个有限状态机`FSM`(`Finite State Machines`)，即用来表示有限个状态的集合以及这些状态之间转移和动作的数学模型，简单说它有三个特征[^FSM]：
 
