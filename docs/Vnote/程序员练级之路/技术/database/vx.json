@@ -3,26 +3,6 @@
     "files": [
         {
             "attachment_folder": "",
-            "created_time": "2022-01-29T11:57:44Z",
-            "id": "150",
-            "modified_time": "2022-01-29T13:38:27Z",
-            "name": "数据库索引与优化.md",
-            "signature": "5621503432032857016",
-            "tags": [
-            ]
-        },
-        {
-            "attachment_folder": "",
-            "created_time": "2022-03-20T11:04:57Z",
-            "id": "157",
-            "modified_time": "2022-04-05T07:50:26Z",
-            "name": "Lucene的倒排索引.md",
-            "signature": "207324014119513",
-            "tags": [
-            ]
-        },
-        {
-            "attachment_folder": "",
             "created_time": "2022-04-04T13:04:36Z",
             "id": "155",
             "modified_time": "2022-04-04T13:10:38Z",
@@ -30,19 +10,18 @@
             "signature": "177742736612",
             "tags": [
             ]
-        },
-        {
-            "attachment_folder": "",
-            "created_time": "2021-07-09T01:50:39Z",
-            "id": "156",
-            "modified_time": "2021-09-13T17:49:47Z",
-            "name": "Redis源码架构阅读.md",
-            "signature": "79316810134662",
-            "tags": [
-            ]
         }
     ],
     "folders": [
+        {
+            "name": "内存KV型数据库"
+        },
+        {
+            "name": "关系型数据库"
+        },
+        {
+            "name": "OLAP型数据库"
+        }
     ],
     "id": "108",
     "modified_time": "2022-01-29T03:04:50Z",
