@@ -278,11 +278,12 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 | @MockBean    | 启动Spring容器,替换Spring原本加载的Bean,但是默认对象没有行为                              |
 | @SpyBean     | 启动Spring容器,替换Spring原本加载的Bean,对象拥有默认行为                                 |
 | @InjectMocks | 注入mock代理对象;必须修饰实现类,修饰接口会报错                                            |
+| @Captor      | 捕获调用时的参数值                                                                      |
 
 其他说明:
 
 1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能注入mock代理对象。
-2. @Spy 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回null。
+2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
 
 @Spy 与 @Mock 测试案例:
 
@@ -308,10 +309,17 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
     }
 ```
 #### 使用建议
+[Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
+> When/Then: when(yourMethod()).thenReturn(5);
+Given/Will: given(yourMethod()).willThrow(OutOfMemoryException.class);
+Do/When: doReturn(7).when(yourMock.fizzBuzz());
+Will/Given/Do: willReturn(any()).given(yourMethod()).doNothing();
+Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
+
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
 3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可\
-4. 当希望mock `void`方法时,可以使用`Mockito.doNothing()`
+4. 当希望mock `void`方法时,可以使用`doNothing/when`
 4. 私有方法和静态方法希望mock可以使用powermock
 5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
 
