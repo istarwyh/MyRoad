@@ -282,7 +282,7 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能注入mock代理对象。
+1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能被注入mock代理对象。
 2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
 
 @Spy 与 @Mock 测试案例:
@@ -318,11 +318,16 @@ Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
 
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可\
-4. 当希望mock `void`方法时,可以使用`doNothing/when`
+3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
+5. 检查`void`方法的执行情况可以使用`verify/times`校验次数和`@Captor`校验参数
 4. 私有方法和静态方法希望mock可以使用powermock
 5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
 
+关于`when/then`以及`doxxx/when`,根据这个[回答](https://stackoverflow.com/questions/20353846/mockito-difference-between-doreturn-and-when),以下情况都应该使用后者:
+
+1. mock `void`方法时,使用`doNothing/when`(因为这时并不会真的执行when中的方法)
+2. spy对象的时候
+3. 对于方法不止一次打桩(?)
 ## 推荐测试流程
 GWT 
 Given:情景/条件
