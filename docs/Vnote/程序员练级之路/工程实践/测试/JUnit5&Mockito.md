@@ -328,8 +328,15 @@ Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
 1. mock `void`方法时,使用`doNothing/when`(因为这时并不会真的执行when中的方法)
 2. spy对象的时候
 3. 对于方法不止一次打桩(?)
-## 推荐测试流程
-GWT 
+## 测试建议与不足
+### 一般测试流程
+#### GWT 
 Given:情景/条件
 When:采取什么行动
 Then:得到什么结果
+#### 是否需要测试私有方法?
+https://jesseduffield.com/Testing-Private-Methods/
+
+### 需要完善的测试框架
+(或者还没发现的测试工具)
+
