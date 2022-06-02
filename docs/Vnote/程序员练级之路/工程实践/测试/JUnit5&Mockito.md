@@ -268,7 +268,7 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension
 
 ## Mockito
-### Mockito原理
+
 ### 常用注解
 #### 介绍
 |  Annotation  |                                         描述                                          |
@@ -309,25 +309,144 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
     }
 ```
 #### 使用建议
-[Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
-> When/Then: when(yourMethod()).thenReturn(5);
-Given/Will: given(yourMethod()).willThrow(OutOfMemoryException.class);
-Do/When: doReturn(7).when(yourMock.fizzBuzz());
-Will/Given/Do: willReturn(any()).given(yourMethod()).doNothing();
-Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
-
+##### 注解常用实践
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
+3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可i
 5. 检查`void`方法的执行情况可以使用`verify/times`校验次数和`@Captor`校验参数
 4. 私有方法和静态方法希望mock可以使用powermock
 5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
 
+##### [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
+> When/Then: when(yourMethod()).thenReturn(x);
+Given/Will: given(yourMethod()).willThrow(OutOfMemoryException.class);
+Do/When: doReturn(x).when(yourMock.fizzBuzz());
+Will/Given/Do: willReturn(any()).given(yourMethod()).doNothing();
+Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
+
 关于`when/then`以及`doxxx/when`,根据这个[回答](https://stackoverflow.com/questions/20353846/mockito-difference-between-doreturn-and-when),以下情况都应该使用后者:
 
-1. mock `void`方法时,使用`doNothing/when`(因为这时并不会真的执行when中的方法)
+1. mock `void`方法时,使用`doNothing/when`(不执行when中的方法)
 2. spy对象的时候
-3. 对于方法不止一次打桩(?)
+
+```java
+List list = new LinkedList();  
+List spy = spy(list);  
+  
+//Impossible: real method is called so spy.get(0) throws IndexOutOfBoundsException (the list is yet empty)  
+when(spy.get(0)).thenReturn("foo");  
+  
+//You have to use doReturn() for stubbing  
+doReturn("foo").when(spy).get(0);  
+```
+
+3. 对于方法不止一次打桩[^two]
+[^two]: https://www.cnblogs.com/vvonline/p/4122991.html
+
+```java
+// 这个和上面不等!这个调用的时候只会返回"world"
+when(i.next()).thenReturn("Hello"); when(i.next()).thenReturn("World");
+
+// 第一种方式 
+when(i.next()).thenReturn("Hello").thenReturn("World");
+// 第二种方式
+when(i.next()).thenReturn("Hello", "World");
+// 第三种方式
+doReturn("Hello").when(i).next();
+doReturn("World").when(i).next();
+```
+### Mockito原理
+比如`when(mockObject.yourMethod()).thenReturn(x)`这样的模式,看起来很连贯,是对`yourMenthod()`做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对`yourMethod()`这个方法进行打桩的呢?[^MockitoRead]
+
+[^MockitoRead]:[mockito原理浅析](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938607&idx=1&sn=7e17607eb5a537f7734631030d289351&chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&mpshare=1&scene=1&srcid=05068BrILyHdI932MoGI4ikG&sharer_sharetime=1654096335341&sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&acctmode=1&pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&wx_header=0)
+
+Mockito本质上就是在代理对象调用方法前，用stub的方式设置其返回值，然后在真实调用时，用代理对象返回起预设的返回值。
+1. org.mockito.internal.creation.bytebuddy.BytecodeGenerator#mockClass 利用ByteBuddy中生成代理类
+ByteBuddy使用示例:
+```java
+Class<?> dynamicType = new ByteBuddy()
+        .subclass(Object.class)
+        .method(ElementMatchers.named("toString"))
+        .intercept(FixedValue.value("Hello World!"))
+        .make()
+        .load(Object.class.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
+        .getLoaded();
+StdOut.println(dynamicType.getSimpleName() + "  " + dynamicType.toString());
+// 输出: Object$ByteBuddy$cmpHDO82   Hello World!
+```
+2. 缓存代理类,多次请求返回同一个代理类
+3. 在执行方法调用时保存当前方法调用上下文到某个字段（org.mockito.internal.stubbing.InvocationContainerImpl#invocationForStubbing字段）
+4. 基于方法调用上下文信息返回`InterceptedInvocation`对象来表示一次方法调用
+
+```java
+// org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.DispatcherDefaultingToRealMethod#interceptAbstract
+public static Object interceptAbstract(@This Object mock, // 当前代理类
+                                       @FieldValue("mockitoInterceptor") MockMethodInterceptor interceptor, // 方法拦截器
+                                       @StubValue Object stubValue, // stub值，这里为null
+                                       @Origin Method invokedMethod, // 当前调用方法
+                                       @AllArguments Object[] arguments) /* 方法入参 */ throws Throwable {
+    if (interceptor == null) {
+        return stubValue;
+    }
+    return interceptor.doIntercept(
+            mock,
+            invokedMethod,
+            arguments,
+            RealMethod.IsIllegal.INSTANCE
+    );
+}
+public static InterceptedInvocation createInvocation(Object mock, Method invokedMethod, Object[] arguments, RealMethod realMethod, MockCreationSettings settings, Location location) {
+    return new InterceptedInvocation(
+        new MockWeakReference<Object>(mock),
+        createMockitoMethod(invokedMethod, settings),
+        arguments,
+        realMethod,
+        location,
+        SequenceNumber.next() // 每个InterceptedInvocation对象都有一个唯一序号
+    );
+}
+```
+5. 当Mockito.when()再次调用时根据InterceptedInvocation对象查找对应的stub，如果找到则使用该stub返回特定值，否则返回默认值（int 会返回 0，布尔值返回 false,其他 type 会返回 null）
+
+```java
+// // org.mockito.internal.handler.MockHandlerImpl#handle
+// 根据invocation匹配对应的stub，匹配规则是 class相同+方法签名相同+入参匹配
+StubbedInvocationMatcher stubbing = invocationContainer.findAnswerFor(invocation);
+```
+6. stub中的值是thenReturn()中塞入的
+```java
+public OngoingStubbing<T> thenReturn(T value) {
+    return thenAnswer(new Returns(value));
+}
+public OngoingStubbing<T> thenAnswer(Answer<?> answer) {
+    invocationContainer.addAnswer(answer);
+    return new ConsecutiveStubbing<T>(invocationContainer);
+}
+public void addAnswer(Answer answer) {
+     // 移除最近一次方法调用保存的invocation信息
+    registeredInvocations.removeLast();
+    //
+    addAnswer(answer, false);
+}
+public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) {
+    Invocation invocation = invocationForStubbing.getInvocation();
+    mockingProgress().stubbingCompleted();
+    if (answer instanceof ValidableAnswer) {
+        ((ValidableAnswer) answer).validateFor(invocation);
+    }
+    synchronized (stubbed) {
+        if (isConsecutive) {
+            // 连续方式
+            // 连续:针对同一个方法的多次调用，可以按照顺序自定义不同的返回值，如果调用次数超过了自定义返回值个数，默认后续以最后一个自定义返回值为准
+            stubbed.getFirst().addAnswer(answer);
+        } else {
+            // 非连续
+            stubbed.addFirst(new StubbedInvocationMatcher(invocationForStubbing, answer));
+        }
+        return stubbed.getFirst();
+    }
+}
+```
 ## 测试建议与不足
 ### 一般测试流程
 #### GWT 
