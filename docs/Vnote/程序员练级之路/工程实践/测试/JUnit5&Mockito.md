@@ -473,18 +473,17 @@ Given:情景/条件
 When:采取什么行动
 Then:得到什么结果
 #### 是否需要测试私有方法?
-https://jesseduffield.com/Testing-Private-Methods/
-
-抽象层次越高,对于测试:
+这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试:
 
 - 更多时间运行
 - mock更多的数据
 - 需要mock更复杂的行为交互
-- 测试更容易因为小改动而失败
+- 更容易因为小改动而失败
 
-但是也更容易重构代码和测试.
-The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
-另外,考虑到Single Responsibility Principle,`Working With Legacy Code` 中指出
+但是也更容易**重构代码和测试**.
+>The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
+另外,考虑到单一职责原则(SRP,Single Responsibility Principle),`Working With Legacy Code`中指出
+
 >If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .
 
 如何测试私有方法便是在**易用性**,**重构性**和**SRP**作权衡.
@@ -492,7 +491,7 @@ The higher the level of encapsulation, the harder to test, but the lower the lev
 
 >1. Try to have as slim a public interface as possible in your classes, by defaulting every method to private. 
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
->3. If you want to test a single private method and don’t see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
+>3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
 
 ### 需要完善的测试框架
 (或者还没发现的测试工具)
