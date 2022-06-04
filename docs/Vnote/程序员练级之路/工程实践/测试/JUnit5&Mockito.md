@@ -319,14 +319,18 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 ##### [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
 > When/Then: when(yourMethod()).thenReturn(x);
-Given/Will: given(yourMethod()).willThrow(OutOfMemoryException.class);
 Do/When: doReturn(x).when(yourMock.fizzBuzz());
-Will/Given/Do: willReturn(any()).given(yourMethod()).doNothing();
 Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
 
-关于`when/then`以及`doxxx/when`,根据这个[回答](https://stackoverflow.com/questions/20353846/mockito-difference-between-doreturn-and-when),以下情况都应该使用后者:
+其中`when/then`以及`doxxx/when`相似度很高,很多人会疑惑[用哪个](https://stackoverflow.com/questions/20353846/mockito-difference-between-doreturn-and-when).
+官方推荐优先使用`When/Then`,因为可以保证返回的类型是符合预期的,并且也更可读.但当不需要执行实际的方法的时候,应该用`Do/When`,比如:
 
 1. mock `void`方法时,使用`doNothing/when`(不执行when中的方法)
+
+```java
+Object o = mock(Object.class);
+doNothing().when(o).notify();
+```
 2. spy对象的时候
 
 ```java
@@ -340,21 +344,36 @@ when(spy.get(0)).thenReturn("foo");
 doReturn("foo").when(spy).get(0);  
 ```
 
-3. 对于方法不止一次打桩[^two]
+3. 连续对调用方法打桩(Stub)[^two]
 [^two]: https://www.cnblogs.com/vvonline/p/4122991.html
-
+值得一提的是,连续打桩方法直接写是反直觉的:
 ```java
-// 这个和上面不等!这个调用的时候只会返回"world"
-when(i.next()).thenReturn("Hello"); when(i.next()).thenReturn("World");
+// 这个和直觉不一样!这个调用的时候只会返回"world"
+when(o.toString()).thenReturn("Hello"); 
+when(o.toString()).thenReturn("World");
 
+// 下面都可以第一次返回"Hello",第二次返回"World"
 // 第一种方式 
-when(i.next()).thenReturn("Hello").thenReturn("World");
+when(o.toString()).thenReturn("Hello").thenReturn("World");
 // 第二种方式
-when(i.next()).thenReturn("Hello", "World");
+when(o.toString()).thenReturn("Hello", "World");
 // 第三种方式
-doReturn("Hello").when(i).next();
-doReturn("World").when(i).next();
+doReturn("Hello").when(o).toString();
+doReturn("World").when(o).toString();
 ```
+像上面这种后半部分的连续方法调用使用`when/then`或`do/when`都是可以的,但还有一种只能用后者,即前一次调用指定了要返回异常,后面又打算覆盖它的时候(虽然这样真的有点奇怪):
+```java
+when(mock.foo())
+.thenThrow(new RuntimeException());
+
+// 后面想要直接覆盖上面的抛异常打桩
+when(mock.foo()).whenReturn("I will be not returned");
+
+// 必须用Do/When
+doReturn("I will be Returned").when(mock).foo();
+```
+
+
 ### Mockito原理
 比如`when(mockObject.yourMethod()).thenReturn(x)`这样的模式,看起来很连贯,是对`yourMenthod()`做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对`yourMethod()`这个方法进行打桩的呢?[^MockitoRead]
 
