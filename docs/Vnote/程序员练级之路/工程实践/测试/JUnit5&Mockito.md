@@ -282,8 +282,12 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能被注入mock代理对象。
+1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个默认对象然后来执行它的方法
+2. `@Spy`和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在单薄的controller/service/dao分层下,在controller层对dao层中方法行为进行验证.但必须注意这违反了单一职责原则[^SpyInject]
 2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
+
+
+[^SpyInject]: https://newbedev.com/is-it-discouraged-to-use-spy-and-injectmocks-on-the-same-field
 
 @Spy 与 @Mock 测试案例:
 
