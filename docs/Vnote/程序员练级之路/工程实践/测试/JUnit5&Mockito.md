@@ -282,8 +282,12 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能被注入mock代理对象。
+1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个默认对象然后来执行它的方法
+2. `@Spy`和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在单薄的controller/service/dao分层下,在controller层对dao层中方法行为进行验证.但必须注意这违反了单一职责原则[^SpyInject]
 2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
+
+
+[^SpyInject]: https://newbedev.com/is-it-discouraged-to-use-spy-and-injectmocks-on-the-same-field
 
 @Spy 与 @Mock 测试案例:
 
@@ -312,10 +316,12 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 ##### 注解常用实践
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可i
-5. 检查`void`方法的执行情况可以使用`verify/times`校验次数和`@Captor`校验参数
+3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
 4. 私有方法和静态方法希望mock可以使用powermock
-5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
+
+5. 检查`void`方法的执行情况可以进行**行为验证**:`verify/times`校验次数和`@Captor`校验参数
+6. 使用这种测试框架进行**状态验证**困难点在于真实生产代码中测试用例中复杂对象的构造
+    - 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截三方请求得到入参与出参
 
 ##### [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
 > When/Then: when(yourMethod()).thenReturn(x);
