@@ -1,3 +1,17 @@
+## 1. 前言 
+Junit系列可以解决测试启动、测试状态校验与组织的问题,比如测试启动上有参数化测试、并发测试、顺序测试等功能,校验上有异常断言、超时断言等功能,代码组织上有测试分组、测试报告自定义等功能.
+在上述领域之外,Mockito很好地承担了对测试对象打桩(stub)以及对测试行为校验的功能.有人可能所Mockito都不能mock私有、静态和构造方法,差评!(虽然[要不要测试私有方法还没有定论](#jump)那你可以从下面挑一款!
+
+|     工具      | 原理 | 最小Mock Unit | 对被Mock方法的限制 | 上手难度 | 总结 |
+| ------------ | ---- | ------------- | ----------------- | -------- | ---- |
+| Mockito      |      |               |                   |          |      |
+| Spock        |      |               |                   |          |      |
+| PowerMock    |      |               |                   |          |      |
+| JMockit      |      |               |                   |          |      |
+| TestableMock |      |               |                   |          |      |
+
+## 2. JUnit5 使用与原理
+
 在JUnit4发布十年之后,2017年JUnit团队靠众筹推出了全新的[JUnit5](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5).
 
 <center>JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage</center>
@@ -11,8 +25,7 @@
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&mockito.md/450935910220547.png)
 
 虽然包括三个部分,不过最新版本引入`org.junit.jupiter:junit-jupiter`就可以了,核心注解都在`org.junit.jupiter.api`下.
-## JUnit5特性
-### 新的注解
+### 2.1. 新的注解
 下面按照我个人经验列举JUni5的新注解,更多的在[这里](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5):
 
 
@@ -33,8 +46,8 @@
 | @TestMethodOrder   | 指定测试方法的执行顺序                                                                        |
 | @ExtendWith        | 为测试类或测试方法甚至字段提供一个或多个扩展环境                                                |
            
-### 新的特性
-#### 超时断言
+### 2.2. 新的特性
+#### 2.2.1. 超时断言
 ```java
 @Test
 @DisplayName("超时测试")
@@ -43,9 +56,9 @@ public void timeoutTest() {
     Assertions.assertTimeout(Duration.ofMillis(1000), () -> Thread.sleep(500));
 }
 ```
-#### 参数化测试
+#### 2.2.2. 参数化测试
 以下为部分介绍,更多细节[在这儿](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests).
-##### 通过注解属性传入参数
+##### 2.2.2.1. 通过注解属性传入参数
 - @ValueSource: 为参数化测试指定入参来源，支持八大基础类以及 String 类型, Class 类型
 
 - @EmptySource: 提供空白数组或空白集合,支持八大基础类及它们包装类以及 String 类型, 集合类型
@@ -71,7 +84,7 @@ void nullEmptyAndBlankStrings(String text) {
     assertTrue(text == null || text.trim().isEmpty());
 }
 ```
-##### 通过静态方法名/指定接口类传入参数
+##### 2.2.2.2. 通过静态方法名/指定接口类传入参数
 - @MethodSource：读取静态方法的Stream流作为参数化测试入参
 
 ```java
@@ -106,7 +119,7 @@ public class MyArgumentsProvider implements ArgumentsProvider {
     }
 }
 ```
-##### 通过文件格式数据传入参数
+##### 2.2.2.3. 通过文件格式数据传入参数
 - @CsvSource：表示读取指定 CSV内容作为参数化测试入参
 
 ```java
@@ -139,7 +152,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
 }
 ```
 
-##### 评价
+##### 2.2.2.4. 评价
 1. 参数化测试相当于是合并了多个单元测试输入输出数据的"缩写",所以通常会有代表input和output的输入输出.当input都对应相同的output时,可以省略output.
 
 2. 通过外部文件作为参数构造文件,就可以**将测试逻辑与准备数据充分解耦**.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML
@@ -147,7 +160,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
     1. 可以转成对应的CSV
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
 
-#### 对类中单元测试分组
+#### 2.2.3. 对类中单元测试分组
 如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\
 下面是一个测试Stack功能的例子
 ```java
@@ -237,7 +250,7 @@ class TestingAStackDemo {
 }
 ```
 ![](https://junit.org/junit5/docs/current/user-guide/images/writing-tests_nested_test_ide.png)
-### JUnit5原理
+### 2.3. JUnit5原理
 单独的JUnit5其实是难以使用的,通常IDE或者代码管理工具,比如IntelliJ IDEA, Eclipse, NetBeans, Visual Studio Code, Gradle, Maven都会对JUnit5进行集成,从而让测试对开发更友好.所以以IDEA+JUnit5为例,第一步其实是从IDEA[内部插件](https://github.com/JetBrains/intellij-community/tree/61fb94acd0e337972338618b58c38a4509aefcff/plugins/junit5_rt/src/com/intellij/junit5)代码开始的.
 
 1. 触发测试进入插件源码,com.intellij.rt.junit.JUnitStarter::main
@@ -267,10 +280,10 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 5. 生成NodeTeskTask然后交给ExecutorService去执行(反射调用具体方法)
 6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension
 
-## Mockito
+## 3. Mockito
 
-### 常用注解
-#### 介绍
+### 3.1. 常用注解
+#### 3.1.1. 介绍
 |  Annotation  |                                         描述                                          |
 | ------------ | ------------------------------------------------------------------------------------ |
 | @Mock        | @Mock修饰的对象都是null,用到的每个方法都需要打桩模拟执行结果: Mockito.when().thenReturn() |
@@ -282,12 +295,8 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个默认对象然后来执行它的方法
-2. `@Spy`和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在单薄的controller/service/dao分层下,在controller层对dao层中方法行为进行验证.但必须注意这违反了单一职责原则[^SpyInject]
+1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能被注入mock代理对象。
 2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
-
-
-[^SpyInject]: https://newbedev.com/is-it-discouraged-to-use-spy-and-injectmocks-on-the-same-field
 
 @Spy 与 @Mock 测试案例:
 
@@ -312,18 +321,16 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
         assertEquals(1, spyList.size());
     }
 ```
-#### 使用建议
-##### 注解常用实践
+#### 3.1.2. 使用建议
+##### 3.1.2.1. 注解常用实践
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
+3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可i
+5. 检查`void`方法的执行情况可以使用`verify/times`校验次数和`@Captor`校验参数
 4. 私有方法和静态方法希望mock可以使用powermock
+5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
 
-5. 检查`void`方法的执行情况可以进行**行为验证**:`verify/times`校验次数和`@Captor`校验参数
-6. 使用这种测试框架进行**状态验证**困难点在于真实生产代码中测试用例中复杂对象的构造
-    - 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截三方请求得到入参与出参
-
-##### [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
+##### 3.1.2.2. [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
 > When/Then: when(yourMethod()).thenReturn(x);
 Do/When: doReturn(x).when(yourMock.fizzBuzz());
 Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
@@ -380,7 +387,7 @@ doReturn("I will be Returned").when(mock).foo();
 ```
 
 
-### Mockito原理
+### 3.2. Mockito原理
 比如`when(mockObject.yourMethod()).thenReturn(x)`这样的模式,看起来很连贯,是对`yourMenthod()`做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对`yourMethod()`这个方法进行打桩的呢?[^MockitoRead]
 
 [^MockitoRead]:[mockito原理浅析](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938607&idx=1&sn=7e17607eb5a537f7734631030d289351&chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&mpshare=1&scene=1&srcid=05068BrILyHdI932MoGI4ikG&sharer_sharetime=1654096335341&sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&acctmode=1&pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&wx_header=0)
@@ -472,13 +479,13 @@ public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) 
     }
 }
 ```
-## 测试建议与不足
-### 一般测试流程
-#### GWT 
+## 4. 测试建议与不足
+### 4.1. 一般测试流程
+#### 4.1.1. GWT 
 Given:情景/条件
 When:采取什么行动
 Then:得到什么结果
-#### 是否需要测试私有方法?
+#### 4.1.2. <span id= "jump">是否需要测试私有方法?</span>
 这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试越不友好,表现在:
 
 - 更多时间运行
@@ -500,6 +507,6 @@ Then:得到什么结果
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
 >3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
 
-### 需要完善的测试框架
+### 4.2. 需要完善的测试框架
 (或者还没发现的测试工具)
 
