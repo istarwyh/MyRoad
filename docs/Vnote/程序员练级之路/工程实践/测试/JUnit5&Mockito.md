@@ -31,22 +31,22 @@ Junit系列可以解决测试启动、测试状态校验与组织的问题,比�
 下面按照我个人经验列举JUni5的新注解,更多的在[这里](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5):
 
 
-|     Annotation     |                                            描述                                             |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| @Test              | 和 JUnit4 的 @Test 不同，这个@Test不能声明任何属性，Jupiter会为不同的test extension提供专门注解 |
-| @ParameterizedTest | 表示方法是参数化测试                                                                         |
-| @RepeatedTest      | 表示方法可重复执行                                                                           |
-| @DisplayName       | 为测试类或者测试方法设置展示名称,支持emoji😄                                                  |
-| @BeforeEach        | 表示在每个单元测试之前执行                                                                    |
-| @AfterEach         | 表示在每个单元测试之后执行                                                                    |
-| @BeforeAll         | 表示在所有单元测试之前执行                                                                    |
-| @AfterAll          | 表示在所有单元测试之后执行                                                                    |
-| @Disabled          | 表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore                                         |
-| @Timeout           | 表示测试方法运行如果超过了指定时间将会返回错误                                                  |
-| @Nested            | 该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类              |
-| @TestClassOrder    | 指定测试类的执行顺序                                                                         |
-| @TestMethodOrder   | 指定测试方法的执行顺序                                                                        |
-| @ExtendWith        | 为测试类或测试方法甚至字段提供一个或多个扩展环境                                                |
+|           Annotation           |                                                                                                    描述                                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| @Test                               | 和 JUnit4 的 @Test 不同，这个@Test不能声明任何属性，Jupiter会为不同的test extension提供专门注解 |
+| @ParameterizedTest | 表示方法是参数化测试                                                                                                                                                                    |
+| @RepeatedTest            | 表示方法可重复执行,可配合并发测试                                                                                                                                        |
+| @DisplayName            | 为测试类或者测试方法设置展示名称,支持emoji😄                                                                                                               |
+| @BeforeEach                | 表示在每个单元测试之前执行                                                                                                                                                       |
+| @AfterEach                    | 表示在每个单元测试之后执行                                                                                                                                                       |
+| @BeforeAll                     | 表示在所有单元测试之前执行                                                                                                                                                       |
+| @AfterAll                         | 表示在所有单元测试之后执行                                                                                                                                                       |
+| @Disabled                      | 表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore                                                                                          |
+| @Timeout                      | 表示测试方法运行如果超过了指定时间将会返回错误                                                                                                          |
+| @Nested                         | 该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类                     |
+| @TestClassOrder         | 指定测试类的执行顺序                                                                                                                                                                    |
+| @TestMethodOrder   | 指定测试方法的执行顺序                                                                                                                                                                |
+| @ExtendWith                | 为测试类或测试方法甚至字段提供一个或多个扩展环境                                                                                                      |
            
 ### 2.2. 新的特性
 #### 2.2.1. 超时断言
@@ -161,6 +161,108 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
 
     1. 可以转成对应的CSV
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
+    
+
+#### 重复与并发测试
+##### 重复测试
+有人可能会疑惑什么时候能用山重复测试?我的一个想法是,当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
+
+```java
+public class ParallelTest {
+
+    void sleep200() {
+        run(sleep(200));
+    }
+
+    void sleep300() {
+        run(sleep(300));
+    }
+
+    void sleep500() {
+        run(sleep(500));
+    }
+
+    private Runnable sleep(int during) {
+        return () -> {
+            try {
+                Thread.sleep(during);
+            } catch (InterruptedException e) {
+                System.out.println(""+e);
+            }
+        };
+    }
+
+    private void run(Runnable runnable) {
+        Instant start = Instant.now();
+        runnable.run();
+        Instant end = Instant.now();
+        System.out.println(Thread.currentThread().getName() + " ------------------------ " +
+                "I have run "+ Duration.between(start,end).toMillis() + " ms");
+    }
+
+    private void async() {
+        run(()-> {
+            try {
+                allOf(runAsync(this::sleep200), runAsync(this::sleep300), runAsync(this::sleep500)).get();
+            } catch (InterruptedException | ExecutionException e) {
+                System.out.println(""+e);
+            }
+        });
+    }
+
+    @RepeatedTest(5) @Execution(ExecutionMode.SAME_THREAD)
+    void testAsyncWithSameMethod(TestInfo testInfo){
+        System.out.println(testInfo.getTestMethod().get().getName());
+        async();
+    }
+
+}
+
+```
+
+![](vx_images/354691209268984.png)
+
+##### 并发测试
+
+JUnit5中的并发执行测试可以分为以下三种场景：
+
+- 多个测试类，它们各自的测试方法同时执行；
+- 一个测试类，里面的多个测试方法同时执行；
+- 一个测试类，里面的一个测试方法，在重复测试(Repeated Tests)或者参数化测试(Parameterized Tests)的时候，这个测试方法被多个线程同时执行；
+
+以最后一种同一个类同一个方法多次执行的并发为例,需要在test/resources目录中加入`junit-platform.properties`:
+
+```properties
+# 并行开关true/false
+junit.jupiter.execution.parallel.enabled=true
+# 方法级多线程开关 same_thread/concurrent
+junit.jupiter.execution.parallel.mode.default = same_thread
+# 类级多线程开关 same_thread/concurrent
+junit.jupiter.execution.parallel.mode.classes.default = same_thread
+
+# 并发策略有以下三种可选：
+# fixed：固定线程数，此时还要通过junit.jupiter.execution.parallel.config.fixed.parallelism指定线程数
+# dynamic：表示根据处理器和核数计算线程数
+# custom：自定义并发策略，通过这个配置来指定：junit.jupiter.execution.parallel.config.custom.class
+junit.jupiter.execution.parallel.config.strategy = fixed
+
+# 并发线程数，该配置项只有当并发策略为fixed的时候才有用
+junit.jupiter.execution.parallel.config.fixed.parallelism = 5
+```
+
+然后再原本测试代码标记`@Execution(ExecutionMode.CONCURRENT)`:
+
+```java
+    @RepeatedTest(5) @Execution(ExecutionMode.CONCURRENT)
+    void testAsyncConcurrently(TestInfo testInfo){
+        System.out.println(testInfo.getTestMethod().get().getName());
+        async();
+    }
+```
+
+![](vx_images/94852091826507.png)
+
+对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.
 
 #### 2.2.3. 对类中单元测试分组
 如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\
