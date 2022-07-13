@@ -2,14 +2,16 @@
 Junit系列可以解决测试启动、测试状态校验与组织的问题,比如测试启动上有参数化测试、并发测试、顺序测试等功能,校验上有异常断言、超时断言等功能,代码组织上有测试分组、测试报告自定义等功能.
 在上述领域之外,Mockito很好地承担了对测试对象打桩(stub)以及对测试行为校验的功能.有人可能所Mockito都不能mock私有、静态和构造方法,差评!(虽然[要不要测试私有方法还没有定论](#jump)那你可以从下面挑一款!
 
-|     工具      | 原理 | 最小Mock Unit | 对被Mock方法的限制 | 上手难度 | 总结 |
-| ------------ | ---- | ------------- | ----------------- | -------- | ---- |
-| Mockito      |      |               |                   |          |      |
-| Spock        |      |               |                   |          |      |
-| PowerMock    |      |               |                   |          |      |
-| JMockit      |      |               |                   |          |      |
-| TestableMock |      |               |                   |          |      |
+|     工具      |      原理       | 最小Mock Unit |     对被Mock方法的限制      | 上手难度 |             总结             |
+| ------------ | --------------- | ------------- | -------------------------- | -------- | ---------------------------- |
+| Mockito      | 动态代理         | 类            | 不能mock私有、静态和构造方法 | 一般     | 比较全面就是不能mock方法有限制 |
+| Spock        | 动态代理         | 类            | 不能mock私有、静态和构造方法 | 较复杂   | 可读性好;mock上也有限制        |
+| PowerMock    | 自定义类加载器   | 类            | **都可以**                  | 较复杂   | Jacoco默认情况下不能统计覆盖率 |
+| JMockit      | 运行时修改字节码 | 类            | 不能mock构造方法            | 较复杂   | 目前不咋被维护                |
+| TestableMock | 运行时修改字节码 | 方法          | **都可以**                  | 容易     | 思路清奇,指哪打哪,上手简单     |
 
+这里也单独提一下[TestableMock](https://alibaba.github.io/testable-mock/). 它绕开了传统Mock工具先mock对象的思路,直接修改运行时被调用的方法,而这只需用一个`@MockInvoke`注解即可.
+然而Mockito只是方便开发者mock数据,却不能帮开发者把数据造出来,在复杂的业务场景下,如何快速生成有业务含义的对象或者响应体依然时很麻烦的问题.**我们还需要一个工具方便我们从运行时获取依赖数据.**
 ## 2. JUnit5 使用与原理
 
 在JUnit4发布十年之后,2017年JUnit团队靠众筹推出了全新的[JUnit5](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5).
@@ -280,7 +282,7 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 5. 生成NodeTeskTask然后交给ExecutorService去执行(反射调用具体方法)
 6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension
 
-## 3. Mockito
+## 3. Mockito使用与原理
 
 ### 3.1. 常用注解
 #### 3.1.1. 介绍
@@ -295,8 +297,10 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个空对象然后来执行它的方法.这也意味着`@Spy`修饰的属性不能被注入mock代理对象。
-2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
+1. ~~使用`@Spy`的前提是对象可以被使用无参构造器初始化,~~~~因为需要得到一个空对象然后来执行它的方法~~.
+
+2. `@Spy` 和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在controller/service/dao分的service特别单薄时,在controller层对dao层方法中的行为进行验证,但必须注意这违反了单一职责原则(SRP原则)
+3. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
 
 @Spy 与 @Mock 测试案例:
 
@@ -325,10 +329,11 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 ##### 3.1.2.1. 注解常用实践
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可i
-5. 检查`void`方法的执行情况可以使用`verify/times`校验次数和`@Captor`校验参数
-4. 私有方法和静态方法希望mock可以使用powermock
-5. 使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造,链路录制工具可以帮助生成请求与返回结构体
+3. 对无法直接实例化的三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
+4. 检查`void`方法的执行情况可以使用`verify/times`校验调用次数和`@Captor`检查调用参数来进行**行为验证**
+
+5. 正如前言中提到的,使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造
+- 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截RPC请求得到入参和出参
 
 ##### 3.1.2.2. [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
 > When/Then: when(yourMethod()).thenReturn(x);
@@ -359,7 +364,9 @@ doReturn("foo").when(spy).get(0);
 
 3. 连续对调用方法打桩(Stub)[^two]
 [^two]: https://www.cnblogs.com/vvonline/p/4122991.html
+
 值得一提的是,连续打桩方法直接写是反直觉的:
+
 ```java
 // 这个和直觉不一样!这个调用的时候只会返回"world"
 when(o.toString()).thenReturn("Hello"); 
@@ -507,6 +514,62 @@ Then:得到什么结果
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
 >3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
 
-### 4.2. 需要完善的测试框架
-(或者还没发现的测试工具)
+#### 4.1.3. TestMe 少写重复的测试
+最后还有一个消除重复写测试代码的神器必须介绍:IDEA上的`testme`插件. 有人可能用过`squareTest`这些测试代码自动生成工具,但是先不说它是收费的,有时候它默认生成的数据类真的一言难尽,实在不如自己写的好用,这里我提供一个用于包装上游调用接口的通用模板,看一下应该不难看懂:)
+```java
+#parse("TestMe macros.java")
+#set($hasMocks=$MockitoMockBuilder.hasMockable($TESTED_CLASS.fields))
+#if($PACKAGE_NAME)
+package ${PACKAGE_NAME}
+#end
 
+#if($hasMock)
+#end
+
+#parse("File Header.java)
+#if($hasMock)
+@ExtendWith(MockitoExtension.class)
+#end
+class ${CLASS_NAME}{
+    
+private String testErrorCode;
+private String testErrorMsg;
+
+@BeforeEach
+void setUp(){
+    testErrorCode = "testErrorCode";
+    testErrorMsg = "testErrorMsg";
+}
+
+#foreach($method in $TESTED_CLASS.methods)
+    #if($TESTSubjectUtils.shouldBeTested($method))
+
+        @Nested
+        @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+        class #renderTestMethodName($method.name){
+            
+            //exception
+            @Test
+            void should_throw_exception_when_upstream_return_null(){}
+            
+            //exception
+            @Test
+            void should_throw_exception_when_upstream_invoke_failed(){}
+            
+            //default value
+            @Test
+            void should_set_default_value_to_empty_list_when_data_is_null(){}
+            
+            @ParameterizedTest()
+            @MethodResource("resultOfUpstream")
+            void should_return_the_same_when_get_normal_data(Object resultOfUpstream){}
+            
+            Source<Arguments> resultOfUpstream(){
+                return Stream.of();
+            }
+        }    
+
+    #end
+#end
+}
+```
