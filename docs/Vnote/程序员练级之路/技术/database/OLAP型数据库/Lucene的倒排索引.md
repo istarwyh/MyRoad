@@ -25,7 +25,7 @@
 3. 通过Term Index索引到的每条词典中的也是一条索引项，其记载term本身的一些信息以及指向倒排列表`Posting list`的指针。
 4. 倒排表可以简单是一个int数组，记录某个词属于哪个文档的文档编号。其中每条记录称为一个倒排项`Posting`。
 5. 所有单词的`Posting list`一般顺序地存储在磁盘的倒排文件`Inverted File`。
-6. 被写入磁盘的Posting list是Immutable（不可变）的一段段（Segment）
+6. 被写入磁盘的Posting list是Immutable（不可变）的一段段（`Segment`）
 
 
 `Term Index`、`Term Dictionary`与`Posting list`的关系如下图所示[^TermRelationship]：
@@ -249,9 +249,10 @@ B+树和倒排索引其实分别适用于两种不同的应用场景:
 搜素引擎可以带来查询性能提升，但是相对Mysql也有一定局限性，比如
 
 - 对深分页支持效果不好
-- 搜索最好不要超过5000条
+    - 例如pageSize = 100,pageNo = 101,一共有个6个shard.则需要在6个shard上都排序算分(score)10100条数据,最后再在coordinating node上之后捞出来的人60600条数据,这很容易OOM
+    - 搜索最好不要超过5000条(ES的`max_result_window`默认为10000)
 - 搜索结果的排序、统计在大数据量时结果不稳定(可能是因为分片堆排序的原因)
-- 更新慢,当出现索引较大更新时，因为倒排索引本身不可变都要重新构建整个索引
+- 更新慢,当出现索引较大更新时，因为倒排索引本身不可变需要重新构建整个索引
 
 ## 3. 使用注意事项
 
