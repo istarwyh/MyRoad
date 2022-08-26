@@ -1,3 +1,19 @@
+## 1. 前言 
+Junit系列可以解决测试启动、测试状态校验与组织的问题,比如测试启动上有参数化测试、并发测试、顺序测试等功能,校验上有异常断言、超时断言等功能,代码组织上有测试分组、测试报告自定义等功能.
+在上述领域之外,Mockito很好地承担了对测试对象打桩(stub)以及对测试行为校验的功能.有人可能所Mockito都不能mock私有、静态和构造方法,差评!(虽然[要不要测试私有方法还没有定论](#jump)那你可以从下面挑一款!
+
+|     工具      |      原理       | 最小Mock Unit |     对被Mock方法的限制      | 上手难度 |             总结             |
+| ------------ | --------------- | ------------- | -------------------------- | -------- | ---------------------------- |
+| Mockito      | 动态代理         | 类            | 不能mock私有、静态和构造方法 | 一般     | 比较全面就是不能mock方法有限制 |
+| Spock        | 动态代理         | 类            | 不能mock私有、静态和构造方法 | 较复杂   | 可读性好;mock上也有限制        |
+| PowerMock    | 自定义类加载器   | 类            | **都可以**                  | 较复杂   | Jacoco默认情况下不能统计覆盖率 |
+| JMockit      | 运行时修改字节码 | 类            | 不能mock构造方法            | 较复杂   | 目前不咋被维护                |
+| TestableMock | 运行时修改字节码 | 方法          | **都可以**                  | 容易     | 思路清奇,指哪打哪,上手简单     |
+
+这里也单独提一下[TestableMock](https://alibaba.github.io/testable-mock/). 它绕开了传统Mock工具先mock对象的思路,直接修改运行时被调用的方法,而这只需用一个`@MockInvoke`注解即可.
+然而Mockito只是方便开发者mock数据,却不能帮开发者把数据造出来,在复杂的业务场景下,如何快速生成有业务含义的对象或者响应体依然时很麻烦的问题.**我们还需要一个工具方便我们从运行时获取依赖数据.**
+## 2. JUnit5 使用与原理
+
 在JUnit4发布十年之后,2017年JUnit团队靠众筹推出了全新的[JUnit5](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5).
 
 <center>JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage</center>
@@ -11,30 +27,29 @@
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&mockito.md/450935910220547.png)
 
 虽然包括三个部分,不过最新版本引入`org.junit.jupiter:junit-jupiter`就可以了,核心注解都在`org.junit.jupiter.api`下.
-## JUnit5特性
-### 新的注解
+### 2.1. 新的注解
 下面按照我个人经验列举JUni5的新注解,更多的在[这里](https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5):
 
 
-|     Annotation     |                                            描述                                             |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| @Test              | 和 JUnit4 的 @Test 不同，这个@Test不能声明任何属性，Jupiter会为不同的test extension提供专门注解 |
-| @ParameterizedTest | 表示方法是参数化测试                                                                         |
-| @RepeatedTest      | 表示方法可重复执行                                                                           |
-| @DisplayName       | 为测试类或者测试方法设置展示名称,支持emoji😄                                                  |
-| @BeforeEach        | 表示在每个单元测试之前执行                                                                    |
-| @AfterEach         | 表示在每个单元测试之后执行                                                                    |
-| @BeforeAll         | 表示在所有单元测试之前执行                                                                    |
-| @AfterAll          | 表示在所有单元测试之后执行                                                                    |
-| @Disabled          | 表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore                                         |
-| @Timeout           | 表示测试方法运行如果超过了指定时间将会返回错误                                                  |
-| @Nested            | 该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类              |
-| @TestClassOrder    | 指定测试类的执行顺序                                                                         |
-| @TestMethodOrder   | 指定测试方法的执行顺序                                                                        |
-| @ExtendWith        | 为测试类或测试方法甚至字段提供一个或多个扩展环境                                                |
+|           Annotation           |                                                                                                    描述                                                                                                     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| @Test                               | 和 JUnit4 的 @Test 不同，这个@Test不能声明任何属性，Jupiter会为不同的test extension提供专门注解 |
+| @ParameterizedTest | 表示方法是参数化测试                                                                                                                                                                    |
+| @RepeatedTest            | 表示方法可重复执行,可配合并发测试                                                                                                                                        |
+| @DisplayName            | 为测试类或者测试方法设置展示名称,支持emoji😄                                                                                                               |
+| @BeforeEach                | 表示在每个单元测试之前执行                                                                                                                                                       |
+| @AfterEach                    | 表示在每个单元测试之后执行                                                                                                                                                       |
+| @BeforeAll                     | 表示在所有单元测试之前执行                                                                                                                                                       |
+| @AfterAll                         | 表示在所有单元测试之后执行                                                                                                                                                       |
+| @Disabled                      | 表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore                                                                                          |
+| @Timeout                      | 表示测试方法运行如果超过了指定时间将会返回错误                                                                                                          |
+| @Nested                         | 该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类                     |
+| @TestClassOrder         | 指定测试类的执行顺序                                                                                                                                                                    |
+| @TestMethodOrder   | 指定测试方法的执行顺序                                                                                                                                                                |
+| @ExtendWith                | 为测试类或测试方法甚至字段提供一个或多个扩展环境                                                                                                      |
            
-### 新的特性
-#### 超时断言
+### 2.2. 新的特性
+#### 2.2.1. 超时断言
 ```java
 @Test
 @DisplayName("超时测试")
@@ -43,9 +58,9 @@ public void timeoutTest() {
     Assertions.assertTimeout(Duration.ofMillis(1000), () -> Thread.sleep(500));
 }
 ```
-#### 参数化测试
+#### 2.2.2. 参数化测试
 以下为部分介绍,更多细节[在这儿](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests).
-##### 通过注解属性传入参数
+##### 2.2.2.1. 通过注解属性传入参数
 - @ValueSource: 为参数化测试指定入参来源，支持八大基础类以及 String 类型, Class 类型
 
 - @EmptySource: 提供空白数组或空白集合,支持八大基础类及它们包装类以及 String 类型, 集合类型
@@ -71,7 +86,7 @@ void nullEmptyAndBlankStrings(String text) {
     assertTrue(text == null || text.trim().isEmpty());
 }
 ```
-##### 通过静态方法名/指定接口类传入参数
+##### 2.2.2.2. 通过静态方法名/指定接口类传入参数
 - @MethodSource：读取静态方法的Stream流作为参数化测试入参
 
 ```java
@@ -106,7 +121,7 @@ public class MyArgumentsProvider implements ArgumentsProvider {
     }
 }
 ```
-##### 通过文件格式数据传入参数
+##### 2.2.2.3. 通过文件格式数据传入参数
 - @CsvSource：表示读取指定 CSV内容作为参数化测试入参
 
 ```java
@@ -139,15 +154,117 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
 }
 ```
 
-##### 评价
+##### 2.2.2.4. 评价
 1. 参数化测试相当于是合并了多个单元测试输入输出数据的"缩写",所以通常会有代表input和output的输入输出.当input都对应相同的output时,可以省略output.
 
 2. 通过外部文件作为参数构造文件,就可以**将测试逻辑与准备数据充分解耦**.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML
 
     1. 可以转成对应的CSV
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
+    
 
-#### 对类中单元测试分组
+#### 重复与并发测试
+##### 重复测试
+有人可能会疑惑什么时候能用山重复测试?我的一个想法是,当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
+
+```java
+public class ParallelTest {
+
+    void sleep200() {
+        run(sleep(200));
+    }
+
+    void sleep300() {
+        run(sleep(300));
+    }
+
+    void sleep500() {
+        run(sleep(500));
+    }
+
+    private Runnable sleep(int during) {
+        return () -> {
+            try {
+                Thread.sleep(during);
+            } catch (InterruptedException e) {
+                System.out.println(""+e);
+            }
+        };
+    }
+
+    private void run(Runnable runnable) {
+        Instant start = Instant.now();
+        runnable.run();
+        Instant end = Instant.now();
+        System.out.println(Thread.currentThread().getName() + " ------------------------ " +
+                "I have run "+ Duration.between(start,end).toMillis() + " ms");
+    }
+
+    private void async() {
+        run(()-> {
+            try {
+                allOf(runAsync(this::sleep200), runAsync(this::sleep300), runAsync(this::sleep500)).get();
+            } catch (InterruptedException | ExecutionException e) {
+                System.out.println(""+e);
+            }
+        });
+    }
+
+    @RepeatedTest(5) @Execution(ExecutionMode.SAME_THREAD)
+    void testAsyncWithSameMethod(TestInfo testInfo){
+        System.out.println(testInfo.getTestMethod().get().getName());
+        async();
+    }
+
+}
+
+```
+
+![](vx_images/354691209268984.png)
+
+##### 并发测试
+
+JUnit5中的并发执行测试可以分为以下三种场景：
+
+- 多个测试类，它们各自的测试方法同时执行；
+- 一个测试类，里面的多个测试方法同时执行；
+- 一个测试类，里面的一个测试方法，在重复测试(Repeated Tests)或者参数化测试(Parameterized Tests)的时候，这个测试方法被多个线程同时执行；
+
+以最后一种同一个类同一个方法多次执行的并发为例,需要在test/resources目录中加入`junit-platform.properties`:
+
+```properties
+# 并行开关true/false
+junit.jupiter.execution.parallel.enabled=true
+# 方法级多线程开关 same_thread/concurrent
+junit.jupiter.execution.parallel.mode.default = same_thread
+# 类级多线程开关 same_thread/concurrent
+junit.jupiter.execution.parallel.mode.classes.default = same_thread
+
+# 并发策略有以下三种可选：
+# fixed：固定线程数，此时还要通过junit.jupiter.execution.parallel.config.fixed.parallelism指定线程数
+# dynamic：表示根据处理器和核数计算线程数
+# custom：自定义并发策略，通过这个配置来指定：junit.jupiter.execution.parallel.config.custom.class
+junit.jupiter.execution.parallel.config.strategy = fixed
+
+# 并发线程数，该配置项只有当并发策略为fixed的时候才有用
+junit.jupiter.execution.parallel.config.fixed.parallelism = 5
+```
+
+然后再原本测试代码标记`@Execution(ExecutionMode.CONCURRENT)`:
+
+```java
+    @RepeatedTest(5) @Execution(ExecutionMode.CONCURRENT)
+    void testAsyncConcurrently(TestInfo testInfo){
+        System.out.println(testInfo.getTestMethod().get().getName());
+        async();
+    }
+```
+
+![](vx_images/94852091826507.png)
+
+对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.
+
+#### 2.2.3. 对类中单元测试分组
 如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\
 下面是一个测试Stack功能的例子
 ```java
@@ -237,7 +354,7 @@ class TestingAStackDemo {
 }
 ```
 ![](https://junit.org/junit5/docs/current/user-guide/images/writing-tests_nested_test_ide.png)
-### JUnit5原理
+### 2.3. JUnit5原理
 单独的JUnit5其实是难以使用的,通常IDE或者代码管理工具,比如IntelliJ IDEA, Eclipse, NetBeans, Visual Studio Code, Gradle, Maven都会对JUnit5进行集成,从而让测试对开发更友好.所以以IDEA+JUnit5为例,第一步其实是从IDEA[内部插件](https://github.com/JetBrains/intellij-community/tree/61fb94acd0e337972338618b58c38a4509aefcff/plugins/junit5_rt/src/com/intellij/junit5)代码开始的.
 
 1. 触发测试进入插件源码,com.intellij.rt.junit.JUnitStarter::main
@@ -267,10 +384,10 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 5. 生成NodeTeskTask然后交给ExecutorService去执行(反射调用具体方法)
 6. 实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension
 
-## Mockito
+## 3. Mockito使用与原理
 
-### 常用注解
-#### 介绍
+### 3.1. 常用注解
+#### 3.1.1. 介绍
 |  Annotation  |                                         描述                                          |
 | ------------ | ------------------------------------------------------------------------------------ |
 | @Mock        | @Mock修饰的对象都是null,用到的每个方法都需要打桩模拟执行结果: Mockito.when().thenReturn() |
@@ -282,12 +399,10 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 其他说明:
 
-1. 使用`@Spy`的前提是对象可以被使用无参构造器初始化,因为需要得到一个默认对象然后来执行它的方法
-2. `@Spy`和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在单薄的controller/service/dao分层下,在controller层对dao层中方法行为进行验证.但必须注意这违反了单一职责原则[^SpyInject]
-2. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
+1. ~~使用`@Spy`的前提是对象可以被使用无参构造器初始化,~~~~因为需要得到一个空对象然后来执行它的方法~~.
 
-
-[^SpyInject]: https://newbedev.com/is-it-discouraged-to-use-spy-and-injectmocks-on-the-same-field
+2. `@Spy` 和`@InjectMocks`可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在controller/service/dao分的service特别单薄时,在controller层对dao层方法中的行为进行验证,但必须注意这违反了单一职责原则(SRP原则)
+3. `@Spy` 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回`null`。
 
 @Spy 与 @Mock 测试案例:
 
@@ -312,18 +427,17 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
         assertEquals(1, spyList.size());
     }
 ```
-#### 使用建议
-##### 注解常用实践
+#### 3.1.2. 使用建议
+##### 3.1.2.1. 注解常用实践
 1. 一般来说,`@Spy`修饰实现类、`@InjectMocks`修饰需要mock属性的实现类、`@Mock`修饰接口
 2. 默认使用`@Spy`或`@SpyBean`,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑
-3. 对无法直接实例化三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
-4. 私有方法和静态方法希望mock可以使用powermock
+3. 对无法直接实例化的三方依赖,比如下游接口、Redis等使用`@Mock`;没有Mock到的依赖会NPE,逐个Mock即可
+4. 检查`void`方法的执行情况可以使用`verify/times`校验调用次数和`@Captor`检查调用参数来进行**行为验证**
 
-5. 检查`void`方法的执行情况可以进行**行为验证**:`verify/times`校验次数和`@Captor`校验参数
-6. 使用这种测试框架进行**状态验证**困难点在于真实生产代码中测试用例中复杂对象的构造
-    - 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截三方请求得到入参与出参
+5. 正如前言中提到的,使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造
+- 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截RPC请求得到入参和出参
 
-##### [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
+##### 3.1.2.2. [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
 > When/Then: when(yourMethod()).thenReturn(x);
 Do/When: doReturn(x).when(yourMock.fizzBuzz());
 Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
@@ -352,7 +466,9 @@ doReturn("foo").when(spy).get(0);
 
 3. 连续对调用方法打桩(Stub)[^two]
 [^two]: https://www.cnblogs.com/vvonline/p/4122991.html
+
 值得一提的是,连续打桩方法直接写是反直觉的:
+
 ```java
 // 这个和直觉不一样!这个调用的时候只会返回"world"
 when(o.toString()).thenReturn("Hello"); 
@@ -380,7 +496,7 @@ doReturn("I will be Returned").when(mock).foo();
 ```
 
 
-### Mockito原理
+### 3.2. Mockito原理
 比如`when(mockObject.yourMethod()).thenReturn(x)`这样的模式,看起来很连贯,是对`yourMenthod()`做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对`yourMethod()`这个方法进行打桩的呢?[^MockitoRead]
 
 [^MockitoRead]:[mockito原理浅析](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938607&idx=1&sn=7e17607eb5a537f7734631030d289351&chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&mpshare=1&scene=1&srcid=05068BrILyHdI932MoGI4ikG&sharer_sharetime=1654096335341&sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&acctmode=1&pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&wx_header=0)
@@ -472,13 +588,13 @@ public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) 
     }
 }
 ```
-## 测试建议与不足
-### 一般测试流程
-#### GWT 
+## 4. 测试建议与不足
+### 4.1. 一般测试流程
+#### 4.1.1. GWT 
 Given:情景/条件
 When:采取什么行动
 Then:得到什么结果
-#### 是否需要测试私有方法?
+#### 4.1.2. <span id= "jump">是否需要测试私有方法?</span>
 这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试越不友好,表现在:
 
 - 更多时间运行
@@ -500,6 +616,62 @@ Then:得到什么结果
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
 >3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
 
-### 需要完善的测试框架
-(或者还没发现的测试工具)
-TestMe: 可以事先写好需要实现的测试模板方法,一键生成.
+#### 4.1.3. TestMe 少写重复的测试
+最后还有一个消除重复写测试代码的神器必须介绍:IDEA上的`testme`插件. 有人可能用过`squareTest`这些测试代码自动生成工具,但是先不说它是收费的,有时候它默认生成的数据类真的一言难尽,实在不如自己写的好用,这里我提供一个用于包装上游调用接口的通用模板,看一下应该不难看懂:)
+```java
+#parse("TestMe macros.java")
+#set($hasMocks=$MockitoMockBuilder.hasMockable($TESTED_CLASS.fields))
+#if($PACKAGE_NAME)
+package ${PACKAGE_NAME}
+#end
+
+#if($hasMock)
+#end
+
+#parse("File Header.java)
+#if($hasMock)
+@ExtendWith(MockitoExtension.class)
+#end
+class ${CLASS_NAME}{
+    
+private String testErrorCode;
+private String testErrorMsg;
+
+@BeforeEach
+void setUp(){
+    testErrorCode = "testErrorCode";
+    testErrorMsg = "testErrorMsg";
+}
+
+#foreach($method in $TESTED_CLASS.methods)
+    #if($TESTSubjectUtils.shouldBeTested($method))
+
+        @Nested
+        @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+        class #renderTestMethodName($method.name){
+            
+            //exception
+            @Test
+            void should_throw_exception_when_upstream_return_null(){}
+            
+            //exception
+            @Test
+            void should_throw_exception_when_upstream_invoke_failed(){}
+            
+            //default value
+            @Test
+            void should_set_default_value_to_empty_list_when_data_is_null(){}
+            
+            @ParameterizedTest()
+            @MethodResource("resultOfUpstream")
+            void should_return_the_same_when_get_normal_data(Object resultOfUpstream){}
+            
+            Source<Arguments> resultOfUpstream(){
+                return Stream.of();
+            }
+        }    
+
+    #end
+#end
+}
+```
