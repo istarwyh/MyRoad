@@ -1,0 +1,3 @@
+/Users/mac/Desktop/code-open/MyRoad/CTest/cmake-build-debug/CMakeFiles/CTest.dir
+/Users/mac/Desktop/code-open/MyRoad/CTest/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mac/Desktop/code-open/MyRoad/CTest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
