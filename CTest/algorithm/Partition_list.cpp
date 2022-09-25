@@ -1,4 +1,4 @@
-#include  <stdio.h>
+#include  <cstdio>
 typedef int T;
 struct LNode{
     T data;

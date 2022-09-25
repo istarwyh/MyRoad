@@ -61,6 +61,9 @@
 			[
 				{
 					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk"
+				},
+				{
+					"fragment" : "-std=gnu++14"
 				}
 			],
 			"includes" : 
@@ -82,7 +85,15 @@
 					"path" : "/Users/mac/Desktop/code-open/MyRoad/CTest/others"
 				}
 			],
-			"language" : "C",
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "14"
+			},
 			"sourceIndexes" : 
 			[
 				0
@@ -103,7 +114,7 @@
 				"role" : "flags"
 			}
 		],
-		"language" : "C"
+		"language" : "CXX"
 	},
 	"name" : "CTest",
 	"nameOnDisk" : "CTest",
@@ -127,7 +138,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "algorithm/bubbleSort.c",
+			"path" : "algorithm/char2int.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

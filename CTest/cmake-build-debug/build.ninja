@@ -46,9 +46,9 @@ cmake_ninja_workdir = /Users/mac/Desktop/code-open/MyRoad/CTest/cmake-build-debu
 
 build cmake_object_order_depends_target_CTest: phony || CMakeFiles/CTest.dir
 
-build CMakeFiles/CTest.dir/algorithm/bubbleSort.c.o: C_COMPILER__CTest_Debug /Users/mac/Desktop/code-open/MyRoad/CTest/algorithm/bubbleSort.c || cmake_object_order_depends_target_CTest
-  DEP_FILE = CMakeFiles/CTest.dir/algorithm/bubbleSort.c.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
+build CMakeFiles/CTest.dir/algorithm/char2int.cpp.o: CXX_COMPILER__CTest_Debug /Users/mac/Desktop/code-open/MyRoad/CTest/algorithm/char2int.cpp || cmake_object_order_depends_target_CTest
+  DEP_FILE = CMakeFiles/CTest.dir/algorithm/char2int.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++14
   INCLUDES = -I/Users/mac/Desktop/code-open/MyRoad/CTest/. -I/Users/mac/Desktop/code-open/MyRoad/CTest/algorithm -I/Users/mac/Desktop/code-open/MyRoad/CTest/homework -I/Users/mac/Desktop/code-open/MyRoad/CTest/others
   OBJECT_DIR = CMakeFiles/CTest.dir
   OBJECT_FILE_DIR = CMakeFiles/CTest.dir/algorithm
@@ -61,7 +61,7 @@ build CMakeFiles/CTest.dir/algorithm/bubbleSort.c.o: C_COMPILER__CTest_Debug /Us
 #############################################
 # Link the executable CTest
 
-build CTest: C_EXECUTABLE_LINKER__CTest_Debug CMakeFiles/CTest.dir/algorithm/bubbleSort.c.o
+build CTest: CXX_EXECUTABLE_LINKER__CTest_Debug CMakeFiles/CTest.dir/algorithm/char2int.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/CTest.dir
   POST_BUILD = :

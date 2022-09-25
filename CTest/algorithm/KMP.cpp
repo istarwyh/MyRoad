@@ -8,7 +8,7 @@
  */
 #include<string>//注意<string.h>和<cstring>为了string则都是错误的
 #include<cstring>//这是为了和C兼容
-#include<assert.h>
+#include<cassert>
 #include<iostream>
 using namespace std;
 int *Next(string P){

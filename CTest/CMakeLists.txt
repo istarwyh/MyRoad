@@ -9,4 +9,4 @@ include_directories(homework)
 include_directories(others)
 
 add_executable(CTest
-        algorithm/bubbleSort.c)
+        algorithm/char2int.cpp)
