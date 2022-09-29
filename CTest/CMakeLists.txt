@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 include_directories(algorithm)
 include_directories(homework)
-include_directories(others)
+include_directories(test)
 
 add_executable(CTest
-        algorithm/char2int.cpp)
+        test/AddTest.c)

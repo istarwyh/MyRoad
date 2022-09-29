@@ -56,28 +56,8 @@
 
 
 ## 2. 技术
-### RSA原理
-e 是 encryption，加密
-d 是 decryption，解密
-c 是 cipher，密文的意思
-m 是 message，消息的意思
-### 2.1. 比特币私钥
-比特币私钥本质是一个数，是密码学安全的，并不是说不可能出现重复的私钥，而是说不可能通过遍历的方式找到某一个特定的私钥，或者通过其它的方式找，而不通过私钥就能花费地址上面的比特币。[^私钥]
-
-选取私钥的过程如果不可预测或不可重复（是随机的），则私钥是密码学安全的
-
-比特币的公钥（K），是 Secp256k1 定义的椭圆曲线上的一个点,并且满足`K=k⋅G`的关系,其中k便是私钥,G 为椭圆曲线上的一个固定点.数学原理保证了计算过程单向不可逆，能轻而易举的从私钥计算出其对应的公钥，反过来则无法实现。[^Secp256k1]
-
-[^Secp256k1]:[比特币的私钥和公钥](https://aaron67.cc/2018/12/23/bitcoin-keys/)
-[^私钥]:[比特币的私钥，公钥和地址是什么？](https://www.8btc.com/article/126232)
-
-生成一个私钥，本质上就是选择一个数：
-
-- 随机数生成（如RNG）
-- random.org
-- bitaddress.org
-### 2.2. 常见非对称加密算法
-- RSA，DSA，ECDSA，EdDSA和Ed25519都用于数字签名，但只有RSA也可以用于加密。
+### 2.1. 常见非对称加密算法
+RSA，DSA，ECDSA，EdDSA和Ed25519都用于数字签名，但只有RSA也可以用于加密。
 
 - RSA（Rivest–Shamir–Adleman）是最早的公钥密码系统之一，被广泛用于安全数据传输。它的安全性取决于整数分解，因此永远不需要安全的RNG（随机数生成器）。与DSA相比，RSA的签名验证速度更快，但生成速度较慢。
 
@@ -87,7 +67,92 @@ m 是 message，消息的意思
 
 - EdDSA（爱德华兹曲线数字签名算法）是一种使用基于扭曲爱德华兹曲线的Schnorr签名变体的数字签名方案。签名创建在EdDSA中是确定性的，其安全性是基于某些离散对数问题的难处理性，因此它比DSA和ECDSA更安全，后者要求每个签名都具有高质量的随机性。
 
-- Ed25519是EdDSA签名方案，但使用SHA-512 / 256和Curve25519；它是一条安全的椭圆形曲线，比DSA，ECDSA和EdDSA 提供更好的安全性，并且具有更好的性能（人为注意）。
+- Ed25519是EdDSA签名方案，但经过优化比DSA，ECDSA和EdDSA 提供更好的安全性，并且具有更好的性能。
+
+### 2.2. RSA原理
+
+RSA加密算法重点是找到了三个数`encryption_key` 、`decryption_key` 、`encryption_key_n` 满足以下性质[^RSA]：
+```c
+// 目标：传递数字message
+// 1. message使用 encryption_key 和 n_encryption 加密
+long cipher =  (long)pow(message,encryption_key) % encryption_key_n;
+// 2. 只有持有 decryption_key 才能对cipher解密
+long result = (long)pow(cipher,decryption_key) % encryption_key_n;
+// 那么result就是原有要传递的数字
+isTrue(result == message)
+```
+
+
+
+怎么找到的呢？源于对数学基本定理的推导，欧拉证明了对于任意两个素数p,q有如下定理：
+$pow(message,(p-1) * (q-1)) \% (p * q) = 1$
+
+名字分别为R，S，A开头的三位教授对等式作如下变换：
+令 
+$\phi = (p-1) * (q-1),encryption_key_n = p*q$
+
+,则有
+$pow(message,\phi) \% encryption_key_n = 1$
+
+先对等式两边取任意正整数k次方，有
+$pow(message,k*\phi) \% encryption_key_n = 1$
+
+再对等式两边乘以message，有
+$pow(message , ( k * φ + 1 )) \% encryption_key_n = message$
+
+这时候如果将`k * φ + 1` 拆成两个数的乘积，即求解 
+$encryption_key * decryption_key = k * φ + 1$
+
+使得
+$pow(message , ( encryption_key * decryption_key )) \% encryption_key_n = message$
+
+即
+$pow(pow(message , encryption_key) , decryption_key) \% encryption_key_n = message$
+
+即
+$pow(pow(message , encryption_key) \% encryption_key_n, decryption_key) \% encryption_key_n = message$
+
+令
+```c
+long cipher =  (long)pow(message,encryption_key) % encryption_key_n;
+```
+
+有
+$pow(cipher , decryption_key) \% encryption_key_n = message$
+
+
+那么我们就找到了三个数`encryption_key` 、`decryption_key` 、`encryption_key_n` 满足开始说的以下性质(插入文本内超链接)
+
+
+就可以得到 `encryption_key` 和 `decryption_key`，encryption_key_n 也即是上述推导公式中的而这样满足条件的密钥对有无数对。
+
+
+这样就可以分发`encryption_key`和作为公钥来加密`decryption_key`作为私钥
+
+
+[^RSA]:https://mp.weixin.qq.com/s/aVt1qj62YzwvU9sNPN9B_g
+
+### 2.3. 椭圆曲线加密算法ECDSA
+ECDSA 是比特币账户选择的加密算法。
+比特币私钥就是一个数，并不是说不可能出现重复的私钥，而是说不可能通过遍历的方式找到某一个特定的私钥，或者通过其它的方式而不通过私钥就能交易地址上面的比特币。[^私钥] 同时选取私钥的过程如果不可预测或不可重复（是随机的），则私钥是密码学安全的。所以生成一个私钥，本质上就是选择一个数：
+
+- 随机数生成（如RNG）
+- random.org2.2. - bitaddress.org  
+
+比特币的公钥（K）是 `Secp256k1`定义的椭圆曲线上的一个点,并且满足`K=k⋅G`的关系,**其中k便是私钥**,`G` 为椭圆曲线上的一个固定点。**椭圆曲线加密算法保证了计算过程单向不可逆**，能轻而易举的从私钥计算出其对应的公钥，反过来则无法实现。[^Secp256k1]
+
+[^Secp256k1]:[比特币的私钥和公钥](https://aaron67.cc/2018/12/23/bitcoin-keys/)
+[^私钥]:[比特币的私钥，公钥和地址是什么？](https://www.8btc.com/article/126232)
+
+这样我们就得到了两个数a,b这样只能”乘法“不能“除法”的运算真的神奇！但我们可以想象一个
+
+那我们得到了私钥和公钥后怎么加密呢？假设需要加密的数字信息是Message，则我们将信息加密为
+$G、Message + K$
+两部分传递即可。因为`K=k⋅G`，所以对于有私钥k的人信息就变成下面这个：
+$G、Message + k*G$
+通过简单的加减运算即可得到Message,
+但对于没有私钥k的人来说，又因为不可能
+
 ## 3. 可以看到的应用场景
 ### 3.1. 国内产品
 - 京东 智臻链

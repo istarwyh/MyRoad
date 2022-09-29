@@ -1,3 +1,12 @@
+## Demo Command
+```shell
+mkdir ./algorithm/out;
+gcc ./algorithm/bubbleSort.c -o ./algorithm/out/bubbleSort;
+"./algorithm/out/"bubbleSort;
+;
+rm -rf ./algorithm/out/
+```
+## Detail
 See your gcc info:
 ```shell
 gcc -v

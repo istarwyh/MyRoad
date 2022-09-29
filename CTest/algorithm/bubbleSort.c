@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include  <stdio.h>
 
 /*How to use symbols or codes to present the essence or process of how to solve the problem that might write in paper or think in brain?
 Firstly,to write a block to represent the essential operation
