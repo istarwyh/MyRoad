@@ -163,8 +163,8 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
     
 
-#### 重复与并发测试
-##### 重复测试
+#### 2.2.3. 重复与并发测试
+##### 2.2.3.1. 重复测试
 有人可能会疑惑什么时候能用山重复测试?我的一个想法是,当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
 
 ```java
@@ -222,7 +222,7 @@ public class ParallelTest {
 
 ![](vx_images/354691209268984.png)
 
-##### 并发测试
+##### 2.2.3.2. 并发测试
 
 JUnit5中的并发执行测试可以分为以下三种场景：
 
@@ -264,7 +264,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism = 5
 
 对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.
 
-#### 2.2.3. 对类中单元测试分组
+#### 2.2.4. 对类中单元测试分组
 如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\
 下面是一个测试Stack功能的例子
 ```java
@@ -622,18 +622,34 @@ Then:得到什么结果
 #parse("TestMe macros.java")
 #set($hasMocks=$MockitoMockBuilder.hasMockable($TESTED_CLASS.fields))
 #if($PACKAGE_NAME)
-package ${PACKAGE_NAME}
+package ${PACKAGE_NAME};
 #end
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 #if($hasMock)
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 #end
 
-#parse("File Header.java)
+#parse("File Header.java")
 #if($hasMock)
 @ExtendWith(MockitoExtension.class)
 #end
 class ${CLASS_NAME}{
-    
+#renderMockedFields($TESTED_CLASS.fields)
+#renderTestSubjectInit($TESTED_CLASS,$TestSubjectUtils.hasTestableInstanceMethod($TESTED_CLASS.methods),$hasMocks)
+
 private String testErrorCode;
 private String testErrorMsg;
 
@@ -644,7 +660,7 @@ void setUp(){
 }
 
 #foreach($method in $TESTED_CLASS.methods)
-    #if($TESTSubjectUtils.shouldBeTested($method))
+    #if($TestSubjectUtils.shouldBeTested($method))
 
         @Nested
         @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -652,21 +668,25 @@ void setUp(){
             
             //exception
             @Test
-            void should_throw_exception_when_upstream_return_null(){}
+            void should_throw_exception_when_upstream_input_null(){}
             
             //exception
             @Test
             void should_throw_exception_when_upstream_invoke_failed(){}
             
+            //exception
+            @Test
+            void should_throw_exception_when_upstream_return_null(){}
+            
             //default value
             @Test
-            void should_set_default_value_to_empty_list_when_data_is_null(){}
+            void should_set_default_value_to_empty_optional_or_list_when_not_success(){}
             
             @ParameterizedTest()
-            @MethodResource("resultOfUpstream")
+            @MethodSource("resultOfUpstream")
             void should_return_the_same_when_get_normal_data(Object resultOfUpstream){}
             
-            Source<Arguments> resultOfUpstream(){
+            Stream<Arguments> resultOfUpstream(){
                 return Stream.of();
             }
         }    
