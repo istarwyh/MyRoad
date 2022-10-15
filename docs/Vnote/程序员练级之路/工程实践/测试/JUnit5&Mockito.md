@@ -165,7 +165,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
 
 #### 2.2.3. 重复与并发测试
 ##### 2.2.3.1. 重复测试
-有人可能会疑惑什么时候能用山重复测试?我的一个想法是,当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
+有人可能会疑惑什么时候能用上重复测试?一种情况是当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
 
 ```java
 public class ParallelTest {
@@ -222,6 +222,7 @@ public class ParallelTest {
 
 ![](vx_images/354691209268984.png)
 
+还有一种情况是对下游幂等的测试，这里不再演示。
 ##### 2.2.3.2. 并发测试
 
 JUnit5中的并发执行测试可以分为以下三种场景：
@@ -388,14 +389,14 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 
 ### 3.1. 常用注解
 #### 3.1.1. 介绍
-|  Annotation  |                                         描述                                          |
-| ------------ | ------------------------------------------------------------------------------------ |
+|  Annotation  | 描述                                                               |
+| ------------ |------------------------------------------------------------------|
 | @Mock        | @Mock修饰的对象都是null,用到的每个方法都需要打桩模拟执行结果: Mockito.when().thenReturn() |
 | @Spy         | @Spy的对象会被无参实例化,在需要的时候可以打桩模拟执行结果: Mockito.doReturn().when()       |
-| @MockBean    | 启动Spring容器,替换Spring原本加载的Bean,但是默认对象没有行为                              |
-| @SpyBean     | 启动Spring容器,替换Spring原本加载的Bean,对象拥有默认行为                                 |
-| @InjectMocks | 注入mock代理对象;必须修饰实现类,修饰接口会报错                                            |
-| @Captor      | 捕获调用时的参数值                                                                      |
+| @MockBean    | 启动Spring容器,替换Spring原本加载的Bean,但是默认对象没有行为                          |
+| @SpyBean     | 启动Spring容器,替换Spring原本加载的Bean,对象拥有默认行为                            |
+| @InjectMocks | 注入mock代理对象;必须修饰实现类,修饰接口会报错                                       |
+| @Captor      | 配合verify在方法调用后使用，捕获调用时的参数值                                       |
 
 其他说明:
 
@@ -588,36 +589,9 @@ public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) 
     }
 }
 ```
-## 4. 测试建议与不足
-### 4.1. 一般测试流程
-#### 4.1.1. GWT 
-Given:情景/条件
-When:采取什么行动
-Then:得到什么结果
-#### 4.1.2. <span id= "jump">是否需要测试私有方法?</span>
-这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试越不友好,表现在:
-
-- 更多时间运行
-- mock更多的数据
-- 需要mock更复杂的行为交互
-- 更容易因为小改动而失败
-
-但是也更容易**重构代码和测试**.
->The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
-
-另外,考虑到单一职责原则(SRP,Single Responsibility Principle),`Working With Legacy Code`中指出
-
->If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .
-
-如何测试私有方法便是在**易用性**,**重构性**和**SRP**作权衡.
-通常来说:
-
->1. Try to have as slim a public interface as possible in your classes, by defaulting every method to private. 
->2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
->3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
-
-#### 4.1.3. TestMe 少写重复的测试
+## 4. TestMe 少写重复的测试
 最后还有一个消除重复写测试代码的神器必须介绍:IDEA上的`testme`插件. 有人可能用过`squareTest`这些测试代码自动生成工具,但是先不说它是收费的,有时候它默认生成的数据类真的一言难尽,实在不如自己写的好用,这里我提供一个用于包装上游调用接口的通用模板,看一下应该不难看懂:)
+
 ```java
 #parse("TestMe macros.java")
 #set($hasMocks=$MockitoMockBuilder.hasMockable($TESTED_CLASS.fields))
@@ -695,3 +669,34 @@ void setUp(){
 #end
 }
 ```
+
+## 5. 测试建议与不足
+### 5.1. 一般测试流程
+#### 5.1.1. GWT 
+
+Given:情景/条件
+When:采取什么行动
+Then:得到什么结果
+### 5.2. 讨论
+#### 5.2.1. <span id= "jump">是否需要测试私有方法?</span>
+这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试越不友好,表现在:
+
+- 更多时间运行
+- mock更多的数据
+- 需要mock更复杂的行为交互
+- 更容易因为小改动而失败
+
+但是也更容易**重构代码和测试**.
+>The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
+
+另外,考虑到单一职责原则(SRP,Single Responsibility Principle),`Working With Legacy Code`中指出
+
+>If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .
+
+如何测试私有方法便是在**易用性**,**重构性**和**SRP**作权衡.
+通常来说:
+
+>1. Try to have as slim a public interface as possible in your classes, by defaulting every method to private. 
+>2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
+>3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
+
