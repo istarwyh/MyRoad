@@ -22,7 +22,7 @@ Test(Add) {
     }
 }
 
-int main(void) {
-    TestAdd();
-    return 0;
-}
+//int main(void) {
+//    TestAdd();
+//    return 0;
+//}
