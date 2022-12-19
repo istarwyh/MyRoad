@@ -5,7 +5,7 @@ ASCII码的取值范围是**0~127**，可以用**7**个bit表示。C语言中cha
 ![ASCII码表](https://gitee.com/istarwyh/images/raw/master/vnote/thinking/公开信息/io.md/738203505604.png)
 
 
-绝大多数计算机的一个字节是8位，取值范围是0~255，而ASCII码并没有规定编号为**128~255**的字符，为了能表示更多字符，各厂商制定了很多种ASCII码的扩展规范。注意，虽然通常把这些规范称为扩展ASCII码（Extended ASCII），但其实它们并不属于ASCII码标准。在图形界面中最广泛使用的扩展ASCII码是`ISO-8859-1`，也称为`Latin-1`，其中包含欧洲各国语言中最常用的非英文字母，但毕竟只有128个字符，某些语言中的某些字母没有包含。
+绝大多数计算机的一个字节是8位，取值范围是`0~255`，而ASCII码并没有规定编号为`128~255`的字符，为了能表示更多字符，各厂商制定了很多种ASCII码的扩展规范。注意，虽然通常把这些规范称为扩展ASCII码（Extended ASCII），但其实它们并不属于ASCII码标准。在图形界面中最广泛使用的扩展ASCII码是`ISO-8859-1`，也称为`Latin-1`，其中包含欧洲各国语言中最常用的非英文字母，但毕竟只有128个字符，某些语言中的某些字母没有包含。
 ![ISO8859-1](https://gitee.com/istarwyh/images/raw/master/vnote/thinking/公开信息/io.md/1712627831355.png)
 
 
