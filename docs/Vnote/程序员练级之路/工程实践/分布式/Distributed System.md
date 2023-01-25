@@ -1,3 +1,6 @@
+## 1. 常见对分布式系统的认知误区
+[Fallacies of Distributed Systems](https://architecturenotes.co/fallacies-of-distributed-systems/)
+## 2. 组成
 
 系统可以参考[Spring Cloud Alibaba](https://github.com/alibaba/spring-cloud-alibaba/blob/2021.x/Roadmap.md)
 此外还有
