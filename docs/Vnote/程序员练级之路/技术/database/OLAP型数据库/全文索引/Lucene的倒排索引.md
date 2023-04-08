@@ -109,19 +109,19 @@ FST和FSA很像，但比它给定一个key除了能回答是否存在，还能�
 - 无环： 不可能重复遍历同一个状态
 - transducer：接收特定的序列，终止于final状态，同时**会输出一个值**。
 
-FST最通常的运用就是翻译，比如将a翻译成b[^ab]:
-![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/38705002826121.png)
+FST最通常的运用就是翻译，比如a走过FST后返回b即翻译成了b[^ab]。
 
 [^ab]:https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node13.html#l2.transducers
 
-依然以mon,tues,thurs这个集合为例，以星期天为一周的第1天，我们的mon对应2，tues对应3，thurs对应5，那么最后生成的FST就如下图所示，`/`后表示要输出的值：
+依然以`{mon,tues,thurs}`这个集合为例，以星期天为一周的第1天，我们的mon对应2，tues对应3，thurs对应5，那么最后生成的FST就如下图所示，`/`后表示要输出的值：
 
 - 路径m->o->n将会输出2
 - 路径t->u->e->s将会输出3
 - 路径t->h->u->r->s将会输出5
+
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/423582028122481.png)
 
-当然，满足上诉输出条件并不只有这一种FST，比如可以m -> o -> n的路径上的`m/2`改成`o/1``n/1`.
+当然，满足上诉输出条件并不只有这一种FST，比如`m -> o -> n`的路径上的`m/2`改成`o/1`与`n/1`.
 
 ##### 2.2.2.5. LevenShtein自动机
 通常我们接触到的索引都假定具有确切的数据，并允许查询键的确切值货排序值的取值范围。对于拼写错误的Term，这种索引是不支持查询。那么Lucene是如何支持模糊查询的呢？
