@@ -33,12 +33,12 @@ LSM-tree将数据分为可变大小的顺序段，仅追加文件；B-tree则将
 
 ##### 1.6.1. 以id列为主键的B+树的聚簇索引
 为方便说明，假设目录页不受限制，数据页只能存储两条用户数据。
-![](vx_images/514964595899450.png =1000x)
+![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/关系型数据库/mysql快问快答.md/514964595899450.png =1000x)
 
 ##### 1.6.2. 以address列为索引的二级索引
 假设该二级索引 中address 列按字典序排列。二级索引包含了索引列以及指向主键的指针。
 
-![](vx_images/410113724586092.png =1000x)
+![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/关系型数据库/mysql快问快答.md/410113724586092.png =1000x)
 
 ##### 1.6.3. 为address列建立的倒排索引
 - Term Distionary:{"中国","浙江","杭州","宁波","江苏","连云港","美国","芜湖","加州"}
