@@ -15,6 +15,8 @@
 
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/560085891826124.png)
 
+
+
 ### 2.2. 倒排索引（inverted index）
 而对于非结构化数据，则需要将从非结构化数据选取某些信息提取出来再进行组织成索引。比如ElasticSearch使用的Lucene工具包中提供的倒排索引（inverted index）。
 #### 2.2.1. 倒排索引的组成部分
@@ -154,9 +156,69 @@ stateDiagram-v2
 		
 ```
 
+提示：Final State 怎么确定？
 
-#### 2.2.3. 联合索引查询
-假设现在查询学生信息，给定查询过滤条件 age=18 与gender= 女 ，对于Mysql来说如果只是如果你给 age 和 gender 两个字段都建立了索引，查询的时候会先采样选一个最好的，然后另外一个条件是在遍历行的过程中在内存中计算之后过滤掉；如果是建立了联合索引age-gender，那才可能一次定位到age=18 与gender= 女 的页。而Lucene的检索流程其实是[^AND]
+### 2.3. B+树与倒排索引实例
+
+给这样一张表
+
+| id  |  name  | age | gender |   address    |
+| --- | ------ | --- | ------ | ------------ |
+| 1   | lele   | 20  | 女      | 中国浙江杭州   |
+| 2   | youyou | 21  | 女      | 中国江苏连云港 |
+| 3   | papa   | 18  | 男      | 中国安徽芜湖   |
+| 4   | anan   | 20  | 男      | 中国浙江宁波   |
+| 5   | nunu   | 20  | 男      | 美国加州      |
+#### 2.3.1. 索引完全不同
+
+##### 2.3.1.1. 以id列为主键的B+树的聚簇索引
+为方便说明，假设目录页不受限制，数据页只能存储两条用户数据。
+![](vx_images/514964595899450.png =1000x)
+
+##### 2.3.1.2. 以address列为索引的二级索引
+假设该二级索引 中address 列按字典序排列。二级索引包含了索引列以及指向主键的指针。
+
+![](vx_images/410113724586092.png =1000x)
+
+##### 2.3.1.3. 为address列建立的倒排索引
+- Term Distionary:{"中国","浙江","杭州","宁波","江苏","连云港","美国","芜湖","加州"}
+- Term Index: 通过FST 返回`Term Distionary`对应的地址
+
+
+```mermaid
+graph LR
+c1((Root))
+c1 --> z((中))
+z --> g((国))
+g --> zj((浙江))
+zj --> h((杭))
+h --> zhou((州))
+c1 --> m((美))
+m --> g
+g --> jz((加))
+jz --> zhou
+
+
+```
+
+
+以中国浙江杭州“和“美国加州”两个Term 集合为例构成的FST，查询时”走到“中国”会返回`[1,2,3,4]`,走到“中国浙江”会返回`[1,4]`，走完路径“中国浙江杭州”会返回`[1]`。
+
+- Posting List: 通过倒排链返回对应的document的主键值
+
+| term  | posting list |
+| ----- | ------------ |
+| 中国   | [1, 2, 3, 4] |
+| 浙江   | [1, 4]       |
+| 杭州   | [1]          |
+| 宁波   | [4]          |
+| 江苏   | [2]          |
+| 连云港 | [2]          |
+| 美国   | [5]          |
+| 加州   | [5]          |
+
+#### 2.3.2. 联合索引查询方式不同
+假设现在查询人员信息，给定查询过滤条件 age=18 与gender= 女 ，对于Mysql来说如果只是如果你给 age 和 gender 两个字段都建立了索引，查询的时候会先采样选一个最好的，然后另外一个条件是在遍历行的过程中在内存中计算之后过滤掉；如果是建立了联合索引age-gender，那才可能一次定位到age=18 与gender= 女 的页。而Lucene的检索流程其实是[^AND]
 
 先从 term index 找到 18 在 term dictionary 的大概位置，然后再从 term dictionary 里精确地找到 18 这个 term，然后得到一个 posting list 或者一个指向 posting list 位置的指针。然后再查询 gender= 女 的过程也是类似的。最后得出 age=18 AND gender= 女 就是把两个 posting list 做一个“与”的合并。
 
@@ -166,13 +228,13 @@ stateDiagram-v2
 - 使用 skip list 数据结构。同时遍历 gender 和 age 的 posting list，互相 skip；
 - 使用 bitset 数据结构。对 gender 和 age 两个 filter 分别求出 bitset，对两个 bitset 做逻辑操作。
 
-##### 2.2.3.1. 利用 Skip List 合并[^AND]
+##### 2.3.2.1. 利用 Skip List 合并[^AND]
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/349563376936825.png)
 
 以上是三个 posting list。我们现在需要把它们用 AND 的关系合并，得出 posting list 的交集。首先选择最短的 posting list，然后从小到大遍历。遍历的过程可以跳过一些元素，比如我们遍历到绿色的 13 的时候，就可以跳过蓝色的 3 了，因为 3 比 13 要小。
 最后得出的交集是 [13,98]，所需的时间比完整遍历三个 posting list 要快得多。
 
-##### 2.2.3.2. 利用 bitset 合并[^AND]
+##### 2.3.2.2. 利用 bitset 合并[^AND]
 bitset 是一种很直观的数据结构，对应 posting list 如：
 <center>[1,3,4,7,10]</center>
 对应的 bitset 就是：
@@ -182,14 +244,14 @@ Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路�
 
 这两种合并使用索引的方式都有其用途。Elasticsearch 对其性能有详细的[对比](https://www.elastic.co/blog/frame-of-reference-and-roaring-bitmaps)。简单来说对于简单的相等条件的过滤缓存成纯内存的 bitset 还不如需要访问磁盘的 skip list 的方式要快。
 
-#### 2.2.4. 倒排索引的其他特性
-##### 2.2.4.1. 分段存储
+#### 2.3.3. 倒排索引的其他特性
+##### 2.3.3.1. 分段存储
 
 >适当的索引可以加速读取查询，但每个索引都会减慢写速度。--《数据密集型系统设计》
 
 数据库维护索引除了占用存储空间，也会减慢写速度。
 如果为整个文档集合创建一个庞大的倒排索引，当索引需要更新时，相比每次只更新索引的一小部分，全量替换原有索引成本太高。所以倒排索引会被拆分为多个子文件存储。每个子文件为一段，所以倒排索引其实是分段（`Segment`）存储的。当段太多时会触发段合并，即将多个段合并生成新段，合并结束后会将老的段删除。
-##### 2.2.4.2. 不可变
+##### 2.3.3.2. 不可变
 前面提到Lucene使用FST尽可能地压缩Term Index的大小，因为压缩的缘故，Term Index实际上不方便直接在原数据结构上做修改了。所以一开始倒排索引就被设计成Inmmutable不可变[^BenefitOfImmutable]：
 
 - 因为已有的倒排索引不会改变，所以理论上读请求都会直接命中内存中的Term Index，不会发生走到磁盘的Term Dictionary的情况。
@@ -210,7 +272,7 @@ Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路�
 
 
 
-##### 2.2.4.3. 延迟写
+##### 2.3.3.3. 延迟写
 同样为了提升写的性能ES不可能同步写数据[^Fsync]:
 
 1. 每当需要新增数据（可能是为了更新），会将其先写到JVM的内存中。
@@ -226,7 +288,7 @@ Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路�
 
 [^BenefitOfImmutable]:https://xie.infoq.cn/article/5501ae1652c9adac088c10646?source=app_share
 
-### 2.3. B+树 vs 倒排索引
+### 2.4. B+树 vs 倒排索引
 
 B+树和倒排索引其实分别适用于两种不同的应用场景:
 
@@ -234,7 +296,7 @@ B+树和倒排索引其实分别适用于两种不同的应用场景:
 - OLAP:On-Line Analytical Processing,联机分析处理,重点在执行数据库的读操作
 
 当数据在源源不断生产,我们离不开Mysql这类偏OLTP的数据库,但为了优化读,我们可以通过后续再把数据清洗一部分到OLAP数据库中做专门的查询分析,如ES.如此,两类数据库共存,各自发挥了自己最擅长的事.
-#### 2.3.1. 优点
+#### 2.4.1. 优点
 非结构化数据如果使用关系数据库中存储，再使用like的方式模糊查询，因为不能利用索引，效率是很低的；但是结构化数据如果使用倒排索引的方式去组织，查询尤其过滤查询性能仍然会得到提升。
 
 - 相对于B+树即使是目录页也在磁盘中，倒排索引的不仅设计了Term Dictionary这样的目录页，还在其上又设计了一层使得定位Term更为迅速的Term Index，并且通过FST压缩使得能完全在内存中使用Term Index
@@ -245,7 +307,7 @@ B+树和倒排索引其实分别适用于两种不同的应用场景:
 - Lucene 支持分 segment，Elasticsearch 支持分 index。Elasticsearch 可以把分开的数据当成一张表来查询和聚合。相比之下 Mysql 如果自己做分库分表的时候，联合查询不方便。
     - 当索引上数据量太大，ES可以水平拆分，这并不像InnoDB的页分裂，因为数据并不会重新排序，而像Mysql数据量太大时的分库分表的水平拆分。拆分出来的索引数据块称为分片（sharding）。
 
-#### 2.3.2. 缺点
+#### 2.4.2. 缺点
 搜素引擎可以带来查询性能提升，但是相对Mysql也有一定局限性，比如
 
 - 对深分页支持效果不好
