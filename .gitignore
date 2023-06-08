@@ -23,6 +23,9 @@ build/
 *.iml
 *.iws
 
+#vscode
+*.vscode
+
 # temp file
 *.log
 *.cache
@@ -44,3 +47,4 @@ Thumbs.db
 CTest/algorithm/KMP.exe
 docs/Vnote/vx_recycle_bin
 docs/Vnote/Thinking
+.obsidian
