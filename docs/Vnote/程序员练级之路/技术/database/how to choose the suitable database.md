@@ -82,3 +82,6 @@ Your goal is to provide a comprehensive and informative overview of the major te
 - ClickHouse is ideal for real-time analytics and reporting.
 - OSS and Simple Storage Service are suitable for storing large amounts of unstructured data, such as images, videos, and backups.
 
+[一名开发者眼中的 TiDB 与 MySQL 的选择丨TiDB Community](https://mp.weixin.qq.com/s/MrXitmIGnlsWY25aw1SRqw)
+
+[数据库选型：MySQL、PolarDB、PolarDB-X、TableStore、MongoDB、TiDB、ClickHouse:](https://mp.weixin.qq.com/s/2oKTItUgvsbEHItiWiGtzA)
