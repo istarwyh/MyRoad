@@ -8,4 +8,4 @@ NewSOL将数据库的计算层和存储层分开,这样就可以通过编排在�
 由于 TiKV 存储是根据 key 的二进制顺序排列的，使用自增 ID 可能会造成热块效应。
 TiDB 默认 RC（读已提交）的事务隔离级别，并且不支持 RR（可重复读）隔离级别，虽然提供了基本等价于RR的SI（Snapshot Isolation），但还是存在写偏斜问题
 TiDB 的点查（select point）性能比 MySQL 要差不少，在几个亿级别的数据量才能勉强和 MySQL 打平。
-因为底层基于 Raft 协议做数据同步，所以 TiDB 延迟会比 MySQL 要高。
+因为底层基于 Raft 协议做数据同步，所以 TiDB 数据同步 延迟会比 MySQL 要高。
