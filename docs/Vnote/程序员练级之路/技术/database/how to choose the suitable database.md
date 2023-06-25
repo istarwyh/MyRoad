@@ -12,9 +12,17 @@ NoSQL (Not Only SQL) is a category of non-relational distributed databases that 
 
 NewSQL is an emerging database concept that combines traditional relational databases with [[Distributed Computing]]. It aims to provide the transactional consistency and data security of traditional relational databases, while also offering the scalability and high concurrency processing capabilities of distributed databases. NewSQL databases achieve data [[Horizontal Scaling]] and load balancing through innovative architectures and technologies such as sharding, replication, and intelligent routing. This combination of relational and distributed computing approaches satisfies the modern application's requirements for high performance, high availability, and strong consistency. Representative examples of NewSQL databases include Spanner, CockroachDB, and TiDB.
 
-## Base Technology
+
+# Base Technology
+## Distributed  System 
+### Consensus Algorithm
+#### [[Raft]]
+
+
 ### Data Synchronization
+
 #### [[Binlog Master-Slave Data Synchronization]]
+
 #### [[Redo-log Master-Slave Data Synchronization]]
  
 
