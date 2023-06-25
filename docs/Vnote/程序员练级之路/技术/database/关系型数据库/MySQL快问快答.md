@@ -2,7 +2,7 @@
 #### 1.1. MySQL 索引会常驻内存吗?
 会.
 #### 1.2. MySQL索引怎么被加载到内存的?
-在Linux中,innodb引擎中为`Innodb_buffer_pool`通过`mmap()`直接向操作系统申请内存,每次申请的大小为`innodb_buffer_pool_chunk_size`,最终会申请`innodb_buffer_pool_size`大小的文件映射段动态内存.以上初始化后,`Innodb_buffer_pool`缓存每次查询加载的目录页和数据页,直到`innodb_buffer_pool_size`大小的物理内存占用.直到在线减少`innodb_buffer_pool_size`或是关闭MySQL才会通过`munmap()`方式释放内存给操作系统.[^mysql_memory]
+在Linux中,innoDB 引擎中为`Innodb_buffer_pool`通过`mmap()`直接向操作系统申请内存,每次申请的大小为`innodb_buffer_pool_chunk_size`,最终会申请`innodb_buffer_pool_size`大小的文件映射段动态内存.以上初始化后,`Innodb_buffer_pool`缓存每次查询加载的目录页和数据页,直到`innodb_buffer_pool_size`大小的物理内存占用.直到在线减少`innodb_buffer_pool_size`或是关闭MySQL才会通过`munmap()`方式释放内存给操作系统.[^mysql_memory]
 #### 1.3. 既然常驻内存,那MySQL索引如何被淘汰?
 无外乎还是那几个缓存淘汰算法。`Innodb_buffer_pool`的内存主要是通过 Free List、LRU List、FLU List、Unzip LRU List 等 4 个链表来进行管理分配。[^mysql_memory]
 
