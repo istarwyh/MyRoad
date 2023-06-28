@@ -220,7 +220,7 @@ public class ParallelTest {
 
 ```
 
-![](vx_images/354691209268984.png)
+![](354691209268984.png)
 
 还有一种情况是对下游幂等的测试，这里不再演示。
 ##### 2.2.3.2. 并发测试
@@ -261,7 +261,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism = 5
     }
 ```
 
-![](vx_images/94852091826507.png)
+![](94852091826507.png)
 
 对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.
 

@@ -4,7 +4,7 @@ Redis最早的需求和Tair诞生的背景类似，当时是antirez这个人想�
 >Redis is written in ANSI C and works in most POSIX systems like Linux, *BSD, and OS X, without external dependencies. ~~SmartOS~~ ~~Windows~~
 
 
-![](vx_images/324746178980.jpg)
+![](324746178980.jpg)
 
 
 ### 1.1. 缓存的逆袭之道
@@ -39,7 +39,7 @@ Redis最早的需求和Tair诞生的背景类似，当时是antirez这个人想�
 ![](vx_images/3650860917223.png =700x)
 
 **Redis 5.0.8:**
-![](vx_images/5493237811439.png)
+![](5493237811439.png)
 ### 2.1. 访问框架-deps.hiredis
 - 提供给外部的调用函数，动态链接到本地
 - 网络框架以Socket通信的形式对外提供键值对操作
@@ -354,7 +354,7 @@ UserMode ->> UserMode: aeCreateFileEvent: cfd && readQueryFromClient
 UserMode ->> KernelMode: select/epoll
 ```
 
-![](vx_images/aeFd.gif)
+![](aeFd.gif)
 
 由于只有一个线程在监听这些文件描述符fd[^fd]并处理。所以即使**客户端并发地发送命令**，后面仍然是依次取出命令，**顺序执行**，避免了线程之间的资源抢占，也简化了数据结构的操作。这就是使用了Reactor模式[^Reactor模式]的Redis单线程模型[^soloIO]：
 
@@ -382,7 +382,7 @@ select,poll,epoll是同类型的IO模式，主要是用户态向内核态做文�
     - epoll_create创建文件fd或者说句柄
     - epoll_ctl添加fd到内核维护的红黑树
     - epoll_await事件允许当数据ready后，将其从红黑树移动到链表，再await异步获取链表中准备好数据的fd
-    - ![](./vx_images/epoll.gif)
+    - ![](epoll.gif)
     
 
 #### 2.2.3. 单线程的问题
@@ -452,7 +452,7 @@ Redis提高数据库容量的办法有两个，一个是将数据分割到多个
 ##### 2.3.4.1. 概述
 互联网应用的业务场景越来越复杂，面对的数据类型也不再是传统的层次模型和关系性模型能满足的，因此持久化数据库层面层次模型、网状模型、关系模型、文档模型和图模型等多样化数据模型风起云涌，内存数据库为了避免应用程序对象到数据库实体之间的转换相关的开销[^dataspend]，如Redis提供字符串，哈希，列表，集合，排序集合，位图，位域，HyperLogLog，地理空间索引和流作为本机数据结构。并对于每个数据结构，Redis也维护专用命令以对于每个数据结构最有效的方式执行多种类型的操作。
 ![](vx_images/4710195741876.png =1600x)
-![](vx_images/2125296809846.png)
+![](2125296809846.png)
 
 - string 类型是二进制安全的。意思是 redis 的 string 可以安全传输任何数据，比如jpg图片或者序列化的对象。
 - Redis hash 是一个 string 类型的 field 和 value 的映射表
@@ -785,7 +785,7 @@ hash = (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16)
 ```
 
 在JVM的启动参数中可以通过`-XX:Hashcode=1`这种方式来指定对象hashcode的生成方式，**也只有这种方式是与对象内存地址有关**。
-![](vx_images/2543722787409.png)
+![](2543722787409.png)
 
 **redis的生成hash值的方法**--`Dict.c`文件[^dicthash]
 

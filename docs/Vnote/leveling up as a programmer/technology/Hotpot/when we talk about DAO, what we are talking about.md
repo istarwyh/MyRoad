@@ -14,13 +14,13 @@
 ## 2. DAO变现还需要的
 ### 2.1. NonceGeekDAO
 https://noncegeek.com/#/whitepaper
-![](vx_images/212670812269196.png)
+![](212670812269196.png)
 
 ### 2.2. 面包多
-![](vx_images/396915497826614.png)
+![](396915497826614.png)
 
 ### 2.3. Collective
-![](vx_images/431366706615706.png)
+![](431366706615706.png)
 
 ### 2.4. 其他
 https://github.com/easychen/lean-side-bussiness
