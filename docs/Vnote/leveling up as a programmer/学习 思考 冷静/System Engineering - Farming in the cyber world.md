@@ -18,7 +18,7 @@
 ## 2. Tool
 ### 2.1. 版本管理工具
 git: https://learngitbranching.js.org/
-### 2.2. 快速展示数据的工具
+### 2.2. 快速利用数据库的工具
 面向小白的retool: https://retool.com/
 面向开发者的airplane：https://www.airplane.dev/
 ### 2.3. 网站设计工具
@@ -27,3 +27,5 @@ wix:https://zh.wix.com/
 strikingly:https://cn.strikingly.com/
 ### 2.4. 数据库管理工具
 bytebase:https://www.bytebase.com/zh
+### 2.5 AI
+[[Create Once,Publish Where]]
