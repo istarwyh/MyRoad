@@ -1,9 +1,10 @@
 To choose the suitable database, we should focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, "How much innovation in basic technology does this project achieve, and what combination of existing technologies does it involve?"
 
->Ask GPT4:
-As an expert on databases, your task is to provide a summary of ten dimensions that illustrate the differences between databases such as MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, TiDB, ClickHouse, OSS, Simple Storage Service, and others. The dimensions should include factors such as data model, infrastructure, index structure, data-sync strategy, data store strategy and other technical factors. Your summary should explain the reasons why these differences exist and how they affect the suitability of each database for different use cases.
-Your response should be clear and concise, highlighting the most significant differences between each database and the advantages and disadvantages of each in relation to the ten dimensions mentioned above. Your response should be flexible enough to allow for various relevant and creative reasons for the differences between databases. For example, you could explain that MySQL uses a B+ Tree data structure, which is effective for storing large amounts of data on disk, while MongoDB uses a document-based data model that is more flexible but can be less efficient for certain types of queries. For example, you at least tell people that MySQL uses B+ Tree as the major index which is a Multiway Unbalanced Binary Tree existing in the disk, and it usually uses sub-library and sub-table strategy when it stores over 2000 thousand records.
-Your goal is to provide a comprehensive and informative overview of the major technical differences between these databases and the reasons why these differences exist, while also encouraging creative and relevant explanations to make the summary unique and engaging.
+
+### Ask GPT4
+>As an expert on databases, your task is to provide a summary of ten dimensions that illustrate the differences between databases such as MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, TiDB, ClickHouse, OSS, Simple Storage Service, and others. The dimensions should include factors such as data model, infrastructure, index structure, data-sync strategy, data store strategy and other technical factors. Your summary should explain the reasons why these differences exist and how they affect the suitability of each database for different use cases.
+>Your response should be clear and concise, highlighting the most significant differences between each database and the advantages and disadvantages of each in relation to the ten dimensions mentioned above. Your response should be flexible enough to allow for various relevant and creative reasons for the differences between databases. For example, you could explain that MySQL uses a B+ Tree data structure, which is effective for storing large amounts of data on disk, while MongoDB uses a document-based data model that is more flexible but can be less efficient for certain types of queries. For example, you at least tell people that MySQL uses B+ Tree as the major index which is a Multiway Unbalanced Binary Tree existing in the disk, and it usually uses sub-library and sub-table strategy when it stores over 2000 thousand records.
+>Your goal is to provide a comprehensive and informative overview of the major technical differences between these databases and the reasons why these differences exist, while also encouraging creative and relevant explanations to make the summary unique and engaging.
 
 
 MySQL, to some extent, can be considered the "C language" of the database field. As a widely used relational database, MySQL is open-source, stable, and reliable, making it a preferred choice for many applications and websites. However, with the problems encountered in using relational databases like MySQL, a large number of NoSQL and NewSQL databases have emerged to address these issues. 
@@ -18,7 +19,6 @@ NewSQL is an emerging database concept that combines traditional relational data
 ### Consensus Algorithm
 #### [[Raft]]
 
-
 ### Data Synchronization
 
 #### [[Binlog Master-Slave Data Synchronization]]
@@ -30,14 +30,14 @@ NewSQL is an emerging database concept that combines traditional relational data
 >1. Data Model:
 - MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
 - Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
-- Elasticsearch stores data in JSON documents and is designed for search and analytics.
+- ElasticSearch stores data in JSON documents and is designed for search and analytics.
 - MongoDB is a document-based NoSQL database, storing data in BSON format.
 - TiDB is a distributed NewSQL database that supports the MySQL protocol and provides horizontal scalability.
 - ClickHouse is a columnar database designed for real-time analytics.
 - OSS and Simple Storage Service are object storage services, storing data as objects in a flat address space.
 
 2. Infrastructure:
-- MySQL, PostgreSQL, Redis, Elasticsearch, MongoDB, and ClickHouse can be deployed on-premises or in the cloud.
+- MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, and ClickHouse can be deployed on-premises or in the cloud.
 - TiDB is designed for cloud-native environments, providing distributed storage and computing.
 - OSS and Simple Storage Service are cloud-based storage services provided by Alibaba Cloud and Amazon Web Services, respectively.
 
