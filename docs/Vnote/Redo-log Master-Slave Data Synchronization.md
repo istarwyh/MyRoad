@@ -5,7 +5,7 @@
 
 Master-slave synchronization with Redo Log involves capturing and applying the changes made to a database's Redo Log files. The Redo Log records the data modifications (inserts, updates, deletes) performed on the master database. By replicating the Redo Log from the master to the slave databases, the same modifications are applied to the slave databases, maintaining data consistency in the same order they occurred on the master.
 
-Comparing the [[Binlog Master-Slave Data Synchronization]]:
+Comparing with the [[Binlog Master-Slave Data Synchronization]]:
 **Advantages:**
 
 1. Lower Network Overhead: Redo log replication transmits only the physical changes made to the database, resulting in reduced network traffic compared to binlog replication.

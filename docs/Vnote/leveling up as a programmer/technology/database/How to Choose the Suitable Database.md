@@ -15,9 +15,18 @@ NewSQL is an emerging database concept that combines traditional relational data
 
 
 # Base Technology
+
+## Data Writing
+### [[Write-Ahead Logging]]
+
+
+
 ## Distributed  System 
+
 ### Consensus Algorithm
 #### [[Raft]]
+
+
 
 ### Data Synchronization
 
@@ -25,7 +34,10 @@ NewSQL is an emerging database concept that combines traditional relational data
 
 #### [[Redo-log Master-Slave Data Synchronization]]
  
+# Compare Items
 
+
+https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA
 
 >1. Data Model:
 - MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
@@ -103,7 +115,7 @@ NewSQL is an emerging database concept that combines traditional relational data
 - ClickHouse is ideal for real-time analytics and reporting.
 - OSS and Simple Storage Service are suitable for storing large amounts of unstructured data, such as images, videos, and backups.
 
-## References
+# References
 
 1. [一名开发者眼中的 TiDB 与 MySQL 的选择丨TiDB Community](https://mp.weixin.qq.com/s/MrXitmIGnlsWY25aw1SRqw)
 2. [数据库选型：MySQL、PolarDB、PolarDB-X、TableStore、MongoDB、TiDB、ClickHouse:](https://mp.weixin.qq.com/s/2oKTItUgvsbEHItiWiGtzA)
