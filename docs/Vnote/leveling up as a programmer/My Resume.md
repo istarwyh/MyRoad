@@ -1,5 +1,4 @@
 ---  
-update_time: '2023.07.16'  
 ## Basic Info
 name: 王艺辉  
 born: 1997  
