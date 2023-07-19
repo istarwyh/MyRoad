@@ -3,6 +3,7 @@ All: https://www.aigc.cn/
 
 
 ## Collect Information
+[[Information Diffusion]]
 ### Fragmented information
 - RSS?
 - Cubox
