@@ -3,7 +3,7 @@
 公共 API_https://apivault.dev/_
 ## [[Prototype]]
 
-## 支付宝
+## 支付
 海外支付：Stripe, Paddle, Lemonsqueezy, FastSpring
 ### 营销
 1. 想靠口碑传播起来，虽然慢但是根本，好评也很有必要
