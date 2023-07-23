@@ -60,7 +60,7 @@ public void timeoutTest() {
 ```
 #### 2.2.2. 参数化测试
 以下为部分介绍,更多细节[在这儿](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests).
-##### 2.2.2.1. 通过注解属性传入参数
+##### 2.2.2.1. 传入单个参数
 - @ValueSource: 为参数化测试指定入参来源，支持八大基础类以及 String 类型, Class 类型
 
 - @EmptySource: 提供空白数组或空白集合,支持八大基础类及它们包装类以及 String 类型, 集合类型
@@ -86,7 +86,7 @@ void nullEmptyAndBlankStrings(String text) {
     assertTrue(text == null || text.trim().isEmpty());
 }
 ```
-##### 2.2.2.2. 通过静态方法名/指定接口类传入参数
+##### 2.2.2.2. 传入多个参数
 - @MethodSource：读取静态方法的Stream流作为参数化测试入参
 
 ```java
@@ -121,7 +121,7 @@ public class MyArgumentsProvider implements ArgumentsProvider {
     }
 }
 ```
-##### 2.2.2.3. 通过文件格式数据传入参数
+##### 2.2.2.3. 传入对象&大量数据(文件)
 - @CsvSource：表示读取指定 CSV内容作为参数化测试入参
 
 ```java
@@ -154,7 +154,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
 }
 ```
 
-##### 2.2.2.4. 评价
+##### 2.2.2.4. 扩展
 1. 参数化测试相当于是合并了多个单元测试输入输出数据的"缩写",所以通常会有代表input和output的输入输出.当input都对应相同的output时,可以省略output.
 
 2. 通过外部文件作为参数构造文件,就可以**将测试逻辑与准备数据充分解耦**.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML
@@ -162,7 +162,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
     1. 可以转成对应的CSV
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
     
-
+第二种思路适用性更强，可参考[笔者的实现](https://github.com/istarwyh/TestMuseum/blob/main/tdd.java.common/src/main/java/istarwyh/junit5/annotation/JsonFileSource.java)。
 #### 2.2.3. 重复与并发测试
 ##### 2.2.3.1. 重复测试
 有人可能会疑惑什么时候能用上重复测试?一种情况是当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:
@@ -222,10 +222,8 @@ public class ParallelTest {
 
 ![](354691209268984.png)
 
-还有一种情况是对下游幂等的测试，这里不再演示。
 ##### 2.2.3.2. 并发测试
-
-JUnit5中的并发执行测试可以分为以下三种场景：
+并发测试很适合测试下游幂等。JUnit5中的并发执行测试可以分为以下三种场景：
 
 - 多个测试类，它们各自的测试方法同时执行；
 - 一个测试类，里面的多个测试方法同时执行；
@@ -589,146 +587,3 @@ public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) 
     }
 }
 ```
-## 4. TestMe 少写重复的测试
-最后还有一个消除重复写测试代码的神器必须介绍:IDEA上的`testme`插件. 有人可能用过`squareTest`这些测试代码自动生成工具,但是先不说它是收费的,有时候它默认生成的数据类真的一言难尽,实在不如自己写的好用,这里我提供一个用于包装上游调用接口的通用模板,看一下应该不难看懂:)
-
-```java
-#parse("TestMe macros.java")
-#set($hasMocks=$MockitoMockBuilder.hasMockable($TESTED_CLASS.fields))
-#if($PACKAGE_NAME)
-package ${PACKAGE_NAME};
-#end
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import java.util.stream.Stream;
-#if($hasMock)
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
-#end
-
-#parse("File Header.java")
-#if($hasMock)
-@ExtendWith(MockitoExtension.class)
-#end
-class ${CLASS_NAME}{
-#renderMockedFields($TESTED_CLASS.fields)
-#renderTestSubjectInit($TESTED_CLASS,$TestSubjectUtils.hasTestableInstanceMethod($TESTED_CLASS.methods),$hasMocks)
-
-private String testErrorCode;
-private String testErrorMsg;
-
-@BeforeEach
-void setUp(){
-    testErrorCode = "testErrorCode";
-    testErrorMsg = "testErrorMsg";
-}
-
-#foreach($method in $TESTED_CLASS.methods)
-    #if($TestSubjectUtils.shouldBeTested($method))
-
-        @Nested
-        @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-        class #renderTestMethodName($method.name){
-            
-            //exception
-            @Test
-            void should_throw_exception_when_upstream_input_null(){}
-            
-            //exception
-            @Test
-            void should_throw_exception_when_upstream_invoke_failed(){}
-            
-            //exception
-            @Test
-            void should_throw_exception_when_upstream_return_null(){}
-            
-            //default value
-            @Test
-            void should_set_default_value_to_empty_optional_or_list_when_not_success(){}
-            
-            @ParameterizedTest()
-            @MethodSource("resultOfUpstream")
-            void should_return_the_same_when_get_normal_data(Object resultOfUpstream){}
-            
-            Stream<Arguments> resultOfUpstream(){
-                return Stream.of();
-            }
-        }    
-
-    #end
-#end
-}
-```
-
-## 5. 测试建议与不足
-### 5.1. 一般测试流程
-#### 5.1.1. GWT 
-
-1. Given:情景/条件
-2. When:采取什么行动
-T3. hen:得到什么结果
-### 5.2. 讨论
-#### 5.2.1. 伦敦学派 vs 芝加哥学派？
-
->测试应当与生产代码解耦 --Bob大叔《匠艺整洁之道:程序员的职业修养》
-
-伦敦学派要按调用栈从外而内的测，芝加哥要按功能测然后再从内重构。
-一开始就胸有成竹、有能力顶层设计好的就按伦敦学派来，不然就按芝加哥学派来一步步重构得到更好的代码。
-一个很常见的场景，foo()处理业务数据之前有一些校验逻辑，伦敦学派会设计好一个validator的接口，再专注于实现这个validator,而芝加哥学派则会先选择直接在foo()中实现校验的功能，然后再重构出一个validator接口。
-测试
-#### 5.2.2. 集成测试 vs 单元测试？
-之所以写测试，是因为正确的测试确实可以提高开发效率，所以选择怎样写测试的判断标准之一就是要找到`ROI`(Return Of Investment) 最高的截面。柳胜认为测试的ROI计算公式为[^3KU]
-
->![](vx_images/440825697826907.png =384x)
-在测试金字塔模型下，越往底部，测试的ROI越高。又因为UI 测试关注功能场景测试，易用性测试和可执行性测试；而接口测试关注不同数据的循环，接口的性能和错误恢复能力；单元测试关注算法的正确性和性能。所以各个测试专注的范围应该如下图所示：
-![](vx_images/207396906615999.png =384x)
-
-在我的理解中，上图中的UI测试通常也被称为`端到端测试`,对外的`接口测试`对后端通常也就是`集成测试`。而单元测试是什么呢？是针对一个类或者某个方法的测试吗？不是，徐昊指出`单元测试`（Unit Test）是一个具有误导性的提法，在TDD中不应该有这样的说法，应代之以`单元级别功能测试`（Unit Level Functional Test）[^IntegrationVsUnit],其本质是**能提供快速反馈的低成本的研发测试**[^Speed]。柳胜之所以认为测试金字塔模型下，越往底部，测试的ROI越高，是因为越往下手工运行时间是越短的，运行次数是越多的；而越往上开发测试和维护测试的成本都越高。
-
-同时柳胜认为[^HappyPath]
-
->集成测试是处在单元测试和端到端测试中间的一个状态。如果所有的外部服务都 Mock 了，集成测试就变成了单元测试，往另外一个方向，如果所有的外部服务都是真实的，集成测试又变成了端到端的测试。
-
-集成测试通常ROI不如单元测试，并且和单元测试测试内容有较多重合，所以两者使用需要追求平衡，[柳胜提出](https://time.geekbang.org/column/article/507443)
->1. 在单元测试阶段验证尽可能多的业务逻辑，这样能让集成测试关注在外部依赖上。
->2. 在依赖可控的情况下，集成测试应走尽可能多的**真实的**外部依赖服务。
-
-可控的依赖比如数据库，就应该尽可能真实地去交互；不可控的如第三方接口，应该尽可能用定好的逻辑来Mock接口。
-
-[^3KU]:[3KU法则：如何找出最优自动化实施截面？](https://time.geekbang.org/column/article/497405)
-[^Speed]:[UnitTest.html](https://martinfowler.com/bliki/UnitTest.html)
-[^HappyPath]:[集成测试（一）：一条Happy Path扫天下](https://time.geekbang.org/column/article/507443)
-[^IntegrationVsUnit]:[TDD中的测试（3）：集成测试还是单元测试？](https://time.geekbang.org/column/article/496699)
-
-#### 5.2.3. <span id= "jump">是否需要测试私有方法?</span>
-这是一个还没有定论的[话题](https://jesseduffield.com/Testing-Private-Methods/).一般来说,抽象层次越高,对于测试越不友好,表现在:
-
-- 更多时间运行
-- mock更多的数据
-- 需要mock更复杂的行为交互
-- 更容易因为小改动而失败
-
-但是也更容易**重构代码和测试**.
->The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
-
-另外,考虑到单一职责原则(SRP,Single Responsibility Principle),`Working With Legacy Code`中指出
-
->If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .
-
-如何测试私有方法便是在**易用性**,**重构性**和**SRP**作权衡.
-通常来说:
-
->1. Try to have as slim a public interface as possible in your classes, by defaulting every method to private. 
->2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
->3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
-

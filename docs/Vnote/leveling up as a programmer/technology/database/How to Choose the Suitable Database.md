@@ -39,6 +39,10 @@ NewSQL is an emerging database concept that combines traditional relational data
 
 https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA
 
+https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
+
+https://waverleysoftware.com/blog/how-to-choose-the-right-database/
+
 >1. Data Model:
 - MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
 - Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
