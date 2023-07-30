@@ -5,3 +5,7 @@ Memo —— AI 驱动的视频、播客转文字、字幕工具链接：https://
 
 简笔画转AI图片：
 https://clipdrop.co/stable-doodle
+
+生成二维码：
+https://qrbtf.com/ai
+prompt: technology lines, digital, futuristic, tech graphics, circuitry, binary, streamline, data streams, virtual, hi-tech

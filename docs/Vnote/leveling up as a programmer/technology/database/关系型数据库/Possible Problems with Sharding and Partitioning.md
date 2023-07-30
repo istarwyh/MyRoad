@@ -8,8 +8,7 @@
 - Sharding On MySQL 的 DB 模式 --[CodeW](https://mp.weixin.qq.com/s/qtIo7cAdSJ_9V-RFCJH8PQ)
 
 JDBC 代理模式其实可以理解为一个增强版的JDBC驱动,比如阿里的TDDL.TDDL可以仅为一个Jar包在项目中引入后配置好分库分表规则，每次在调用的时候，TDDL自动替换好SQL，再调用实际的JDBC和SQL即可完成操作,如[下图](https://www.zhihu.com/question/352256403/answer/878523206)所示:
-![](https://pic2.zhimg.com/80/v2-1fea48775e036e0336392cef1903d15c_720w.jpg?source=1940ef5c)
-
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202307302208308.jpg)
 ## 1. 频繁变动拆分规则
 通常来说,分库分表键是业务最常用的等值查询条件,其次需要考虑分表后数据分布的均匀度.
 因为业务的变化,大数据量的分表容易变动拆分规则，每次规则变动都可能涉及到数据的重新搬迁，并且业务端还需要投入大量的人力去维护路由规则。

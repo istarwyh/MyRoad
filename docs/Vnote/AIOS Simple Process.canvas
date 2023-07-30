@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"type":"text","text":"MaxCompute","id":"3c260244bd4ee681","x":-480,"y":-380,"width":160,"height":60},
+		{"type":"text","text":"TDDL","id":"1eee2685dda55049","x":-240,"y":-380,"width":100,"height":60},
+		{"type":"text","text":"Swift(开发者输入)","id":"07e597bc2652c952","x":-20,"y":-380,"width":220,"height":60},
+		{"type":"text","text":"SARO","id":"3927a9e68c66838f","x":-480,"y":-220,"width":670,"height":160},
+		{"type":"text","text":"Pangu Full Doc","id":"43bd264d4a460501","x":-450,"y":-170,"width":250,"height":60},
+		{"type":"text","text":"批次增量","id":"73b58e312cbba94e","x":-200,"y":-170,"width":120,"height":60},
+		{"type":"text","text":"实时增量 Swift 中转","id":"a6e785c384ed42ee","x":-80,"y":-170,"width":235,"height":60}
+	],
+	"edges":[]
+}
