@@ -11,5 +11,6 @@ source ~/.bashrc
 git config --global --add safe.directory /storage/emulated/0/Download/Xiaohui/Myroad
 git config --global user.email "yihui-wang@qq.com"
 git config --global user.name "istarwyh"
+检查是否生效git config -l
 
 #Command

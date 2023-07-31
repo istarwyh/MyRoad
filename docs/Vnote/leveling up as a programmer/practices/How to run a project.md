@@ -1,4 +1,11 @@
 有时候，启动应用也不简单。
+## Node应用
+安装 nvm(node version manager)
+nvm -v
+安装 node:nvm install node node 为最新版的别名
+安装 npm(node package manager)
+查看 package.json 选择对应方式运行
+
 ## Java应用
 🤔maven 经常下载不下来某个依赖但是清除缓存再试就好了？
 - 非常怀疑其实是有一个找依赖都超时时间，清缓存延长了这个超时时间？
