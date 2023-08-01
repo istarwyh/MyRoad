@@ -53,6 +53,9 @@ All: https://www.aigc.cn/
 
 [码农之家 计算机类图书](https://www.xz577.com)
 
+### Learning
+Sizzle AI，个性化学习
+
 ## Process
 
 ### Search

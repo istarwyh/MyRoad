@@ -13,3 +13,9 @@
 https://www.shenmezhidedu.com/jinri/haowen/gongju/9038.html
 
 6. Affiliate Program。把这个订阅收入的 25% 给推荐者。只要订阅者不取消订阅，推荐者就可以一直收到那 25% 的订阅费。
+## 隐私
+Android 隐私合规方案：
+
+https://github.com/lwj1994/privacy_hook
+
+用户同意之前禁止所有代码调用隐私 api，基本上常见的 api 都hook，如果有遗漏可以再加进去。

@@ -9,3 +9,7 @@ https://clipdrop.co/stable-doodle
 生成二维码：
 https://qrbtf.com/ai
 prompt: technology lines, digital, futuristic, tech graphics, circuitry, binary, streamline, data streams, virtual, hi-tech
+
+该项目能够以折线图的方式，实时展示 ping 的结果，支持 Windows、Linux 和 macOS 操作系统：https://github.com/orf/gping
+
+DeepFaceLive：https://github.com/iperov/DeepFaceLive
