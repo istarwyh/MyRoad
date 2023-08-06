@@ -16,9 +16,23 @@ NewSQL is an emerging database concept that combines traditional relational data
 
 # Base Technology
 
-## Data Writing
+## Data Persistence
+If a computer wants to write data from memory to disk, it typically needs to perform at least two steps:
+
+1. The program writes to the [[PageCache]]
+2. The [[PageCache]] is flushed to the disk
+
+## In-memory Database
+### AOF(Append Only File)
+Redis doesn't use a traditional [[Write-Ahead Logging|WAL]], but its AOF persistence mode has similarities with the concept of WAL.
+The AOF and [[Write-Ahead Logging]] share the principle of logging changes to data before they are applied, providing a way to recover the state of the data in case of a crash. The AOF can be configured to sync to disk at different frequencies based on the fsync policy. This allows you to balance between write performance and data durability.
+### [RDB(Redis Database)](https://redis.io/docs/management/persistence/).
+
+
 ### [[Write-Ahead Logging]]
 
+
+RDB 
 
 
 ## Distributed  System 
