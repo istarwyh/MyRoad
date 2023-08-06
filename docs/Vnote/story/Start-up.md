@@ -5,6 +5,7 @@
 
 ## 支付
 海外支付：Stripe, Paddle, Lemonsqueezy, FastSpring
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202308061525272.png)
 ### 营销
 1. 想靠口碑传播起来，虽然慢但是根本，好评也很有必要
 2. 广告
