@@ -13,3 +13,6 @@ prompt: technology lines, digital, futuristic, tech graphics, circuitry, binary,
 该项目能够以折线图的方式，实时展示 ping 的结果，支持 Windows、Linux 和 macOS 操作系统：https://github.com/orf/gping
 
 DeepFaceLive：https://github.com/iperov/DeepFaceLive
+
+视频生成自己的数字人：
+https://www.heygen.com/
