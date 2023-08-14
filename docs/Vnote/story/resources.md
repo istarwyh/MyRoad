@@ -16,3 +16,5 @@ DeepFaceLive：https://github.com/iperov/DeepFaceLive
 
 视频生成自己的数字人：
 https://www.heygen.com/
+
+数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
