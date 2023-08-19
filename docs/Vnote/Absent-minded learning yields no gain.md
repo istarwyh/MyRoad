@@ -1,3 +1,4 @@
+#ScottYoung
 We can only keep a few things in mind at any one time. George Miller initially pegged the number at seven, plus or minus two items. But more recent work has suggested the number is closer to four things.
 
 我们在同一时间只能记住几件事。乔治·弥勒最初把这个数字定为7±2件，但最新的研究表明，这个数字更接近4件。

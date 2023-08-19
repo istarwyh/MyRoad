@@ -1,14 +1,15 @@
 {
 	"nodes":[
 		{"type":"text","text":"结算","id":"34f96f77a7d424c6","x":-50,"y":-120,"width":90,"height":50},
-		{"id":"6f01979f27ae374c","x":-380,"y":-120,"width":100,"height":50,"type":"text","text":"报价"},
+		{"type":"text","text":"报价","id":"6f01979f27ae374c","x":-380,"y":-120,"width":100,"height":50},
 		{"type":"text","text":"计费","id":"21795b6469e30cb2","x":-220,"y":-120,"width":100,"height":50},
 		{"type":"text","text":"不可结算","id":"e9a7fb8c616c05b2","x":106,"y":-40,"width":128,"height":50},
 		{"type":"text","text":"账单","id":"903a2accd4d1037f","x":106,"y":-220,"width":90,"height":50},
 		{"type":"text","text":"发票","id":"fd7c20cda0491b29","x":260,"y":-220,"width":90,"height":50},
 		{"type":"text","text":"ToB","id":"2ba4450b3e439896","x":425,"y":-320,"width":90,"height":50},
 		{"type":"text","text":"ToC","id":"10f2967871cf1ef9","x":425,"y":-220,"width":90,"height":50},
-		{"type":"text","text":"[[寄售]]","id":"9a087a15b3441c0b","x":425,"y":-120,"width":90,"height":50}
+		{"type":"text","text":"[[寄售]]","id":"9a087a15b3441c0b","x":425,"y":-120,"width":90,"height":50},
+		{"id":"3a8e9e8b916e805b","x":-380,"y":-620,"width":400,"height":400,"type":"file","file":"Classic Process Data Infrastructure.canvas"}
 	],
 	"edges":[
 		{"id":"49c010bf8a2f0712","fromNode":"6f01979f27ae374c","fromSide":"right","toNode":"21795b6469e30cb2","toSide":"left"},
