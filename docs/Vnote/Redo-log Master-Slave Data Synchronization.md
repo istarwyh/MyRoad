@@ -15,7 +15,7 @@ Comparing with the [[Binlog Master-Slave Data Synchronization]]:
 **Disadvantages:**
 
 1. Physical Replication: Redo log replication operates at the physical level, making it less flexible for replicating to different databases or database versions.
-2. Limited Point-in-Time Recovery: Redo log replication does not provide a point-in-time view of the executed SQL statements like binlog replication. Recovery is based on physical changes, making it less precise for point-in-time recovery scenarios.
+2. Limited Point-in-Time Recovery（Rollback?): Redo log replication does not provide a point-in-time view of the executed SQL statements like binlog replication. Recovery is based on physical changes, making it less precise for point-in-time recovery scenarios.
 3. Complex Schema Changes: Redo log replication requires additional considerations and techniques for handling complex schema changes, such as table alterations involving large amounts of data.
 
 In summary, binlog master-slave data synchronization offers logical replication, point-in-time recovery, and ease of schema changes, while redo log master-slave data synchronization provides lower network overhead, higher transaction durability, and faster synchronization. The choice between these approaches depends on the specific requirements, data characteristics, and priorities of the database system.
