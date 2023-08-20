@@ -2,7 +2,8 @@
 
 公共 API_https://apivault.dev/_
 ## [[Prototype]]
-
+## 备案
+http://w2solo.com/topics/4033
 ## 支付
 海外支付：Stripe, Paddle, Lemonsqueezy, FastSpring
 ### Stripe
