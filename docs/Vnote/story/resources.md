@@ -20,3 +20,5 @@ https://www.heygen.com/
 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
 
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
+
+可视化创建数据库🀄️数据：https://visualdb.com/
