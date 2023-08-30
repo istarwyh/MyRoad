@@ -22,3 +22,13 @@ https://www.heygen.com/
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 
 可视化创建数据库🀄️数据：https://visualdb.com/
+
+https://js.design/ai-upcoming 描述生成原型
+
+Kombai —— AI 界面转代码
+链接：https://kombai.com/
+
+解释程序如何运行：
+https://github.com/hackclub/putting-the-you-in-cpu
+
+ICP Query Extension
