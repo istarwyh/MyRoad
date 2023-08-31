@@ -20,8 +20,6 @@ public final class String
     - String这样的核心类，需要通过`JNI`(Java Native Interface)结合操作系统完成，如果String可以被继承并重写方法，很有可能对操作系统带来威胁[^String设计]
 - 并发：String的方法均没有加任何锁，但由于它的不可变性，使得String对象可以在多个线程之间自由共享
 
-[^String设计]:[深入理解String、StringBuffer与StringBuilder](https://blog.csdn.net/qq_40401156/article/details/108464386)
-
 ### 1.2. JDK 11
 ```java
 public final class String
@@ -60,8 +58,6 @@ String str = new String(data);
 ### 2.2. 字符串常量池
 
 >**字符串常量池本质上是个哈希表，它存储的是字符串实例对象的引用![^jvm]**
-
-[^jvm]:[从字符串到常量池，一文看懂String类](https://mp.weixin.qq.com/s?__biz=MzU5ODg2Njk4OA==&mid=2247484037&idx=1&sn=5f0805bd6c62f690ffa06c3982959889&chksm=febcefc6c9cb66d0cb70d70fac2e4fee73ef2fa32d91f16cb0c6510f5b32ae78f629bb612ddb&mpshare=1&scene=1&srcid=&sharer_sharetime=1593613925350&sharer_shareid=f059618cb093f5efb49a39cd6562e90e&key=7a6ffc80620031bc540a4b92b391e87157b55c88e52904cbb835bda526e0ff1a586d1c6101fb542490828c08cdfce2866392d015927be5907d84463dc26371ef31dd9fe02f79e0fb09eb956dbbf22976&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&exportkey=A8edtILws1QNJsxnTLC8Iqs%3D&pass_ticket=aFoiqjOTcc8UhC9qVxDI%2BkM0NqWcoqXdVcdpjeCgXbTcKBGqej6Xds48IfMw5j8m)
 
 ```java
 /**
@@ -174,3 +170,5 @@ public class Test {
 
 ```
 
+[^String设计]:[深入理解String、StringBuffer与StringBuilder](https://blog.csdn.net/qq_40401156/article/details/108464386)
+[^jvm]:[从字符串到常量池，一文看懂String类](https://mp.weixin.qq.com/s?__biz=MzU5ODg2Njk4OA==&mid=2247484037&idx=1&sn=5f0805bd6c62f690ffa06c3982959889&chksm=febcefc6c9cb66d0cb70d70fac2e4fee73ef2fa32d91f16cb0c6510f5b32ae78f629bb612ddb&mpshare=1&scene=1&srcid=&sharer_sharetime=1593613925350&sharer_shareid=f059618cb093f5efb49a39cd6562e90e&key=7a6ffc80620031bc540a4b92b391e87157b55c88e52904cbb835bda526e0ff1a586d1c6101fb542490828c08cdfce2866392d015927be5907d84463dc26371ef31dd9fe02f79e0fb09eb956dbbf22976&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&exportkey=A8edtILws1QNJsxnTLC8Iqs%3D&pass_ticket=aFoiqjOTcc8UhC9qVxDI%2BkM0NqWcoqXdVcdpjeCgXbTcKBGqej6Xds48IfMw5j8m)

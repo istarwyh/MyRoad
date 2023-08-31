@@ -12,7 +12,7 @@ https://www.cnblogs.com/cosmos-wong/p/11845934.html
 2. i + 1
 3. i = i + 1
 
-### var instance = new Object();
+### Var Instance = New Object();
 actually 2 steps
 1. new Object() ,假如创建了对象$12345
 2. instance = $12345

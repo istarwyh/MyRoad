@@ -4,8 +4,8 @@
 ## [[Prototype]]
 ## 备案
 http://w2solo.com/topics/4033
+海外支付：Stripe, Paddle, Lemon, squeezy, FastSpring
 ## 支付
-海外支付：Stripe, Paddle, Lemonsqueezy, FastSpring
 ### Stripe
 https://itangtalk.com/stripe/
 ### Paddle

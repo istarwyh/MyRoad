@@ -4,7 +4,7 @@ All: https://www.aigc.cn/
 
 ## Collect Information
 [[Information Diffusion]]
-### Fragmented information
+### Fragmented Information
 - RSS?
 - Cubox
 - 从微信直接输入：Flomo
