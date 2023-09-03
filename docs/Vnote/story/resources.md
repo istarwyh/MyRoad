@@ -32,3 +32,9 @@ Kombai —— AI 界面转代码
 https://github.com/hackclub/putting-the-you-in-cpu
 
 ICP Query Extension
+
+官方的论坛：  
+1911星球 planet.tsinghua.edu.cn  
+民间的论坛：  
+新T树洞 new-t.github.io  
+闭社清华站 thu.closed.social
