@@ -21,6 +21,9 @@ actually 2 steps
 ⚠️直接从数据库中查出来的数据也可能是null,而这就是null的来源之一。
 ### 2.2. 继承
 当子类拥有与父类同名的成员变量时，父类的成员变量并不会被覆盖，而是与子类的成员变量分别存储在不同的空间，其值仍然可以被改变和访问。
+### Optional
+[[Never Neglect Bug#Java Optional]]
+
 ## 3. 不好说之坑
 ### 3.1. String
 ```java
@@ -92,4 +95,4 @@ If you don't see one, feel free to add it yourself
   </component>
 ```
 3. **原理**
-该选项控制如何将classpath传递给JVM：通过命令行或通过文件。大多数操作系统都有最大的命令行限制，当它超过时，IDEA将无法运行您的应用程序。 当命令行长于32768个字符时，IDEA建议您切换到动态类路径。长类路径被写入文件，然后由应用程序启动器读取并通过系统类加载器加载。 如果您对实施细节感兴趣，可以查看IDEA社区版的源代码，JdkUtil.java文件，setupJVMCommandLine方法。
+该选项控制如何将classpath传递给JVM：通过命令行或通过文件。大多数操作系统都有最大的命令行限制，当它超过时，IDEA将无法运行您的应用程序。 当命令行长于32768个字符时，IDEA建议您切换到动态类路径。长类路径被写入文件，然后由应用程序启动器读取并通过系统类加载器加载。 如果您对实施细节感兴趣，可以查看IDEA社区版的源代码，JdkUtil.java中的setupJVMCommandLine方法。

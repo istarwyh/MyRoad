@@ -1,6 +1,6 @@
 #Bug
-### 1.4.1. 正则匹配
-#### 1.4.1.1. 对于方法的了解---document.write()
+## 1.4.1. 正则匹配
+### 1.4.1.1. 对于方法的了解---document.write()
 **先自己跑一遍**
 **确认代码无误**
 但还是有问题,So?
@@ -27,8 +27,8 @@
 **于是你搜索了一下**
 发现有js中有三种输出方式,于是你都试了一下,发现只有`document.write()`这个在页面上显示的不完整.于是你继续搜索document.write()的使用方法,你发现![](https://gitee.com/istarwyh/images/raw/master/1618155659_20191215103044402_21130.png =265x),果然像`<p>`这种标签式的,document.write()是不会打印给html页面的.
 **所以这个问题才算基本解决了**
-### 1.4.2. P-mission小程序后端
-#### 1.4.2.1. 删掉数据后发现无法加载出页面了
+## 1.4.2. P-mission小程序后端
+### 1.4.2.1. 删掉数据后发现无法加载出页面了
 - Try1
 猜想可能是改掉的序号乱了它的遍历-->把序号`id`改成连续的1/2/3,同时发现了标签没有闭合(不知道为啥vscode不提示了)-->改好后没有作用
 - Try2
@@ -43,13 +43,13 @@
 - Try6
 改掉一个`id`与`publish_user_id`-->不行-->把一个干掉再试---->可以
 **结论**:前面一个`id`是给进入的页面的参数;后面对于返回页面的查询(`https://ganzhiqiang.wang/ares/goods/detail/?goods_id=50`)也证实了这一点
-#### 1.4.2.2. 试验数据库不返回对应值
+### 1.4.2.2. 试验数据库不返回对应值
 - Try 1
 删掉一些字段-->可以
-#### 1.4.2.3. 数据库表创建总提示语法不对
+### 1.4.2.3. 数据库表创建总提示语法不对
 - Try 1
 上网搜-->没用但是发现了后面多打了一个`,`号,改了-->报了另一个错误---->发现本质还是打了`,`或`;`什么的
-#### 1.4.2.4. 不知道该怎么返回对应格式的数据
+### 1.4.2.4. 不知道该怎么返回对应格式的数据
 - Try1
 看后端代码并在后端代码里面搜,关键词`select`-->发现sql有关的语句并不在`Dao层`中,而是在`.xml`文件中,并且他似乎用了Mybatis的手段
 于是我想到直接改他的数据库,如果能跑起来应该也就没有问题了-->不过后端似乎用了docker和tomcat,他会显示拒绝访问
@@ -64,9 +64,9 @@
 **不得不说**
 赵泽龙直接说猜大概像`json`这样的肯定已经有人写了包了
 還有就是像`@getter``@Setter`這些也的確應當是有人寫了包
-#### 1.4.2.5. 報"無法訪問"
+### 1.4.2.5. 報"無法訪問"
 問題找了一圈是**OneDrive同步的時候鎖定**了,但是似乎同步時間還很長?-->考慮要不要換
-#### 1.4.2.6. 函數空指針異常
+### 1.4.2.6. 函數空指針異常
 原因居然是注釋掉了`@AutoWired`...因爲上面原本有紅點點,我就把它注釋掉了
 2020年6月27日
 这是因为没有把对应的属性作为`Bean`自动注入,也就没有实例化,等同于没有
@@ -76,7 +76,7 @@ private constructor(Bean bean){
     this.bean = bean;
 }
 ```
-#### 1.4.2.7. 返回的页面无法达到同样效果
+### 1.4.2.7. 返回的页面无法达到同样效果
 最开始自然是怀疑返回的不对,然后改前端逻辑,都失败了于是决定完全返回对应页面,依然不对....
 只好怀疑是超出认知之外的问题,于是改掉url返回完全一样的页面,并考虑**排版**的问题,终于发现:
 **即使** 是html页面中有注释的东西或者多些根本不显示的标签,都无法成功达到效果!!!
@@ -160,7 +160,7 @@ private constructor(Bean bean){
 - 大括号`{}`保存对象,对象可以包含多个 key/value（键/值）对,JSON 对象中可以包含另外一个 JSON 对象
 - 中括号`[]`保存数组
 这样明白了之后甚至可以先用[json在线解析](https://c.runoob.com/front-end/53)看清结构啊!(包括还有看`json`的插件)
-#### 1.4.2.8. 构造函数内部不能那个啥?
+### 1.4.2.8. 构造函数内部不能那个啥?
 ```java
 List<Cover> photos = new ArrayList<>();photos.add(new Cover(id, image_id, path));
     photos.add(cover);
@@ -187,19 +187,19 @@ this.cover = new Cover(id,image_id,path);
 this.photos=new ArrayList<>();photos.add(this.cover);
 //调用它自己就好了!初始化也是调用自己
 ```
-#### 1.4.2.9. 报avatar格式异常
+### 1.4.2.9. 报avatar格式异常
 找了很久还是别人发现的,我删掉了一些传入的值,导致了这些值之间对不上,但是我一直以为自己已经改回来了,而拒绝看是不是没有对上!!!!
 多少bug是自己给自己下绊子呵!!!!
-#### 1.4.2.10. `describe`始终无法显示
+### 1.4.2.10. `describe`始终无法显示
 这个是...我单词拼错了,自己原本写成了`descrble`???!!!
 呵......望君珍重
-### 1.4.3. Bitcron啥啥
+## 1.4.3. Bitcron啥啥
 `Traceback (most recent call last):  File "D:\Python\Scripts\bitcron-script.py", line 11, in <module>
     load_entry_point('bitcron==0.0.9', 'console_scripts', 'bitcron')()`
 上面这个Google了好像没得啥办法...
 
-### 1.4.4. Hadoop云盘
-#### 1.4.4.1. JAVA_HOME is not defined correctly.
+## 1.4.4. Hadoop云盘
+### 1.4.4.1. JAVA_HOME Is not Defined Correctly.
 **输入**
 `ant -version`
 **返回**
@@ -216,12 +216,12 @@ Error: JAVA_HOME is not defined correctly.
 [有人说](https://askubuntu.com/questions/157229/java-home-is-not-defined-correctly)名字格式可能不对,用`ls -al`检查
 有人是因为JAVA_HOME多加了一个`bin`
 最后有人说使用`find . -exec grep -l "jdk1.7.0_71" {} \`找到真正定义你JAVA_HOME的文件,我才发现自己`JAVA_HOME`中的路径曾经因为疑惑是不是不认`_`而将其改为了`-`.
-### Mapstruct
+## Mapstruct
 Mapstruct 的方法注解字段更改更改后没有编译，原本生成的代码始终没变，所以无论怎么运行测试都会报错。
 特别当测试路径很长，错误包裹的很深的时候找到最后是这个原因...狠难受😣
-### 运行环境
+## 运行环境
 2023 年 9月3日
 预发两套环境只部署了其中一套...debug 时不停直呼诡异啊诡异
-### Java Optional
-filter 和 map 是两个独立的操作，互不影响对方运行。假设你期望filter过滤一些数据，不要流到map里面，否则map就会报错。那么它一定会报错。这个设计原理也被解释为 filter 不会改变 Optioanl 中的 原数据，所以 map 不管怎么样都会用原数据去执行操作。
+## Java Optional
+filter 和 map 是两个独立的操作，互不影响对方运行。假设你期望filter过滤一些数据，不要流到map里面，否则map就会报错。那么它一定会报错。这个设计原理也被解释为 filter 不会改变 Optional 中的 原数据，所以 map 不管怎么样都会用原数据去执行操作。
 解决方法是用 flatmap 改变实际 Optional 链中的值。
