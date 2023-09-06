@@ -1,4 +1,4 @@
-https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA
+
 All: https://www.aigc.cn/
 
 
@@ -94,6 +94,11 @@ Sizzle AI，个性化学习
 ### Prompt
 - https://promptperfect.jina.ai/prompts
 - https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction
+
+## TODO
+https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA
+The PARA Method: A Universal System for Organizing Digital Information
+
 ## Create
 
 - https://designer.microsoft.com/
@@ -105,5 +110,5 @@ Sizzle AI，个性化学习
 - https://gamma.app/
 - MindMap: https://www.processon.com/v/64a1092b259a5437d9992cc6
 
-## Publish
+### Publish
 - 发布每个人自己的博客网站并提供订阅服务： https://xiaohuihui.substack.com/
