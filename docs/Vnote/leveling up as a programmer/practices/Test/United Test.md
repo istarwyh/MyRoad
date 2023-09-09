@@ -11,3 +11,6 @@
 Prompt 分享
 图书资源分享
 [[Create Once,Publish Where#Read]]
+
+跳过Android 开屏
+https://github.com/zfdang/Android-Touch-Helper
