@@ -1,4 +1,4 @@
-## 1. 前言 
+## 1. 前言
 Junit系列可以解决测试启动、测试状态校验与组织的问题,比如测试启动上有参数化测试、并发测试、顺序测试等功能,校验上有异常断言、超时断言等功能,代码组织上有测试分组、测试报告自定义等功能.
 在上述领域之外,Mockito很好地承担了对测试对象打桩(stub)以及对测试行为校验的功能.有人可能所Mockito都不能mock私有、静态和构造方法,差评!(虽然[要不要测试私有方法还没有定论](#jump)那你可以从下面挑一款!
 
@@ -40,7 +40,7 @@ Junit系列可以解决测试启动、测试状态校验与组织的问题,比�
 | @BeforeEach                | 表示在每个单元测试之前执行                                                                                                                                                       |
 | @AfterEach                    | 表示在每个单元测试之后执行                                                                                                                                                       |
 | @BeforeAll                     | 表示在所有单元测试之前执行                                                                                                                                                       |
-| @AfterAll                         | 表示在所有单元测试之后执行                                                                                                                                                       |
+| @After all                         | 表示在所有单元测试之后执行                                                                                                                                                       |
 | @Disabled                      | 表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore                                                                                          |
 | @Timeout                      | 表示测试方法运行如果超过了指定时间将会返回错误                                                                                                          |
 | @Nested                         | 该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类                     |
@@ -219,8 +219,7 @@ public class ParallelTest {
 }
 
 ```
-
-![](354691209268984.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091453982.png)
 
 ##### 2.2.3.2. 并发测试
 并发测试很适合测试下游幂等。JUnit5中的并发执行测试可以分为以下三种场景：
@@ -259,7 +258,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism = 5
     }
 ```
 
-![](94852091826507.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091501237.png)
 
 对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.
 
@@ -436,7 +435,7 @@ final class DefaultDiscoveryRequest implements LauncherDiscoveryRequest {
 5. 正如前言中提到的,使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造
 - 链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截RPC请求得到入参和出参
 
-##### 3.1.2.2. [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars): 
+##### 3.1.2.2. [Mockito Patterns](https://stackoverflow.com/questions/11462697/forming-mockito-grammars):
 > When/Then: when(yourMethod()).thenReturn(x);
 Do/When: doReturn(x).when(yourMock.fizzBuzz());
 Verify/Do: verify(yourMethod()).doThrow(SomeException.class);
@@ -464,8 +463,6 @@ doReturn("foo").when(spy).get(0);
 ```
 
 3. 连续对调用方法打桩(Stub)[^two]
-[^two]: [使用Mockito进行单元测试【2】—— stub 和 高级特性]( https://www.cnblogs.com/vvonline/p/4122991.html)
-
 值得一提的是,连续打桩方法直接写是反直觉的:
 
 ```java
@@ -497,8 +494,6 @@ doReturn("I will be Returned").when(mock).foo();
 
 ### 3.2. Mockito原理
 比如`when(mockObject.yourMethod()).thenReturn(x)`这样的模式,看起来很连贯,是对`yourMenthod()`做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对`yourMethod()`这个方法进行打桩的呢?[^MockitoRead]
-
-[^MockitoRead]:[mockito原理浅析](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938607&idx=1&sn=7e17607eb5a537f7734631030d289351&chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&mpshare=1&scene=1&srcid=05068BrILyHdI932MoGI4ikG&sharer_sharetime=1654096335341&sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&acctmode=1&pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&wx_header=0)
 
 Mockito本质上就是在代理对象调用方法前，用stub的方式设置其返回值，然后在真实调用时，用代理对象返回起预设的返回值。
 1. org.mockito.internal.creation.bytebuddy.BytecodeGenerator#mockClass 利用ByteBuddy中生成代理类
@@ -587,3 +582,6 @@ public StubbedInvocationMatcher addAnswer(Answer answer, boolean isConsecutive) 
     }
 }
 ```
+
+[^two]: [使用Mockito进行单元测试【2】—— stub 和 高级特性]( https://www.cnblogs.com/vvonline/p/4122991.html)
+[^MockitoRead]:[mockito原理浅析](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938607&idx=1&sn=7e17607eb5a537f7734631030d289351&chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&mpshare=1&scene=1&srcid=05068BrILyHdI932MoGI4ikG&sharer_sharetime=1654096335341&sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&acctmode=1&pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&wx_header=0)

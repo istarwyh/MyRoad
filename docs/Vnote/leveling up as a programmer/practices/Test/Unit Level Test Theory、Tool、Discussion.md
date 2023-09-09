@@ -115,14 +115,14 @@ void setUp(){
 2. When:采取什么行动
 3. Then:得到什么结果
 
-### 集成测试 vs 单元测试？
+### 集成测试 Vs 单元测试？
 之所以写测试，是因为正确的测试确实可以提高开发效率，所以选择怎样写测试的判断标准之一就是要找到`ROI`(Return Of Investment) 最高的截面。柳胜认为测试的ROI计算公式为[^3KU]
+>![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091459177.png)
 
->![](vx_images/440825697826907.png =384x)
 在测试金字塔模型下，越往底部，测试的ROI越高。又因为UI 测试关注功能场景测试，易用性测试和可执行性测试；而接口测试关注不同数据的循环，接口的性能和错误恢复能力；单元测试关注算法的正确性和性能。所以各个测试专注的范围应该如下图所示：
-![](vx_images/207396906615999.png =384x)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091458922.png)
 
-在我的理解中，上图中的UI测试通常也被称为`端到端测试`,对外的`接口测试`对后端通常也就是`集成测试`。而单元测试是什么呢？是针对一个类或者某个方法的测试吗？不是，徐昊指出`单元测试`（Unit Test）是一个具有误导性的提法，在TDD中不应该有这样的说法，应代之以`单元级别功能测试`（Unit Level Functional Test）[^IntegrationVsUnit],其本质是**能提供快速反馈的低成本的研发测试**[^Speed]。柳胜之所以认为测试金字塔模型下，越往底部，测试的ROI越高，是因为越往下手工运行时间是越短的，运行次数是越多的；而越往上开发测试和维护测试的成本都越高。
+在我的理解中，上图中的UI测试通常也被称为`端到端测试`,对外的`接口测试`对后端通常也就是`集成测试`。而单元测试是什么呢？是针对一个类或者某个方法的测试吗？不是，徐昊指出`单元测试`（Unit Test）是一个具有误导性的提法，在TDD中不应该有这样的说法，应代之以`单元级别功能测试`（Unit Level Functional Test）,[^IntegrationVsUnit]其本质是**能提供快速反馈的低成本的研发测试**[^Speed]。柳胜之所以认为测试金字塔模型下，越往底部，测试的ROI越高，是因为越往下手工运行时间是越短的，运行次数是越多的；而越往上开发测试和维护测试的成本都越高。
 
 同时柳胜认为[^HappyPath]
 
@@ -136,12 +136,7 @@ void setUp(){
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202307232321182.png)
 
 
-[^3KU]:[3KU法则：如何找出最优自动化实施截面？](https://time.geekbang.org/column/article/497405)
-[^Speed]:[UnitTest.html](https://martinfowler.com/bliki/UnitTest.html)
-[^HappyPath]:[集成测试（一）：一条Happy Path扫天下](https://time.geekbang.org/column/article/507443)
-[^IntegrationVsUnit]:[TDD中的测试（3）：集成测试还是单元测试？](https://time.geekbang.org/column/article/496699)
-
-### Mock vs Real?
+### Mock Vs Real?
 能Real 肯定Real。对于完全可控依赖的服务，虽然是应用之外的一个进程，但可以把跟它的交互当作开发的内部实现。
 而不可控依赖服务，比如公共的服务，做Real 凭空增加服务方QPS，不是自己能决定的，基于交互契约来Mock即可。
 
@@ -170,4 +165,7 @@ void setUp(){
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
 >3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
 
-
+[^3KU]:[3KU法则：如何找出最优自动化实施截面？](https://time.geekbang.org/column/article/497405)
+[^IntegrationVsUnit]:[TDD中的测试（3）：集成测试还是单元测试？](https://time.geekbang.org/column/article/496699)
+[^Speed]:[UnitTest.html](https://martinfowler.com/bliki/UnitTest.html)
+[^HappyPath]:[集成测试（一）：一条Happy Path扫天下](https://time.geekbang.org/column/article/507443)

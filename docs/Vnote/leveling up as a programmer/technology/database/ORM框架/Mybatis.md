@@ -17,7 +17,7 @@ https://juejin.cn/post/6844904002421800967 理论上来说，自己使用sqlSess
 对于需要事务的引擎，如果不提交，是不能改变数据库的 https://louluan.blog.csdn.net/article/details/37992171?spm=1001.2101.3001.6650.10&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-10-37992171-blog-121394975.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-10-37992171-blog-121394975.pc_relevant_default&utm_relevant_index=14
 
 
-### JPA vs Mybatis
+## JPA Vs Mybatis
 优势：
 
 MyBatis 是一个可以灵活编写 sql 语句
