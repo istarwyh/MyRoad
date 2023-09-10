@@ -2,7 +2,7 @@
 NewSQL 是一类关系数据库管理系统，旨在为在线事务处理（OLTP）工作负载提供 NoSQL 系统的可扩展性，同时保持传统数据库系统的 ACID 保证。NewSQL用SQL来代指数据库,然后并不知道给这些新型的数据库起什么名字,就起了个NewSQL这样的名字。
 
 MySQL的没落是必然的,因为数据一直领先于硬件和分库分表这样的应用层工具在增长,以及存储和计算资源的弹性都呼唤着NewSQL.
-NewSOL将数据库的计算层和存储层分开,这样就可以通过编排在云中进行横向扩展.   不过没有银弹,[以 TiDB 为例](https://mp.weixin.qq.com/s/qtIo7cAdSJ_9V-RFCJH8PQ)：
+NewSOL将数据库的计算层和存储层分开,这样就可以通过编排在云中进行横向扩展. 不过没有银弹,[以 TiDB 为例](https://mp.weixin.qq.com/s/qtIo7cAdSJ_9V-RFCJH8PQ)：
 
 >TiDB 的自增 ID 只能保证单个 TiKV 上的自增，并不能保证全局自增。
 由于 TiKV 存储是根据 key 的二进制顺序排列的，使用自增 ID 可能会造成热块效应。

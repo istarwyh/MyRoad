@@ -1,7 +1,7 @@
 To choose the suitable database, we should focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, "How much innovation in basic technology does this project achieve, and what combination of existing technologies does it involve?"
 
 
-### Ask GPT4
+## Ask GPT4
 >As an expert on databases, your task is to provide a summary of ten dimensions that illustrate the differences between databases such as MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, TiDB, ClickHouse, OSS, Simple Storage Service, and others. The dimensions should include factors such as data model, infrastructure, index structure, data-sync strategy, data store strategy and other technical factors. Your summary should explain the reasons why these differences exist and how they affect the suitability of each database for different use cases.
 >Your response should be clear and concise, highlighting the most significant differences between each database and the advantages and disadvantages of each in relation to the ten dimensions mentioned above. Your response should be flexible enough to allow for various relevant and creative reasons for the differences between databases. For example, you could explain that MySQL uses a B+ Tree data structure, which is effective for storing large amounts of data on disk, while MongoDB uses a document-based data model that is more flexible but can be less efficient for certain types of queries. For example, you at least tell people that MySQL uses B+ Tree as the major index which is a Multiway Unbalanced Binary Tree existing in the disk, and it usually uses sub-library and sub-table strategy when it stores over 2000 thousand records.
 >Your goal is to provide a comprehensive and informative overview of the major technical differences between these databases and the reasons why these differences exist, while also encouraging creative and relevant explanations to make the summary unique and engaging.
@@ -14,42 +14,73 @@ NoSQL (Not Only SQL) is a category of non-relational distributed databases that 
 NewSQL is an emerging database concept that combines traditional relational databases with [[Distributed Computing]]. It aims to provide the transactional consistency and data security of traditional relational databases, while also offering the scalability and high concurrency processing capabilities of distributed databases. NewSQL databases achieve data [[Horizontal Scaling]] and load balancing through innovative architectures and technologies such as sharding, replication, and intelligent routing. This combination of relational and distributed computing approaches satisfies the modern application's requirements for high performance, high availability, and strong consistency. Representative examples of NewSQL databases include Spanner, CockroachDB, and TiDB.
 
 
-# Base Technology
+## Base Technology
+### Data Structure && Index
+- ...traditional data structure like list、array
+- bitmap
+- dictionary encoding
 
-## Data Persistence
+### Data Persistence
 If a computer wants to write data from memory to disk, it typically needs to perform at least two steps:
 
 1. The program writes to the [[PageCache]]
 2. The [[PageCache]] is flushed to the disk
+#### Column
+Examples: [[ORC (Optimized Row Columnar)]]
+Column storage is suitable for OLAP(Online Analytical Processing) scenarios:
+- data scanning
+- filtering
+- statistical analysis
+#### Row
+Examples: 
+- [[SST(Sorted String Table)]]
+- [[Inverted Index of Lucene and B+Tree#2.1. B+Tree]]
+Row storage is suitable for OLTP(Online Transaction Processing) scenarios:
+- Primary Key select
+- ACID
+#### LSM
+Examples: Inverted Index
 
-### [[Write-Ahead Logging]]
+#### Coexistence of Rows and Columns
+ uses a sub-library and sub-table strategy when storing over 2000 thousand records, improving performance and manageability.
+- PostgreSQL uses tablespaces to manage the storage location of its data files.
+- Redis stores data in memory, with optional persistence to disk using RDB snapshots or AOF logs.
+- Elasticsearch stores data in shards, which are distributed across nodes in a cluster.
+- MongoDB uses a storage engine called WiredTiger, which supports document-level concurrency control and compression.
 
-### AOF(Append Only File)
+### Backup Strategy
+#### [[Write-Ahead Logging]]
+
+#### AOF(Append Only File)
 Redis doesn't use a traditional [[Write-Ahead Logging|WAL]], but its AOF persistence mode has similarities with the concept of [[Write-Ahead Logging]].
 The AOF and [[Write-Ahead Logging]] share the principle of logging changes to data before they are applied, providing a way to recover the state of the data in case of a crash. The AOF can be configured to sync to disk at different frequencies based on the fsync policy. This allows you to balance between write performance and data durability.
-
-### [RDB(Redis Database)](https://redis.io/docs/management/persistence/)
-
+#### [RDB(Redis Database)](https://redis.io/docs/management/persistence/)
 
 
-## Distributed System 
+### Distributed System
 
-### [[Storage-Compute Architecture]]
+#### [[Storage-Compute Architecture]]
 
+#### Consensus Algorithm
+##### [[Paxos]]
+##### [[Raft]]
 
+#### Data Synchronization
 
-### Consensus Algorithm
-#### [[Paxos]]
-#### [[Raft]]
+##### [[Binlog Master-Slave Data Synchronization]]
 
+- TiDB uses the Raft consensus algorithm for data synchronization across its distributed nodes.
+###### Asynchronous
+- Redis master-slave replication
+- ElasticSearch primary-backup model
+###### Synchronous
+Synchronous replication is a most reliable way comparing with other replication strategy, because the master node MUST WAIT for the slave node to confirm before sending data. Naturally, it can have a significant impact on the performance of the master node because it needs to wait for the slave node to confirm before continuing to process client requests.
+###### Semi-synchronous
+- MySQL master-slave replication
 
-### Data Synchronization
-
-#### [[Binlog Master-Slave Data Synchronization]]
-
-#### [[Redo-log Master-Slave Data Synchronization]]
+##### [[Redo-log Master-Slave Data Synchronization]]
  
-# Compare Items
+## Compare Items
 
 
 https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA
@@ -57,6 +88,9 @@ https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA
 https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
 
 https://waverleysoftware.com/blog/how-to-choose-the-right-database/
+
+
+
 
 >1. Data Model:
 - MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
@@ -80,23 +114,6 @@ https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 - MongoDB uses B-Tree indexes, which are similar to B+ Tree but with some differences in node structure and traversal.
 - TiDB uses a distributed index structure based on Google's Percolator model.
 - ClickHouse uses a combination of primary and secondary indexes, including sparse and bitmap indexes.
-
-4. Data-Sync Strategy:
-- MySQL and PostgreSQL support replication for data synchronization, with various replication modes like asynchronous, synchronous, and semi-synchronous.
-- Redis supports master-slave replication and Redis Cluster for data synchronization.
-- ElasticSearch uses a primary-backup model for data replication and synchronization.
-- MongoDB supports replica sets and sharding for data synchronization and distribution.
-- TiDB uses the Raft consensus algorithm for data synchronization across its distributed nodes.
-- ClickHouse supports replication through its distributed tables feature.
-
-5. Data Store Strategy:
-- MySQL uses a sub-library and sub-table strategy when storing over 2000 thousand records, improving performance and manageability.
-- PostgreSQL uses tablespaces to manage the storage location of its data files.
-- Redis stores data in memory, with optional persistence to disk using RDB snapshots or AOF logs.
-- Elasticsearch stores data in shards, which are distributed across nodes in a cluster.
-- MongoDB uses a storage engine called WiredTiger, which supports document-level concurrency control and compression.
-- TiDB uses a distributed storage engine called TiKV, which is based on the Raft consensus algorithm.
-- ClickHouse stores data in columns, improving query performance for analytical workloads.
 
 6. Concurrency Control:
 - MySQL and PostgreSQL use multi-version concurrency control (MVCC) to handle concurrent transactions.
@@ -134,7 +151,7 @@ https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 - ClickHouse is ideal for real-time analytics and reporting.
 - OSS and Simple Storage Service are suitable for storing large amounts of unstructured data, such as images, videos, and backups.
 
-# References
+## References
 
 1. [一名开发者眼中的 TiDB 与 MySQL 的选择丨TiDB Community](https://mp.weixin.qq.com/s/MrXitmIGnlsWY25aw1SRqw)
 2. [数据库选型：MySQL、PolarDB、PolarDB-X、TableStore、MongoDB、TiDB、ClickHouse:](https://mp.weixin.qq.com/s/2oKTItUgvsbEHItiWiGtzA)

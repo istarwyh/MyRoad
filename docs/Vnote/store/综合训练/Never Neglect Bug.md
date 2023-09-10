@@ -225,3 +225,6 @@ Mapstruct 的方法注解字段更改更改后没有编译，原本生成的代�
 ## Java Optional
 filter 和 map 是两个独立的操作，互不影响对方运行。假设你期望filter过滤一些数据，不要流到map里面，否则map就会报错。那么它一定会报错。这个设计原理也被解释为 filter 不会改变 Optional 中的 原数据，所以 map 不管怎么样都会用原数据去执行操作。
 解决方法是用 flatmap 改变实际 Optional 链中的值。
+
+## Java Unit Test
+Mockito 的 core 和all 新旧版本的类名一样，但是行为有的不一样，运行测试的时候可能随机读到其中一个实现，就会出现测试一会成功，一会失败的现象。

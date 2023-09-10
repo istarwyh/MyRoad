@@ -1,6 +1,6 @@
-# 谈谈数据库
-## 1. 各人谈数据库
-### 1.1. 多是数据密集型应用
+## 谈谈数据库
+### 1. 各人谈数据库
+#### 1.1. 多是数据密集型应用
 >Xujiu@Sapesn:大部分APP-数据密集型应用，不从轮子做起,就与数据结构和算法没关系。主要创造性的工作往往在**数据模型**和**数据流设计**上。实际生产中，数据表就是数据结构，索引和查询就是算法，应用代码往往扮演胶水角色，处理IO和业务逻辑，在数据库系统之间搬运数据。架构师最重要的能力之一，就是能够灵活地权衡取舍/集成拼接数据系统。
 第一代:网状和层次数据库系统
 第三代:面向对象数据模型为主要特征的数据库系统
@@ -8,7 +8,7 @@
 第二代:关系型数据库系统
 
 事务与ACID其实是为了帮程序员屏蔽底层并发的细节.
-### 1.2. Not Only Sql
+#### 1.2. Not Only Sql
 - 高并发下,数据库IO非常缓慢
     - `key-value`形式:redis、memcached
 - 关系数据库难以应付复杂数据
@@ -19,7 +19,7 @@
    ![20210525194902877_23231](https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/谈谈数据库.md/182751607742476.png)
 - 传统数据库底层是B树/B+树,降低树的高度避免IO,但存储性能值得探讨
     - 专业的时间序列数据库:InfluxDB
-### 1.3. ACID vs CAP
+#### 1.3. ACID Vs CAP
 |              词语               |              传统数据库               |            CAP             | 迷惑?  |
 | ------------------------------- | ----------------------------------- | -------------------------- | ----- |
 | 事务                            | 一组不可分割的操作(包括ACID)            | -                          | -     |
@@ -43,18 +43,14 @@ note:
 
 
 对数据库的操作依然离不开查找和排序，并且传承于通用的数据结构与算法。
-## 2. 对传统索引的理解
-### 2.1. 只是支持快速查找的数据结构
+### 2. 对传统索引的理解
+#### 2.1. 只是支持快速查找的数据结构
 索引的本质在**查询关键字**与**数据库记录**之间建立的一种支持快速查找的数据结构 ，不一定是b+树，也可以是hash索引，也可以是b树/二叉树/数组/n叉树等等。
 因为磁盘相比主存慢十万倍，而且磁盘一次能取一个扇区的数据[^WhyB]，因此索引的设计应当使每次磁盘`I/O`取到内存的数据都能帮助后续记录的定位，尽可能减少IO的次数。以第二行做二叉树形式的索引结构如下：
-[^WhyB]:[文件系统和数据库是由于什么原因才选择 B 树或 B+ 树建立索引的？](https://www.zhihu.com/question/62406977)
-
 ![](https://gitee.com/istarwyh/images/raw/master/1621869911_20210524231742810_16229.png)
 
 - B树（多路平衡二叉树）俯视图[^BTree]：
 ![](https://gitee.com/istarwyh/images/raw/master/1621869913_20210524231825279_9618.png)
-
-[^BTree]:[MySQL索引凭什么能让查询效率提高这么多？](https://juejin.im/post/6869532756498448392?utm_source=gold_browser_extension)
 
 - B+树只是一种均衡各方面的产物：
 ![](https://gitee.com/istarwyh/images/raw/master/1621869917_20210524231839825_23357.png)
@@ -72,7 +68,7 @@ note:
 B+树正面图：
 
 
-### 2.2. 索引的演化简史
+#### 2.2. 索引的演化简史
 - 索引结构经历了**Hash -> 二叉树 -> 平衡二叉树（BST） -> 多路平衡二叉树（B-Tree） -> B+树 -> `B*`树**的演变过程，依次提供了一些功能或解决了一些问题：
     - 直接给每个记录唯一的键(hash值)，并通过唯一键给记录定位是最直接的想法
         - 不同索引键可能存在相同 Hash 值而碰撞，且不支持Key比较，且不支持范围遍历
@@ -86,9 +82,9 @@ B+树正面图：
     - 结点必要时换父亲，尽可能减少页分裂的次数
 - 红黑树虽然也是B-Tree类型的树，但不会控制树的高度，所以不适合利用磁盘存储的MySQL 的。而因为B-Tree每一块的大小是固定的，如果有新的元素处于一个满了数据块的范围内，则会触发该数据块分裂,最糟糕时情况是一次插入操作所有的数据块都分裂了一遍，则带来的问题就是存储浪费，所以它不适合内存
 
-### 2.3. 索引聚不聚簇
+#### 2.3. 索引聚不聚簇
 以新华字典为例说明，新华字典提供主要的索引方法：**拼音**查询。因为**字典本身按照这样的索引已聚集排序**，当输入一个拼音如`gong`--一个`Key`,就可以按照`g`--`ong`（--`笔画数`）不断缩小查找范围，最后遍历最小的那个分类集合**命中**汉字--一个`value`.这样像拼音这样的索引被称作”聚簇索引(`Clustered Index`)“。聚簇索引本身并不需要聚簇索引表。
-可以看出聚簇索引并不是一种单独的索引类型，而是一种数据存储方式，满足`聚簇`的字面意思[^Cluster]。必须注意的是，每张表有且仅有一个聚簇索引[^Clustered],因为数据库只能按照一种方法进行排序。
+可以看出聚簇索引并不是一种单独的索引类型，而是一种数据存储方式，满足`聚簇`的字面意思[^Cluster]。必须注意的是，每张表有且仅有一个聚簇索引,[^Clustered]因为数据库只能按照一种方法进行排序。
 
 同时字典也提供部首查询的方法，字典中字排列顺序与这里索引--部首的排序不一致，所以**部首查询表本身一定需要包含命中的指向字的直接索引**。有过部首查询经历会发现，部首查询表自己是按笔画数进行的划分，先按照”一笔“”二笔“”三笔“...这样类似数组下标的索引查得部首如"工"，接着同样按照笔画数如三笔--一个`Key`,又查到部首索引表中的字与它对应的页数--一个`<K,V>`,而这里的`V`是一个指向实际物理文件--字典中字的`point`.这里的部首索引表本身也就是一个含有**笔画**--这种聚簇索引的表，而对于字典，部首索引表的**部首**则是”非聚簇索引（`Noinclustered Index`）“
 
@@ -100,22 +96,16 @@ B+树正面图：
 假设每页为一记录，自然地页数就是主键id,并且满足主键约束（不重复）。在页数之上添加的部首索引表便是在聚簇索引的基础上添加了非聚簇索引。
 而在数据库中，索引是通过n叉树的形式进行描述的。承接上述的层级关系，聚簇索引的叶子结点是最终的数据结点记录，而非聚簇索引的叶子结点仍然是索引节点，一定有一个指向最终数据的指针。
 
-[^Cluster]:[聚簇索引和非聚簇索引](https://blog.csdn.net/lm1060891265/article/details/81482136?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param)
-
-[^Clustered]:[聚集索引，非聚簇索引，辅助索引](https://blog.csdn.net/riemann_/article/details/90324846?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
-
 对于使用聚簇索引方式存储的表,每个索引后都会附加索引信息?
 
-### 2.4. 索引优缺点[^Mysql]
-#### 2.4.1. 优点
-[^Mysql]:[曾经，我以为我很懂 MySQL 索引...](https://mp.weixin.qq.com/s?__biz=MzU0OTk3ODQ3Ng==&mid=2247489255&idx=1&sn=43793ea6368c32645c9171e1ee160cd2&chksm=fba6fee4ccd177f22c31d8b1ab14ea44d7d753e6d42cd18be2c5fd5881362a702376ca953e39&mpshare=1&scene=1&srcid=0908hXnudi0sZuHNEzdMMRga&sharer_sharetime=1599530921440&sharer_shareid=f059618cb093f5efb49a39cd6562e90e&key=c45d238be947117fbf9b0bbb7c85ee41039a467b954cd73519cd9d9aa048aa01a00297833817905235b10d87d3e285f42ab3246ce4e4f0346cb6066b90f1d1818bff0bf31991b536d063c3f97c0186c04290dc3876c1e3ef7a19600e6394a14506fc814887b4b1c6db24acca9b7826917771ff67696dd12083792a68818d965c&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A%2FCs263OBTZ%2F8s0ViGboT1k%3D&pass_ticket=g9yhQkckoZlAk%2FX6cPUhDBTSEp8osozONZ7MKFJVjVqOacOgUwH%2FJagIuENpoxqA&wx_header=0)
-
+#### 2.4. 索引优缺点[^Mysql]
+##### 2.4.1. 优点
 1. 索引大大减少了存储引擎需要扫描的数据量。因为可以逐步聚焦需要的记录。
 
 2. 索引可以帮助存储引擎避免排序和临时表。因为对于聚簇索引本身记录会按索引组织，从而也可以避免临时表之后再建立索引。
 
 3. 索引可以将随机 I/O 变成**顺序 I/O**（比如B+树底部的双链表）。随机指的是无目的查询，相比有了索引关键字，只需要按步骤顺序查询或者遍历叶节点就好。
-#### 2.4.2. 缺点
+##### 2.4.2. 缺点
 1. 降低更新表的速度，如对表进行 INSERT、UPDATE 和 DELETE。因为更新表时，MySQL 不仅要更新数据，还要更新索引文件。
 
 2. 索引文件会占用磁盘空间。当在一个大表上创建了多种组合索引，且伴随大量数据量插入，索引文件大小也会快速膨胀。
@@ -126,46 +116,42 @@ B+树正面图：
     - 小数据集或数据记录本身小，直接排序更好，优先聚簇索引；
     - 如果一条记录本身十分大，为了降低insert的维护开销，可用非聚簇索引（以避免对记录的重排序？）
 
-[^唯一性与索引]:唯一性并不是索引的必要条件。将索引设置为唯一，对于等值查找当查到第一条符合条件的纪录时即可停止查找，而非唯一索引则要继续查找(回表，因为叶结点还是指针）。不过索引唯一维护开销也大，每一行数据的插入都会去检查重复以保证唯一性；
-
 4. 对于记录很少的表，不仅仅范围查询，大部分情况下简单的全表扫描更高效。因为拿到主索引回表查一次，可能会涉及 I/O 的行数更多,同样这也是聚簇索引优于非聚簇索引，以及`select *`垃圾的原因。
 
-### 2.5. 如何建立主键索引?
+#### 2.5. 如何建立主键索引?
 
  一个列可以选择多种数据类型时,数字类型->日期/二进制类型->字符类型,并且选择占用空间小的类型.
 
-#### 2.5.1. 区分业务主键与数据库主键
+##### 2.5.1. 区分业务主键与数据库主键
 业务主键用于标识业务数据,进行表与表之间的关联。 Innodb要求每个表中都要有主键,按照**主键的顺序**逻辑存储.如果没有主键,会选择非空列的唯一索引.如果还没有,Innodb会生成6Byte的隐含主键.
 最好主键可以顺序增长,避免数据的逻辑迁移,减少IO;同时主键的字段类型应该尽可能的小,使一页中存储的主键数量更多
-#### 2.5.2. 索引可以用已有的唯一键，如trade_no吗？
+##### 2.5.2. 索引可以用已有的唯一键，如trade_no吗？
 首先，普通索引不一定要求键要唯一；而如果建唯一索引或者主键索引，则应当自己建顺序主键。因为
 
 - trade_no具有自己的业务意义，不一定永远保证唯一性（比如对接了不同的trade_no合并到一张表）
 - trade_no较长，主键使用空间多，二级索引空间也多
 - trade_no一般为了安全会有一定随机性，这会使得建B*树时，不能顺序插入而被动随机插入，最后造成数据不够紧凑
-## 3. 找慢SQL
+### 3. 找慢SQL
 
 看数据库的监控：CPU、Memory 、load、RT
 如果是TDDL，可以在`/home/admin/logs/tddl/tddl-slow.log.*`里面查看
 
 找到慢SQL的实例,在物理库上查看对于每个物理库的执行计划:`explain SQL语句`[^explain]
 
-[^explain]: https://blog.csdn.net/qq_20315217/article/details/120416716?spm=1001.2014.3001.5501
-
 ![](https://gitee.com/istarwyh/images/raw/master/vnote/thinking/公开信息/慢sql优化.md/2047303415995.png)
 
 查询物理库已经建立的索引:`show create table xxx表名_0000`
 
 
-### 3.1. 索引概念
+#### 3.1. 索引概念
 主键索引Primary Key
 唯一索引Unique Key
 聚簇索引
 非聚簇索引
 
-### 3.2. 针对索引的优化
+#### 3.2. 针对索引的优化
 
-#### 3.2.1. 索引是最左匹配的
+##### 3.2.1. 索引是最左匹配的
 - 优化条件的从左到右的匹配顺序，以便利用索引
 - 如果还不行，使用`FORCE INDEX`优化已有索引
 ```sql
@@ -174,36 +160,32 @@ SELECT * FROM `database`.`table` FORCE INDEX(create_time) WHERE create_time >= 1
 
 - 添加唯一索引
 - 添加组合索引(必要的组合索引，或者利用覆盖索引)
-#### 3.2.2. 默认的索引下推优化
+##### 3.2.2. 默认的索引下推优化
 ```sql
 select * from item where itemName like “前缀” and itemSize = 20
 ```
 假如itemName是索引，那么MySQL5.6之后优化为在索引遍历过程中，对索引中包含的itemSize先做判断，直接过滤掉不满足条件的记录-->减少回表次数[^敖丙调优]。
 
-#### 3.2.3. 常见操作避坑
+##### 3.2.3. 常见操作避坑
 - `group by name`,实际上这既包括了聚合，也默认了排序操作
     - 如果只是对数据做过滤而不需要排序，需要指定不需要排序操作：`group by name order by null`
 - 传统行数据库中，where子句中对**列**的任何操作结果都是在SQL运行时**逐列计算**得到的，因此如果where子句包括函数，它将不得不进行表搜索，而无法使用该列上面的索引；
     - 还要一种解释：对索引字段做函数操作，可能会破坏索引值的有序性，因此优化器就决定放弃走树搜索功能[^敖丙调优]。
 
-[^敖丙调优]:[「数据库调优」屡试不爽的面试连环combo](https://juejin.cn/post/6844904201437315079)
-
 - `in ('0','1')` => `id_no ='0' or id_no='1'` =>`or策略`,会创建临时表自己建立索引而不会利用即使已经有的索引[^SQL优化]
     - 因此已建立的索引应尽量避免`or策略`，可以分别条件过滤再join
 
-[^SQL优化]:[如何让你的SQL运行得更快](https://blog.csdn.net/gprime/article/details/1687930)
-
-#### 3.2.4. 隐藏索引
+##### 3.2.4. 隐藏索引
 Mysql8中引入隐藏索引,这种索引不会被优化器所使用,从而可以利用它来快速测试删除索引后对SQL查询性能的影响,如果有用则设置可见即可,而避免索引删除与重建耗费时间.
 
 
-# 经典优化场景
-## 1. 单机分页查询
+## 经典优化场景
+### 1. 单机分页查询
 单机数据库因为可以通过自增主键强一致保障数据写入的先后性，所以分页查询时，只需要按照索引顺序排列即可满足功能需求。
-### 1.1. 哪里用
+#### 1.1. 哪里用
 - 前端展示分页时
 - 后端性能优化使用分页查询时
-### 1.2. 怎么用
+#### 1.2. 怎么用
 子查询法:先取索引,再查询索引范围内的数据
 - 取索引：`x = (SELECT id FROM table ORDER BY id LIMIT 20000,1)`
     - 和结果相关的索引起点拿到后回表去取索引范围内的数据：
@@ -219,9 +201,9 @@ LIMIT 10;
 ```sql
 SELECT c1,c2,cn... FROM table A JOIN (SELECT PK FROM table WHERE column = ? ORDER BY PK LIMIT 20000,10) B ON A.PK = B.PK
 ```
-## 2. 分层查询
+### 2. 分层查询
 读操作时,在代码里面，可以规范使用`Factory`专门去取id,之后再在`Repository`取由id索引的数据。当然直接写SQL是性能最优的，只是维护与扩展性差一些。
-## 3. 批量插入
+### 3. 批量插入
 通常因为数据库连接和网络传输的开销，批量插入是比单条更快的。不过
 
 1. 批量插入未必总是比单条插入效率高
@@ -229,3 +211,13 @@ SELECT c1,c2,cn... FROM table A JOIN (SELECT PK FROM table WHERE column = ? ORDE
     - 比如一条记录的数据量有1M，10条记录的数据量就10M，这时一次插100条，100M数据
     - 数据库有个参数`max_allowed_packet`，也就是每一个包（sql）命令大小，默认是1M，那么sql的长度大于1M就会报错。
 3. 批量插入并不是越快越好, 数据库分读写，有集群，这就意味着，需要同步！！！如果有分库分表分区的情况，如果短时间内插入的数据量太大,读写数据不一致的情况在所难免
+
+[^WhyB]:[文件系统和数据库是由于什么原因才选择 B 树或 B+ 树建立索引的？](https://www.zhihu.com/question/62406977)
+[^BTree]:[MySQL索引凭什么能让查询效率提高这么多？](https://juejin.im/post/6869532756498448392?utm_source=gold_browser_extension)
+[^Cluster]:[聚簇索引和非聚簇索引](https://blog.csdn.net/lm1060891265/article/details/81482136?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param)
+[^Clustered]:[聚集索引，非聚簇索引，辅助索引](https://blog.csdn.net/riemann_/article/details/90324846?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
+[^Mysql]:[曾经，我以为我很懂 MySQL 索引...](https://mp.weixin.qq.com/s?__biz=MzU0OTk3ODQ3Ng==&mid=2247489255&idx=1&sn=43793ea6368c32645c9171e1ee160cd2&chksm=fba6fee4ccd177f22c31d8b1ab14ea44d7d753e6d42cd18be2c5fd5881362a702376ca953e39&mpshare=1&scene=1&srcid=0908hXnudi0sZuHNEzdMMRga&sharer_sharetime=1599530921440&sharer_shareid=f059618cb093f5efb49a39cd6562e90e&key=c45d238be947117fbf9b0bbb7c85ee41039a467b954cd73519cd9d9aa048aa01a00297833817905235b10d87d3e285f42ab3246ce4e4f0346cb6066b90f1d1818bff0bf31991b536d063c3f97c0186c04290dc3876c1e3ef7a19600e6394a14506fc814887b4b1c6db24acca9b7826917771ff67696dd12083792a68818d965c&ascene=1&uin=MTM2NzczNTcyNQ%3D%3D&devicetype=Windows+10+x64&version=62090529&lang=zh_CN&exportkey=A%2FCs263OBTZ%2F8s0ViGboT1k%3D&pass_ticket=g9yhQkckoZlAk%2FX6cPUhDBTSEp8osozONZ7MKFJVjVqOacOgUwH%2FJagIuENpoxqA&wx_header=0)
+[^唯一性与索引]:唯一性并不是索引的必要条件。将索引设置为唯一，对于等值查找当查到第一条符合条件的纪录时即可停止查找，而非唯一索引则要继续查找(回表，因为叶结点还是指针）。不过索引唯一维护开销也大，每一行数据的插入都会去检查重复以保证唯一性；
+[^explain]: https://blog.csdn.net/qq_20315217/article/details/120416716?spm=1001.2014.3001.5501
+[^敖丙调优]:[「数据库调优」屡试不爽的面试连环combo](https://juejin.cn/post/6844904201437315079)
+[^SQL优化]:[如何让你的SQL运行得更快](https://blog.csdn.net/gprime/article/details/1687930)
