@@ -38,3 +38,5 @@ ICP Query Extension
 民间的论坛：  
 新T树洞 new-t.github.io  
 闭社清华站 thu.closed.social
+
+修理东西： https://zh.ifixit.com/
