@@ -28,3 +28,7 @@ Android 隐私合规方案：
 https://github.com/lwj1994/privacy_hook
 
 用户同意之前禁止所有代码调用隐私 api，基本上常见的 api 都hook，如果有遗漏可以再加进去。
+## 身份验证
+https://www.permit.io/
+authing.com
+开源： logto.io
