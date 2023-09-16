@@ -1,6 +1,4 @@
 
-
-
 ## Software Use
 ## IDEA
 ### 本地RPC
@@ -11,7 +9,7 @@
 ### 本地Debug
 - Halo
 
-## 自动切换输入法
+### 自动切换输入法
 Smart Input
 
 ## GPT

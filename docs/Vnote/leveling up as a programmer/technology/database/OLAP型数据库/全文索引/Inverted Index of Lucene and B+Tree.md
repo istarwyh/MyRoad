@@ -222,9 +222,9 @@ jz --> zhou
 bitset 是一种很直观的数据结构，对应 posting list 如：
 <center>[1,3,4,7,10]</center>
 对应的 bitset 就是：
-<cenrter>[1,0,1,1,0,0,1,0,0,1]</center>
+<center>[1,0,1,1,0,0,1,0,0,1]</center>
 每个文档按照文档 id 排序对应其中的一个 bit。Bitset 自身就有压缩的特点，其用一个 byte 就可以代表 8 个文档。所以 100 万个文档只需要 12.5 万个 byte。但是考虑到文档可能有数十亿之多，在内存里保存 bitset 仍然是很奢侈的事情。而且对于个每一个 filter 都要消耗一个 bitset，比如 age=18 缓存起来的话是一个 bitset，18<=age<25 是另外一个 filter 缓存起来也要一个 bitset。
-Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路其实很简单。与其保存 100 个 0，占用 100 个 bit。还不如保存 0 一次，然后声明这个 0 重复了 100 遍。
+Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路其实很简单:与其保存 100 个 0，占用 100 个 bit;还不如保存 0 一次，然后声明这个 0 重复了 100 遍。
 
 这两种合并使用索引的方式都有其用途。Elasticsearch 对其性能有详细的[对比](https://www.elastic.co/blog/frame-of-reference-and-roaring-bitmaps)。简单来说对于简单的相等条件的过滤缓存成纯内存的 bitset 还不如需要访问磁盘的 skip list 的方式要快。
 

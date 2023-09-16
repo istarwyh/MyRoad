@@ -1,11 +1,4 @@
-## What is the Difference between PostgreSQL and Hologres?
 
-之所以这样问，是因为Hologres 兼容大部分 PostgreSQL 的语法，以及报错堆栈也与之相像。实际上Hologres这个词是`holographic`和`Postgres`的组合，Postgres指的是兼容PostgreSQL生态，holographic指的是全部信息，代表官方希望Hologres对数据进行全息的分析(HSAP )，并且能够兼容PostgreSQL生态[^hologres]。
-
-Hologres 相比PostgreSQL 主要做了以下创新：
-- 在tablet层面同时支持了row tablet 和 column tablet,并且是双份而不是raft同步
-- 所有查询都在内存中完成,哪怕OOM(?)
-- 引入了bitmap、dictionary encoding 提高查询速度,不过 PostgreSQL 有插件，更多索引都能支持
 ## Data Storage Partition[^HologresUse]
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309102000835.png)
 如上所示，用户写了一个SQL之后，首先会按照用户分区键路由到对应要找的表上面，找对逻辑对象Table。  
@@ -31,5 +24,14 @@ ClusteringKey的设计是按照最左匹配的原则，就是当遇到用户的�
 位图索引，对于等值过滤场景有明显的优化效果，多个等值过滤条件，通过向量比较计算。位图索引主要的应用场景是在点查过滤。  
 同样的，位图索引也有个问题，就是**基数过多的列，在位图索引编码时，会形成稀疏数组（列很多，值很少），对查询性能改善影响小。**
 
-[^hologres]: https://developer.aliyun.com/article/778789
+## Difference between PostgreSQL and Hologres
+
+之所以这样问，是因为Hologres 兼容大部分 PostgreSQL 的语法，以及报错堆栈也与之相像。实际上Hologres这个词是`holographic`和`Postgres`的组合，Postgres指的是兼容PostgreSQL生态，holographic指的是全部信息，代表官方希望Hologres对数据进行全息的分析(HSAP )，并且能够兼容PostgreSQL生态[^hologres]。
+
+Hologres 相比PostgreSQL 主要做了以下创新：
+- 在tablet层面同时支持了row tablet 和 column tablet,并且是双份而不是raft同步
+- 所有查询都在内存中完成,哪怕OOM(?)
+- 引入了bitmap、dictionary encoding 提高查询速度,不过 PostgreSQL 有插件，更多索引都能支持
+
 [^HologresUse]: https://developer.aliyun.com/article/785330
+[^hologres]: https://developer.aliyun.com/article/778789

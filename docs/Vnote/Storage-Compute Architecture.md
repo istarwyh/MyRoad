@@ -8,8 +8,11 @@
 计算节点可以像访问单机数据一样访问共享存储。但是计算节点需要引入共识算法保证数据同步和一致性，继而计算节点扩展有一个上限。
 
 ## Shard Disaggregation
-想要综合shared nothing和shared storage的优点，所以把存储和计算都分离了,计算节点之间也别通信了，就处理自己分片数据。
+想要综合[[Storage-Compute Architecture#Shard Nothing|Share Nothing]]和[[Storage-Compute Architecture#Shard Storage|Share Storage]]的优点，所以把存储和计算都分离了,计算节点之间也别通信了，就处理自己分片数据。
 优点：
 1. 一致性问题处理比较简单，计算层只需要保证同一时刻有一个计算节点写入同一分片。
 2. 扩展灵活 & 计算节点故障恢复快，没有 shared nothing的问题。
 缺点：我猜底层数据的一致性就麻烦了吧
+
+### Example
+- [[Hologres]]
