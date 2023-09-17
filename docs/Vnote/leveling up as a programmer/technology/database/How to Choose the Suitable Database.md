@@ -13,6 +13,13 @@ NoSQL (Not Only SQL) is a category of non-relational distributed databases that 
 NewSQL is an emerging database concept that combines traditional relational databases with [[Distributed Computing]]. It aims to provide the transactional consistency and data security of traditional relational databases, while also offering the scalability and high concurrency processing capabilities of distributed databases. NewSQL databases achieve data [[Horizontal Scaling]] and load balancing through innovative architectures and technologies such as sharding, replication, and intelligent routing. This combination of relational and distributed computing approaches satisfies the modern application's requirements for high performance, high availability, and strong consistency. Representative examples of NewSQL databases include Spanner, CockroachDB, and TiDB.
 
 
+
+## New Hardware
+### NVMe
+NVMe, or Non-Volatile Memory Express, is a communication protocol designed specifically for high-speed solid-state drives (SSDs). 
+Compared to disk and memory, it strikes a balance between cost and random access performance.
+### [[RDMA]]
+
 ## Data Create、Persistence & Backup
 ### Index Structure
 - ...traditional data structure like list、array
@@ -50,6 +57,7 @@ In a traditional column storage database, data is stored by column rather than b
 ##### Examples:
 - [[Hologres]] Coexistence of Rows and Columns Style
 - [[Bigtable]]
+- [[OceanBase]]
 #### LSM
 Examples: Inverted Index
 ### Backup Strategy
@@ -73,7 +81,7 @@ The AOF and [[Write-Ahead Logging]] share the principle of logging changes to da
 - OSS and Simple Storage Service are object storage services, storing data as objects in a flat address space.
 ### Connection Model
 ### Spawning a New Process on Each Connection
-The process model provides better isolation, for example, an invalid memory access error can only crash a single process, rather than the entire database server. The process model, on the other hand, consumes more resources.
+The process model provides better isolation, for example, an invalid memory access error can only crash a single process, rather than the entire database server. The process model, on the other hand, consumes more resources like memory.
 #### Example
 - PostgreSQL
 ### Spawns a New Thread on Each Connection
@@ -85,7 +93,9 @@ The process model provides better isolation, for example, an invalid memory acce
 - Elasticsearch, MongoDB, and TiDB support optimistic concurrency control.
 - ClickHouse uses a lock-free data structure for concurrent query execution.
 ## Database Solutions for Distributed Systems
-
+### Database Sharding
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309171515581.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309171517508.png)
 ### Consensus Algorithm
 #### [[Paxos]]
 #### [[Raft]]
@@ -114,6 +124,7 @@ In traditional database deployment, the master and slave each maintain an indepe
 
 ## **Ecosystem Ecological Ecosystem**
 ## Features of Common Database
+### Cost
 
 ### **Performance**
 
@@ -125,6 +136,9 @@ In traditional database deployment, the master and slave each maintain an indepe
 - ClickHouse focuses on read consistency for analytical queries.
 - OSS and Simple Storage Service provide eventual consistency for object storage.
 ### **Usability**
+#### Support for Global Indexes
+Local indexes are friendly to transaction performance and are all local transactions. However, they have the disadvantage of [[Possible Problems with Sharding and Partitioning#4. 读扩散：查询没有分库分表键拖慢查询| read amplification]]. 
+Global indexes avoid read amplification, but they convert all transactions into [[Possible Problems with Sharding and Partitioning#3. 分布式事务|distributed transactions]], greatly increasing transaction complexity and slowing down the performance of individual transactions.
 #### Query Language
 - MySQL and PostgreSQL use `SQL` as their query language.
 - Redis has its own `set of commands` for data manipulation.
@@ -171,4 +185,4 @@ https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
 https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 
 
- [^PostgrevsMysql]: [全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
+ :[^PostgrevsMysql] [全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)

@@ -6,7 +6,7 @@
 
 ## Shard Storage
 计算节点可以像访问单机数据一样访问共享存储。但是计算节点需要引入共识算法保证数据同步和一致性，继而计算节点扩展有一个上限。
-
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309171509717.png)
 ## Shard Disaggregation
 想要综合[[Storage-Compute Architecture#Shard Nothing|Share Nothing]]和[[Storage-Compute Architecture#Shard Storage|Share Storage]]的优点，所以把存储和计算都分离了,计算节点之间也别通信了，就处理自己分片数据。
 优点：

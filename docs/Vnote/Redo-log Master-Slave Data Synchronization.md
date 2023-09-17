@@ -3,9 +3,15 @@
 >Please also include relevant resources or tips for further learning on this topic, such as reputable sources and recommended reading.
 >Please note that your response should encourage creative and flexible thinking about the concept of master-slave synchronization, while still providing a solid foundation of understanding and step-by-step guidance.
 
+## Concept
 Master-slave synchronization with Redo Log involves capturing and applying the changes made to a database's Redo Log files. **The Redo Log records the data modifications (inserts, updates, deletes) performed on the master database.** By replicating the Redo Log from the master to the slave databases, the same modifications are applied to the slave databases, maintaining data consistency in the same order they occurred on the master.
 
-Comparing with the [[Binlog Master-Slave Data Synchronization]]:
+## Comparing with the [[Binlog Master-Slave Data Synchronization]]
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309171547768.png)
+
+This image is from Baotiao's comparison of PolarDB and MySQL redolog and binlog, assuming here that the cluster using redolog is ShareStorage. So the logical replication has more delay than the physical replication.
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309171556653.png)
+
 **Advantages:**
 
 1. Lower Network Overhead: Redo log replication transmits only the physical changes made to the database, resulting in reduced network traffic compared to binlog replication.
