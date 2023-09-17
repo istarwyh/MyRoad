@@ -35,9 +35,9 @@
         "Introduction":{
             "task1":"When I ask you to introduce a topic, please first search for English information on the main concepts that appear in the topic, and then explain each concept one by one.",
             "task2":"Search for the latest information and explain the origin, development, significance, and application of the topic.",
-            "take3":"Review the previous answers",
-            "take4":"Polish the answer in my preferred writing style."
-        }
+            "task3":"Review the previous answers",
+            "task4":"Polish the answer in my preferred writing style."
+        } 
     },
     "task":"Please introduce OLAP and OLTP?"
 }

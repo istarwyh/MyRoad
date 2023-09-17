@@ -9,6 +9,9 @@
 ## 备案
 http://w2solo.com/topics/4033
 海外支付：Stripe, Paddle, Lemon, squeezy, FastSpring
+### 海外身份
+海外手机卡：https://www.giffgaff.com/orders/affiliate/lauix16 邀请链接
+
 ## 支付
 ### Stripe
 https://itangtalk.com/stripe/
