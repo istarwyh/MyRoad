@@ -40,3 +40,5 @@ ICP Query Extension
 闭社清华站 thu.closed.social
 
 修理东西： https://zh.ifixit.com/
+
+架构图绘制：

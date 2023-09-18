@@ -68,8 +68,10 @@ Redis doesn't use a traditional [[Write-Ahead Logging|WAL]], but its AOF persist
 The AOF and [[Write-Ahead Logging]] share the principle of logging changes to data before they are applied, providing a way to recover the state of the data in case of a crash. The AOF can be configured to sync to disk at different frequencies based on the fsync policy. This allows you to balance between write performance and data durability.
 #### [RDB(Redis Database)](https://redis.io/docs/management/persistence/)
 
+### RDB + AOF
+[AOF rewrite](https://redis.io/docs/management/persistence/)
 
-
+When AOF is performing a AOF rewrite, Redis first writes a data snapshot in RDB format to the AOF file, and then appends each write command generated during this period to the AOF file.
 ## Conventional System Implementation Method
 ### Data Model
 - MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
