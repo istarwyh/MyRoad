@@ -41,4 +41,6 @@ ICP Query Extension
 
 修理东西： https://zh.ifixit.com/
 
-架构图绘制：
+架构图绘制：https://www.onemodel.app/
+
+ai 生成网页： https://v0.dev/
