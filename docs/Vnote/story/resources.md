@@ -44,3 +44,11 @@ ICP Query Extension
 架构图绘制：https://www.onemodel.app/
 
 ai 生成网页： https://v0.dev/
+
+网站防火墙：
+https://github.com/chaitin/SafeLine
+
+带入操作系统视角的游戏：
+https://github.com/plbrault/youre-the-os
+
+keyviz：一款免费的实时键鼠输入可视化软件
