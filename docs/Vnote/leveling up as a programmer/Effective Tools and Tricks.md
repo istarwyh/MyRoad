@@ -1,12 +1,14 @@
+## Terminal
+### Warp
 
-## Software Use
-## IDEA
-### 本地RPC
+## IDE
+#### IDEA
+#### 本地RPC
 - HSF-Console
-### 本地发送消息
+#### 本地发送消息
 - HSF-Console
 - 大波浪
-### 本地Debug
+#### 本地Debug
 - Halo
 
 ### 自动切换输入法
