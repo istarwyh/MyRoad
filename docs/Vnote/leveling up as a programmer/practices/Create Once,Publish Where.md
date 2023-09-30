@@ -112,7 +112,8 @@ The PARA Method: A Universal System for Organizing Digital Information
 - MindMap: https://www.processon.com/v/64a1092b259a5437d9992cc6
 - Jupyter Book
 - Docusaurus
+- Docsify
 
 ### Publish
-- Github Pages
+- GitHub Pages
 - 发布每个人自己的博客网站并提供订阅服务： https://xiaohuihui.substack.com/
