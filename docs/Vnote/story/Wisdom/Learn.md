@@ -6,7 +6,8 @@
 
 那些评论康德《纯粹理性批判》，却根本没看过他《实践理性批判》的人；批评亚当·斯密的《国富论》，却没看过他《道德情操论》的人；或是谈论《共产党宣言》，却没有看过马克思《资本论》的人，他们都是在赞成或反对一些自己并不了解的东西。--《如何阅读一本书》
 
-Creativity is mostly copying.
-[[Absent-minded learning yields no gain]]
+Creativity is mostly copying.[[Absent-minded learning yields no gain]].
 Achieving an 85% success rate appears to be the optimal condition for efficient learning, both in humans and machines.
 -- ScottYoung
+
+对他人的实现抱有敬畏之心,完整地、不修改地模仿别人是有必要的。

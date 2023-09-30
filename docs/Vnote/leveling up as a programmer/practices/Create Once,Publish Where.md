@@ -8,6 +8,7 @@ All: https://www.aigc.cn/
 - RSS?
 - Cubox
 - 从微信直接输入：Flomo
+- [自动同步微信聊天记录](https://mp.weixin.qq.com/s/Yq9x_eA_WLxs5aGrcx2ENA)
 ### Read
 #### Integration
 
@@ -109,6 +110,9 @@ The PARA Method: A Universal System for Organizing Digital Information
 
 - https://gamma.app/
 - MindMap: https://www.processon.com/v/64a1092b259a5437d9992cc6
+- Jupyter Book
+- Docusaurus
 
 ### Publish
+- Github Pages
 - 发布每个人自己的博客网站并提供订阅服务： https://xiaohuihui.substack.com/
