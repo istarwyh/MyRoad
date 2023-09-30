@@ -12,8 +12,6 @@
 
 **总体流程如下图:[^0]
 
-[^0]:[从URL输入到页面展现到底发生什么?](https://github.com/ljianshu/Blog/issues/24)
-
 ![](https://gitee.com/istarwyh/images/raw/master/1617621094_20210405191108954_15113.png)
 
 ## 1. 按下"g"键
@@ -62,10 +60,10 @@ Windows的 ``SendMessage`` API直接将消息添加到特定窗口句柄 ``hWnd`
 
 ## 4. DNS 查询···
 通过URL寻找用IP地址标志的哪台机器上有你需要资源的过程或者说技术。[^1]
-### 4.1. URL: Uniform Resorce Location
+### 4.1. URL: Uniform Resource Location
 浏览器地址栏上的地址就是`URL`.以url:`https://segmentfault.com/a/12345#item-1-1`为例:
 
-`https://` ~~WWW.~~  `segmentfault.com` ~~.~~  ~~:443~~ `/a/12345` `#item-1-1`
+`https://` ~~WWW.~~ `segmentfault.com` ~~.~~ ~~:443~~ `/a/12345` `#item-1-1`
 
 - 协议,如`https`
 - 主机服务器,如`www.segmentfault.com`
@@ -76,8 +74,6 @@ Windows的 ``SendMessage`` API直接将消息添加到特定窗口句柄 ``hWnd`
 - 锚点(目录/书签),如`#item-1-1`
 - WWW:一组**分布式**通信应用程序和系统软件,使用`超文本数据结构`建立在Internet上的**信息组织形式**与表现形式,包括`Web客户端`(Client)与`Web服务器端`(Server).S端往往由大量的计算机集群组成.
 - IP地址:标志了某台计算机在网络中的位置.如果它是服务器,则可以响应Client的请求.
-
-[^1]:[从输入URL到页面加载发生了什么](https://segmentfault.com/a/1190000006879700#item-1-1)
 
 于是浏览器通过 URL 能够知道下面的信息：
 
@@ -93,17 +89,15 @@ Windows的 ``SendMessage`` API直接将消息添加到特定窗口句柄 ``hWnd`
 * 注意，一个网站哪怕不在 HSTS 列表里，也可以要求浏览器对自己使用 HSTS 政策进行访问。浏览器向网站发出第一个 HTTP 请求之后，网站会返回浏览器一个响应，请求浏览器只使用 HTTPS 发送请求。然而，就是这第一个 HTTP 请求，却可能会使用户收到 `downgrade attack`_ 的威胁，这也是为什么现代浏览器都预置了 HSTS 列表。
 ### 4.4. 转换非 ASCII 的 Unicode 字符
 * 浏览器检查输入是否含有不是 ``a-z``， ``A-Z``，``0-9``， ``-`` 或者 ``.`` 的字符
-* 这里主机名是 ``google.com`` ，所以没有非ASCII的字符，如果有的话，浏览器会对主机名部分使用 `Punycode`_  编码
+* 这里主机名是 ``google.com`` ，所以没有非ASCII的字符，如果有的话，浏览器会对主机名部分使用 `Punycode`_ 编码
     * 比如浏览器最终会把中文用 字符编码+`Percent Encode`翻译为真正的url再发给服务器。浏览器地址栏里的中文只是想让用户体验好些而已[^深入理解GET与POST]。
-### 4.5. DNS:Domian name Server
+### 4.5. DNS:Domain Name Server
 - 一种用于TCP/IP应用程序的**分布式数据库**[^2]
     - 本地域名服务器
         - ISP:Internet Service Provider
     - 根域名服务器,如`.`
     - 顶级域名服务器,如`com`
     - 权限域名服务器,如`google.com`
-
-[^2]:[一个用户在地址栏输入例如www.baidu.com,DNS解析大概有10个过程](https://www.cnblogs.com/fanfan0916/p/9369913.html)
 
 * 如果 DNS 服务器和我们的主机在同一个子网内，系统会先对 DNS 服务器进行 ARP查询
 * 如果 DNS 服务器和我们的主机在不同的子网，系统只能先对默认网关进行查询
@@ -195,13 +189,13 @@ id5-.在.->id1
 ### 5.2. TCP连接
 上一步DNS解析拿到了服务器的IP地址,客户端在http对应的端口号,一般是`80`发起TCP连接,而启动后的服务端一直在`80`端口监听,处于`Listen`状态.之后建立连接的过程可以描述为三次握手.为了实现应用层的服务,这里是`http`,客户端需要在传输层与服务端间建立TCP连接.
 
-1.  客户端选择一个初始序列号(`ISN`)，将设置了 `SYN` 位的封包发送给服务器端，表明自己要建立连接并设置了初始序列号
+1. 客户端选择一个初始序列号(`ISN`)，将设置了 `SYN` 位的封包发送给服务器端，表明自己要建立连接并设置了初始序列号
 2. 服务器端接收到 SYN 包，如果它可以建立连接：
    * 服务器端选择它自己的初始序列号
    * 服务器端设置 SYN 位，表明自己选择了一个初始序列号
    * 服务器端把 (`客户端ISN + 1`) 复制到 ACK 域，并且设置 `ACK` 位，表明自己接收到了客户端的第一个TCP segment
         * `+x`原本是表明接受了x Byte的数据,但是因为含有SYN或FIN标志位的包并不携带有效数据,所以这里不会对有效数据的计数产生影响
-3.  客户端通过发送下面一个TCP segment来确认这次连接：
+3. 客户端通过发送下面一个TCP segment来确认这次连接：
    * 自己的序列号+1
    * 接收端 ACK+1
    * 设置 ACK 位
@@ -347,12 +341,9 @@ http其实相当自由,理论上允许参数放url的path里、querystring里、
 
 #### 6.2.2. Rest请求格式
 REST的设计目标是解决互联网级别的信息共享和互操作问题[^大宽宽]，url主体是资源，是个名词[^Vincross]。
-[^Vincross]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/163638731)
-[^大宽宽]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/541465581)
-
 - `GET` + URL : 获取资源或者资源列表
     - <Header>
--  `POST` + URL : **创建**一个资源
+- `POST` + URL : **创建**一个资源
     - <Header>
     - {json串}
 - `PUT` + URL : **替换**一个已有记录
@@ -465,9 +456,9 @@ REST的设计目标是解决互联网级别的信息共享和互操作问题[^�
 ### 6.4. 数据包分组发送
 
 TCP工作在全双工模式，建立连接后TCP会将需要传输的数据包划分为`TCP Segment`在B/S之间双向数据传输，并允许同时进行。
-1)  发送数据 ：服务器向客户端发送一个带有数据的数据包，该**数据包中的序列号**和确认号与建立连接第三步的数据包中的序列号和确认号相同；
+1) 发送数据 ：服务器向客户端发送一个带有数据的数据包，该**数据包中的序列号**和确认号与建立连接第三步的数据包中的序列号和确认号相同；
 
-2)  确认收到 ：客户端收到该数据包，向服务器发送一个确认数据包，该数据包中`序列号`为`上一个数据包中的确认号值`，而`确认号`为服务器发送的`上一个数据包中的序列号+该数据包中所带数据的大小`。
+2) 确认收到 ：客户端收到该数据包，向服务器发送一个确认数据包，该数据包中`序列号`为`上一个数据包中的确认号值`，而`确认号`为服务器发送的`上一个数据包中的序列号+该数据包中所带数据的大小`。
 
 这里序列号用于确认收到,确认号则确认收到无误.在这里,如果只有确认号也可以达到保证收到及无误的作用,但是序列号还可以使:
 
@@ -483,7 +474,7 @@ HTTPD(HTTP Daemon)在服务器端处理请求/相应。最常见的 HTTPD 有 Li
 * 服务器把请求拆分为以下几个参数：
     * HTTP 请求方法(GET, POST, HEAD, PUT 和 DELETE)。在访问 Google 这种情况下，使用的是 GET 方法
     * 域名：google.com
-    * 请求路径/页面：/  (我们没有请求google.com下的指定的页面，因此 / 是默认的路径)
+    * 请求路径/页面：/ (我们没有请求google.com下的指定的页面，因此 / 是默认的路径)
 * 服务器验证其上已经配置了 google.com 的虚拟主机
 * 服务器验证 google.com 接受 GET 方法
 * 服务器验证该用户可以使用 GET 方法(根据 IP 地址，身份信息等)
@@ -554,10 +545,8 @@ Content-Length: 2333
 504 Gateway Timeout | 网关超时(网关不可达?)
 505 HTTP Version Not Supported | 服务器不支持请求中指明的HTTP协议版本
 ### 7.3. 记录客户端状态
-#### 7.3.1. http无状态
+#### 7.3.1. Http无状态
 设计决策基于以下想法：上传到网站的内容可以位于多个不同的服务器上。[^full-stack]大多数Web流量与检索未更改的内容有关，服务器和浏览器软件的实现者不一定需要预留资源维护用户空间。
-
-[^full-stack]: [HTTP协议无状态性和cookie](https://materiaalit.github.io/wepa-s17/part3/)
 
 #### 7.3.2. Cookie
 但是服务器端的业务往往需要是有状态的,如用户的登录次数,账号密码等。因此HTTP / 1.1允许服务器端生成Cookie，发送给**浏览器端**的`User-Agent`,User-Agent会将`Cookie`的`key/value`保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器,如:
@@ -597,8 +586,6 @@ Content-Length: 2333
 * **UI后端** UI 后端用于绘制基本 UI 组件，例如下拉列表框和窗口。UI 后端暴露一个统一的平台无关的接口，下层使用操作系统的 UI 方法实现
 * **Javascript 引擎** Javascript 引擎用于解析和执行 Javascript 代码
 * **数据存储** 数据存储组件是一个持久层。浏览器可能需要在本地存储各种各样的数据，例如 Cookie 等。浏览器也需要支持诸如 localStorage，IndexedDB，WebSQL 和 FileSystem 之类的存储机制
-
-[^DOM]:[从 HTML，CSS 和 JS 的解析，DOM 树的建立；到最终的渲染，布局和动态调整](https://shaunlebron.github.io/pacman-mazegen/)
 
 一个 Webkit 内核的浏览器工作流程图:
 ![](_v_images/20201126163521310_20314.png)
@@ -654,12 +641,18 @@ HTML不能使用常见的自顶向下或自底向上方法来进行分析。主�
     因为TCP工作在全双工模式,每个方向上需要单独关闭.在一方请求关闭--收到确认(最后一次自己发送的报文收到的)报文关闭之后,另一方可能还需要发送数据,也需要重复这一过程,所以是四次握手
 
 2. **主动关闭方收到`FIN`报文后为什么还要等待`2MSL`(TIME_WAIT倒计时)才进入`CLOSE`状态?**
-    MSL:Maximum Segement Lifetime,报文最大生存时间(default `2min`,必须大于`TTL`(跳数为单位)).之所以用到它还是与网络报文到达的不确定性有关.
+    MSL:Maximum Segment Lifetime,报文最大生存时间(default `2min`,必须大于`TTL`(跳数为单位)).之所以用到它还是与网络报文到达的不确定性有关.
     - 如果主动关闭方的`ACK`报文丢失了,则会触发被动关闭方超时重传`FIN+ACK`报文段,之后主动关闭方再重传一次确认进行最后一次挥手,并**重新启动**2MSL计时器.
         - 那么在丢了ACK的情况下,如果不等待2MSL,被动关闭方将不能正常进入`CLOSED`状态.而触发超时重传到被动关闭方重发`FIN`到达的时间小于等于`2MSL`.
         - 所以MSL不可以太小,否则ACK丢了`FIN`重发到不了主动关闭方;也不可以太大,否则白白等待.
     - 另一方面,如果不等待2MSL就关闭,如果有历史连接请求到达被动关闭方,被动关闭方的回复就无法得到主动关闭方的响应,如`RST`报文的拒绝.而历史连接到达与服务器返回报文的时间最多就2MSL.
         - 等待2MSL之后,**本连接持续的时间内所产生的所有报文也就将从网络中消失**.
 
-
+[^0]:[从URL输入到页面展现到底发生什么?](https://github.com/ljianshu/Blog/issues/24)
+[^1]:[从输入URL到页面加载发生了什么](https://segmentfault.com/a/1190000006879700#item-1-1)
 [^深入理解GET与POST]:[深入理解GET与POST](https://blog.csdn.net/bingxuesiyang/article/details/102474310?utm_medium=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v28-9.nonecase&depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task--2~all~first_rank_v2~rank_v28-9.nonecase)
+[^2]:[一个用户在地址栏输入例如www.baidu.com,DNS解析大概有10个过程](https://www.cnblogs.com/fanfan0916/p/9369913.html)
+[^大宽宽]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/541465581)
+[^Vincross]:[WEB开发中，使用JSON-RPC好，还是RESTful API好？](https://www.zhihu.com/question/28570307/answer/163638731)
+[^full-stack]: [HTTP协议无状态性和cookie](https://materiaalit.github.io/wepa-s17/part3/)
+[^DOM]:[从 HTML，CSS 和 JS 的解析，DOM 树的建立；到最终的渲染，布局和动态调整](https://shaunlebron.github.io/pacman-mazegen/)
