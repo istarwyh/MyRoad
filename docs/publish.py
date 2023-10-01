@@ -4,7 +4,13 @@ from git.exc import GitCommandError
 
 path = 'output/html'
 repo_url = 'https://github.com/istarwyh/Myroad.git'
-
+# git init
+# git checkout -b gh-pages
+# git add .
+# git commit -am "gh-pages"
+# git remote -v
+# git remote add origin https://github.com/istarwyh/Myroad.git
+# git push -f origin gh-page
 print(f"\033[32mStart publishing to your git repo: {repo_url}\nPlease wait...\033[0m")
 
 try:
