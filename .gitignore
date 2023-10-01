@@ -25,6 +25,7 @@ build/
 
 #vscode
 *.vscode
+/.vscode/
 
 # temp file
 *.log
