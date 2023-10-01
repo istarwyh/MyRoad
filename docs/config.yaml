@@ -1,0 +1,4 @@
+# The note that will be used as the index.html
+# should be in obsidian_folder_path_str
+# Use the full path or relative path, but don't use ~/
+obsidian_entrypoint_path_str: './Vnote/leveling up as a programmer/Farming_in_the_cyber_world.md'

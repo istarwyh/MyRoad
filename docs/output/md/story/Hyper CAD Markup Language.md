@@ -1,0 +1,8 @@
+---
+tags:
+- idea
+---
+   
+`{_obsidian_pattern_tag_idea}`    
+有超文本，应该也要有超图纸，可以关注 kittyCAD   
+另外 CAD 都线上协作也是值得关注的方向。
