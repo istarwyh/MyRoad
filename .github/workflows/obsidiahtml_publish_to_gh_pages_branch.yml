@@ -22,7 +22,7 @@ jobs:
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html
           obsidianhtml convert -i ${{ github.workspace }}/docs/config.yaml -v
-          touch ../html/.nojekyll
+          touch html/.nojekyll
 
       - name: Publish to Github Pages
         uses: s0/git-publish-subdir-action@develop
