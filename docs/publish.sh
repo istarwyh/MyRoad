@@ -1,5 +1,9 @@
 #!/bin/bash
 
+git commit -am "modify"
+
+git push
+
 # Convert Obsidian files to HTML
 obsidianhtml convert -i config.yaml
 

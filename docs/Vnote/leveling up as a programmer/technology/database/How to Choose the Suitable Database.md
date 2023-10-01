@@ -1,6 +1,6 @@
 How do we choose a suitable database in face with kinds of databases?[^awschoice]
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202310012255322.png)
-In my opinion, we should focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, 
+The most important thing is definitely the business scenario in which our database is used. However, in this article, we will focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, 
 >"How much innovation in basic technology does this project achieve, and what combination of existing technologies does it involve?"
 
 ## Ask GPT4
