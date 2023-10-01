@@ -12,14 +12,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: master
-          path: docs/Vnote
+          path: docs
 
       - name: Install dependencies and run build
         run: |
           cd ${{ github.workspace }}
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html
-          obsidianhtml convert -i docs/Vnote/config.yaml -v
+          obsidianhtml convert -i docs/config.yaml -v
           touch html/.nojekyll
 
       - name: Publish to Github Pages
