@@ -4,6 +4,8 @@ from git.exc import GitCommandError
 
 path = 'output/html'
 repo_url = 'https://github.com/istarwyh/Myroad.git'
+# obsidianhtml convert -i config.yaml
+# cd output/html
 # git init
 # git checkout -b gh-pages
 # git add .

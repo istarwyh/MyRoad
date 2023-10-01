@@ -76,7 +76,7 @@ The AOF and [[Write-Ahead Logging]] share the principle of logging changes to da
 
 When AOF is performing a AOF rewrite, Redis first writes a data snapshot in RDB format to the AOF file, and then appends each write command generated during this period to the AOF file.
 ## Conventional System Implementation Method
-### Data Model
+### Data Model[^wavedb]
 - **Relational** – with data organized in tables related to each other, like MySQL and PostgreSQL;
 - **Hierarchical** – a tree-like structure, organizing data into parent-child relationships;
 - **Network** – based on the hierarchical model, with the possibility of many-to-many parent-child relationships;
@@ -178,7 +178,7 @@ Postgres supports several extensions. The most outstanding is PostGIS, which bri
 - ClickHouse is ideal for real-time analytics and reporting.
 - OSS and Simple Storage Service are suitable for storing large amounts of unstructured data, such as images, videos, and backups.
 
-### Other case
+### Other cases
 1. [一名开发者眼中的 TiDB 与 MySQL 的选择丨TiDB Community](https://mp.weixin.qq.com/s/MrXitmIGnlsWY25aw1SRqw)
 2. [数据库选型：MySQL、PolarDB、PolarDB-X、TableStore、MongoDB、TiDB、ClickHouse:](https://mp.weixin.qq.com/s/2oKTItUgvsbEHItiWiGtzA)
 
@@ -186,7 +186,6 @@ Postgres supports several extensions. The most outstanding is PostGIS, which bri
 
 [^awschoice]: https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
 
-https://waverleysoftware.com/blog/how-to-choose-the-right-database/
-
+[^wavedb]:https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 
  [^PostgrevsMysql]:[全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
