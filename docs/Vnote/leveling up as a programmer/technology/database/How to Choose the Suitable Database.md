@@ -1,4 +1,7 @@
-To choose the suitable database, we should focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, "How much innovation in basic technology does this project achieve, and what combination of existing technologies does it involve?"
+How do we choose a suitable database in face with kinds of databases?[^awschoice]
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202310012255322.png)
+In my opinion, we should focus on the key differences between them, especially the main technology of them, because I believe none of a database can obtain all the advantages. When we encounter a new project, we should ask ourselves, 
+>"How much innovation in basic technology does this project achieve, and what combination of existing technologies does it involve?"
 
 ## Ask GPT4
 >As an expert on databases, your task is to provide a summary of ten dimensions that illustrate the differences between databases such as MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, TiDB, ClickHouse, OSS, Simple Storage Service, and others. The dimensions should include factors such as data model, infrastructure, index structure, data-sync strategy, data store strategy and other technical factors. Your summary should explain the reasons why these differences exist and how they affect the suitability of each database for different use cases.
@@ -74,13 +77,14 @@ The AOF and [[Write-Ahead Logging]] share the principle of logging changes to da
 When AOF is performing a AOF rewrite, Redis first writes a data snapshot in RDB format to the AOF file, and then appends each write command generated during this period to the AOF file.
 ## Conventional System Implementation Method
 ### Data Model
-- MySQL and PostgreSQL use a relational data model with tables, rows, and columns. They support SQL queries and ACID transactions.
-- Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
-- ElasticSearch stores data in JSON documents and is designed for search and analytics.
-- MongoDB is a document-based NoSQL database, storing data in BSON format.
-- TiDB is a distributed NewSQL database that supports the MySQL protocol and provides horizontal scalability.
-- ClickHouse is a columnar database designed for real-time analytics.
-- OSS and Simple Storage Service are object storage services, storing data as objects in a flat address space.
+- **Relational** – with data organized in tables related to each other, like MySQL and PostgreSQL;
+- **Hierarchical** – a tree-like structure, organizing data into parent-child relationships;
+- **Network** – based on the hierarchical model, with the possibility of many-to-many parent-child relationships;
+- **Object-oriented** – store data as objects, for example, JSON documents or media files; meant to conform to the needs of object-oriented programming and multimedia-based software, like MongoDB and Simple Storage Service. Although S3 stores data as objects in a flat address space.
+- **Object-relational** – also called hybrid, as it is a mixture of relational and object-oriented approach to database modeling;
+- **Entity-relationship** – data is stored in a way to reflect relationships between entities, their attributes, or processes.
+- **Inverted index** – a data store that organizes a list of identifiers (indexes) of certain data elements within a file, document, or a set of documents – most often applied in full-text search such as we do with search engines, like ElasticSearch;
+- **Multidimensional** – a complex cube-like data structure based on a variation of relational database which is used for data analytics and viewing the same data from different perspectives. Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
 ### Connection Model
 ### Spawning a New Process on Each Connection
 The process model provides better isolation, for example, an invalid memory access error can only crash a single process, rather than the entire database server. The process model, on the other hand, consumes more resources like memory.
@@ -180,9 +184,9 @@ Postgres supports several extensions. The most outstanding is PostGIS, which bri
 
 ## References
 
-https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
+[^awschoice]: https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
 
 https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 
 
- :[^PostgrevsMysql][全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
+ [^PostgrevsMysql]:[全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
