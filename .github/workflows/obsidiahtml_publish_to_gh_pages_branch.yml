@@ -2,16 +2,16 @@ name: Publish to gh-pages branch
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
-      - name: Checkout main
+      - name: Checkout master
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: master
           path: clone-path
 
       - name: Install dependencies and run build
