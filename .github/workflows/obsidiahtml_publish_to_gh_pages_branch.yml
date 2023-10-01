@@ -16,11 +16,11 @@ jobs:
 
       - name: Install dependencies and run build
         run: |
-          cd ${{ github.workspace }}
+          cd ${{ github.workspace }}/docs
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html
-          obsidianhtml convert -i docs/config.yaml -v
-          touch html/.nojekyll
+          obsidianhtml convert -i config.yaml -v
+          touch ../html/.nojekyll
 
       - name: Publish to Github Pages
         uses: s0/git-publish-subdir-action@develop
