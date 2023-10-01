@@ -180,11 +180,9 @@ Postgres supports several extensions. The most outstanding is PostGIS, which bri
 
 ## References
 
-https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA
-
 https://aws.amazon.com/cn/startups/start-building/how-to-choose-a-database/
 
 https://waverleysoftware.com/blog/how-to-choose-the-right-database/
 
 
- :[^PostgrevsMysql] [全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
+ :[^PostgrevsMysql][全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
