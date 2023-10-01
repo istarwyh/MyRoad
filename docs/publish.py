@@ -9,7 +9,7 @@ print(f"\033[32mStart publishing to your git repo: {repo_url}\nPlease wait...\03
 
 try:
     repo = Repo.init(path)
-    # repo.create_remote('origin', url=repo_url)
+    repo.create_remote('origin', url=repo_url)
 
     # Add all files in the 'output/html' directory to the staging area
     for file in os.listdir(path):
