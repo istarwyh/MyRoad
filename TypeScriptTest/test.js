@@ -52,7 +52,7 @@ console.log(data);
 // ----------------------------------------------------------------------------------------
 // 实现对String内置的repeat方法!!!可以改String的内置方法?!!原型链...
 String.prototype.repeatify = String.prototype.repeatify || function (times) {
-    var str = '-->';
+    let str = '-->';
     while (times > 0) {
         str += this;
         times--;

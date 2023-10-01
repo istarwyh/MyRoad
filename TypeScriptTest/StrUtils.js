@@ -5,7 +5,7 @@ function convertToParamStr(paramObj) {
         requestParam.push(`${attr}=${filter(paramObj[attr])}`);
     }
     return '?' + requestParam.join('&');
-};
+}
 function filter(str) {
     str += '';
     str = str.replace(/%/g, '%25');
