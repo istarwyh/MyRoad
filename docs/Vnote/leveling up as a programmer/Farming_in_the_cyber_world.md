@@ -38,10 +38,17 @@ Smart Input
 ### 版本管理工具
 git: https://learngitbranching.js.org/
 [[Frequently Git Command]]
-### 快速利用数据库的工具
+
+### DataBase
+#### 选择数据库
+[[How to Choose the Suitable Database]]
+#### 快速利用数据库
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/
 - 可视化创建数据库🀄️数据：https://visualdb.com/
+#### 数据库管理工具
+bytebase:https://www.bytebase.com/zh
+- 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
 ### 网站设计工具
 - https://js.design/ai-upcoming 描述生成原型
 - AI 界面转代码: https://kombai.com/
@@ -49,9 +56,7 @@ git: https://learngitbranching.js.org/
 - strikingly:https://cn.strikingly.com/
 - ai 生成网页： https://v0.dev/
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
-### 数据库管理工具
-bytebase:https://www.bytebase.com/zh
-- 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
+
 ## Testing & Quality Assurance
 
 ## Deploy
