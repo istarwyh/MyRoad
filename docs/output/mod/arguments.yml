@@ -1,5 +1,0 @@
-command:
-- convert
-config_path: config.yaml
-literals:
-  -i: config.yaml
