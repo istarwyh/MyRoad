@@ -43,7 +43,7 @@ Thumbs.db
 *.exe
 
 #output file
-./docs/output/
+/docs/output/
 
 #private
 .obsidian
