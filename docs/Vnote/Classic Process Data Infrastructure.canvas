@@ -11,7 +11,7 @@
 		{"type":"text","text":"交易应用","id":"644615ed8a571511","x":-600,"y":-160,"width":137,"height":60},
 		{"type":"text","text":"OSS","id":"5a11c016948836b7","x":-20,"y":-160,"width":160,"height":60},
 		{"type":"text","text":"[[BigTable]]","id":"c2ba5cc2ccd9ce94","x":-269,"y":-160,"width":160,"height":60},
-		{"type":"text","text":"N计费应用","id":"e23b2e31f0206539","x":-600,"y":-60,"width":137,"height":58}
+		{"type":"text","text":"各计费应用","id":"e23b2e31f0206539","x":-600,"y":-60,"width":137,"height":58}
 	],
 	"edges":[
 		{"id":"1452d2bd45c77ebf","fromNode":"e31431b9725fac65","fromSide":"right","toNode":"41cca696b67de7c5","toSide":"left","label":"dump"},
