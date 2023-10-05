@@ -1,4 +1,4 @@
-- [[#Technology|Technology]]
+- [[#Theory & Resource]]
 	- [[#Technology#Resources Router|Resources Router]]
 		- [[#Resources Router#Automa|Automa]]
 		- [[#Resources Router#Raycast / Alfred|Raycast / Alfred]]
@@ -32,7 +32,7 @@
 	- [[#Story#Idea|Idea]]
 	- [[#Story#For Others' Story|For Others' Story]]
 
-## Technology
+## Theory & Resource
 ### Resources Router
 #### Automa
 浏览器行为录制自动化
