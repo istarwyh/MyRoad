@@ -4,7 +4,7 @@
 #### Automa
 浏览器行为录制自动化
 #### Raycast / Alfred
-Please translate: 
+Mac Spotlight加强
 
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
@@ -81,7 +81,7 @@ bytebase:https://www.bytebase.com/zh
 ### Business Models
 [[Consignment and other e-commerce Business Models]]
 
-### IDEA
+### Idea
 [[Cloud App]]
 
 [[Hyper CAD Markup Language]]
@@ -89,3 +89,6 @@ bytebase:https://www.bytebase.com/zh
 [[iCareer]]
 
 [[Project Management]]
+
+### For Others' Story
+[[How_to_choose_your_work]]
