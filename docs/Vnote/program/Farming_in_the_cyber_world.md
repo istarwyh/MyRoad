@@ -1,3 +1,36 @@
+- [[#Technology|Technology]]
+	- [[#Technology#Resources Router|Resources Router]]
+		- [[#Resources Router#Automa|Automa]]
+		- [[#Resources Router#Raycast / Alfred|Raycast / Alfred]]
+	- [[#Technology#Communication & Analysis|Communication & Analysis]]
+	- [[#Technology#Modeling & Design|Modeling & Design]]
+	- [[#Technology#Development|Development]]
+		- [[#Development#Terminal|Terminal]]
+			- [[#Terminal#Warp|Warp]]
+		- [[#Development#IDE|IDE]]
+			- [[#IDE#IDEA|IDEA]]
+				- [[#IDEA#本地RPC|本地RPC]]
+				- [[#IDEA#本地发送消息|本地发送消息]]
+				- [[#IDEA#本地Debug|本地Debug]]
+				- [[#IDEA#自动切换输入法|自动切换输入法]]
+		- [[#Development#GPT|GPT]]
+		- [[#Development#版本管理工具|版本管理工具]]
+		- [[#Development#DataBase|DataBase]]
+			- [[#DataBase#Choose the Suitable Database|Choose the Suitable Database]]
+			- [[#DataBase#快速利用数据库|快速利用数据库]]
+			- [[#DataBase#数据库管理工具|数据库管理工具]]
+		- [[#Development#网站设计工具|网站设计工具]]
+	- [[#Technology#Testing & Quality Assurance|Testing & Quality Assurance]]
+	- [[#Technology#Deploy|Deploy]]
+		- [[#Deploy#Website Registration|Website Registration]]
+	- [[#Technology#Promotion|Promotion]]
+	- [[#Technology#Saving Time|Saving Time]]
+		- [[#Saving Time#[跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)|[跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)]]
+- [[#Practices|Practices]]
+- [[#Story|Story]]
+	- [[#Story#Business Models|Business Models]]
+	- [[#Story#Idea|Idea]]
+	- [[#Story#For Others' Story|For Others' Story]]
 
 ## Technology
 ### Resources Router
@@ -42,7 +75,8 @@ git: https://learngitbranching.js.org/
 [[Frequently Git Command]]
 
 #### DataBase
-##### [[How to Choose the Suitable Database]]
+##### Choose the Suitable Database
+[[How_to_Choose_the_Suitable_Database]]
 ##### 快速利用数据库
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/
