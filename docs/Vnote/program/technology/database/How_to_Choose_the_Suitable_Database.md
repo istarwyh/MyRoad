@@ -31,7 +31,7 @@ Compared to disk and memory, it strikes a balance between cost and random access
 
 ### Data Create、Persistence & Backup
 #### Data Model
-Data Model defines how data is stored, arranged, and accessed in a database system.  [^wavedb]
+Data Model defines how data is stored, arranged, and accessed in a database system. [^wavedb]
 - **Relational** – with data organized in tables related to each other, like MySQL and PostgreSQL;
 - **Hierarchical** – a tree-like structure, organizing data into parent-child relationships;
 - **Network** – based on the hierarchical model, with the possibility of many-to-many parent-child relationships;
@@ -206,7 +206,7 @@ Postgres supports several extensions. The most outstanding is PostGIS, which bri
 
 ## References
 
- [^PostgrevsMysql]: [全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
+ :[^PostgrevsMysql] [全方位对比 Postgres 和 MySQL (2023 版) ](https://mp.weixin.qq.com/s/xf7qb4oAVHyi4_U32FSKPA)
 ## Appendix
 1. GPT4 Prompt
 >As an expert on databases, your task is to provide a summary of ten dimensions that illustrate the differences between databases such as MySQL, PostgreSQL, Redis, ElasticSearch, MongoDB, TiDB, ClickHouse, OSS, Simple Storage Service, and others. The dimensions should include factors such as data model, infrastructure, index structure, data-sync strategy, data store strategy and other technical factors. Your summary should explain the reasons why these differences exist and how they affect the suitability of each database for different use cases.
