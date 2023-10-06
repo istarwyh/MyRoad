@@ -114,7 +114,7 @@ bytebase:https://www.bytebase.com/zh
 
 ## Story
 ### Business Models
-[[Consignment and other e-commerce Business Models]]
+[[e-commerce Business Models]]
 
 ### Idea
 [[Cloud App]]
