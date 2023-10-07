@@ -10,10 +10,6 @@ ToB的财务关系中，有一条很经典的链路:[[Finance Technology Area Re
 ## 整体数据架构
 [[Classic Process Data Infrastructure.canvas|Classic Process Data Infrastructure]]
 
-### 数据存储与处理
-### 数据查询&导出
-### 数据动态渲染
-
 ## 数据存储与处理的统一
 ### 数据库选型
 - PostgreSQL
@@ -25,8 +21,8 @@ ToB的财务关系中，有一条很经典的链路:[[Finance Technology Area Re
 ```mermaid
 graph LR
 0(Mysql)--DTS同步-->1[Hive]--ETL-->2[BigTable]
-subgraph BigTable
-2[BigTable]
+subgraph TableStore
+2[TableStore]
 2 --> ZJSY[主键索引]
 2 --> EJSY[二级索引]
 2 --> DDSY[多元索引]
@@ -40,10 +36,7 @@ end
 ```
 
 
-ETL的全称为`Extraction-Transformation-Loading`,中文名为数据抽取、清洗和加载。这里用ETL用来概括我们处理数据的过程。对于批处理，上游会每个周期(`T`)开始直接从在线表中同步 `T-1` 的 数据，然后我们消费`T-1`的数据；对于流处理，这个过程对于进入处理流程的每条记录实时消费 。得到这个原始在线表数据的过程便是ETL中的`Extraction`,消费这个数据的过程便是`Transformation`,最后将处理好的数据加载到数据仓库提供对外的服务，便是`Loading`。当我们把数据导入数据仓库时，ETL中的每个步骤中都可能会遇到数据质量错误，比如
-- 与源系统的连接错误，抽取数据可能会失败
-- 由于数据类型冲突，数据转换可能会失败
-- 由于数据生产者新增或变更了存储逻辑，导致处理后的数据异常对于ETL过程中不是单点的错误，我们监控一些数据任务的指标。
+ETL的全称为`Extraction-Transformation-Loading`,中文名为数据抽取、清洗和加载。这里用ETL用来概括我们处理数据的过程。对于批处理，上游会每个周期(`T`)开始直接从在线表中同步 `T-1` 的 数据，然后我们消费`T-1`的数据；对于流处理，这个过程对于进入处理流程的每条记录实时消费 。得到这个原始在线表数据的过程便是ETL中的`Extraction`,消费这个数据的过程便是`Transformation`,最后将处理好的数据加载到数据仓库提供对外的服务，便是`Loading`。
 
 ### 2.2. 数据质量保证
 当我们把数据导入数据仓库时，ETL中的每个步骤中都可能会遇到数据质量错误，比如
@@ -63,8 +56,19 @@ ETL的全称为`Extraction-Transformation-Loading`,中文名为数据抽取、�
 标准化命名和类型约定将节省大量繁琐的工作。命名上比如数据表中使用`a_b_c`,应用中统一是`aBC`；类型上比如数据库中存储的统一是`String`格式，日期格式统一采用`yyyy-MM-dd hh:mm:ss`。这将使我们也能够标准化数据类型。
 
 #### 2.2.3. 参数化测试
-基于业务场景的完全的JSON测试。
-物流服务费账单因为实际计费口径和希望给用户展示的口径不一致，后台需要处理来自三个不同接口的4份数据，然后再按照订单包裹维度解析。然而4份数据：物流费、包材费、防护费和仓内操作费都没有办法和订单包裹关联上，只能按照一定的顺序和商品的关系关联，又因为历史上包材计费的系统迁移过，历史数据格式大变过且是灰度逐渐切流，更增加了处理的难度。所以必须祭出
+如前所述，账单涉及数据时间跨度长，计费规则也常变，如何既覆盖各种异常case，同时长期保证transformation 的数据质量值得思考。
+物流服务费账单因为实际计费口径和希望给用户展示的口径不一致，后台需要处理来自三个不同接口的4份数据，然后再按照订单包裹维度解析。然而4份数据：物流费、包材费、防护费和仓内操作费都没有办法和订单包裹关联上，只能按照一定的顺序和商品的关系关联，又因为历史上包材计费的系统迁移过，历史数据格式大变过且是灰度逐渐切流，更增加了数据处理的难度。基于此，可以采用参数化测试。
+这就是最简单的参数化测试：将数据和逻辑分离。同样地，我开发了[`@JsonFileSource`](https://github.com/istarwyh/TestMuseum/blob/main/tdd.java.common/src/main/java/istarwyh/junit5/annotation/JsonFileSource.java) 传入JSON格式的对象，并将每个时期变动的计费逻辑都覆盖到，于是我们对数据处理正确的信心大大增加了。
+```java
+@ParameterizedTest
+@CsvSource(value = {
+		"1,2",
+		"3,4"
+})
+void should_show_how_to_parse_multi_args_with_csv(Integer in,Integer out){
+	assertEquals(out,in + 1);
+}
+```
 ### 2.3. 数据索引
 考虑如下的数据模型：
 ```json
