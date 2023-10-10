@@ -13,3 +13,5 @@
 Being the CEO is miserable more often than it’s good.  But when it’s good, it’s really good.--Sam Altman
 
 对于任何没有足够财富的人来说，从事科学理论研究事业是一种自私和不负责任的人生选择。--Hacker News
+
+如果相片比绘画更真实，那么还要绘画干什么？如果AI比相机更美更真实，那么还要拍照干什么？因为选择。虽然我们面对的可能是同一个世界，但是每个人对这个世界的观察不同，对这个世界的想法和观感不同，于是从这个世界里撷取什么碎片如何表达也就彼此不同，后面是个人选择。--和菜头
