@@ -11,7 +11,11 @@ http://w2solo.com/topics/4033
 海外支付：Stripe, Paddle, Lemon, squeezy, FastSpring
 ### 海外身份
 海外手机卡：https://www.giffgaff.com/orders/affiliate/lauix16 邀请链接
-
+## 开发
+### 域名
+https://www.nazhumi.com/
+https://namebeta.com/
+namecheap 第二年贵，于是转到 cloudflare
 ## 支付
 ### Stripe
 https://itangtalk.com/stripe/

@@ -63,6 +63,7 @@ Sizzle AI，个性化学习
 - Google
 - Technology search: https://www.perplexity.ai/
 - Technology search: https://www.phind.com/
+- paper search:Consensus
 ### Translate
 - 网页双语同时展示: Immersivetranslate
 
