@@ -93,19 +93,23 @@ bytebase:https://www.bytebase.com/zh
 - ai 生成网页： https://v0.dev/
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
 
+### Cloud Platform
+
+- [善用GitHub](https://link.zhihu.com/?target=https%3A//www.bmpi.dev/self/use-github-better/)
+- Cloudflare：Serverless最好的平台，能提供如常用的存储R2、KV数据库、CDN、Pages、Worker、MQ、甚至运行AI模型
+- Vercel：很适合部署运行Next.js的前端项目，Cloudflare Pages运行Next.js还需要额外的一些配置。
+- [http://Fly.io](https://link.zhihu.com/?target=http%3A//Fly.io)：非常好的容器化平台，它能弥补Cloudflare只能运行Serverless的不足，能以Docker的方式运行各种重型API服务。
+- AWS/Azure/GCP：作为巨头平台，他们可以补充上面云平台所缺失的东西，比如AWS SES就是一个非常好的发邮件服务。
+- [Newrelic](https://link.zhihu.com/?target=https%3A//newrelic.com/)：非常好的监控平台，尤其是它能作为免费的日志搜索平台，我把我产品的[系统日志](https://www.zhihu.com/search?q=%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A3249282055%7D)都上传到这个平台，然后对日志进行监控。一般的日志平台都是ES架构，[价格](https://www.zhihu.com/search?q=%E4%BB%B7%E6%A0%BC&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A3249282055%7D)并不便宜，单Newrelic却能免费。
+- [Optimizely](https://link.zhihu.com/?target=https%3A//www.optimizely.com/)：一个不错的feature toggle平台，可以很方便的做产品的A/B测试。
 ### Testing & Quality Assurance
 
 ### Deploy
 网站防火墙：https://github.com/chaitin/SafeLine
 #### Website Registration
 - ICP Query Extension
-### Promotion
-- keyviz：一款免费的实时键鼠输入可视化软件
-- 视频生成自己的数字人：https://www.heygen.com/
-- Memo —— AI 驱动的视频、播客转文字、字幕工具链接：https://mxmefbp9p0g.feishu.cn/docx/ZI3ldweTXorTvMxYLbucT00Un5n
-- DeepFaceLive：https://github.com/iperov/DeepFaceLive
-- 生成二维码：https://qrbtf.com/ai
-	- prompt: technology lines, digital, futuristic, tech graphics, circuitry, binary, streamline, data streams, virtual, hi-tech
+#### i18n
+https://github.com/linyuxuanlin/Auto-i18n
 ### Saving Time
 #### [跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)
 
@@ -127,3 +131,6 @@ bytebase:https://www.bytebase.com/zh
 
 ### For Others' Story
 [[How_to_choose_your_work]]
+
+## Start-up
+[[Start-up Resources Collection]]
