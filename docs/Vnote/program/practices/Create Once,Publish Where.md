@@ -118,3 +118,4 @@ The PARA Method: A Universal System for Organizing Digital Information
 ### Publish
 - GitHub Pages
 - 发布每个人自己的博客网站并提供订阅服务： https://xiaohuihui.substack.com/
+- obsidian publish

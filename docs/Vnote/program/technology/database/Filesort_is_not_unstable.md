@@ -1,6 +1,6 @@
 
 不同的分页查询批次存在重复数据.
-MySQL在执行排序操作时，主要使用以下几种排序算法：
+MySQL在执行排序操作时，主要[这样选择排序算法](https://github.com/mysql/mysql-server/blob/trunk/sql/filesort.cc)：
 
 1. 如果数据可以完全适应内存，那么MySQL会使用快速排序算法（Quick sort）。
 
