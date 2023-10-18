@@ -84,8 +84,11 @@ bytebase:https://www.bytebase.com/zh
 ### Testing & Quality Assurance
 
 ### Deploy
+#### Domain
+https://www.netlify.com/blog/2020/03/26/how-to-set-up-netlify-dns-custom-domains-cname-and-a-records/
 网站防火墙：https://github.com/chaitin/SafeLine
 #### Website Registration
+
 - ICP Query Extension
 #### i18n
 https://github.com/linyuxuanlin/Auto-i18n
