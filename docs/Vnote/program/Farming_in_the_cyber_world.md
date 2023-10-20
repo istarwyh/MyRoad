@@ -113,6 +113,8 @@ https://github.com/linyuxuanlin/Auto-i18n
 
 [[blog to do]]
 
+[[AI Brother&Sister]]
+
 ### For Others' Story
 [[How_to_choose_your_work]]
 
