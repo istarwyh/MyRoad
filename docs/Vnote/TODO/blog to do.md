@@ -7,3 +7,4 @@
 - [ ] 一键部署成网站：[[Create Once,Publish Where]]
 - [ ] 允许指定收费后推送阅读
 - [ ] read: 货币崛起、美国商业大亨传奇、百万美金交易员、富豪谷底求翻身、金钱通解
+- [ ] review url process: https://github.com/alex/what-happens-when

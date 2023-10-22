@@ -17,7 +17,7 @@
 #### Automa
 浏览器行为录制自动化
 #### Raycast / Alfred
-Mac Spotlight加强
+Mac Spotlight 加强
 
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
@@ -41,16 +41,11 @@ Mac Spotlight加强
 
 #### IDE
 ##### IDEA
-###### 本地RPC
-- HSF-Console
-###### 本地发送消息
-- HSF-Console
-- 大波浪
-###### 本地Debug
-- Halo
-###### 自动切换输入法
-Smart Input
-
+- [[Frequently IDEA Shortcut]]
+- 本地RPC:
+- 本地发送消息
+- 本地Debug 远程
+- 自动切换输入法：Smart Input
 #### GPT
 [[Frequently Used Prompt]]
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
