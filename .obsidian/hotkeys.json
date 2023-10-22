@@ -1,0 +1,19 @@
+{
+  "file-explorer:reveal-active-file": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "X"
+    }
+  ],
+  "zen:toggle": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Mod"
+      ],
+      "key": "Z"
+    }
+  ]
+}

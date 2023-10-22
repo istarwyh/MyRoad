@@ -1,0 +1,257 @@
+{
+  "main": {
+    "id": "b47bcbb13f8c117b",
+    "type": "split",
+    "children": [
+      {
+        "id": "abde645713b74c1a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "15d7490ba1aef422",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Prevention and Monitoring of Slow SQL.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b7ec5bba86b13548",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Prevention and Monitoring of Slow SQL.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4e11f0c44fbb8cd0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "story/Start-up Resources Collection.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b77ca1a23b5d9616",
+    "type": "split",
+    "children": [
+      {
+        "id": "51354ce786cb2daf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "855daae41c935e06",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d1888dbbfc29fd98",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "195f70f22cd0ea32",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "375ce24a21e365e1",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "com.maxymillion.zen",
+              "state": {},
+              "pinned": true
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d1c813a9377cec55",
+    "type": "split",
+    "children": [
+      {
+        "id": "cee4e4dc43c18c68",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "651c679c4e3f3a96",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Prevention and Monitoring of Slow SQL.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d400067db1b57159",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Prevention and Monitoring of Slow SQL.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6279c8aa5bce7a8f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c1b74bedb36a5c8f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Prevention and Monitoring of Slow SQL.md"
+              }
+            }
+          },
+          {
+            "id": "d578b8cb0e57b673",
+            "type": "leaf",
+            "state": {
+              "type": "RSS_FEED",
+              "state": {}
+            }
+          },
+          {
+            "id": "b2f220345028983b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "size-history:Vault size history": false
+    }
+  },
+  "active": "15d7490ba1aef422",
+  "lastOpenFiles": [
+    "program/technology/database/relational_database/MySQL Index Introduction and Correct Use.md",
+    "Prevention and Monitoring of Slow SQL.md",
+    "program/technology/database/relational_database/MySQL FAQ.md",
+    "program/technology/database/relational_database/Possible Problems with Sharding and Partitioning.md",
+    "Common Metrics of MySQL.md",
+    "program/technology/Distributed Computing.md",
+    "program/practices/Create Once,Publish Where.md",
+    "Farming-in-the-cyber-world.md",
+    "program/chatgpt-next-web stack.md",
+    "program/学习 思考 冷静/Business Propaganda.md",
+    "program/technology/network/输入url到页面.md",
+    "story/Start-up Resources Collection.md",
+    "program/Farming-in-the-cyber-world.md",
+    "blog to do.md",
+    "TODO/开题笔记.md",
+    "TODO/vx.json",
+    "TODO/blog to do.md",
+    "TODO/Endnote Migrate to Zetoro.md",
+    "TODO",
+    "docs/Vnote/Life/Wisdom/Learn.md",
+    "docs/Vnote/Life/Wisdom",
+    "docs/Vnote/Life",
+    "docs/Vnote/program/technology/database/How_to_Choose_the_Suitable_Database.md",
+    "docs/Vnote/program/technology/database",
+    "docs/Vnote/program/practices/How to deploy a website using AWS.md",
+    "docs/Vnote/program/technology",
+    "docs/Vnote/program/practices",
+    "docs/Vnote/program/chatgpt-next-web stack.md",
+    "docs/Vnote/TODO/开题笔记.md",
+    "docs/Vnote/TODO/vx.json",
+    "docs/Vnote/TODO/blog to do.md",
+    "docs/Vnote/TODO/Endnote Migrate to Zetoro.md",
+    "docs/Vnote/program",
+    "docs/Vnote/TODO",
+    "program/学习 思考 冷静/DDD.md",
+    "program/practices/web3 development history.md",
+    "Finance Technology Area Relation.canvas",
+    "业财一体.canvas",
+    "Classic Process Data Infrastructure.canvas",
+    "AIOS Simple Process.canvas",
+    "Pasted image 20231006225221.png",
+    "program/technology/database/内存KV型数据库/vx_images/epoll.gif",
+    "program/technology/database/内存KV型数据库/vx_images/aeFd.gif",
+    "program/technology/database/内存KV型数据库/vx_images/5986130496488.png",
+    "program/technology/database/内存KV型数据库/vx_images/5920443129073.png",
+    "program/technology/database/内存KV型数据库/vx_images/5493237811439.png",
+    "program/technology/database/内存KV型数据库/vx_images/5199406505616.png",
+    "program/technology/database/内存KV型数据库/vx_images/4710195741876.png",
+    "program/technology/database/内存KV型数据库/vx_images/4560105539474.png",
+    "program/technology/database/内存KV型数据库/vx_images/3650860917223.png",
+    "Untitled.canvas",
+    "Untitled 1.canvas"
+  ]
+}

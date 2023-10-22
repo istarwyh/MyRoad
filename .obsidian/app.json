@@ -1,0 +1,20 @@
+{
+  "spellcheckDictionary": [
+    "TiDB",
+    "ClickHouse",
+    "ElasticSearch",
+    "某种程度上可以说是数据库领域的C语言。有着大量的数据库是因为互联网广泛使用MySQL带来的问题难以解决而诞生的，这些数据库发展出了各种新式的技术手段来解决MySQL的问题，但是另一方面，它们自己也带来了新的问题。。",
+    "作为一种常用的关系型数据库，开源、稳定、可靠，被广泛应用于各个行业和领域，成为许多应用程序和网站的首选数据库之一。而随着广泛使用关系型数据库如MySQL暴露出的问题，也诞生了大量的NoSql、NewSql来解决，另一方面，另一方面，这些新数据库自己也带来了新的问题。",
+    "Binlog",
+    "binlog",
+    "binlog",
+    "inlog ",
+    "HTAP",
+    "KeepChatGPT",
+    "Immersivetranslate",
+    "pool",
+    "so t",
+    " Paxo"
+  ],
+  "alwaysUpdateLinks": true
+}
