@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Vnote.iml" filepath="$PROJECT_DIR$/.idea/Vnote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyRoad.iml" filepath="$PROJECT_DIR$/.idea/MyRoad.iml" />
+      <module fileurl="file://$PROJECT_DIR$/docs/Demo/revealPPT/easy.iml" filepath="$PROJECT_DIR$/docs/Demo/revealPPT/easy.iml" />
     </modules>
   </component>
 </project>

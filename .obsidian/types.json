@@ -1,8 +1,0 @@
-{
-  "types": {
-    "aliases": "aliases",
-    "cssclasses": "multitext",
-    "tags": "tags",
-    "gmt_create": "datetime"
-  }
-}
