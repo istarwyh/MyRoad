@@ -13,9 +13,13 @@ http://w2solo.com/topics/4033
 海外手机卡：https://www.giffgaff.com/orders/affiliate/lauix16 邀请链接
 ## 开发
 ### 域名
-https://www.nazhumi.com/
-https://namebeta.com/
-namecheap 第二年贵，于是转到 cloudflare
+域名比价:
+- https://www.nazhumi.com/
+- https://namebeta.com/
+域名whois：
+- https://www.hostinger.com.hk/whois
+
+域名往往第一年买便宜，第二年贵，所以第二年可以转到其他平台，比如 cloudflare。
 ## 支付
 ### LemonSqueezy
 ### Stripe
