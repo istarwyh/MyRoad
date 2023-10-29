@@ -1,5 +1,5 @@
 《The Formula : The Universal Laws of Success》这本书5个成功的一些定律，其中有些定律鼓舞人心，比如成功可以发生在任何时间和年龄， 只要你在一个好想法上坚持不懈。不过在更广泛的意义上，人们对于成功的决定因素是什么还没有清晰认识。
-这里我们不讨论理想的成功定义：与自己和解，我们简化成功为比其周边的人优秀。在这种定义下，  Michael Sander 在《THE TYRANNY OF MERIT: Can We Find the Common Good?》中警告到
+这里我们不讨论理想的成功定义：与自己和解，我们简化成功为比其周边的人优秀。在这种定义下， Michael Sander 在《THE TYRANNY OF MERIT: Can We Find the Common Good?》中警告到
 >如果一个“成功者”认为自己的成绩主要是靠个人努力，继而认为其他人不够成功主要是因为不够努力，相信努力即可抹平差距，奋斗就能创造未来，是一件非常危险的事。
 
 这是因为成功有很多因素左右，这里简单列举如下：
