@@ -3,7 +3,13 @@ All: https://www.aigc.cn/
 
 
 ## Collect Information
-[[Information Diffusion]]
+
+信息的[[Information Diffusion|及时性]]十分重要。
+
+### Import Knowledge
+
+可能已经有了不少笔记和知识内容在其他地方，相比于创作的第一步，可能就是导入或整理以前的知识到第一个地方。
+
 ### Fragmented Information
 - RSS?
 - Cubox
