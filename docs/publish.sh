@@ -11,7 +11,7 @@ obsidianhtml convert -i config.yaml
 cd output/html || exit
 
 # Initialize a Git repository
-#git init
+git init
 
 # Create and switch to the gh-pages branch
 git checkout -b gh-pages
