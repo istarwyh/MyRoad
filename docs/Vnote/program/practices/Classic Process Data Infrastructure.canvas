@@ -10,7 +10,7 @@
 		{"type":"text","text":"结算应用","id":"a7fecbd039ffe260","x":-600,"y":20,"width":137,"height":60},
 		{"type":"text","text":"交易应用","id":"644615ed8a571511","x":-600,"y":-160,"width":137,"height":60},
 		{"type":"text","text":"OSS","id":"5a11c016948836b7","x":-20,"y":-160,"width":160,"height":60},
-		{"type":"text","text":"[[BigTable]]","id":"c2ba5cc2ccd9ce94","x":-269,"y":-160,"width":160,"height":60},
+		{"type":"text","text":"[[Bigtable]]","id":"c2ba5cc2ccd9ce94","x":-269,"y":-160,"width":160,"height":60},
 		{"type":"text","text":"各计费应用","id":"e23b2e31f0206539","x":-600,"y":-60,"width":137,"height":58}
 	],
 	"edges":[

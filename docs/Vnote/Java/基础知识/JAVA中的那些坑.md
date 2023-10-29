@@ -58,7 +58,7 @@ https://www.cnblogs.com/maoyali/p/8805975.html
 `Arrays.asList()`方法中的ArrayList是Arrays类的内部类,但没有重写add方法,调用add方法时才会抛出`java.lang.UnsupportedOperationException`异常。
 #### 3.4.3. Collections.emptyList()只能作为只读的list
 ### 3.5. Property拿不到之坑
-![](_v_images/20210331190512257_21036.png)
+![](20210331190512257_21036.png)
 ## 4. 与操作系统之坑
 ### 4.1. 操作系统命令行长度限制
 1. 在容器中运行测试类报错：
