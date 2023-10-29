@@ -19,7 +19,7 @@
 - [ ] Google Keep 
 - [ ] Craft 
 - [ ] Day One 
-- [ ] Diaro 
+- [ ] Diaro
 - [ ] TiddlyWiki 
 - [ ] TheBrain 
 - [ ] Ulysses 
