@@ -1,0 +1,52 @@
+#java
+*.class
+
+#package file
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+#maven ignore
+target/
+build/
+
+#eclipse ignore
+.settings/
+.project
+.classpatch
+
+#Intellij idea
+.idea/
+/idea/
+/.idea/
+*.ipr
+*.iml
+*.iws
+
+#vscode
+*.vscode
+/.vscode/
+
+# temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+*.vswp
+*.out
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# exe file
+*.exe
+
+#output file
+/docs/output/
+
+#private
+.obsidian
+/docs/env/

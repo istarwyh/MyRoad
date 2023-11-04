@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            ## 1. 引言
+
+            ### 1.1. 编写目的
+
+            对基于格覆盖的布尔表达式可视化系统的测试做出详细的测试计划
+
+            ### 1.2. 被测系统
+
+            基于格覆盖的布尔表达式可视化系统
+        </section>
+
+        <section data-markdown>
+            ## 2. 测试资源
+
+            ### 2.1. 测试环境
+
+            * 硬件：CPU：英特尔酷睿i5和i7；内存：16g和12g
+
+            * 操作系统：windows 10
+
+            * JAVA：JDK 11
+
+            * node：12.16.3
+            * 数据库：Mysql8.0.19
+            * Redis：5.0.9
+            * 浏览器：Google Chrome
+        </section>
+
+        <section data-markdown>
+            ## 3. 测试的范围
+            ### 3.1. 功能类测试范围
+
+            测试基于格覆盖的布尔表达式可视化系统的主要功能，如卡诺图绘制、单缺陷诊断、同项双缺陷诊断、双项双缺陷诊断、降维、缺陷动画历史回放等功能。
+
+            ### 3.2. 非功能类测试范围
+
+            非功能类测试主要是对系统安装、内容、导航、界面和配置进行测试。
+        </section>
+
+        <section data-markdown>
+            ### 3.3. 不需要的测试范围
+
+            不对安全、性能、数据库进行测试。
+        </section>
+
+        <section data-markdown>
+            ## 4. 测试的方案
+            ### 4.1. 安装测试
+
+            #### 4.1.1概述
+
+            确保软件能够按照安装文档正常安装使用。
+
+            #### 4.1.2目标
+
+            测试按照安装文档配置好运行环境后是否能正常安装。
+        </section>
+
+        <section data-markdown>
+            ### 4.2. 导航测试
+
+            #### 4.2.1概述
+
+            导航描述了用户在一个页面内操作的方式，在不同的用户接口控制之间，例如按钮、对话框、列表和窗口等。或在不同的连接页面之间。
+        </section>
+        <section data-markdown>
+            #### 4.2.2目标
+
+            (1)保证任何用户可以使用的路径都处于可工作状态;
+
+            (2)确认每个导航语义单元都可被适当类型的用户使用。
+        </section>
+        <section data-markdown style="font-size: 20px;">
+            **具体测试用例**
+            ![](https://raw.githubusercontent.com/pku-hjw/git-helloworld/master/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-05-10%20%E4%B8%8A%E5%8D%8811.32.43.png)
+
+        </section>
+        <section data-markdown>
+            ### 4.3. 界面测试
+
+            #### 4.3.1概述
+
+            界面测试就是指，布局是否合理、整体风格是否一致、各个控件的放置位置是否符合客户使用习惯，此外还要测试界面操作便捷性、导航简单易懂性，页面元素的可用性，界面中文字是否正确，命名是否统一，页面是否美观，文字、图片组合是否完美等。
+
+            #### 4.3.2目标
+
+            (1)找出与特定界面机制相关的错误;
+
+            (2)找出在界面实现导航语义、Web应用功能或内容显示方法中存在的错误。
+        </section>
+        <section data-markdown style="font-size: 20px;">
+            **具体测试用例**
+            ![](https://raw.githubusercontent.com/pku-hjw/git-helloworld/master/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-05-10%20%E4%B8%8A%E5%8D%8811.46.35.png)
+        </section>
+
+        <section data-markdown>
+            ### 4.4. 内容测试
+
+            #### 4.4.1. 概述
+
+            内容测试用来检验Web应用系统提供信息的正确性、准确性和相关性。确保可视化系统文本、图像展示和排版等没有错误。
+        </section>
+
+        <section data-markdown>
+            #### 4.4.2. 目标
+
+            (1)发现文本文件、图像展示和其他媒体的句法错误(如排版错误，语法错误等);
+
+            (2)发现当进行导航时呈现在任何内容对象中的语义错误(即信 息准确性和完整性的错误);
+
+            (3)找出呈现给最终用户的内容组织或结构上的错误。
+        </section>
+        <section data-markdown style="font-size: 20px;">
+            **具体测试用例**:
+            ![](https://raw.githubusercontent.com/pku-hjw/git-helloworld/master/img/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202020-05-10%20%E4%B8%8A%E5%8D%8811.48.10.png)
+        </section>
+
+
+        <section data-markdown>
+            ### 4.5. 功能测试
+        </section>
+        <section data-markdown>
+            #### 4.5.1. 概述
+            确保可视化系统各功能正常,如卡诺图绘制,缺陷诊断,缺陷动画,降维等功能正确.
+            #### 4.5.2. 目标
+            利用有效的和无效的数据来执行各个用例流,以核实
+
+            1. 在使用有效数据时得到预期的结果
+            2. 在使用无效数据时显示相应的错误消息或警告消息
+        </section>
+        <section data-markdown style=font-size:30px>
+            **具体检查项目**:
+
+            | 检查项| 测试人员评价 |
+            | --- | -------- |
+            | 卡诺图绘制功能正确吗? | |
+            | 单缺陷诊断功能正确吗? | |
+            | 双项双缺陷诊断功能正确吗? | |
+            | 单项单缺陷诊断功能正确吗? | |
+            | 操作日志正常吗?| |
+            | 缺陷动画历史回放功能可用吗? | |
+            | 降维功能正常吗?| |
+            | 存储数据功能正常吗? | |
+        </section>
+        <section data-markdown>
+            #### 4.5.3. 怎么检查
+            人工检查项目与判断
+        </section>
+        <section data-markdown>
+            ### 4.6. 接口测试
+        </section>
+        <section data-markdown>
+            #### 4.6.1. 概述
+
+            理论上UI界面到数据库之间，数据流经过的所有接口都需要测试:
+            - Web 浏览器 到 Web 服务器:Web 接口测试，测试 请求和响应
+            - Web 服务器 到 应用服务器:契约服务，`WebService`，`JavaAPI`，`WebAPI`等
+            - 应用服务器 到 数据库服务器：测试数据处理与把数据读取到数据库
+        </section>
+        <section data-markdown>
+            依据本次测试需求,我们主要关注Web接口测试.
+
+            Web接口一般利用http协议，通过路径来区分调用,请求报文基本为`key-value`形式，返回报文一般是`json`或`xml`，支持`get`和`post`等方法
+        </section>
+
+        <section data-markdown>
+            #### 4.6.2. 具体测试内容
+            Web 接口的定义决定了测试内容,主要关注于服务器逻辑验证,如图:
+        </section>
+        <section>
+            <img src="https://gitee.com/istarwyh/images/raw/master/1588984076_20200504095137715_17069.png"
+                 style="width:600px;height:600px">
+        </section>
+        <section data-markdown>
+            #### 4.6.3. 怎么测试
+            通过工具或代码模拟http请求的发送与接收,主要有以下两种方法:
+
+            - 接口自动化来实现,发送请求用断言来判断。
+            - 工具`postman`和`java+httpclient`等
+        </section>
+        <section data-markdown>
+            ### 4.7. 配置测试
+        </section>
+        <section data-markdown style=font-size:30px>
+            #### 4.7.1. 概述
+            配置测试是在各种硬件和软件平台类型以及不同设置情况下检查软件运行的过程
+            #### 4.7.2. 目标
+            保证系统在不同浏览器及其不同配置下能正常运行
+
+            **配置测试的检查项**
+
+            | 检查项| 测试人员评价 |
+            | --- | -------- |
+            |系统可以运行在不同的操作系统下吗?| |
+            |系统可以运行在不同的浏览器下吗?| |
+            |系统可以运行在不同的处理器下吗?| |
+            |系统运行在不同的RAM下有何影响?| |
+        </section>
+        <section data-markdown>
+            #### 4.7.3. 怎么测试
+            小组共有两台电脑,一台16GMac,一台12GWindows,可勉强满足不同的操作系统/浏览器/处理器/RAM要求.
+        </section>
+        <section data-markdown>
+            ### 4.8. 回归测试
+
+            测试过程中如果发现`bug`,提交并解决后判断修复`bug`对系统带来的影响,保证不引入新的缺陷.
+            如果选择完全重复测试,将要重新执行全部测试用例,必然拖累项目进度.因而选择选择性重复测试,具体策略:
+
+            1. 针对发生错误的模块,选取这个模块的全部用例进行测试.
+            2. 将周边与上述模块有关系的模块测试用例也执行一遍.
+        </section>
+        <section data-markdown>
+            ## 5. 项目任务分配
+            初步分配:
+
+
+            | 测试人员 | 项目任务分配 |
+            | -------|------------- |
+            | 黄佳威 | 测试计划1-4.4节及对应后续任务|
+            | 王艺辉 | 测试计划4.5-9节及对应后续任务|
+            | 所有人 | 讨论汇总 |
+        </section>
+        <section data-markdown>
+            ## 6. 测试进度
+
+            利用`teambition`的时间线工具作出[初步安排](https://www.teambition.com/organization/5eaf8aaa0fd592819da63dd1/timeline)如下图所示:
+            ![](https://gitee.com/istarwyh/images/raw/master/1588984078_20200504114334653_13217.png)
+        </section>
+        <section data-markdown>
+            ## 7. 测试结束准则
+        </section>
+        <section data-markdown style=font-size:30px>
+            以下为测试结束准则:
+
+            - 安装测试:对于安装文档提到的情况,依据安装文档可顺利安装,测试结束
+            - 导航测试:测试时间耗尽,测试结束
+            - 界面测试:测试时间耗尽,测试结束
+            - 内容测试:测试时间耗尽,测试结束
+            - 功能测试:当执行完所有的测试用例未发现错误,测试结束
+            - 接口测试:当执行完所有的测试用例未发现错误,测试结束
+            - 配置测试:测试时间耗尽,测试结束
+            - 回归测试:在回归测试策略下,执行完相关所有测试用例未发现错误,测试结束
+        </section>
+        <section data-markdown>
+            ## 8. 软件缺陷报告
+        </section>
+        <section data-markdown>
+            ### 8.1. 概述
+            在测试过程中发现了软件的缺陷,需要对其记录并正确地报告,并监视其修复的全过程.
+
+            以下有4个我们采取的报告软件缺陷的基本原则:
+
+            1. 尽快报告软件缺陷;
+            2. 有效的描述软件缺陷;
+            3. 报告缺陷同时不做评价;
+            4. 坚持跟踪软件缺陷
+        </section>
+        <section>
+            <h4>8.2. 软件缺陷报告格式</h4>
+            <html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <meta http-equiv="Content-Style-Type" content="text/css">
+                <meta name="generator" content="Aspose.Words for .NET 17.1.0.0">
+                <title></title>
+            </head>
+            <body>
+            <div>
+                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                    <tbody>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">Bug</span><span style="font-family:Calibri">ID</span>
+                            </p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">B</span><span
+                                    style="font-family:Calibri">ug</span><span
+                                    style="font-family:&#39;宋体&#39;">标题</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">软件版本</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">测试环境</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">测试人员</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">开发人员</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">创建时间</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">Bug</span><span
+                                    style="font-family:&#39;宋体&#39;">状态</span></p></td>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">测试阶段</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">接口测试、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">集成测试、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">系统测试、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">验收测试</span>
+                            </p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">Bu</span><span
+                                    style="font-family:Calibri">g</span><span
+                                    style="font-family:&#39;宋体&#39;">严重程度</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">紧急、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">严重、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">一般、</span>
+                                <input type="button" style="height:11px;width:10px;">
+                                <span style="font-family:&#39;宋体&#39;">轻微</span></p></td>
+                        <p></p>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">问题优先级</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">高</span>
+                                <span style="font-family:&#39;宋体&#39;">、</span>
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">较高</span>
+                                <span style="font-family:&#39;宋体&#39;">、</span>
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">一般</span>
+                                <span style="font-family:&#39;宋体&#39;">、</span>
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">低</span>
+                            </p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">问题来源</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">测试</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">升级</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">其他</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">问题类型</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <input type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">功能问题</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">版本问题</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">遗留问题</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">新需求</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">配置错误</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">性能问题</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">设计问题</span><span
+                                    style="font-family:&#39;宋体&#39;">、</span><input type="button"
+                                                                                    style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">偶发性错误</span><span style="font-family:&#39;宋体&#39;">、</span><input
+                                    type="button" style="height:11px;width:10px;"><span
+                                    style="font-family:&#39;宋体&#39;">其他</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">缺陷的触发条件</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">操作步骤（简）</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">实际结果</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr>
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">预期结果</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:Calibri">&nbsp;</span></p></td>
+                    </tr>
+                    <tr style="height:96.1pt">
+                        <td style="width:92.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">附图</span></p></td>
+                        <td colspan="3"
+                            style="width:300.3pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
+                            <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; widows:0; orphans:0; font-size:10.5pt">
+                                <span style="font-family:&#39;宋体&#39;">(如果语言不清楚可附图，图过多可附件)</span></p></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; widows:0; orphans:0; font-size:10.5pt">
+                    <span style="font-family:Calibri">&nbsp;</span></p>
+            </div>
+
+            </body>
+            </html>
+        </section>
+        <section data-markdown>
+            ## 9. 风险与问题
+        </section>
+        <section data-markdown style=font-size:30px>
+            1. 小组成员皆是测试新手,并不一定能保证相关测试正确执行
+            2. 测试人员只有两人且时间有限,测试计划中的测试内容并不一定能完全执行
+            3. 由于缺乏经验与相关背景知识,可能测试用例设计不正确
+            4. 回归测试难以运行全部测试用例,可能导致测试不完全
+            5. 各个科目都有大作业,且成员面临找工作的压力,可能导致测试进展缓慢
+            6. 一些突发情况如局部疫情,包括某些不可抗力也构成风险因素
+        </section>
+        <section data-markdown>
+            ## 10. 测试提交产物
+            1. 测试计划书
+            2. 测试用例文档
+            3. 测试分析与Bug分析报告
+            4. 测试汇报PPT
+
+        </section>
+    </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        hash: true,
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/highlight/highlight.js'},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+</script>
+</body>
+</html>
