@@ -1,6 +1,0 @@
-- [[Cloud App]]
-- [[Hyper CAD Markup Language]]
-- [[iCareer]]
-- [[Project Management]]
-- [[AI Brother&Sister]]
-- [[blog to do]]

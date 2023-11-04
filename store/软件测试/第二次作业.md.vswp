@@ -1,0 +1,24 @@
+vnote_backup_file_826537664 H:/OneDrive/文档/Vnote/大五第二学期/软件测试/第二次作业.md
+## 1. 需求描述
+1、 输入范围(从命令行输入)检查：
+a. 整数类型检测，
+b. 下界小于等于上界；
+c. 不正确时提示重新输入；
+即
+2. 对下界和上界进行判断是否是整数
+```flow
+st=>start: 命令行输入下界和上界
+e=>end: void
+cond1=>condition: 是否是整数
+cond2=>condition: 是否下界小于上界
+op1=>operation: alert"不是整数..."
+op2=>operation: alert"下界大于上界..."
+op3=>operation: 重新读取输入
+
+st->cond1
+cond1(no)->op1->op3(left)->cond1
+cond2(no)->op2->op3(left)->cond1
+cond1(yes)->cond2
+cond2(yes)->e
+
+```

@@ -1,0 +1,274 @@
+{
+  "main": {
+    "id": "b47bcbb13f8c117b",
+    "type": "split",
+    "children": [
+      {
+        "id": "abde645713b74c1a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "15d7490ba1aef422",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "program/database/AIOS Simple Process.canvas",
+                "viewState": {
+                  "x": -172.81359249329768,
+                  "y": -196.13739410187674,
+                  "zoom": -0.8959678984772461
+                }
+              }
+            }
+          },
+          {
+            "id": "4e11f0c44fbb8cd0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "story/Create Once,Publish Where.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b77ca1a23b5d9616",
+    "type": "split",
+    "children": [
+      {
+        "id": "51354ce786cb2daf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "855daae41c935e06",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d1888dbbfc29fd98",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "195f70f22cd0ea32",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "dbb8acf52da65816",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "com.maxymillion.zen",
+              "state": {},
+              "pinned": true
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d1c813a9377cec55",
+    "type": "split",
+    "children": [
+      {
+        "id": "cee4e4dc43c18c68",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "651c679c4e3f3a96",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "story/Create Once,Publish Where.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "d400067db1b57159",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "story/Create Once,Publish Where.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6279c8aa5bce7a8f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c1b74bedb36a5c8f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "story/Create Once,Publish Where.md"
+              }
+            }
+          },
+          {
+            "id": "d578b8cb0e57b673",
+            "type": "leaf",
+            "state": {
+              "type": "RSS_FEED",
+              "state": {}
+            }
+          },
+          {
+            "id": "b2f220345028983b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "a62febf47ed65316",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "a526466b1e4a86c0",
+            "type": "leaf",
+            "state": {
+              "type": "file-view",
+              "state": {}
+            }
+          },
+          {
+            "id": "2ee721b5235bc021",
+            "type": "leaf",
+            "state": {
+              "type": "canvas-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 8
+      }
+    ],
+    "direction": "horizontal",
+    "width": 350.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "size-history:Vault size history": false
+    }
+  },
+  "active": "4e11f0c44fbb8cd0",
+  "lastOpenFiles": [
+    "docs/Vnote/program/database/How_to_Choose_the_Suitable_Database.md",
+    "docs/Vnote/program/database",
+    "docs/Vnote/program",
+    "docs/Vnote",
+    "docs",
+    "story/Ideas.md",
+    "program/practices/Frequently Used Prompt.md",
+    "program/database/AIOS Simple Process.canvas",
+    "program/database/OLAP型数据库/全文索引/Build Service Process.md",
+    "program/database/AIOS.md",
+    "other/resources.md",
+    "story/Promote mutual understanding among human beings.md",
+    "Story.md",
+    "story/Create Once,Publish Where.md",
+    "story/iCareer.md",
+    "program/practices/Information Handle.md",
+    "program/Good-Tools.md",
+    "Farming-in-the-cyber-world.md",
+    "Others' Story.md",
+    "program/学习 思考 冷静/Different Programming Language.md",
+    "learning/Interview Problem.md",
+    "program/chatgpt-next-web stack.md",
+    "program/Raycast Stack.md",
+    "program/Web3-Architecture -and-Tech-Stack.md",
+    "program/technology/Hotpot/When we talk about BlockChain, what are we talking about.md",
+    "life/How_to_choose_your_work.md",
+    "life/wisdom/Society.md",
+    "program/Jobs-link.md",
+    "learning/The-Formula-The-Universal-Laws-of-Success.md",
+    "learning/Education-Wisdom.md",
+    "learning/本科，硕士和博士的区别.md",
+    "logseq/bak/story/Start-up Resources Collection",
+    "logseq/bak/story",
+    "logseq/bak/program/学习 思考 冷静/DDD",
+    "logseq/bak/program/学习 思考 冷静",
+    "logseq/bak/program/technology/network/输入url到页面",
+    "logseq/bak/program/technology/network",
+    "learning/Pasted image 20231029125923.png",
+    "program/practices/Finance Technology Area Relation.canvas",
+    "society/业财一体.canvas",
+    "Other/Qita/_v_images/20200621000230778_24229.png",
+    "program/practices/Classic Process Data Infrastructure.canvas",
+    "Pasted image 20231006225221.png",
+    "program/database/内存KV型数据库/vx_images/epoll.gif",
+    "program/database/内存KV型数据库/vx_images/aeFd.gif",
+    "program/database/内存KV型数据库/vx_images/5986130496488.png",
+    "program/database/内存KV型数据库/vx_images/5920443129073.png",
+    "program/database/内存KV型数据库/vx_images/5493237811439.png",
+    "program/database/内存KV型数据库/vx_images/5199406505616.png",
+    "program/database/内存KV型数据库/vx_images/4710195741876.png",
+    "Untitled.canvas",
+    "Untitled 1.canvas"
+  ]
+}

@@ -1,8 +1,0 @@
-# The note that will be used as the index.html
-# should be in obsidian_folder_path_str
-# Use the full path or relative path, but don't use ~/
-obsidian_entrypoint_path_str: './Vnote/Farming-in-the-cyber-world.md'
-
-# # Use when deploying to https://mydomain.com/html_prefix/ instead of https://mydomain.com/
-# # use '/html_prefix' (prepend slash, no slash at the end)
-#html_url_prefix: '/MyRoad'
