@@ -1,3 +1,0 @@
-- https://cryptocurrencyjobs.co/?ref=hackernoon.com
-- https://crypto.jobs/?ref=hackernoon.com
-- https://hackernoon.com/your-complete-guide-to-getting-a-job-on-blockchain
