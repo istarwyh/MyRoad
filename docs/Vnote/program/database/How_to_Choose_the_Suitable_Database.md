@@ -80,6 +80,7 @@ In a traditional column storage database, data is stored by column rather than b
 - [[OceanBase]]
 ##### LSM
 Examples: Inverted Index
+[[Inverted Index of Lucene and B+Tree]]
 #### Backup Strategy
 ##### [[Write-Ahead Logging]]
 
