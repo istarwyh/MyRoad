@@ -1,6 +1,6 @@
 ## Business Models
 [[e-commerce Business Models]]
-
+[[Work involved in opening an e-commerce store]]
 ## For My Story
 [[Ideas]]
 
