@@ -1,7 +1,4 @@
 #startup #resource 
-程序员就是在赛博世界里种地的农民。他们用着别人的地，没日没夜地做着长工，只愿换来季收的一些施舍。
-他们为什么不想有自己的土地？赛博世界里的地又不贵，服务器、域名花不了几个钱。因为他们其实没这个能力，没有人教他们如何从头开始种地，没有人教他们如何种出粮食，而最关键的他们根本没有时间去思考一下种自己地的事。
-
 
 公共 API_https://apivault.dev/_
 ## Prototype
@@ -22,10 +19,15 @@ http://w2solo.com/topics/4033
 
 域名往往第一年买便宜，第二年贵，所以第二年可以转到其他平台，比如 cloudflare。
 ## 支付
-### LemonSqueezy
-### Stripe
+### 海外卡
+- wildcard
+- nodepay
+- onekey
+### 渠道
+#### LemonSqueezy
+#### Stripe
 https://itangtalk.com/stripe/
-### Paddle
+#### Paddle
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202308061525272.png)
 ### Promotion
 #### Tools
