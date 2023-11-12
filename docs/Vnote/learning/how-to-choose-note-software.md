@@ -42,7 +42,7 @@
 | 全平台同步         | 全平台记笔记                                      | All              |
 | 本地优先、数据私有 | 防止断网、软件厂商倒闭以及数据泄漏                | Obsidian、Logseq |
 | 自由书写           | 手绘图画、插入音频                                | Onenote          |
-| 信息剪藏           | [[Information Handle#Collect Information]] | Notion、Flomo    |
+| 信息剪藏           | [[Information Handler#Collect Information]] | Notion、Flomo    |
 | 文档式笔记         | 符合直觉，方便整合知识、互相关联、输出文章        | All but Logseq   |
 | 卡片/大纲式笔记         | 非常方便知识关联与追溯                            | Logseq           |
 | 白板               | 方便知识展示、关系寻找                            | Logseq           |

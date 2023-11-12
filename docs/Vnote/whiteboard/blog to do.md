@@ -9,7 +9,7 @@
 	- [ ] 内部引用的规则
 - [ ] 允许插件介入修改文本，比如autocorrect。
 - [ ] 发布到各个媒体（至少导出对应的格式）
-- [ ] 一键部署成网站：[[Information Handle]]
+- [ ] 一键部署成网站：[[Information Handler]]
 - [ ] 允许指定收费后推送阅读
 - [ ] read: 货币崛起、美国商业大亨传奇、百万美金交易员、富豪谷底求翻身、金钱通解
 - [ ] review url process: https://github.com/alex/what-happens-when
