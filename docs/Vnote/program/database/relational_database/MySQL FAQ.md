@@ -137,7 +137,7 @@ $1280*1280*15 \approx 2.45kw$
 所以最后我们推算出Mysql单表不要超过2400w条数据，但实际上索引键的大小和一行数据的大小都不止上面的大小，所以实际中Mysql单表建议的数据量更小，且随着索引键以及一行数据的大小越大越小。
 所以我们设计Mysql 表时要注意主键的选择和必要的垂直拆分。
 
-## 问题
+## MySQL分库分表的问题
 [[Possible Problems with Sharding and Partitioning]]
 
 [^mysql_memory]: [ MySQL 内存管理初探](https://mp.weixin.qq.com/s/jlFueo-WnR3gILR38uzeIg)

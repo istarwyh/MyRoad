@@ -1,12 +1,13 @@
 #startup #resource 
 
-公共 API_https://apivault.dev/_
+公共 API: https://apivault.dev/
+聚合资源：https://www.freelancethings.co/?type=Tools
 ## Prototype
 [[Prototype]]
 
 ## 备案
 http://w2solo.com/topics/4033
-海外支付：Stripe, Paddle, Lemon, squeezy, FastSpring
+海外支付：Stripe, Paddle, Lemon squeezy, FastSpring
 ### 海外身份
 海外手机卡：https://www.giffgaff.com/orders/affiliate/lauix16 邀请链接
 ## 开发

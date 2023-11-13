@@ -1,4 +1,4 @@
-[技术揭秘：从双11看实时数仓∂Hologres高可用设计与实践](https://developer.aliyun.com/article/829794https://developer.aliyun.com/article/829794)
+[技术揭秘：从双11看实时数仓Hologres高可用设计与实践](https://developer.aliyun.com/article/829794https://developer.aliyun.com/article/829794)
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202308192240287.png)
 
 ## Shard Nothing

@@ -3,7 +3,7 @@ Metis 是智能运维领域的**首个**开源产品，旨在通过算法从海�
 ## 2. 应用场景多,潜力巨大[^织云]
 - **1. 业务高质量保障**
 利用机器学习技术，进行异常检测、故障定位、瓶颈分析等，可在无人工干预下，智能地保障业务高质量运行。场景有:
-    -    时间序列异常检测
+    - 时间序列异常检测
     - DLP 生死指标监控
     - 多维下钻
     - 关联分析
@@ -83,7 +83,7 @@ predictor = Predictor(model, batch_size=config.batch_size, n_z=config.test_n_z,
 
 ## 6. spot.py
 
-- SPOT类:在单变量数据集上运行SPOT算法(upper  bounds)
+- SPOT类:在单变量数据集上运行SPOT算法(upper bounds)
     1. 定义SPOT对象
     2. 给SPOT对象提供数据包括添加数据`def add(self, data):`
     3. 初始化
@@ -91,7 +91,7 @@ predictor = Predictor(model, batch_size=config.batch_size, n_z=config.test_n_z,
   
     5. def _log_likelihood(Y, gamma, sigma):`Compute the log-likelihood for the Generalized Pareto Distribution (μ=0)`
         - 寻找所有可能的根
-    6.  def _grimshaw(self, epsilon=1e-8, n_points=10):` Compute the GPD parameters estimation with the Grimshaw's trick`
+    6. def _grimshaw(self, epsilon=1e-8, n_points=10):` Compute the GPD parameters estimation with the Grimshaw's trick`
     7. def _quantile(self, gamma, sigma):` Compute the quantile at level 1-q`
     8. 根据运行的结果画图
 - biSPOT类:在单变量数据集上运行biSPOT算法(upper and lower bounds)
@@ -102,7 +102,7 @@ predictor = Predictor(model, batch_size=config.batch_size, n_z=config.test_n_z,
 ![微信图片_20200512095727](https://gitee.com/istarwyh/images/raw/master/1589852213_20200512100014351_27868.jpg =600x)
 ## 7. spot.py
 
-- SPOT类:在单变量数据集上运行SPOT算法(upper  bounds)
+- SPOT类:在单变量数据集上运行SPOT算法(upper bounds)
     1. 定义SPOT对象
     2. 给SPOT对象提供数据包括添加数据`def add(self, data):`
     3. 初始化
@@ -110,7 +110,7 @@ predictor = Predictor(model, batch_size=config.batch_size, n_z=config.test_n_z,
   
     5. def _log_likelihood(Y, gamma, sigma):`Compute the log-likelihood for the Generalized Pareto Distribution (μ=0)`
         - 寻找所有可能的根
-    6.  def _grimshaw(self, epsilon=1e-8, n_points=10):` Compute the GPD parameters estimation with the Grimshaw's trick`
+    6. def _grimshaw(self, epsilon=1e-8, n_points=10):` Compute the GPD parameters estimation with the Grimshaw's trick`
     7. def _quantile(self, gamma, sigma):` Compute the quantile at level 1-q`
     8. 根据运行的结果画图
 - biSPOT类:在单变量数据集上运行biSPOT算法(upper and lower bounds)
@@ -170,7 +170,7 @@ Kafka在设计之初作为日志流平台和运营消息管道平台,作为消�
 - `Producer`:消息生产者
 - `Consumer`:消息消费者
 - `Consumer Group`: 每一组消费者都有相同的`Group id`,这样可以保证多个消费者*不重复消费*同一条消息
-### 12.2.  顺序读写
+### 12.2. 顺序读写
 Kafka数据的写入和读取是顺序的。根据局部性原理，在实际测试中，磁盘顺序写入和随机写入的性能比相差最大可达6000倍[^冷热数据分离方案].Kafka之所以能做到如此,主要是
 1. 把磁盘中的数据缓存到内存中，把对磁盘的访问变为对内存的访问,同时这种`Page Cache`中的数据会按照一定的策略更新到磁盘。
 2. 将数据**直接**从磁盘文件复制到网卡设备中，而不需要经由应用程序之手。从而大大减少内核和用户模式之间的上下文切换,这种零拷贝技术依赖于底层的 sendfile() 方法实现。
@@ -199,10 +199,8 @@ Kafka顺序读写磁盘,使用**NIO网络模型**支持数千个客户端同时�
 
 ### 13.1. 业界的实践
 这篇[How companies integrate Kafka with InfluxDB to create tolerant, scalable, fast and simplified data streams](https://www.influxdata.com/blog/influxdb-and-kafka-how-companies-are-integrating-the-two/)提到`Hulu` 和`Wayfair`团队的实践.
-`Hulu`声称它们可以做到每秒导入100万条指标数据[^100],并且通过全新的重定向技术保证可以处理任何有问题的InfluxDB集群.[Hulu官方](https://medium.com/hulu-tech-blog/how-hulu-uses-influxdb-and-kafka-to-scale-to-over-1-million-metrics-a-second-1721476aaff5)给了一个架构图:
+`Hulu`声称它们可以做到每秒导入100万条指标数据,[^100]并且通过全新的重定向技术保证可以处理任何有问题的InfluxDB集群.[Hulu官方](https://medium.com/hulu-tech-blog/how-hulu-uses-influxdb-and-kafka-to-scale-to-over-1-million-metrics-a-second-1721476aaff5)给了一个架构图:
 ![](https://gitee.com/istarwyh/images/raw/master/1589123280_20200510214807021_27695.png)
-[^100]:[scale to over 1M metrics per second](https://medium.com/hulu-tech-blog/how-hulu-uses-influxdb-and-kafka-to-scale-to-over-1-million-metrics-a-second-1721476aaff5)
-
 而`Wayfair`在2017年经过波士顿,西雅图和爱尔兰跨球集群之间海量时间序列数据连接的复杂探索:
 ![](https://gitee.com/istarwyh/images/raw/master/1589123281_20200510215806324_29544.png)
 
@@ -213,18 +211,15 @@ Kafka顺序读写磁盘,使用**NIO网络模型**支持数千个客户端同时�
 
 于是发现`InfluxData`团队已经开发了`Telegraf`服务来帮助在Kafka和InfluxDB之间导出和导入数据.
 ### 13.2. Telegraf
-事实上`Telegraf`能连接各种数据源比如 `MongoDB`, `MySQL`, `Redis`,还有包括`Kafka`这样的消息队列然后进行收集和再次发送数据.[官方](https://www.influxdata.com/time-series-platform/telegraf/)称`Telegraf`可以扮演`Agent`和`Collector`和`Ingest Pipeline`来减少对于大量数据来源情况下写操作的请求数量,而其本身是    `plugin-driven`驱动的服务器.
+事实上`Telegraf`能连接各种数据源比如 `MongoDB`, `MySQL`, `Redis`,还有包括`Kafka`这样的消息队列然后进行收集和再次发送数据.[官方](https://www.influxdata.com/time-series-platform/telegraf/)称`Telegraf`可以扮演`Agent`和`Collector`和`Ingest Pipeline`来减少对于大量数据来源情况下写操作的请求数量,而其本身是 `plugin-driven`驱动的服务器.
 ![](https://gitee.com/istarwyh/images/raw/master/1589123283_20200510221541767_27223.png)
 ### 13.3. InfluxDB Cloud 2.0
 
 
 2019年5月7日–InfluxDat发布了`InfluxDB Cloud 2.0`.InfluxDB Cloud 2.0集成了Kafka[^InfluxDB2.0],实现高效稳健容忍度高.当客户将一批指标点写入Kafka层时，数据将分配给拥有分区的Kafka生产者，在此处被短暂保存，而不是立即写入Kafka分区。 Kafka生产者保留数据，直到生产者有足够大的批量来写。 Kafka生产者可以保留不断增长的批次，同时将其他批次的数据写入Kafka分区，从而使存储引擎可以有效地处理大量数据，而不必处理来自单个客户端的少量数据。同样，当客户端写入WAL[^WAL]时，不会阻塞它们在存储层中。事实上,预先写入日志或WAL是几乎每个性能数据库（包括时间序列数据库）的通用做法,而kafka作为WAL工具维护了数据库系统中的写持久性和原子性,也保证了高效.
-[^WAL]:Write-Ahead-Log,对数据库执行的操作的日志（仅作为附录文件）
-
 ![](https://gitee.com/istarwyh/images/raw/master/1589123283_20200510224536355_2105.png)
-[^InfluxDB2.0]: [InfluxDB2.0](https://www.influxdata.com/blog/influxdb-and-kafka-how-influxdata-uses-kafka-in-production/)
 ### 13.4. Confluent Platform
-The [InfluxDB Connector](https://docs.confluent.io/current/connect/kafka-connect-influxdb/) is used to copy data between  Kafka and InfluxDB Server.
+The [InfluxDB Connector](https://docs.confluent.io/current/connect/kafka-connect-influxdb/) is used to copy data between Kafka and InfluxDB Server.
 
 - The InfluxDB source connector is used to export data from InfluxDB Server to Kafka topics.
 - The InfluxDB sink connector is used to import data from Kafka topics to InfluxDB Server.
@@ -254,7 +249,7 @@ Apache Flink is a **framework** and **distributed** processing engine for **stat
 - `bounded`: `time-window`内到达的所有数据做一批处
 
 ![](https://gitee.com/istarwyh/images/raw/master/1589852217_20200519092334638_4790.png)
- [^ApacheFlink]:《Stream Processing with Apache Flink》
+ :[^ApacheFlink]《Stream Processing with Apache Flink》
 
 #### 15.1.2. [Time](https://www.bilibili.com/video/BV1G441177wT/?spm_id_from=333.788.videocard.17)
 时间标签在Flink中比关系型数据库中的`key`更重要,因为它必然是key.因此对`Flink`中的key做一介绍:
@@ -268,8 +263,6 @@ Apache Flink is a **framework** and **distributed** processing engine for **stat
 **生态支持**
 ![](https://gitee.com/istarwyh/images/raw/master/1589852216_20200519085307894_15750.png)
 **API[^API]**
-[^API]: [Flink的特点和优点](https://www.cnblogs.com/zgq25302111/p/12258371.html)
-
 层次化的API在表达能力和易用性方面各有权衡。表达能力由强到弱（易用性由弱到强）依次是：ProcessFunction、DataStream API、SQL/Table API。
 ![](https://gitee.com/istarwyh/images/raw/master/1589852217_20200519090021201_18752.png)
 Flink API提供
@@ -277,7 +270,7 @@ Flink API提供
 - 通用的流操作原语（如窗口划分和异步操作）以及精确控制时间和状态的接口
 - 详细、可自由定制的系统及应用指标（`metrics`）集合，用于提前定位和响应问题
 - 嵌入式执行模式可将应用自身连同整个Flink系统在单个JVM进程内启动，方便在IDE里运行和调试Flink作业
-### 15.3. Flink vs Spark
+### 15.3. Flink Vs Spark
 双方都想构建包含 AI 的统一大数据计算平台
 **Flink之于Spark的优点**
 
@@ -312,7 +305,7 @@ Flink API提供
 - Token: `export INFLUX_TOKEN=ZAiCu6Os2vOak5q9Ky3bcPdHWPGZHOqcgvBI52YhatD3FOjyxS05wAaDx8QPj_145Y6wnX-olAjsvPTFRO-9Qw==`
 - Organization:`sspku`;ID:`87e2941a63ad495d`
 - Bucket:`Metis`;ID:`05d50679c9497000`
-- Start Telegraf:  `telegraf --config https://us-central1-1.gcp.cloud2.influxdata.com/api/v2/telegrafs/05d0726a72a9f000`
+- Start Telegraf: `telegraf --config https://us-central1-1.gcp.cloud2.influxdata.com/api/v2/telegrafs/05d0726a72a9f000`
 
 ![](https://gitee.com/istarwyh/images/raw/master/1591715152_20200608210059539_11592.png)
 ### 17.2. [Write Data to InfluxDB](https://v2.docs.influxdata.com/v2.0/write-data/)
@@ -437,6 +430,11 @@ public static class Mem {
 }
 ```
 ## 18. References
-[^冷热数据分离方案]:[蘑菇街Kafka](https://juejin.im/post/5e1bad1ce51d453cee48c976)
+
 [^成熟]:[腾讯三大运维开源项目齐聚“OSCAR开源先锋日”](https://segmentfault.com/a/1190000016749190)
 [^织云]:[织云 Metis：看腾讯怎么做智能运维](https://zhuanlan.zhihu.com/p/36333033)
+[^冷热数据分离方案]:[蘑菇街Kafka](https://juejin.im/post/5e1bad1ce51d453cee48c976)
+[^100]:[scale to over 1M metrics per second](https://medium.com/hulu-tech-blog/how-hulu-uses-influxdb-and-kafka-to-scale-to-over-1-million-metrics-a-second-1721476aaff5)
+[^InfluxDB2.0]: [InfluxDB2.0](https://www.influxdata.com/blog/influxdb-and-kafka-how-influxdata-uses-kafka-in-production/)
+[^WAL]:Write-Ahead-Log,对数据库执行的操作的日志（仅作为附录文件）
+[^API]: [Flink的特点和优点](https://www.cnblogs.com/zgq25302111/p/12258371.html)

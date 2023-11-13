@@ -52,7 +52,7 @@ git: https://learngitbranching.js.org/
 
 #### DataBase
 ##### Choose the Suitable Database
-- [[How_to_Choose_the_Suitable_Database]]
+- [[How-to-Choose-the-Suitable-Database]]
 - https://blog.bytebytego.com/p/understanding-database-types
 ##### 快速利用数据库
 - 面向小白的retool: https://retool.com/
