@@ -19,8 +19,7 @@ The most important thing is definitely the business scenario in which our databa
 ## Hardware & Technology
 - [[#New Hardware|New Hardware]]
 - [[#Data Create、Persistence & Backup|Data Create、Persistence & Backup]]
-- [[#Conventional System Implementation Method|Conventional System Implementation Method]]
-- [[#Database Solutions for Distributed Systems|Database Solutions for Distributed Systems]]
+- [[#Database System Self Implementation|Database System Self Implementation]]
 - [[#License|License]]
 - [[#Ecological Ecosystem|Ecological Ecosystem]]
 
@@ -95,7 +94,8 @@ RDB persistence performs point-in-time snapshots of your dataset at specified in
 1. AOF rewrite: The AOF gets bigger and bigger as write operations are performed. While AOF file size exceeds the limit, Redis continues appending to the old file, a completely new one is produced with the minimal set of operations needed to create the current data set, and once this second file is ready Redis switches the two and starts appending to the new one.
 
 2. Mixed RDB with AOF rewrite: When AOF is performing a AOF rewrite, Redis first writes a data snapshot in RDB format to the AOF file, and then appends each write command generated during this period to the AOF file.
-### Conventional System Implementation Method
+
+### Database System Self Implementation
 
 #### Connection Model
 ##### Spawning a New Process on Each Connection
@@ -110,40 +110,9 @@ The process model provides better isolation, for example, an invalid memory acce
 - [[Redis源码架构阅读|Redis]] uses single-threaded execution, processing one command at a time.
 - Elasticsearch, MongoDB, and TiDB support optimistic concurrency control.
 - ClickHouse uses a lock-free data structure for concurrent query execution.
-### Database Solutions for Distributed Systems
-
-#### Distributed Consensus
-##### [[Paxos]]
-##### [[Raft]]
-
-#### Data Synchronization
-
-##### [[Binlog Master-Slave Data Synchronization]]
-
-- TiDB uses the Raft consensus algorithm for data synchronization across its distributed nodes.
-###### Asynchronous
-- Redis master-slave replication
-- ElasticSearch primary-backup model
-###### Synchronous
-Synchronous replication is a most reliable way comparing with other replication strategy, because the master node MUST WAIT for the slave node to confirm before sending data. Naturally, it can have a significant impact on the performance of the master node because it needs to wait for the slave node to confirm before continuing to process client requests.
-###### Semi-synchronous
-- MySQL master-slave replication
-
-##### [[Redo-log Master-Slave Data Synchronization]]
-
-#### High Scalability
-##### Sharding Cluster or Sharding and Partitioning
-1. [[Possible Problems with Sharding and Partitioning]]
-
-2. A Sharding Cluster is typically used when a single machine cannot handle a large workload or a vast amount of data, thus allowing you to scale horizontally. This process is particularly useful when dealing with very large amounts of data and offers near-limitless scaling to handle big data and intensive workloads
-
-##### [[Storage-Compute Architecture]]
-
-In traditional database deployment, the master and slave each maintain an independent copy of the data and synchronize through Binlog. In a shared storage cloud database, the master and slave share a copy of the data.
+#### [[Database Solutions for Distributed Systems]]
 
 
-#### High Availability
-The [[Master-Slave switch]] in the database field refers to a process where the roles of the master database and the slave database are switched. This is usually done for purposes of failover, maintenance, or load balancing. The master database is typically the primary source of data, and it handles all write operations, while the slave databases are replicas of the master database and handle read operations.
 ### License
 - MySQL Community Edition is licensed under the GPL.
 - Postgres is released under the PostgreSQL license, a free and open source license similar to BSD or MIT.
@@ -194,10 +163,8 @@ Postgres has more comprehensive support for CTE:
 
 #### **Operability**
 
-
 #### Extensibility
 Postgres supports several extensions. The most outstanding is PostGIS, which brings geospatial capabilities to Postgres. In addition, there is Foreign Data Wrapper (FDW), which supports querying other data systems, pg_stat_statements for tracking planning and execution statistics, and pgvector for vector searches for AI applications.[^PostgrevsMysql]
-
 
 #### Security
 

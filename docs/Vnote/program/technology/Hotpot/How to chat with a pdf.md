@@ -19,7 +19,7 @@
 4. 把最相似的文本发送给 openai，让他总结并回答你的问题。
 
 
-### 2.1. 登录 colab
+### 2.1. 登录 Colab
 
 你可以在本地电脑运行 python 一步步执行，也可以直接登录 [colab](https://colab.research.google.com/) 这个 python 运行平台，它提供了很方便的 python 环境，并且可以一步步执行代码并保存，非常适合做研究。只要你有谷歌账号就可以使用 colab。
 
@@ -44,7 +44,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import ElasticVectorSearch, pinecone, Weaviate, FAISS
 ```
 
-### 2.3. 定义 openapi token
+### 2.3. 定义 Openapi Token
 
 为了调用 openapi 服务，需要先申请 token，当你申请到 token 后，通过如下方式定义：
 
@@ -70,7 +70,7 @@ reader = PdfReader('/content/gdrive/My Drive/2023_GPT4All_Technical_Report.pdf')
 
 我们读取了 `2023_GPT4All_Technical_Report.pdf` 报告，这是一个号称本地可跑对标 GPT4 的服务（[测评](https://sspai.com/post/79196)）。
 
-### 2.5. 将 PDF 内容文本化并拆分为多个小 chunk
+### 2.5. 将 PDF 内容文本化并拆分为多个小 Chunk
 首先执行如下代码读取 PDF 文本内容：
 
 ```python
@@ -110,7 +110,7 @@ docsearch = FAISS.from_texts(texts, embeddings)
 
 总之这一步之后，我们本地就拿到了各段文本与其向量的对应关系，比如 “这是一段文字” 对应的向量为 `[-0.231, 0.423, -0.2347831, ...]`。
 
-### 2.7. 利用 chain 生成问答服务
+### 2.7. 利用 Chain 生成问答服务
 接下来要串起完整流程了，初始化一个 QA chain 表示与 GPT 使用 chat 模型进行问答：
 
 ```python
