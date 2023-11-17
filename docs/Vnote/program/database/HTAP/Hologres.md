@@ -32,6 +32,7 @@ Hologres 相比PostgreSQL 主要做了以下创新：
 - 在tablet层面同时支持了row tablet 和 column tablet,并且是双份而不是raft同步
 - 所有查询都在内存中完成,哪怕OOM(?)
 - 引入了bitmap、dictionary encoding 提高查询速度,不过 PostgreSQL 有插件，更多索引都能支持
+- [[Storage-Compute Architecture]]
 
 [^HologresUse]: https://developer.aliyun.com/article/785330
 [^hologres]: https://developer.aliyun.com/article/778789
