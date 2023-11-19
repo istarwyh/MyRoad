@@ -58,8 +58,10 @@ git: https://learngitbranching.js.org/
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/
 - 可视化创建数据库🀄️数据：https://visualdb.com/
+##### 数据库开发工具
+- https://webdb.app/page/demo
 ##### 数据库管理工具
-bytebase:https://www.bytebase.com/zh
+- bytebase:https://www.bytebase.com/zh
 - 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
 #### Framework
 - Web Extension开发框架: https://github.com/wxt-dev/wxt
