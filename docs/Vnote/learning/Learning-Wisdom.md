@@ -9,7 +9,9 @@
 
 Creativity is mostly copying.[[Absent-minded learning yields no gain]].
 Achieving an 85% success rate appears to be the optimal condition for efficient learning, both in humans and machines.
--- ScottYoung
+-- ScottYoung/《打开心智》
+
+人类几万年的进化，在基因中产生了一条新的心智模型：大脑既喜欢稳定又需要新鲜刺激。--《打开心智》
 
 对他人的实现抱有敬畏之心,完整地、不修改地模仿别人是有必要的。
 
