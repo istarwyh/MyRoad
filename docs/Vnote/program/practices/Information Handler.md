@@ -78,7 +78,8 @@ Sizzle AI，个性化学习
 
 ### Video Read
 - 提供视频字幕以及总结: https://glarity.app/zh-CN
-- 提供视频字幕以及结构化视频: 哔哩哔哩字幕列表
+- 视频导出文本：https://github.com/Dicklesworthstone/bulk_transcribe_youtube_videos_from_playlist**
+- 提供视频字幕以及结构化: 哔哩哔哩字幕列表
 
 ### Meeting or Talking Record
 - https://audiopen.ai/
