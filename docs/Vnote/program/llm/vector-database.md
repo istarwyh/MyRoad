@@ -1,4 +1,26 @@
-## vectorDB 演示
+## vectorDB 直观接触
+简单的向量数据库可以参见: https://vectordb.com/ ：
+```python
+import sys  
+from vectordb import Memory  
+  
+print(sys.version)  
+print(sys.platform)  
+memory = Memory()  
+memory.save("Hello world")  
+memory.save(  
+    ["apples are green", "oranges are orange"],  
+    [{"url": "https://apples.com"}, {"url": "https://oranges.com"}],  
+)  
+# Search for top n relevant results, automatically using embeddings  
+query = "hello"  
+results = memory.search(query, top_n = 1)  
+  
+print(results)
+```
+
+不过没有运行成功:`HTTPSConnectionPool(host='huggingface.co', port=443)`
+
 ## NLP(Natural Language processing) 与Vector
 ### 什么是NLP
 自然语言处理（NLP）专注让计算机能够以有意义和有价值的方式理解和响应人类语言。简单来说，我们可以构建一个包含所有句子的词典来实现这一目标，但这有些不切实际，因为人类语言中用于构成句子的单词组合无穷无尽。而且口语中还有口音、多样的同义词汇、错误发音或句中省略单词等等情况，就很复杂，所以诞生了NLP这个学科专门研究如何让计算机处理人类语言。
@@ -34,8 +56,6 @@ NLP尤其是生成型AI引发的热潮促使开发者寻找一种简便的方法
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220033738.png)
 向量之间**相似度**使用**距离函数**进行衡量：比如欧式距离，或余弦距离，结果通常会按距离排序取 TOP K，即 K 个最为相似的对象（K-NN, k nearest neighbors）。
 
-[^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
-
 其中余弦距离我们在高中学过：
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220023552.png)
@@ -70,8 +90,6 @@ NLP尤其是生成型AI引发的热潮促使开发者寻找一种简便的方法
 https://www.pinecone.io/learn/series/faiss/hnsw/
 
 ### 相似度查询[^vs]
-
-[^vs]: https://www.pinecone.io/learn/vector-similarity/
 
 #### 余弦相似度
 测量向量空间中两个向量之间角度的余弦。它的范围从 -1 到 1，其中 1 表示相同的向量，0 表示正交向量，-1 表示截然相反的向量。
@@ -120,7 +138,10 @@ $$
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311212317133.png)
 
-1.  基于Embedding对问题结合其聊天历史向量化解析 
+1. 基于Embedding对问题结合其聊天历史向量化解析 
 2. 通过在线及离线方式检索融合知识库及网页端内容 
 3. 基于LLM相关性模型进行精排再求解输出 
 4. 大模型基于更全面与实时数据推理答案并召回数据
+
+[^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
+[^vs]: https://www.pinecone.io/learn/vector-similarity/
