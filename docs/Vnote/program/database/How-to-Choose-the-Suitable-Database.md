@@ -42,16 +42,16 @@ Data Model defines how data is stored, arranged, and accessed in a database syst
 - **Multidimensional** – a complex cube-like data structure based on a variation of relational database which is used for data analytics and viewing the same data from different perspectives. Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
 #### Index Structure
 - ...traditional data structure like list、array
+	-  [[Redis源码架构阅读|Redis]] uses in-memory data structures for indexing, providing fast access to data.
 - bitmap
 - dictionary encoding
-
- MySQL uses B+ Tree as the major index, which is a multiway unbalanced binary tree existing on disk. It is effective for storing large amounts of data on disk.
-- PostgreSQL also uses B+ Tree as its primary index structure, along with other index types like hash, GiST, and SP-GiST.
-- [[Redis源码架构阅读|Redis]] uses in-memory data structures for indexing, providing fast access to data.
+- B+ Tree , which is a multiway unbalanced binary tree existing on disk. 
+	- PostgreSQL uses B+ Tree as its primary index structure, along with other index types like hash, GiST, and SP-GiST.
+	- MongoDB uses B-Tree indexes, which are similar to B+ Tree but with some differences in node structure and traversal.
 - ElasticSearch uses an inverted index for full-text search and analytics.
-- MongoDB uses B-Tree indexes, which are similar to B+ Tree but with some differences in node structure and traversal.
-- TiDB uses a distributed index structure based on Google's Percolator model.
-- ClickHouse uses a combination of primary and secondary indexes, including sparse and bitmap indexes.
+- Percolator model
+	- TiDB uses a distributed index structure based on Google's Percolator model
+- HNSW:[[vector-database#Hierarchical Navigable Small World (HNSW)]]
 #### Data Persistence Format
 If a computer wants to write data from memory to disk, it typically needs to perform at least two steps:
 
