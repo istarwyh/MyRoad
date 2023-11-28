@@ -18,3 +18,5 @@ Achieving an 85% success rate appears to be the optimal condition for efficient 
 如果定义鸡蛋是鸡生的蛋，那么先有鸡；如果定义鸡蛋是能孵出鸡的蛋，那么先有蛋。--评“先有鸡还是先有蛋？”
 
 世界上大部分争论都是语言的争论。
+
+遵从第一性原理，第一性原理就是指“系统性地怀疑你可能怀疑的一切事物，直到你获得无可置疑的真相”。--笛卡尔

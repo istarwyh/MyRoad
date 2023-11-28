@@ -72,7 +72,9 @@ Sizzle AI，个性化学习
 - Google
 - Technology search: https://www.perplexity.ai/
 - Technology search: https://www.phind.com/
-- paper search:Consensus
+- paper search:
+- Consensus
+- https://www.aminer.cn/
 ### Translate
 - 网页双语同时展示: Immersivetranslate
 
@@ -85,6 +87,7 @@ Sizzle AI，个性化学习
 - https://audiopen.ai/
 - otter.ai
 - speechtext.ai
+- https://podwise.xyz/
 ### Paper Read
 - https://typeset.io/
 
