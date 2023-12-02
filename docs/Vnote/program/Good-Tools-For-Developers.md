@@ -45,7 +45,7 @@ Mac Spotlight 加强
 #### GPT
 [[Frequently Used Prompt]]
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
-
+https://devv.ai
 #### 版本管理工具
 git: https://learngitbranching.js.org/
 [[Frequently Git Command]]
