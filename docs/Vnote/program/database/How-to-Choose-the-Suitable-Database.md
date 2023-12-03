@@ -58,7 +58,7 @@ If a computer wants to write data from memory to disk, it typically needs to per
 1. The program writes to the [[PageCache]]
 2. The [[PageCache]] is flushed to the disk
 ##### Column
-Examples: [[ORC (Optimized Row Columnar)]]
+Examples: [[Optimized-Row-Columnar]]
 Column storage is suitable for OLAP(Online Analytical Processing) scenarios:
 - data scanning
 - filtering
