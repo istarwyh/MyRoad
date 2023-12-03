@@ -1,4 +1,5 @@
-## 1. Markdown
+#tool
+## Markdown
 |        操作         |   Hash   | 有序数组 |  二叉树  |     b树(B-tree,Balanced Tree)     |                 b+树                 |                 b*树                  |
 | ------------------ | -------- | ------- | ------- | --------------------------------- | ------------------------------------ | ------------------------------------- |
 | Insert             | O(1)     | O(n)    | O(logn) | n叉树，每个节点可以有1200个叉         | n叉树，优化b树存储，提供范围查找          | n叉树，优化b+树页分裂空间利用率低的问题     |
@@ -9,13 +10,10 @@
 | Sort/Group by      | $\times$ |         |         | 搜索可以在非叶子节点结束              | 各个叶子节点通过指针跟兄弟节点关联(双指针) |                                       |
 | supplement         |          |         |         | 子节点数目超过后再二分，称作**页分裂** |                                      |                                       |
 
-
-## 2. Mermaid
-
-教程：
-https://blog.csdn.net/fenghuizhidao/article/details/79440583
-https://codechina.csdn.net/mirrors/knsv/mermaid?utm_source=csdn_github_accelerator
-### 2.1. 画流程图
+### Extradraw
+本身是JSON格式存储，渲染为手绘风格的图画。可以导入Mermaid 格式的Flowchart
+### Mermaid
+#### 画流程图
 ```mermaid
 graph LR
 id1(lineText)--基础校验-->id2[validText]--业务校验-->id7{是否是issue查找}
@@ -30,7 +28,7 @@ id3--否-->id5[关键词补全]--补全关键词-->id7
 3. 文本换行得用`<br/>`标签...
 4. 文字中不能包含`~`
 
-### 2.2. 画思维导图
+#### 画思维导图
 https://blog.csdn.net/skytruine/article/details/105828748
 
 ```mermaid
@@ -68,7 +66,7 @@ C-->C2(再保)
 
 保险-->D(...)
 ```
-### 2.3. 画时序图
+#### 画时序图
 https://www.imooc.com/article/292709?block_id=tuijian_wz
 
 ```mermaid
@@ -114,7 +112,9 @@ end
 信保 -->> -信贷 : 返回组装的响应对象
 ```
 
-## 3. CSS3
+## Draw.io/Diagrams.net
+GUI画图，xml 格式存储，渲染为drawio风格的图画。支持图形较多。
+## CSS3
 ### 3.1. Papaerclip
 <a class="paperclip icon"></a>
 

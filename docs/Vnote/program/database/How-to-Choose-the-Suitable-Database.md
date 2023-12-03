@@ -42,7 +42,7 @@ Data Model defines how data is stored, arranged, and accessed in a database syst
 - **Multidimensional** – a complex cube-like data structure based on a variation of relational database which is used for data analytics and viewing the same data from different perspectives. Redis is an in-memory key-value store, supporting various data structures like strings, lists, sets, and hashes.
 #### Index Structure
 - ...traditional data structure like list、array
-	-  [[Redis源码架构阅读|Redis]] uses in-memory data structures for indexing, providing fast access to data.
+	- [[Redis源码架构阅读|Redis]] uses in-memory data structures for indexing, providing fast access to data.
 - bitmap
 - dictionary encoding
 - B+ Tree , which is a multiway unbalanced binary tree existing on disk. 

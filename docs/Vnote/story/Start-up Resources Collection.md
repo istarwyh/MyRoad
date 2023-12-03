@@ -3,7 +3,7 @@
 公共 API: https://apivault.dev/
 聚合资源：https://www.freelancethings.co/?type=Tools
 ## Prototype
-[[Prototype]]
+[[Prototype-Draw]]
 
 ## 备案
 http://w2solo.com/topics/4033

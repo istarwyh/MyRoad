@@ -22,7 +22,7 @@ Mac Spotlight 加强
 
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
-- [[Information Handler]]
+- [[Information-Handler]]
 ### DevOps
 - jira
 - confluence
@@ -65,6 +65,7 @@ git: https://learngitbranching.js.org/
 - 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
 #### Framework
 - Web Extension开发框架: https://github.com/wxt-dev/wxt
+- [[Java-Project-Jar]]
 #### 网站设计工具
 - https://js.design/ai-upcoming 描述生成原型
 - AI 界面转代码: https://kombai.com/

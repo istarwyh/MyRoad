@@ -1,3 +1,4 @@
+#tool
 2023年的笔记市场产品令人眼花缭乱。下面这些产品你都听说过吗？你知道该选哪一个吗？
 - [ ] Obsidian
 - [ ] Bear 
@@ -12,6 +13,7 @@
 - [ ] 为知笔记 
 - [ ] MindBox 
 - [ ] Supernotes 
+- [ ] Heptabse
 - [ ] Evernote（国际） 
 - [ ] 印象笔记（国内） 
 - [ ] OneNote 
@@ -42,7 +44,7 @@
 | 全平台同步         | 全平台记笔记                                      | All              |
 | 本地优先、数据私有 | 防止断网、软件厂商倒闭以及数据泄漏                | Obsidian、Logseq |
 | 自由书写           | 手绘图画、插入音频                                | Onenote          |
-| 信息剪藏           | [[Information Handler#Collect Information]] | Notion、Flomo    |
+| 信息剪藏           | [[Information-Handler#Collect Information]] | Notion、Flomo    |
 | 文档式笔记         | 符合直觉，方便整合知识、互相关联、输出文章        | All but Logseq   |
 | 卡片/大纲式笔记         | 非常方便知识关联与追溯                            | Logseq           |
-| 白板               | 方便知识展示、关系寻找                            | Logseq           |
+| 白板               | 方便知识展示、关系寻找                            | Logseq、Heptabse         |
