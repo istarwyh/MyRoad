@@ -70,7 +70,7 @@ Row storage is suitable for OLTP(Online Transaction Processing) scenarios:
 - ACID
 ###### Examples:
 - [[SST(Sorted String Table)]]
-- [[Inverted Index of Lucene and B+Tree#2.1. B+Tree]]
+- [[Inverted-Index-of-Lucene-and-B-Tree#2.1. B+Tree]]
 ##### Coexistence of Rows and Columns
 In a traditional column storage database, data is stored by column rather than by row. This can be beneficial for analytical queries that aggregate values in a column because the database can read the column data in a continuous disk scan.
 ###### Examples:

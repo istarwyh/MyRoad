@@ -46,7 +46,7 @@ GPT-**Generative Pre-trained Transformer**,即经过预训练的`Transformer`模
 - 内容生成
 
 
-传统的数据库，无论是关系型、Nosql 或者 NewSql数据库，将图片转为二进制到存入都很简单，但是我们没有办法直接以图搜图。当然，如果我们是想要以文搜文，自然语言文本（字符串）也可以正则模糊匹配(`%`)，或者借由[[Inverted Index of Lucene and B+Tree#2.2.2.5. LevenShtein自动机]] ,但如果输入是一句话呢？
+传统的数据库，无论是关系型、Nosql 或者 NewSql数据库，将图片转为二进制到存入都很简单，但是我们没有办法直接以图搜图。当然，如果我们是想要以文搜文，自然语言文本（字符串）也可以正则模糊匹配(`%`)，或者借由[[Inverted-Index-of-Lucene-and-B-Tree#2.2.2.5. LevenShtein自动机]] ,但如果输入是一句话呢？
 NLP尤其是生成型AI引发的热潮促使开发者寻找一种简便的方法来存储与查询各种非结构化信息的**输出**。如果将那些不可以比较的数据转换成为向量，且这些向量的分布和距离可以反映出实体的关系，那么就可以通过比较向量进行检索，也就可以实现图搜图、文搜文的功能。而通过 AI/ML 算法，就可以实现向量化(`vector embeddings`)。例如可以将不同尺寸、不同内容的图片映射成为由像素值组成的同一个空间内的向量，然后在图像搜索中，当用户输入一张图片进行搜索时，可以将其转换为一个向量，并进行相似度搜索，以便找到与输入图片最相似的图片。同样在推荐系统中，将商品、商品和用户的关系都用向量表示，继而也可以通过相似度搜索来推荐相似、相关的物品给用户。
 举个形象的例子，如果我们把每一个单词看作向量，king减queen之差与man与woman之差应该是近似的，都代表着性别的差异。
 ```python
@@ -156,7 +156,7 @@ finalize_plot(ax)
 
 查询的时候再将查询向量hash到特定表，然后与同一表中的其他向量进行比较，以找到最接近的匹配项。这种方法比搜索整个数据集要快得多，因为每个哈希表中的向量比整个空间中的向量少得多。
 #### Inverted Index(倒排索引)
-[[Inverted Index of Lucene and B+Tree#2.2. 倒排索引（inverted index）|倒排索引]]和 [[vector-database#Locality-sensitive hashing（局部敏感哈希）|LSH]] 思想类似，都是通过聚类方法把整个向量空间划分为子区域，从而缩小检索时的量级。ANN 中的倒排索引每个区域用中心点聚类，在索引构造阶段，向量与中心点比对，将其归属到距离最近的中心点对应的倒排中。
+[[Inverted-Index-of-Lucene-and-B-Tree#2.2. 倒排索引（inverted index）|倒排索引]]和 [[vector-database#Locality-sensitive hashing（局部敏感哈希）|LSH]] 思想类似，都是通过聚类方法把整个向量空间划分为子区域，从而缩小检索时的量级。ANN 中的倒排索引每个区域用中心点聚类，在索引构造阶段，向量与中心点比对，将其归属到距离最近的中心点对应的倒排中。
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311261151924.png)
 #### Hierarchical Navigable Small World (HNSW)
 上面的相似检索都是基于空间划分的方法，每个向量只会属于某个子区域。它们最大的的问题是为了提高召回率，需要搜索较大空间，导致计算量增加。基于图的方法就可以比较好的解决这一问题[^graph]。
