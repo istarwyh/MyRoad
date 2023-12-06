@@ -19,6 +19,7 @@ All: https://www.aigc.cn/
 ### Read
 [[How-to-read-books-better]]
 #### Integration
+http://libgen.li/
 
 [Z-Library](https://singlelogin.re/)
 
@@ -94,6 +95,7 @@ Sizzle AI，个性化学习
 - https://podwise.xyz/
 ### Paper Read
 - https://typeset.io/
+- https://www.connectedpapers.com/
 
 ### API Access
 #### Quick

@@ -34,5 +34,9 @@ Hologres 相比PostgreSQL 主要做了以下创新：
 - 引入了bitmap、dictionary encoding 提高查询速度,不过 PostgreSQL 有插件，更多索引都能支持
 - Hologres 采用了 [[Storage-Compute Architecture|存算分离]]的架构
 
+
+hologres 存算分离有一个很重要的特征，它将计算单元放到了 docker 中。
+
+
 [^HologresUse]: https://developer.aliyun.com/article/785330
 [^hologres]: https://developer.aliyun.com/article/778789
