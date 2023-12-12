@@ -9,7 +9,7 @@ print(sys.platform)
 memory = Memory()  
 memory.save("Hello world")  
 memory.save(  
-    ["apples are green", "oranges are orange"],  
+    ["apples are red", "oranges are orange"],  
     [{"url": "https://apples.com"}, {"url": "https://oranges.com"}],  
 )  
 # Search for top n relevant results, automatically using embeddings  
