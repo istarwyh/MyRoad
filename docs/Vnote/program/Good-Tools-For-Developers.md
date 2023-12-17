@@ -19,7 +19,8 @@
 浏览器行为录制自动化
 #### Raycast / Alfred
 Mac Spotlight 加强
-
+### Tools 🔍
+https://www.apigpts.dev/tools
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
 - [[Information-Handler]]
@@ -69,6 +70,7 @@ git: https://learngitbranching.js.org/
 - Web Extension开发框架: https://github.com/wxt-dev/wxt
 - [[Java-Project-Jar]]
 #### 网站设计工具
+- 设计师： https://webdesigner.tools/
 - https://js.design/ai-upcoming 描述生成原型
 - AI 界面转代码: https://kombai.com/
 - wix:https://zh.wix.com/

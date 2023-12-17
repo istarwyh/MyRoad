@@ -16,12 +16,10 @@
 
 多思无益，个人能做的就是多学一点，多积累一些经验，多看看一点世界。这个博客也为互联网建立的初衷带来一点噪音或者信息。
 
+- [[致谢]]
+- [[关于版权]]
 
-><span style="font-family: cursive">Thanks for
-[obsidian-html](https://github.com/obsidian-html/obsidian-html)
-[零成本搭建现代博客之搭建篇](https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/)
 
-</span>
 
 
 
