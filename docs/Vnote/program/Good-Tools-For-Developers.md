@@ -41,13 +41,13 @@ https://sinqi.tools/
 
 #### IDE
 ##### IDEA
-- [[Frequently IDEA Shortcut]]
+- [[Frequently-IDEA-Shortcut]]
 - 本地RPC:
 - 本地发送消息
 - 本地Debug 远程
 - 自动切换输入法：Smart Input
 #### GPT
-[[Frequently Used Prompt]]
+[[Frequently-Used-Prompt]]
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 https://devv.ai
 #### 版本管理工具
@@ -103,4 +103,4 @@ https://github.com/linyuxuanlin/Auto-i18n
 #### [跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)
 
 ## Practices
-[[Practices for processing l0 Billion Bill data]]
+[[Practices-for-Processing-l0-Billion-Bill-data]]

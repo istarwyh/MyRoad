@@ -1,4 +1,4 @@
-## 1. How to get an Object Instance limitlessly?
+## 1. How to Get an Object Instance Limitlessly?
 ### 1.1. 利用Unsafe直接分配内存
 ```java
 <T> T allocateInstance(Class<T> type) {
@@ -39,7 +39,7 @@ public class CannotInitialByLoadingClassErrorModifier implements Modifier {
 }
 
 ```
-## 2. How to set a field limitlessly?
+## 2. How to Set a Field Limitlessly?
 ### 2.1. 一般的反射
 我想要将instance塞到field中:
 
@@ -51,11 +51,11 @@ declareField.set(testClass,instance);
 ### 2.2. 无限制的反射
 [TestMuseum](https://github.com/istarwyh/TestMuseum):tdd.args.utils.ReflectionUtil
 
-## 3. How to mock middleware locally?
+## 3. How to Mock Middleware Locally?
 在公司里，与公司还有日常环境数据库可以提供测试之外，通常公司中的中间件都没有本地能够启动的版本，比如阿里的Redis、RocketMq,所以就和内存数据库H2可以作为日常环境数据库的替身一样，各种中间件的本地版本该怎么Mock呢？
 如果只是方法中少次用到，每次mock返回值是可行的。但如果是并发或者循环调用这种中间件就得有个真实执行的mock。
 一种思路是直接转发本地请求到本地的Mock类里面，这个思路的问题就在于工作量太大，得写一个完整的Mock类。
-## How to Use JSON as parameterized test?
+## How to Use JSON as Parameterized Test?
 [TestMuseum](https://github.com/istarwyh/TestMuseum):tdd.args.utils.ReflectionUtil
 🌰
-[[Practices for processing l0 Billion Bill data#2.2.3. 参数化测试]]
+[[Practices-for-Processing-l0-Billion-Bill-data#2.2.3. 参数化测试]]
