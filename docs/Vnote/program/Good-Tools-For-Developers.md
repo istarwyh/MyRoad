@@ -80,7 +80,7 @@ git: https://learngitbranching.js.org/
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
 
 ### Cloud Platform
-- 使用云平台像使用操作系统一样 https://sealos.io/ 以及 laf  serverless 平台
+- 使用云平台像使用操作系统一样 https://sealos.io/ 以及 laf serverless 平台
 - [善用GitHub](https://link.zhihu.com/?target=https%3A//www.bmpi.dev/self/use-github-better/)
 - Cloudflare：Serverless最好的平台，能提供如常用的存储R2、KV数据库、CDN、Pages、Worker、MQ、甚至运行AI模型
 - Vercel：很适合部署运行Next.js的前端项目，Cloudflare Pages运行Next.js还需要额外的一些配置。
