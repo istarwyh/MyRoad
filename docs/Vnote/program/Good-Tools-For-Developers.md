@@ -74,11 +74,10 @@ git: https://learngitbranching.js.org/
 - 设计师： https://webdesigner.tools/
 - https://js.design/ai-upcoming 描述生成原型
 - AI 界面转代码: https://kombai.com/
-- wix:https://zh.wix.com/
-- strikingly:https://cn.strikingly.com/
 - ai 生成网页： https://v0.dev/
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
-
+- wix:https://zh.wix.com/
+- strikingly:https://cn.strikingly.com/
 ### Cloud Platform
 - 使用云平台像使用操作系统一样 https://sealos.io/ 以及 laf serverless 平台
 - [善用GitHub](https://link.zhihu.com/?target=https%3A//www.bmpi.dev/self/use-github-better/)

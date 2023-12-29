@@ -11,8 +11,8 @@ http://w2solo.com/topics/4033
 ### 海外身份
 海外手机卡：https://www.giffgaff.com/orders/affiliate/lauix16 邀请链接
 ## 开发
-### 域名Domain
-域名比价:
+### 域名 Domain
+Domain 比价:
 - https://www.nazhumi.com/
 - https://namebeta.com/
 域名whois：

@@ -119,6 +119,8 @@ Sizzle AI，个性化学习
 - https://promptperfect.jina.ai/prompts
 - https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction
 
+### Index & Query
+- [Dataview Query Language](https://blacksmithgu.github.io/obsidian-dataview/)
 ## Create Todo
 https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA
 The PARA Method: A Universal System for Organizing Digital Information
