@@ -19,7 +19,8 @@
 多思无益，个人能做的就是多学一点，多积累一些经验，多看看一点世界。这个博客也为互联网建立的初衷带来一点噪音或者信息。
 
 ## 博客技术栈
-xiaohui-blog-tech-architecture.excalidraw
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202312310112170.png)
+[[xiaohui-blog-technology-architecture.excalidraw]]
 
 ## 关于版权
 本博客大部分文字均属原创，部分文字和图片均来自网络收集整理，版权归原作者所有。
