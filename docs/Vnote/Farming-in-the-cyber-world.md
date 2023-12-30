@@ -1,7 +1,8 @@
+
 我是[晓灰](https://istarwyh.github.io/resume-it/)，这是我在阿里工作时的花名，取自《庄子·天地》
 >视乎冥冥，听乎无声。_冥冥之中_，_独见晓焉_；无声之中，独闻和焉。
 
-
+## 独白
 我是赛博世界里新进的农民。
 
 作为一个农民，我现在还用着别人的地，没日没夜地做着长工，只愿换来季收的一些施舍。所幸的是当我今天来到这里，我发现自己已经站在那么多优秀的开源项目和“玲琅满目”的SAAS巨人肩膀上。我有很多的[[Good-Tools-For-Developers]]可以用，我也有如同阳光和空气一般的知识可以获取。
@@ -17,11 +18,22 @@
 
 多思无益，个人能做的就是多学一点，多积累一些经验，多看看一点世界。这个博客也为互联网建立的初衷带来一点噪音或者信息。
 
-- [[致谢]]
-- [[关于版权]]
+## 博客技术栈
+xiaohui-blog-tech-architecture.excalidraw
 
+## 关于版权
+本博客大部分文字均属原创，部分文字和图片均来自网络收集整理，版权归原作者所有。
+如果原作者禁止转载、修改、引用，只要给我（email:yihui-wang@qq.com）留言，我一定删掉您的文章，并进行道歉。如果您允许我非营利性使用，我将十分感谢您的宽容和对知识的分享。
+本站遵循"署名-非商业用途-保持一致"的创作共用协议，转载文章请注明原文地址。本博客所有原创内容允许在[CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/2.5/cn/)条款下使用。
 
+## 致谢
 
+<span style="font-family: cursive">Thanks for
 
+- World Wide Web
 
+- [obsidian-html](https://github.com/obsidian-html/obsidian-html)
 
+- [零成本搭建现代博客之搭建篇](https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/)
+
+</span>
