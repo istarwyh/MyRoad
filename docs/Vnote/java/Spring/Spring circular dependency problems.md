@@ -116,3 +116,5 @@ A创建过程->>缓存: 将A实例放入一级缓存
 	```
 	
 	By combining constructor injection with lazy loading using `Supplier`, we can resolve the circular dependency between `ClassA` and `ClassB`. However, it's important to note that this approach may not be suitable for all scenarios, and it's best to avoid circular dependencies whenever possible.
+
+记一个隐秘的循环依赖：自定义AOP（非Spring AOP）如果没实现 Spring 解决循环依赖接口 getFactoryBeanReference ，当该类与其他普通类循环依赖时Spring 会启动失败。

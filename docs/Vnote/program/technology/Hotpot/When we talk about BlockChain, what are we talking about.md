@@ -22,7 +22,7 @@
 - 智能化：可以自动执行区块链中的逻辑
 - 隐私性：在链上只有公钥和私钥是被认可的
 
-![](20210405110222449_27332.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202312311900774.png)
 
 ##### 1.2.1.1. 交易
 交易不一定代表着金钱的转换，可抽象如下：
@@ -47,7 +47,7 @@
 #### 1.2.2. $B分层架构
 **Layered structure of the blockchain architecture**[^layer]
 
-![](20210405105958625_25475.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202312311901871.png)
 
 ### 精通比特币
 https://www.8btc.com/books/261/master_bitcoin/_book/qian_yan.html

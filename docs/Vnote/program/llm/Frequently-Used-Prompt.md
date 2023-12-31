@@ -1,6 +1,16 @@
 #prompt
+
 Official Guidance:https://github.com/guidance-ai/guidance
-And there is my frequently used prompt:
+## 稳定输出
+
+- 角色指定
+- 任务说明
+- 格式说明
+- 规则说明
+- 末尾加强
+
+
+## 个人常用
 
 1. Please translate:
 

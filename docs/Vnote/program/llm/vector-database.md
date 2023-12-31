@@ -277,24 +277,7 @@ $$
 向量本质上就是浮点数数组，对数据库而言相当于多了一个类似JSON的专门存储类型，所以传统的搜索引擎ES或PostgreSQL的向量版或假装向量插件后都可以，甚至用Redis 还更方便。
 
 ## 向量数据库的具体应用
-### LangChain
-
-<img width=600 src="https://s1.ax1x.com/2023/04/16/p9CCejs.png">
-
-即：
-
-1. 找一些库把 PDF 内容文本提取出来。
-2. 把这些文本拆分成 N 份更小的文本，用 openai 进行文本向量化。
-3. 当用户提问时，对用户提问进行向量化，并用数学函数计算与 PDF 已向量化内容的相似程度。
-4. 把最相似的文本用 Langchain 的 Prompt组装起来发送给 openai，让他总结并回答你的问题。
-### 百川搜索+LLM
-
-![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311212317133.png)
-
-1. 基于Embedding对问题结合其聊天历史向量化解析 
-2. 通过在线及离线方式检索融合知识库及网页端内容 
-3. 基于LLM相关性模型进行精排再求解输出 
-4. 大模型基于更全面与实时数据推理答案并召回数据
+[[Enhanced-Search-With-AI]]
 
 [^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
 [^graph]: [向量召回」相似检索算法](https://mp.weixin.qq.com/s/dfdNj9CZ3Kj2UwDr9PQcVg)

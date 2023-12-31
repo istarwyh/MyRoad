@@ -17,4 +17,11 @@ The wide-column model allows for efficient storage and retrieval of data by row 
 
 So, while Bigtable does use a form of column storage, it's not the same as traditional column storage. **It's a hybrid model that combines aspects of both row storage and column storage.**
 
+
+
+Bigtable support null-query instead of exist-query, because Bigtable cannot store null data. Null in Bigtable represents two semantic meaning:
+1. null field is absent
+2. the field value is actually null
+So it is confusing. And exist query actually define the field is absent in a row.
+
 [^BigtableWiki]:https://en.wikipedia.org/wiki/Bigtable
