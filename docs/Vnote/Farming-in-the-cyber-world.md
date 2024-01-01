@@ -17,13 +17,13 @@
 多思无益，个人能做的就是多学一点，多积累一些经验，多看看一点世界。这个博客也为互联网建立的初衷带来一点噪音或者信息。
 
 ## 博客技术栈
-![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202312310112170.png)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401012244710.png)
 [[xiaohui-blog-technology-architecture.excalidraw]]
 
 ## 关于版权
 本博客大部分文字均属原创；部分文字和图片来自网络收集整理，版权归原作者所有。
 
-如果原作者禁止转载、修改、引用，只要给我（email:yihui-wang@qq.com）留言，我一定删掉您的文章，并进行道歉。如果您允许我非营利性使用，我将十分感谢您的宽容和对知识的分享。
+如果原作者禁止转载、修改、引用，只要给我（email: yihui-wang@qq.com ）留言，我一定删掉您的文章，并进行道歉。如果您允许我非营利性使用，我将十分感谢您的宽容和对知识的分享。
 
 本站遵循"署名-非商业用途-保持一致"的创作共用协议，转载文章请注明原文地址。本博客所有原创内容允许在[CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/2.5/cn/)条款下使用。
 
