@@ -143,6 +143,7 @@ The PARA Method: A Universal System for Organizing Digital Information
 - Docsify
 
 ### Publish
+- “The Day You Became a Better Writer”
 - GitHub Pages: 免费但是慢
 - [Netlify](https://app.netlify.com/): CDN服务商,免费100G/月
 - [Substack](https://xiaohuihui.substack.com/): 发布每个人自己的博客网站并提供订阅服务
