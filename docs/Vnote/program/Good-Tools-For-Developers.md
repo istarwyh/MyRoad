@@ -50,6 +50,8 @@ https://sinqi.tools/
 [[Frequently-Used-Prompt]]
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 https://devv.ai
+https://www.phind.com/
+本地LLM:https://jan.ai/
 #### 版本管理工具
 git: https://learngitbranching.js.org/
 [[Frequently Git Command]]
@@ -58,6 +60,7 @@ git: https://learngitbranching.js.org/
 ##### Choose the Suitable Database
 - [[How-to-Choose-the-Suitable-Database]]
 - https://blog.bytebytego.com/p/understanding-database-types
+- Free redis: https://upstash.com/
 ##### 快速利用数据库
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/

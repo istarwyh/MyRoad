@@ -1,3 +1,7 @@
+---
+author: Captain越
+reference_link: https://mp.weixin.qq.com/s/SYqNyoeDFK3qygms5hx95A
+---
 ## 一、概要
 
 很多时候，大家做项目的时候容易陷入为了上线而上线，尤其技术出身的同学，接到一个项目后，会陷入快速了解需求、做方案的圈子里。
