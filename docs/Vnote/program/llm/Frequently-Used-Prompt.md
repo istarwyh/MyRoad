@@ -9,6 +9,7 @@ Official Guidance:https://github.com/guidance-ai/guidance
 - 规则说明
 - 末尾加强
 
+Before you start, please ask me any questions that you need answered to help me best solve my problem.
 
 ## 个人常用
 
