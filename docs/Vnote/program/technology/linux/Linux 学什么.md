@@ -1,17 +1,15 @@
-# 1. Linux学习笔记01
-## 1.1. Why do we learn Linux?
+## 1.1. Why Do We Learn Linux?
 1. 使用标准C/C++编写运行在 Linux上的应用程序
 2. 编写部署在Linux上的应用程序,如Python,Java Web服务程序
 其实Python有Python解释器,Java有Java虚拟机,它们实际上对于Linux的需求没有C/C++来的高,不过对于这些开发者仍然需要掌握一定的Linux使用能力并可以通过Linux知晓系统底层.为何呢?因为不管是工作需要,还是线上日志的查看/准确定位/端口被占用等,还是对于网络模型实现及学习新的如虚拟化技术等,都需要Linux的相关掌握.
->现在工作开发越来越细,对于公司来说,个人就像螺丝钉,用旧了换就行.
 
-## 1.2. The several way of Linux 
+## 1.2. The Several way of Linux
 - 运维、维护Linux服务器①
 - 开发Linux服务程序②
 - 底层开发(*************)③
 
 ## 1.3. How to Learn Linux
-### 1.3.1. The periiod of Linux
+### 1.3.1. The Periiod of Linux
 Linux的学习很多以命令为主,初学者学多了之后可能觉得没意思,那么Linux为什么这样做?
 -	省略GUI,节省资源
 -	命令行通过将一系列操作写入脚本,可代替手动操作-->自动化
@@ -35,6 +33,3 @@ Linux的学习很多以命令为主,初学者学多了之后可能觉得没意�
 先学再说后面!
 ## 1.4. 注意!!
 Linux运行可能不稳定,因此不要长期开启缺乏维护,要及时保存快照.
-## 1.5. References
-编程珠玑:守望先生
-奇舞周刊 7/11

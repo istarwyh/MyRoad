@@ -1,6 +1,7 @@
 区别于传统的关键词匹配，向量召回处理复杂查询更好，处理大量文档结果更高效，但是为了给LLM最优的上下文信息，还需要结合搜索知识，对文档粗排、重排、精排，提高文档准确性与多样性，最终提供更好的问答效果。
-
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401141137875.png)
 [[Enhanced-Search-With-AI.excalidraw]]
+
 ## 百川搜索+LLM
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311212317133.png)

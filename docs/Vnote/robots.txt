@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /$
+Allow: /debug/
+Allow: /qa/
+Allow: /wiki
+Allow: /cgi-bin/loginpage
+Allow: /cgi-bin/wx
+Allow: /webpoc/ruleCenter
+Disallow: /

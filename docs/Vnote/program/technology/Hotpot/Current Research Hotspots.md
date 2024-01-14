@@ -1,6 +1,6 @@
 ## 1. Current Research Hotspots
 ### 1.1. Trusted Computing
-With Trusted Computing ( TC ), the computer will consistently behave  in expected ways in order to improve the security of computer system, and those behaviors will be enforced by computer hardware and software. 
+With Trusted Computing ( TC ), the computer will consistently behave in expected ways in order to improve the security of computer system, and those behaviors will be enforced by computer hardware and software. 
 ### 1.2. Cloud Computing
 Cloud computing is a kind of large-scale distributed computing mode powered by massive economy, on the demand availability of computer system resources, especially data storage and computing power, without direct active management by the user.
 ### 1.3. Internet of Things
@@ -61,14 +61,14 @@ https://promptperfect.jina.ai/prompts
 > C/C++/汇编圈子、Ruby圈子、Hadoop/Spark圈子、……
 
 ### Other
-#### new NET
+#### New NET
 `QUIC`开启: `chrome://flags/#enable-quic`
 
 #### code-CAD
 - https://kittycad.io/product
 - https://cadhub.xyz/
 
-##### share and reuse CAD
+##### Share and Reuse CAD
 - https://www.onshape.com/en/
 - https://www.xunjiecad.com/dailypic.html
 ## Method

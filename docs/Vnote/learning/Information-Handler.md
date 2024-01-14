@@ -1,5 +1,6 @@
 
-All: https://www.aigc.cn/
+- https://www.aigc.cn/
+- https://usefulai.com/
 
 ## Collect Information
 
