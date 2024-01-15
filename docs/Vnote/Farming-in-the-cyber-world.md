@@ -21,6 +21,9 @@
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401012244710.png)
 [[xiaohui-blog-technology-architecture.excalidraw]]
 
+## 联系我
+<img src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401141955805.png" alt="微信链接:https://u.wechat.com/MDCbTNhjRDYw10n6lSZQmS0" width="250" height="250">
+
 ## 关于版权
 本博客大部分文字均属原创；部分文字和图片来自网络收集整理，版权归原作者所有。
 
@@ -37,5 +40,7 @@
 - [obsidian-html](https://github.com/obsidian-html/obsidian-html)
 
 - [零成本搭建现代博客之搭建篇](https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/)
+
+- [lepton.ai](https://www.lepton.ai/playground/artistic?mode=qr-code)
 
 </span>
