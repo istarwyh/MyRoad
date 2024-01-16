@@ -277,7 +277,7 @@ $$
 向量本质上就是浮点数数组，对数据库而言相当于多了一个类似JSON的专门存储类型，所以传统的搜索引擎ES或PostgreSQL的向量版或假装向量插件后都可以，甚至用Redis 还更方便。 pg-vector
 
 ## 向量数据库的具体应用
-[[Enhanced-Search-With-AI]]
+[[Retrieval-Augmented-Generation]]
 
 [^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
 [^graph]: [向量召回」相似检索算法](https://mp.weixin.qq.com/s/dfdNj9CZ3Kj2UwDr9PQcVg)

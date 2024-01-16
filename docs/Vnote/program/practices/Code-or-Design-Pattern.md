@@ -41,3 +41,7 @@ transform2("HELLO WORLD"); // "hello world !"
 ```
 ### 3. SPOT(Single Point of Truth)/DRY(Don't Repeat yourself)
 尽量不要有重复的代码有时候会让代码难懂，而保证自己写的代码在需要的时候只需要改动一处，是更为实际的原则。
+
+### 4.AOP
+面向切面封装识别功能的收益，埋点、报表、同比环比等等。
+面向切面做缓存

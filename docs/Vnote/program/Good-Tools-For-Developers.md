@@ -15,8 +15,10 @@
 
 
 ### Resources Router
-#### Automa
-浏览器行为录制自动化
+#### RPA
+rpa: 浏览器行为录制自动化
+自动投简历： https://github.com/Frrrrrrrrank/auto_job__find__chatgpt__rpa
+
 #### Raycast / Alfred
 Mac Spotlight 加强
 ### Tools 🔍
@@ -65,6 +67,7 @@ git: https://learngitbranching.js.org/
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/
 - 可视化创建数据库🀄️数据：https://visualdb.com/
+- 数据库数据 mock: Snaplet 
 ##### 数据库开发工具
 - https://webdb.app/page/demo
 ##### 数据库管理工具

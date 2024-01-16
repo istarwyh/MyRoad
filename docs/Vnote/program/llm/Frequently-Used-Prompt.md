@@ -1,6 +1,7 @@
 #prompt
 
 Official Guidance:https://github.com/guidance-ai/guidance
+- AIGC 图片收集工具链接：https://www.picwell.art/ai
 ## 稳定输出
 
 - 角色指定

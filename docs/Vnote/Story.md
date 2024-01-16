@@ -1,6 +1,7 @@
 ## Business Models
 [[e-commerce Business Models]]
 [[Work involved in opening an e-commerce store]]
+[[customer-behavior]]
 ## For My Story
 
 >我要做的事情是做我自己。我相信这个地球上有很多和我一样需求的人，他们最终会找到我。
