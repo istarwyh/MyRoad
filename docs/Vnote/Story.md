@@ -18,7 +18,10 @@ LIST FROM #idea
 ## For Others' Story
 我暂时想不到足够好的故事，或许只是没有信心完成我的故事，所以我会先去看看[[Others' Story]],然后[[How-to-choose-your-work|选择一个]]。
 
+## Dang Story
+https://dang.ai/ai-graveyard
 ## Start-up
+- Feasibility https://www.alpha-sense.com/
 - [[Start-up Resources Collection]]
 - [Bytebase SAAS Collection](https://mp.weixin.qq.com/s/Z4W4JiWLFUY-uIXT5C7-2g)
 - [创业者股权架构](https://mp.weixin.qq.com/s/hxPY3HDUk7ReWo_9zL_l_A)
