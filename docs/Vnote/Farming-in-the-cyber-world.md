@@ -22,7 +22,8 @@
 [[xiaohui-blog-technology-architecture.excalidraw]]
 
 ## 联系我
-<img src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401141955805.png" alt="微信链接:https://u.wechat.com/MDCbTNhjRDYw10n6lSZQmS0" width="250" height="250">
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202402122327554.png)
 
 ## 关于版权
 本博客大部分文字均属原创；部分文字和图片来自网络收集整理，版权归原作者所有。
