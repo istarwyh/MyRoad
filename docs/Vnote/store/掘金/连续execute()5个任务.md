@@ -1,4 +1,4 @@
-### 1.1. 配置
+## 1.1. 配置
 ```java
 var threadPool2 = new ThreadPoolExecutor(2, 3, 30, TimeUnit.SECONDS, new LinkedBlockingQueue<>(2),
                 new UserThreadFactory("MBinPC"), new UserRejectHandler());
