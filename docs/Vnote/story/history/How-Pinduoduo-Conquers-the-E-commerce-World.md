@@ -1,3 +1,4 @@
+## 市场策略层面
 https://mp.weixin.qq.com/s/q6VnNrWvV2Jh9UuTl96dWQ
 
 https://mp.weixin.qq.com/s/WQzkC78t7_Pi6YOfzvl0vw 
@@ -7,3 +8,6 @@ https://mp.weixin.qq.com/s/WQzkC78t7_Pi6YOfzvl0vw
 3、补贴多，价格便宜，退款退货流程快
 ，消费者满意，主要是便宜。
 因为大家不可能天天网购，所以MAU更接近真实用户数量，用前面微信的MAU13.27亿-淘宝的MAU8.8亿=4.47亿。而拼多多正是在微信这块土壤上成长起来的。
+
+## 技术层面
+- PDD对流量的把控十分精准与精细，可以做到你投多少钱带给你多少流量，你不投钱则没有流量

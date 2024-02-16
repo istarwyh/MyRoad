@@ -44,3 +44,14 @@
 - [lepton.ai](https://www.lepton.ai/playground/artistic?mode=qr-code)
 
 </span>
+
+
+
+<iframe
+src="https://userdesk.io/chatbot/clsok8vng0001aihcgmmbxfos"
+width="100%"
+style="height: 100%; min-height: 700px"
+frameborder="0"
+></iframe>
+
+<script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clsok8vng0001aihcgmmbxfos"></script>

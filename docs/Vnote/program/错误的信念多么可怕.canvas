@@ -42,7 +42,7 @@
 		{"id":"ab2a1550283b0120","type":"text","text":"其中感觉之前日志toJSONString(sqlSesssionFactory) 没有必要，于是改了日志，但是我忽视了这个简单的动作","x":1770,"y":159,"width":205,"height":140},
 		{"id":"3174791d0d8b82d9","type":"text","text":"还是有问题","x":1267,"y":360,"width":167,"height":120},
 		{"id":"08195091666d5590","type":"text","text":"一直怀疑是包依赖的问题，于是注释了大量的包","x":1568,"y":370,"width":169,"height":110},
-		{"id":"a188021da6217698","x":1286,"y":-626,"width":267,"height":124,"type":"text","text":"之后还有 Invalid Bounded Method 报错，同样百思不得其解，最后尝试种种，发现是和原本代码中其他MapperScan冲突而解决了"},
+		{"id":"a188021da6217698","type":"text","text":"之后还有 Invalid Bounded Method 报错，同样百思不得其解，最后尝试种种，发现是和原本代码中其他MapperScan冲突而解决了","x":1286,"y":-626,"width":267,"height":124},
 		{"id":"eb25d46aeb67aa2d","type":"text","text":"之后 SQLFeatureNotSupported 的报错，这个很清晰就是 版本过老的问题，但是 阿里内部的pandora starter以及中间件starter以及其他中台业务包引入了 太多老版本的druid， 特别地把druid强耦合在了自己的包中","x":1656,"y":-646,"width":307,"height":134},
 		{"id":"a2ae24b14d20ae4c","type":"text","text":"排不干净，放弃，将LocalDate 改为Date \n反思？！\n1. 应该早点认识到这个没有意义！","x":2063,"y":-652,"width":307,"height":134},
 		{"id":"89f103ba7e99650e","type":"text","text":"至此，接入Hologres的旅程正式告一段落","x":2458,"y":-659,"width":307,"height":134}

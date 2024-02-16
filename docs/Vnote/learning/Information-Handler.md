@@ -76,8 +76,8 @@ Sizzle AI，个性化学习
 ### Search
 - [术语在线](https://www.termonline.cn/) 
 - Google
-- Technology search: https://www.perplexity.ai/
-- Technology search: https://www.phind.com/
+- Global Ask: https://www.perplexity.ai/
+- Technology Ask: https://www.phind.com/
 - paper search:
 - Consensus
 - https://www.aminer.cn/
@@ -120,11 +120,14 @@ Sizzle AI，个性化学习
 - https://promptperfect.jina.ai/prompts
 - https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction
 
+### Export
+
 ### Index & Query
 - [Dataview Query Language](https://blacksmithgu.github.io/obsidian-dataview/)
 ## Create Todo
-https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA
-The PARA Method: A Universal System for Organizing Digital Information
+
+[The PARA Method: A Universal System for Organizing Digital Information](https://fortelabs.com/blog/para/)
+	- [案例](https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA)
 
 ## Create
 
@@ -150,4 +153,4 @@ The PARA Method: A Universal System for Organizing Digital Information
 - [Substack](https://xiaohuihui.substack.com/): 发布每个人自己的博客网站并提供订阅服务
 - obsidian publish:$8/月
 - 简单、轻松的书写&部署博客: https://elog.1874.cool/notion/introduce
-- 
+- [[mdnice]]

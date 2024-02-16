@@ -38,7 +38,8 @@ https://www.91wink.com/index.php/sites/
 - 架构图绘制：https://www.onemodel.app/
 - 绘图时需要的一些配色，可以访问: https://coolors.co/ 或者 http://khroma.co/ 来自动生成，比自己瞎配要美观不少
 ### Development
-开发瑞士军刀，可搭配 raycast 等使用：https://he3app.com/zh/
+- 开发瑞士军刀，可搭配 raycast 等使用：https://he3app.com/zh/
+- 自动从页面跳转代码： https://github.com/zh-lx/code-inspector
 #### Terminal
 ##### Warp
 
