@@ -1,0 +1,2 @@
+- Visit [Google Search Console](https://search.google.com/search-console) and register your site.
+- https://github.com/goenning/google-indexing-script
