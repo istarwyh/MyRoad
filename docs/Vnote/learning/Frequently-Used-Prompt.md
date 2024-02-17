@@ -16,6 +16,10 @@ Before you start, please ask me any questions that you need answered to help me 
 
 Have a break, and then...
 ```
+## 引发硅竞
+```
+But chatGPT can do it better.
+```
 ## 个人常用
 ### 翻译
 #### 一般翻译
@@ -109,7 +113,7 @@ LLM 由于训练者的选择是有自己的默认风格的，比如喜欢用1、
 现在请你介绍“线程同步开销”
 ```
 #### 名人的风格
-![[Pasted image 20240216190101.png]]
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202402171549868.png)
 ### Midjourney AI
 ```
 您现在将充当名为“Midjourney”的生成式 AI 的提示生成器。 Midjourney AI 根据给定的提示生成图像。
