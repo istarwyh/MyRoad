@@ -18,7 +18,7 @@
 - [WeChatMsg](https://github.com/LC044/WeChatMsg):提取微信聊天记录
 - UmiOCR、Latex-OCR
 ### Read
-[[How-to-read-books-better]]
+[[How-to-Read-Books-Better]]
 #### Integration
 http://libgen.li/
 
@@ -69,7 +69,7 @@ Sizzle AI，个性化学习
 
 
 ## Sort out
-- [[how-to-choose-note-software|笔记软件]]
+- [[How-to-Choose-Note-Software|笔记软件]]
 - [eagle](https://eagle.cool/)
 ## Process
 

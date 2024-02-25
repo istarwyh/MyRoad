@@ -1,7 +1,7 @@
 #wisdom 
 
 
-Creativity is mostly copying.[[Absent-minded learning yields no gain]].
+Creativity is mostly copying.[[Absent-Minded Learning Yields No Gain]].
 Achieving an 85% success rate appears to be the optimal condition for efficient learning, both in humans and machines.
 -- ScottYoung/《打开心智》
 

@@ -8,7 +8,7 @@
 		{"type":"text","text":"发票","id":"fd7c20cda0491b29","x":260,"y":-220,"width":90,"height":50},
 		{"type":"text","text":"供应商","id":"2ba4450b3e439896","x":425,"y":-320,"width":102,"height":50},
 		{"type":"text","text":"消费者","id":"10f2967871cf1ef9","x":425,"y":-220,"width":104,"height":50},
-		{"type":"text","text":"[[e-commerce Business Models|寄售]]","id":"9a087a15b3441c0b","x":425,"y":-120,"width":109,"height":51},
+		{"type":"text","text":"[[E-Commerce Business Models|寄售]]","id":"9a087a15b3441c0b","x":425,"y":-120,"width":109,"height":51},
 		{"id":"3a8e9e8b916e805b","type":"file","file":"program/practices/Classic Process Data Infrastructure.canvas","x":106,"y":-900,"width":400,"height":400}
 	],
 	"edges":[

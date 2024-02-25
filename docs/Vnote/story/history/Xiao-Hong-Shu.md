@@ -5,6 +5,6 @@
 
 中国的创业公司在初创阶段就要预防来自于巨头的业务抄袭和降维打击，需要在产品、资本和运营上全方位提速，这种高强度的生存压力之下，很少有公司能够保持住纯粹的产品心态和技术心态[^cto]。
 
-#e-business
+#e-commerce
 
 [^cto]: [小红书不再需要CTO](https://mp.weixin.qq.com/s/TtG2jiQ9XmisMntcJqInxw)

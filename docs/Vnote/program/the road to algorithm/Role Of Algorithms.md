@@ -2,8 +2,6 @@
 reference_link: https://mp.weixin.qq.com/s/ErbpSgF-UueOEntNahKW6g
 author: matklad;dingtingli
 ---
-
-
 ## 1. 提升编程质量
 
 算法不仅仅是技术学习的目的，而是一个锻炼工具。

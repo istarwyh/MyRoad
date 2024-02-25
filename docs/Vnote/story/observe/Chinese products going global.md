@@ -1,4 +1,5 @@
 ## Prompt
+```markdown
 - task: 分析海外缺乏中国有的哪些种类或有本质不同的互联网产品,尽可能关注细小的垂直领域？如果你在 ${result_ignore} 后没有结果,重复 ${task}.
 - background:我希望发现潜在的中国中小企业互联网产品出海机会
 - requirement
@@ -10,6 +11,8 @@
 	- 微博和Twitter 是同一种类产品，所以海外不缺乏微博
 	- 知乎和Quora 是同一类产品；知识星球是粉丝经济的一个代表产品，海外有 OnlyFans，尽管它们设计和运营思路不一样，但是没有本质不同
 	- 微信是一款社交应用，但集成了多种功能，如支付、小程序、小视频等，和Facebook 有本质不同，所以海外缺乏微信
+```
+
 ## Output
 | Chinese Product | Overseas Similar(may be absent) | Field | Differences(list) |
 |-----------------|---------------------------------|-------|-------------------|
@@ -23,3 +26,5 @@
 | 丁香园 | WebMD | Medical information | 丁香园 is a professional medical community and platform, while WebMD is a general health information website |
 | 马蜂窝 | TripAdvisor | Travel | 马蜂窝 focuses on user-generated travel content and guides, while TripAdvisor is more review-based |
 | 飞猪 | Expedia, Booking.com | Travel booking | 飞猪 offers a more comprehensive range of travel services, including local tours and activities |
+
+#product 
