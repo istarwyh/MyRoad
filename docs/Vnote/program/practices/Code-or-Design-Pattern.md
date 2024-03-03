@@ -2,7 +2,7 @@
 
 ### Brief
 每个方法、函数都应该简短，原则上不应该超过 7 行。
-###  SRP(Single Responsibility Program)
+### SRP(Single Responsibility Program)
 
 ```javascript
 const transform1 = (str) => {
