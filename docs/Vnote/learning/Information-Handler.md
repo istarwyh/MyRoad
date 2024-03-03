@@ -4,7 +4,7 @@
 
 ## Collect Information
 
-信息的[[Information Diffusion|及时性]]十分重要。
+收集信息是汲取信息养分的第一步。信息就是资源，如果个人有发动机，它就是个人的石油。这些资源将会为不断加深我们对关注领域的理解，最终帮助我们生产、创造出新的信息回馈世界。收集信息时需要注意信息的[[Information Diffusion|及时性]]十分重要。
 
 ### Import Knowledge
 
@@ -71,6 +71,7 @@ Sizzle AI，个性化学习
 ## Sort out
 - [[How-to-Choose-Note-Software|笔记软件]]
 - [eagle](https://eagle.cool/)
+
 ## Process
 
 ### Search
@@ -128,6 +129,7 @@ Sizzle AI，个性化学习
 
 [The PARA Method: A Universal System for Organizing Digital Information](https://fortelabs.com/blog/para/)
 	- [案例](https://mp.weixin.qq.com/s/RDDoo_Ega4YNUc9OsCylBA)
+	- [LifeOs](https://obsidian-life-os.netlify.app/)
 
 ## Create
 
