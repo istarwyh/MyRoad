@@ -45,7 +45,8 @@ https://itangtalk.com/stripe/
 - [SimilarWeb](https://link.zhihu.com/?target=https%3A//chrome.google.com/webstore/detail/similarweb-traffic-rank-w/hoklmmgfnpapgjgcpechhaamimifchmp)：查看网站PV流量的工具，结果不稳定
 - [SEOquake](https://link.zhihu.com/?target=https%3A//chrome.google.com/webstore/detail/seoquake/akdgnmcogleenhbclghghlkkdndkjdjc)：查看网站的SEO相关的信息，如外链量、索引数量、SEO的站内问题等
 - [Keyword Surfer](https://link.zhihu.com/?target=https%3A//chrome.google.com/webstore/detail/keyword-surfer/bafijghppfhdpldihckdcadbcobikaca)：关键词工具，可以查看一些关键词的月搜索量
-- [META SEO inspector](https://link.zhihu.com/?target=https%3A//chrome.google.com/webstore/detail/meta-seo-inspector/ibkclpciafdglkjkcibmohobjkcfkaef)：网页Meta信息查看工具，可以方便地解决一些网页SEO的基本问题。
+- [META SEO inspector](https://link.zhihu.com/?target=https%3A//chrome.google.com/webstore/detail/meta-seo-inspector/ibkclpciafdglkjkcibmohobjkcfkaef)：网页Meta信息查看工具，可以方便地解决一些网页SEO的基本问题
+- https://web-check.xyz/
 #### Channel
 1. 广告
 2. [在互联网上留下你的产品名字及官网链接](https://mp.weixin.qq.com/s/x6PLSIMn_1qcKnXWPT-J-Q)

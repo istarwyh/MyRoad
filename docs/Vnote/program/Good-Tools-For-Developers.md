@@ -21,10 +21,12 @@ rpa: 浏览器行为录制自动化
 
 #### Raycast / Alfred
 Mac Spotlight 加强
+
 ### Tools 🔍
 https://www.apigpts.dev/tools
 https://sinqi.tools/
 https://www.91wink.com/index.php/sites/
+https://tool.browser.qq.com
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
 - [[Information-Handler]]

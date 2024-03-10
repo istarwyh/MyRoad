@@ -14,7 +14,7 @@
 
 - AI 特别是语聊机器人方面的专业经验
 - 财务后端开发的专业经验
-- Java 、[[Optimize Kinds of Resource Use#1.2.2. 数据库可以当操作系统|Flink]]、[[How-to-Choose-the-Suitable-Database|数据库]] （[[Hologres]](PostgreSQL变种)、[[MySQL FAQ|MySQL]]、[[Possible Problems with Sharding and Partitioning|TDDL]]、[[Redis源码架构阅读|Redis]]、 [[Inverted-Index-of-Lucene-and-B-Tree|HavenAsk3]](淘宝的推荐引擎) 、[[Practices-for-Processing-l0-Billion-Bill-data|TableStore]]）、[[Unit Level Test Theory、Tool、Discussion|测试]]（TDD） 方面、Java&React 全栈的**高质量**开发经验
+- Java 、[[Optimize Kinds of Resource Use#1.2.2. 数据库可以当操作系统|Flink]]、[[How-to-Choose-the-Suitable-Database|数据库]] （[[Hologres]](PostgreSQL变种)、[[MySQL FAQ|MySQL]]、[[Possible Problems with Sharding and Partitioning|TDDL]]、[[Redis源码架构阅读|Redis]]、 [[Inverted-Index-of-Lucene-and-B-Tree|HavenAsk3]](淘宝的推荐引擎) 、[[Practices-for-Processing-l0-Billion-Bill-data|TableStore]]）、[[Unit Level Test Theory、Tool、Discussion|测试]]（TDD） 方面、Java&React 全栈、[[Distributed System Problems|分布式系统]] 的**高质量**开发经验
 - 本科给排水转行后端开发，2021校招阿里sp offer的经验
 
 ## [[博客技术栈]]
@@ -35,19 +35,6 @@
 
 本站遵循"署名-非商业用途-保持一致"的创作共用协议，转载文章请注明原文地址。本博客所有原创内容允许在[CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/2.5/cn/)条款下使用。
 
-## 致谢
-
-<span style="font-family: cursive">Thanks for
-
-- World Wide Web
-
-- [obsidian-html](https://github.com/obsidian-html/obsidian-html)
-
-- [零成本搭建现代博客之搭建篇](https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/)
-
-- [lepton.ai](https://www.lepton.ai/playground/artistic?mode=qr-code)
-
-</span>
 
 
 <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clsok8vng0001aihcgmmbxfos"></script>
