@@ -4,7 +4,7 @@
 Hive 是基于 Hadoop 的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，并使用 sql 语句转换为 MapReduce 任务进行运行。其优点是学习成本低，可以通过类 SQL 语句快速实现简单的 MapReduce 统计，不必开发专门的 MapReduce 应用，十分适合数据仓库的统计分析。
 ### 1.2. Sqoop介绍
 Sqoop 即 `SQL to Hadoop` ，是一款方便的在传统型数据库与 Hadoop 之间进行数据迁移的工具，充分利用 MapReduce 并行特点以批处理的方式加快数据传输
-### 1.3. Hive vs SQL
+### 1.3. Hive Vs SQL
 Hive 使用HDFS，关系数据库则是服务器本地的文件系统。因为Hive 则是为海量数据做数据挖掘设计的，其实时性很差;而关系数据库都是为实时查询的业务进行设计的.
 ## 2. 环境说明
 - Ubuntu 18.04
@@ -114,8 +114,6 @@ Caused by: java.lang.RuntimeException: java.sql.SQLNonTransientConnectionExcepti
 发现没有reduce,遂加上`-m 1`
 如果不是输到hdfs上还需要配置`${SQOOP_HOME}/bin/sqoop`中`HIVE_HOME`的位置,来告诉sqoop怎么找到hive.或者偷懒直接改掉依赖的引用路径[^安装Sqoop]也可以.
 
-[^安装Sqoop]:[设计者自身设计有问题](https://zhuanlan.zhihu.com/p/33677303)
-
 最后用
 `sqoop import --connect jdbc:mysql://192.168.192.134:3306/hive?characterEncoding=utf-8 --username root --password root --table province_city_district --delete-target-dir -m 1 --hive-import --create-hive-table
 `
@@ -123,3 +121,5 @@ Caused by: java.lang.RuntimeException: java.sql.SQLNonTransientConnectionExcepti
 ![](https://gitee.com/istarwyh/images/raw/master/1592828110_20200622170729500_11424.png)
 ## 5. hiveSQL输出我所在的省市
 ![](https://gitee.com/istarwyh/images/raw/master/1592828110_20200622174304167_14305.png)
+
+[^安装Sqoop]:[设计者自身设计有问题](https://zhuanlan.zhihu.com/p/33677303)

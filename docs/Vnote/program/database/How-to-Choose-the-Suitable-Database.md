@@ -51,7 +51,7 @@ Data Model defines how data is stored, arranged, and accessed in a database syst
 - ElasticSearch uses an inverted index for full-text search and analytics.
 - Percolator model
 	- TiDB uses a distributed index structure based on Google's Percolator model
-- HNSW:[[vector-database#Hierarchical Navigable Small World (HNSW)]]
+- HNSW:[[Vector-Database#Hierarchical Navigable Small World (HNSW)]]
 #### Data Persistence Format
 If a computer wants to write data from memory to disk, it typically needs to perform at least two steps:
 

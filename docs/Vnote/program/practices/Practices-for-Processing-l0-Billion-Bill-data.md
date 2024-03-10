@@ -1,3 +1,4 @@
+
 ## 1. 项目背景
 ToB的财务关系中，有一条很经典的链路:[[Finance Technology Area Relation.canvas]]
 

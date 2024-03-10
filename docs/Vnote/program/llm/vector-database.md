@@ -156,7 +156,7 @@ finalize_plot(ax)
 
 查询的时候再将查询向量hash到特定表，然后与同一表中的其他向量进行比较，以找到最接近的匹配项。这种方法比搜索整个数据集要快得多，因为每个哈希表中的向量比整个空间中的向量少得多。
 #### Inverted Index(倒排索引)
-[[Inverted-Index-of-Lucene-and-B-Tree#2.2. 倒排索引（inverted index）|倒排索引]]和 [[vector-database#Locality-sensitive hashing（局部敏感哈希）|LSH]] 思想类似，都是通过聚类方法把整个向量空间划分为子区域，从而缩小检索时的量级。ANN 中的倒排索引每个区域用中心点聚类，在索引构造阶段，向量与中心点比对，将其归属到距离最近的中心点对应的倒排中。
+[[Inverted-Index-of-Lucene-and-B-Tree#2.2. 倒排索引（inverted index）|倒排索引]]和 [[Vector-Database#Locality-sensitive hashing（局部敏感哈希）|LSH]] 思想类似，都是通过聚类方法把整个向量空间划分为子区域，从而缩小检索时的量级。ANN 中的倒排索引每个区域用中心点聚类，在索引构造阶段，向量与中心点比对，将其归属到距离最近的中心点对应的倒排中。
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311261151924.png)
 #### Hierarchical Navigable Small World (HNSW)
 上面的相似检索都是基于空间划分的方法，每个向量只会属于某个子区域。它们最大的的问题是为了提高召回率，需要搜索较大空间，导致计算量增加。基于图的方法就可以比较好的解决这一问题[^graph]。
@@ -277,7 +277,7 @@ $$
 向量本质上就是浮点数数组，对数据库而言相当于多了一个类似JSON的专门存储类型，所以传统的搜索引擎ES或PostgreSQL的向量版或假装向量插件后都可以，甚至用Redis 还更方便。 pg-vector
 
 ## 向量数据库的具体应用
-[[Retrieval-Augmented-Generation]]
+[[淘工厂客服知识库和问答相关的工作]]
 
 [^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
 [^graph]: [向量召回」相似检索算法](https://mp.weixin.qq.com/s/dfdNj9CZ3Kj2UwDr9PQcVg)

@@ -5,9 +5,9 @@ AIOS 分为数据源聚合（dump)、全量/增量/实时索引构建及在线�
 
 [^AIOSINALI]: [10年+，阿里沉淀出怎样的搜索引擎?]( https://developer.aliyun.com/article/719158)
 
-## AIOS 包含与涉及的组件极简介绍
+## AIOS 包含与涉及的组件极简介绍Î
 [[AIOS Simple Process.canvas|AIOS Simple Process]]
-- SARO (Search, Advertisement and Recommendation Offline):引入MaxCompute、TDDL等数据源来产出HA3全量Dump和增量Swif数据
+- SARO (Search, Advertisement and Recommendation Offline):引入MaxCompute、TDDL等数据源来产出HA3全量Dump和增量Swift数据
 	- Airflow:SARO上配置定时任务的调度平台
 - Build Service:从HDFS和Swift中拉取HA3格式数据构建索引，详见 [[Build Service Process ]]
 	- Processor:对原始文档的文本处理，包括业务逻辑对字段内容的改写与分词

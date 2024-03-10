@@ -58,27 +58,4 @@ ON A.PK = B.PK
 
 看**物理库**已经建立的索引:`show create table xxx表名_0000`
 
-
-## 针对索引的优化
-
-### 索引是最左匹配的
-- 优化条件的从左到右的匹配顺序，以便利用索引
-- 如果还不行，使用`FORCE INDEX`优化已有索引
-
-```sql
-SELECT * FROM `database`.`table` FORCE INDEX(create_time) WHERE create_time >= 1508360400 and create_time <= 1508444806 ORDER BY create_time asc LIMIT 4000, 1000;
-```
-- 添加唯一索引
-- 添加组合索引(必要的组合索引，或者利用覆盖索引)
-### 默认的索引下推优化
-																													  
-```sql
-select * from item where itemName like “前缀” and itemSize = 20
-```
-																													  
-假如itemName是索引，那么MySQL5.6之后优化为在索引遍历过程中，对索引中包含的itemSize先做判断，直接过滤掉不满足条件的记录-->减少回表次数[^敖丙调优]。
-### 隐藏索引
-Mysql8中引入隐藏索引,这种索引不会被优化器所使用,从而可以利用它来快速测试删除索引后对SQL查询性能的影响,如果有用则设置可见即可,而避免索引删除与重建耗费时间.
-
 [^SQL优化]:[如何让你的SQL运行得更快](https://blog.csdn.net/gprime/article/details/1687930)
-[^敖丙调优]:[「数据库调优」屡试不爽的面试连环combo](https://juejin.cn/post/6844904201437315079)

@@ -37,6 +37,5 @@ Hologres 相比PostgreSQL 主要做了以下创新：
 
 hologres 存算分离有一个很重要的特征，它将计算单元放到了 docker 中。
 
-
 [^HologresUse]: https://developer.aliyun.com/article/785330
 [^hologres]: https://developer.aliyun.com/article/778789
