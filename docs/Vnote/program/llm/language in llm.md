@@ -7,3 +7,6 @@ source_time: 2023 ML-Summit
 AI领域长期认为图像，视觉，语言，结构化数据等等对于智能都是平等的。它们都是所谓训练数据。但是直到大语言模型，Large Language Model 出来之后，大家才发现，自然语言是智能的核心。
 并且大家发现我们进入了新的语言以及数据的生成时代。
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311131849689.png)
+
+
+>今天GPT太弱，七位数乘法都不会做。但人也不会做，调用工具就行了。GPT核心，第一它会语言，马克思讲人和动物的区别是人会语言。第二，它会制造和使用工具。--王小川**
