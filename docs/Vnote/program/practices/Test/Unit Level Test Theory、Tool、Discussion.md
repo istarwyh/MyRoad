@@ -8,7 +8,7 @@
 ## 面向功能开发- TDD（Test Driven Development)
 >测试应当与生产代码解耦 --Bob大叔《匠艺整洁之道:程序员的职业修养》
 
-[【使用JUnit5与芝加哥学派TDD驱动产出一个简单的Stack类】]( https://www.bilibili.com/video/BV1pd4y147MP/?share_source=copy_web)
+[使用JUnit5与芝加哥学派TDD驱动产出一个简单的Stack类]( https://www.bilibili.com/video/BV1pd4y147MP/?share_source=copy_web)
 
 - 伦敦学派
 	- 预先设计

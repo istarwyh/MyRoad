@@ -18,27 +18,6 @@
 - 本科给排水转行后端开发，2021校招阿里sp offer的经验
 
 
-| 时间段       | 大学           | 绩点排名   |
-| --------- | ------------ | ------ |
-| 2019~2021 | 北京大学(全日制二学位) | 15/139 |
-| 2015~2019 | 石河子大学        | 1/69   |
-| 2017~2018 | 重庆大学(交流生)    | 24/100 |
-
-<table><style>th, td {display: inline-block;margin-right: 10px;border-right: 1px solid white;}th {font-weight: bold;}table {border-collapse: collapse;}</style><tr><th>时间段</th><th>大学</th><th>绩点排名</th></tr><tr><td>2019~2021</td><td>北京大学(全日制二学位)</td><td>15/139</td></tr><tr><td>2015~2019</td><td>石河子大学</td><td>1/69</td></tr><tr><td>2017~2018</td><td>重庆大学(交流生)</td><td>24/100</td></tr></table>
-
-
-
-<dd><span>教育背景：</span><style>th, td {display: inline-block;margin-right: 10px;border-right: 1px solid white;}th {font-weight: bold;}table {border-collapse: collapse;}</style><table><tbody><tr><th>时间段</th><th>大学</th><th>绩点排名</th></tr><tr><td>2019~2021</td><td>北京大学(全日制二学位)</td><td>15/139</td></tr><tr><td>2015~2019</td><td>石河子大学</td><td>1/69</td></tr><tr><td>2017~2018</td><td>重庆大学(交流生)</td><td>24/100</td></tr></tbody></table></dd>
-
-
-<div class="w-full overflow-auto rounded-lg border border-gray-200 dark:border-gray-800"><table class="w-full table-fixed text-sm"><thead><tr class="border-b border-gray-200 dark:border-gray-800"><th class="px-4 py-3 text-left font-bold w-[200px]">时间段</th><th class="px-4 py-3 text-left font-bold">大学</th><th class="px-4 py-3 text-left font-bold w-[100px]">   GPA   排名</th></tr></thead><tbody><tr class="border-b border-gray-200 dark:border-gray-800"><td class="px-4 py-3 font-medium">2019-2021</td><td class="px-4 py-3">北京大学(全日制第二学士)</td><td class="px-4 py-3">15/139
-
-</td></tr><tr class="border-b border-gray-200 dark:border-gray-800"><td class="px-4 py-3 font-medium">2015-2017 &amp; 2018-2019	</td><td class="px-4 py-3">石河子大学</td><td class="px-4 py-3">1/69</td></tr><tr class="border-b border-gray-200 dark:border-gray-800"><td class="px-4 py-3 font-medium">2017-2018</td><td class="px-4 py-3">重庆大学(交流)	</td><td class="px-4 py-3">24/100</td></tr></tbody></table></div>
-
-
-
-
-
 ## 欢迎联系我～
 
 - 微信号: istarwyh 
