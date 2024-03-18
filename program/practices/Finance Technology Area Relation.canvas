@@ -1,0 +1,24 @@
+{
+	"nodes":[
+		{"type":"text","text":"结算","id":"34f96f77a7d424c6","x":-50,"y":-120,"width":90,"height":50},
+		{"type":"text","text":"报价","id":"6f01979f27ae374c","x":-380,"y":-120,"width":100,"height":50},
+		{"type":"text","text":"计费","id":"21795b6469e30cb2","x":-220,"y":-120,"width":100,"height":50},
+		{"type":"text","text":"不可结算","id":"e9a7fb8c616c05b2","x":106,"y":-40,"width":128,"height":50},
+		{"type":"text","text":"账单","id":"903a2accd4d1037f","x":106,"y":-220,"width":90,"height":50},
+		{"type":"text","text":"发票","id":"fd7c20cda0491b29","x":260,"y":-220,"width":90,"height":50},
+		{"type":"text","text":"供应商","id":"2ba4450b3e439896","x":425,"y":-320,"width":102,"height":50},
+		{"type":"text","text":"消费者","id":"10f2967871cf1ef9","x":425,"y":-220,"width":104,"height":50},
+		{"type":"text","text":"[[E-Commerce Business Models|寄售]]","id":"9a087a15b3441c0b","x":425,"y":-120,"width":109,"height":51},
+		{"id":"3a8e9e8b916e805b","type":"file","file":"program/practices/Classic Process Data Infrastructure.canvas","x":106,"y":-900,"width":400,"height":400}
+	],
+	"edges":[
+		{"id":"49c010bf8a2f0712","fromNode":"6f01979f27ae374c","fromSide":"right","toNode":"21795b6469e30cb2","toSide":"left"},
+		{"id":"a0c9925e7f5a1780","fromNode":"21795b6469e30cb2","fromSide":"right","toNode":"34f96f77a7d424c6","toSide":"left"},
+		{"id":"0fda6040cfe48d60","fromNode":"34f96f77a7d424c6","fromSide":"right","toNode":"903a2accd4d1037f","toSide":"left"},
+		{"id":"aaa47699350ada47","fromNode":"34f96f77a7d424c6","fromSide":"right","toNode":"e9a7fb8c616c05b2","toSide":"left"},
+		{"id":"fce9351de2549e86","fromNode":"903a2accd4d1037f","fromSide":"right","toNode":"fd7c20cda0491b29","toSide":"left"},
+		{"id":"74c8c630300daded","fromNode":"fd7c20cda0491b29","fromSide":"top","toNode":"2ba4450b3e439896","toSide":"left"},
+		{"id":"561fb5027ccd8547","fromNode":"fd7c20cda0491b29","fromSide":"right","toNode":"10f2967871cf1ef9","toSide":"left"},
+		{"id":"ff36036a131d5422","fromNode":"fd7c20cda0491b29","fromSide":"bottom","toNode":"9a087a15b3441c0b","toSide":"left"}
+	]
+}

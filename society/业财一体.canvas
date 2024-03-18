@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"id":"e194d66239fda7e7","type":"text","text":"收单: 收集基本业财数据","x":-152,"y":-274,"width":250,"height":60},
+		{"id":"6bb3475c3264de15","type":"text","text":"销账: 根据应收应付单结算","x":-151,"y":84,"width":250,"height":61},
+		{"id":"778185d77f65df92","type":"text","text":"业财集成: 生成应收应付单","x":-152,"y":-29,"width":250,"height":51},
+		{"id":"d0de98080881d858","type":"text","text":"业财链路: 补全业财数据","x":-153,"y":-149,"width":250,"height":50},
+		{"id":"0327a17c0a0580b1","x":-150,"y":230,"width":250,"height":60,"type":"text","text":"不可结算流程"}
+	],
+	"edges":[
+		{"id":"2bb859693f9b0e0b","fromNode":"e194d66239fda7e7","fromSide":"bottom","toNode":"d0de98080881d858","toSide":"top"},
+		{"id":"5f0b7e933eb5eb77","fromNode":"d0de98080881d858","fromSide":"bottom","toNode":"778185d77f65df92","toSide":"top"},
+		{"id":"64b3653298f055fb","fromNode":"778185d77f65df92","fromSide":"bottom","toNode":"6bb3475c3264de15","toSide":"top"},
+		{"id":"16c6064a08b4cc08","fromNode":"6bb3475c3264de15","fromSide":"left","toNode":"778185d77f65df92","toSide":"left","label":"结算后更新应收应付单"},
+		{"id":"d35c6c8f7cdf713b","fromNode":"6bb3475c3264de15","fromSide":"bottom","toNode":"0327a17c0a0580b1","toSide":"top","label":"结算失败"}
+	]
+}
