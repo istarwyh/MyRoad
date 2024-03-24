@@ -29,6 +29,8 @@ https://www.91wink.com/index.php/sites/
 https://tool.browser.qq.com
 ### Communication & Analysis
 - 先想直接一点的哪怕傻一点的解决方案--KISS--Keep It Simple, Stupid!
+- 传统方式：设计师产生想象力，用工具把想象力做出来，再评审修改，然后上线。再由数据反馈让设计师调整不断迭代改进产品，再继续维护，直到有新的需求出来。
+- 现在的AI：直接在数据中洞察需求，生成产品，不需要评审也不需要反复修改。这里有两个关键点，一个是对产品的理解算法，一个是设计模型的算法。比如我的产品需要在运营活动中提升销量，对于算法来说，它就需要知道提升销量的“公式”或“模型”有哪些，比如流量漏斗模型，有大流量进来，做好landingpage，再怎么样，再怎么样……有了这样一个个的算法，就能把对产品需求的理解交给设计模型，让设计模型来推荐一个风格。
 - [[Information-Handler]]
 ### DevOps
 - jira
@@ -58,6 +60,7 @@ https://tool.browser.qq.com
 https://devv.ai
 https://www.phind.com/
 本地LLM:https://jan.ai/
+API: https://api.zetatechs.com/
 #### 版本管理工具
 git: https://learngitbranching.js.org/
 [[Frequently Git Command]]
@@ -108,6 +111,7 @@ https://www.netlify.com/blog/2020/03/26/how-to-set-up-netlify-dns-custom-domains
 - ICP Query Extension
 #### i18n
 https://github.com/linyuxuanlin/Auto-i18n
+https://www.i18next.com/
 ### Saving Time
 #### [跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)
 

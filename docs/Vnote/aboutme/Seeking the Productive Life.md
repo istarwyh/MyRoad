@@ -1,28 +1,10 @@
 [Seeking the Productive Life: Some Details of My Personal Infrastructure
 ](https://writings.stephenwolfram.com/2019/02/seeking-the-productive-life-some-details-of-my-personal-infrastructure/)
 I’m a person who’s only satisfied if I feel I’m being productive.
+And Why Be Productive?
+>I don’t believe it’s because we want to get more done or we want more time back. We have other means to do so. 
+> I believe **we want to be productive so we can achieve our highest potential.** -- [MAYANK VERMA](https://thinkingthrough.substack.com/p/why-be-productive)
 
-我的在线简历：https://istarwyh.github.io/resume-it/
+And Sometimes we can consider more about [[Team-Efficiency]].
 
-我的绩效：3 次类似字节 m+，1 次 e
 
-我的主要经历：钱账票一体化、业财一体建设
-
-[[Team-Efficiency]]
-## 困惑
-1. 我的背景: 两年多前校招加入阿里淘工厂(原淘特)做后端开发，跟随团队发展依次做了供应链、财务、营销计费结算相关的工作。与原本还会有点关注系统设计不同，我们现在已经不按领域划分职责，主要趋势是跟随能赚钱的项目串联起各个团队，季度KPI也与此高度相关。
-2. 我的困惑：
-- PDD 把人当机器、把消费者当上帝赚到了阿里一半的市值，阿里分家前的“让天下没有难做的生意”、“客户第一、员工第二” 在商业上是否都是错误的？
-- 在商业劣币驱逐良币的环境下，整体向 PDD学习是否更好？
-- 阿里越发追求短平快，作为有着天真的长期主义、还残留技术理想的年轻人应该怎么办？一个很简单的例子，想要快速上线就一把梭，想要长期高效就得现在就封装包。
-- 在业务部门工作，项目的核心难点似乎真的是在拉通对齐扯皮，大量浪费时间，且不谈遗留下来的诸多历史债，个人觉得哪怕简单践行文档沟通的方式也能缓解很多问题，但是极少有人像自己一样认真对待文档，如何看待这种现象？
-- 个人在下班时间会主动学习AI、区块链、数据库内核相关的知识，但是每天12h的工作极大地困住我，并且想要拿好绩效本身需要“卷”，个人如何思考才能超脱当前评价体系？
-- 传统电商行业没有增长已是定势，那么如果转行，如何积累个人能带走的优势或资源？
-
-## 如何量化技术治理、代码质量的效果？
-首先得明确做公共的工作是一定要量化的，只有品味甚至情怀是走不远的。技术的沉淀往往是一步步来的，但是业务的目标却通常很短而且易变，比如先做DAC上升，后面又强调马上GMV上升
-
-- 工单数
-- 测试bug数
-- 测试bug 性质
-- 系统指标（RT、内存等）的监控
