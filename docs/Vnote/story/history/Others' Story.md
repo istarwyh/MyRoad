@@ -13,11 +13,12 @@ https://x-hiring.hehehai.cn/?s=Java
 ## Building
 - Autodesk
 - 以见科技 [BIM+AR](https://mp.weixin.qq.com/s/zl8MHoNaN_HrVT_0y0QFeg)
-## Data
+## AI
 [上海人工智能实验室](https://www.shlab.org.cn/joinus/apply/702d2018-da69-454d-80fe-ecde510d617a?mode=social&keyword=%E5%90%8E%E7%AB%AF&zhinengId=&commitment=)
-
+AI 类的网站？
 ## 自媒体
 
 ### Individual
 -  [Notepal]( https://lutaonan.com/blog/my-extension-sold-1k-yuan/)
+- [售卖自己时间](https://jx.duiyou360.com/)
 

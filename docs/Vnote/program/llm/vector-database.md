@@ -34,6 +34,8 @@ NLP 的初始步骤通常是文本数据的预处理。预处理的工作包括
 
 预处理之后的文本会被拿去训练。在大型数据集上接受训练以执行特定NLP任务的深度学习模型被称为 NLP 的预训练模型（PTM，Pre-trained Model），它们可以通过避免从头开始训练新模型来帮助下游 NLP 任务。
 GPT-**Generative Pre-trained Transformer**,即经过预训练的`Transformer`模型，就是一个 PTM 。和以往其他PTM不一样的是，GPT3.5已经拥有1750亿的参数，而其功能简单解释就是不断预测输入后的下一个单词。**并且虽然我们已经用了很久GPT，但现在GPT仍然是一个黑盒，业界还不知道为什么GPT可以做到它涌现的能力。**
+值得一提的是,llama-2-70b 就是文件系统上的两个文件，一个参数文件和一个运行这些参数的二进制代码。文件大小也就140G左右(700亿参数，每个参数2byte)[^llm]。
+
 ### NLP 的应用
 后来人们的目标不仅仅是处理自然语言，而是处理各种非结构化信息，比如图像、音乐乃至商品描述的推荐。
 - 聊天机器人
@@ -279,6 +281,7 @@ $$
 ## 向量数据库的具体应用
 [[淘工厂客服知识库和问答相关的工作]]
 
+[^llm]: https://www.youtube.com/watch?v=zjkBMFhNj_g&t=22s
 [^vector-json]: [VECTORS ARE THE NEW JSON IN POSTGRESQL](https://jkatz05.com/post/postgres/vectors-json-postgresql/)
 [^graph]: [向量召回」相似检索算法](https://mp.weixin.qq.com/s/dfdNj9CZ3Kj2UwDr9PQcVg)
 [^hnsw]: https://www.pinecone.io/learn/series/faiss/hnsw/

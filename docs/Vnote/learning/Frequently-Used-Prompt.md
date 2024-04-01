@@ -14,7 +14,12 @@ Official Guidance:https://github.com/guidance-ai/guidance
 ```
 Before you start, please ask me any questions that you need answered to help me best solve my problem.
 
-Have a break, and then...
+
+```
+## 引导进入慢思考
+
+```
+I don't need to get answer quickly. Have a break, and then...
 ```
 ## 引发硅竞
 ```
