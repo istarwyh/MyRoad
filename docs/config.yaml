@@ -37,9 +37,9 @@ navbar_links:
     link: index.html
   - name: About
     link: CyberFarmer.html
-  - name: Full-Stream
+  - name: FULL-STREAM
     link: program/full-stream/Full-Stream.html
-  - name: ChooseDB
+  - name: CHOOSE-DB
     link: program/database/How-to-Choose-the_suitable-Database.html
 #  - name: News
 #    link: News.html
@@ -121,7 +121,7 @@ toggles:
       enabled: True
 
     dataview:
-      enabled: True
+      enabled: False
       folder: 'obs.html/export' # relative to the vault being processed. this folder should always be in the vault
 
     folder_notes:
