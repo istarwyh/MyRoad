@@ -123,7 +123,7 @@ toggles:
 #
     dataview:
       enabled: True
-      folder: '/' # relative to the vault being processed. this folder should always be in the vault
+      folder: './' # relative to the vault being processed. this folder should always be in the vault
 #
 #    folder_notes:
 #      enabled: True
