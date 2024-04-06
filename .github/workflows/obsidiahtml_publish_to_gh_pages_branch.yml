@@ -25,7 +25,9 @@ jobs:
           mkdir output
           mkdir output/html 
           touch output/html/test.txt
-          cd output/html & ls -la
+          cd output/html 
+          pwd
+          ls -la
           cd ../..
           pwd
           ls -la
