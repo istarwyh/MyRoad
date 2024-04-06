@@ -22,7 +22,9 @@ jobs:
           ls -la
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html
-          mkdir output & mkdir output/html & touch output/html/test.txt
+          mkdir output
+          mkdir output/html 
+          touch output/html/test.txt
           cd output/html & ls -la
           cd ../..
           pwd
