@@ -24,6 +24,7 @@ jobs:
           pip install git+https://github.com/obsidian-html/obsidian-html
           pwd
           ls -la
+          obsidianhtml --help
           obsidianhtml convert -i ./config.yaml -v
           pwd
           ls -la
