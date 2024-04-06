@@ -31,7 +31,8 @@ jobs:
           cd ../..
           pwd
           ls -la
-          ./convert.sh
+#          ./convert.sh
+          cat config.yaml
           # obsidianhtml convert -i config.yaml
           pwd
           ls -la
