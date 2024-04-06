@@ -31,9 +31,8 @@ jobs:
           cd ../..
           pwd
           ls -la
-          # ./convert.sh
           cat config.yaml
-          # obsidianhtml convert -i config.yaml
+          obsidianhtml convert -i config.yaml
           pwd
           ls -la
           # touch html/.nojekyll
