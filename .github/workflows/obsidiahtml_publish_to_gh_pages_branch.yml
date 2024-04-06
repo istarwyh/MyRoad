@@ -24,11 +24,8 @@ jobs:
           pip install git+https://github.com/obsidian-html/obsidian-html
           pwd
           ls -la
-          obsidianhtml --help
-          git config --global user.email "yihui.wang@pku.edu.cn"
-          git config --global user.name "istarwyh"
           # ./convert.sh
-          # obsidianhtml convert -i config.yaml
+          obsidianhtml convert -i config.yaml
           pwd
           ls -la
           # touch html/.nojekyll
@@ -38,6 +35,6 @@ jobs:
         env:
           REPO: self
           BRANCH: gh-pages # The branch name where you want to push the assets
-          FOLDER: html # The directory where your assets are generated
+          FOLDER: ${{ github.workspace }}/docs/output/html # The directory where your assets are generated
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message
