@@ -7,11 +7,11 @@ obsidian_entrypoint_path_str: './Vnote/Farming-in-the-cyber-world.md'
 
 # # Use when deploying to https://mydomain.com/html_prefix/ instead of https://mydomain.com/
 # # use '/html_prefix' (prepend slash, no slash at the end)
-#html_url_prefix: ''
+html_url_prefix: ''
 
 # Provide the fullpath to a template file to use instead of standard template.
 # Note that this file must contain at least "{content}" somewhere in the page.
-#html_template_path_str: ''
+html_template_path_str: ''
 
 # Exclude subfolders
 # These are relative to obsidian_folder_path_str
@@ -40,7 +40,7 @@ navbar_links:
   - name: FULL-STREAM
     link: program/full-stream/Full-Stream.html
   - name: CHOOSE-DB
-    link: program/database/How-to-Choose-the_suitable-Database.html
+    link: program/database/How-to-Choose-the-suitable-Database.html
 #  - name: News
 #    link: News.html
 
