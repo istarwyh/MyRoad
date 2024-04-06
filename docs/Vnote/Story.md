@@ -1,7 +1,4 @@
-## Business Models
-[[E-Commerce Business Models]]
-[[Work Involved In Opening an E-Commerce Store]]
-[[customer-behavior]]
+
 ## For My Story
 
 >我要做的事情是做我自己。我相信这个地球上有很多和我一样需求的人，他们最终会找到我。
@@ -18,8 +15,6 @@ LIST FROM #idea
 ## For Others' Story
 我暂时想不到足够好的故事，或许只是没有信心完成我的故事，所以我会先去看看[[Others' Story]],然后[[How-to-choose-your-work|选择一个]]。
 
-## Dang Story
-https://dang.ai/ai-graveyard
 ## Start-up
 - Feasibility https://www.alpha-sense.com/
 - [[Start-up Resources Collection]]

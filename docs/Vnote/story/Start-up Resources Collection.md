@@ -5,7 +5,7 @@
 
 - 全链路公司创建辅助： Durable 
 ## Prototype
-[[Prototype-Draw]]
+[[Prototype-Diagram]]
 
 ## 备案
 http://w2solo.com/topics/4033

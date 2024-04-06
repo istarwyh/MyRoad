@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"8fe0b5f757dec6d3","type":"text","text":"Releasing","x":-261,"y":97,"width":166,"height":54},
+		{"id":"7553627c0beea78a","type":"text","text":"Operation","x":-253,"y":197,"width":250,"height":60},
+		{"id":"a1f5c30440497bda","type":"text","text":"Coding","x":-232,"y":-25,"width":114,"height":59},
+		{"id":"3db0ef4d376c560a","type":"text","text":"Task Breaking down","x":-536,"y":-372,"width":177,"height":58},
+		{"id":"c321d627c8467505","type":"text","text":"Acceptance Confirmation & [[Unit Level Test Theory、Tool、Discussion|Testing]]","x":-542,"y":-225,"width":297,"height":50},
+		{"id":"ad89f7840afb3d6f","type":"text","text":"[[Prototype-Diagram]]","x":-113,"y":-236,"width":169,"height":50},
+		{"id":"3809de72505f03d1","type":"text","text":"[[Modeling]]","x":-550,"y":-531,"width":149,"height":54},
+		{"id":"bd523023149345d0","type":"text","text":"[[Analyzing]]","x":-508,"y":-725,"width":187,"height":55}
+	],
+	"edges":[
+		{"id":"077540be9b3dbf53","fromNode":"a1f5c30440497bda","fromSide":"bottom","toNode":"8fe0b5f757dec6d3","toSide":"top"},
+		{"id":"910448a0af760807","fromNode":"8fe0b5f757dec6d3","fromSide":"bottom","toNode":"7553627c0beea78a","toSide":"top"},
+		{"id":"f2a9013cae03764f","fromNode":"3db0ef4d376c560a","fromSide":"bottom","toNode":"c321d627c8467505","toSide":"top"},
+		{"id":"9a91113b3761875e","fromNode":"c321d627c8467505","fromSide":"bottom","toNode":"a1f5c30440497bda","toSide":"top"},
+		{"id":"de5b1aced95b97c5","fromNode":"c321d627c8467505","fromSide":"right","toNode":"ad89f7840afb3d6f","toSide":"left"},
+		{"id":"a31035fbdc04ea7c","fromNode":"bd523023149345d0","fromSide":"bottom","toNode":"3809de72505f03d1","toSide":"top"},
+		{"id":"945921aeb841339d","fromNode":"3809de72505f03d1","fromSide":"bottom","toNode":"3db0ef4d376c560a","toSide":"top"}
+	]
+}

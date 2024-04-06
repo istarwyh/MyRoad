@@ -116,7 +116,7 @@ Sizzle AI，个性化学习
 - https://nmdcao.cn/huihua.php
 - https://flowgpt.com/p/gpt-4-10
 - https://copilot.microsoft.com/
-	
+- pi.ai
 ### Prompt
 - https://promptperfect.jina.ai/prompts
 - https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction
@@ -137,7 +137,7 @@ Sizzle AI，个性化学习
 - Midjourney
 - https://www.blinkvideo.ai/
 - [[Code-Oriented-Draw]]
-- [[Prototype-Draw]]
+- [[Prototype-Diagram]]
 - Image Storage: PicGo
 
 ## Presentation

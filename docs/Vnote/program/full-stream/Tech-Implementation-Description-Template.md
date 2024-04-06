@@ -201,6 +201,86 @@ reference_link: https://mp.weixin.qq.com/s/SYqNyoeDFK3qygms5hx95A
 
 > 核心业务逻辑的实现方法可事先定义好，把类图画出来
 
+```mermaid
+classDiagram
+    class UserGroup {
+        +int id
+        +string name
+        +UserGroupUser[] userGroupUsers
+    }
+    class User {
+        +int id
+        +string username
+        +UserGroupUser[] userGroupUsers
+        +UserRole[] userRoles
+    }
+    class Role {
+        +int id
+        +string name
+        +UserRole[] userRoles
+        +PermissionRole[] permissionRoles
+        +PermissionGroupRole[] permissionGroupRoles
+    }
+    class PermissionGroup {
+        +int id
+        +string name
+        +PermissionGroupRole[] permissionGroupRoles
+        +PermissionGroupPermission[] permissionGroupPermissions
+    }
+    class Permission {
+        +int id
+        +string name
+        +int operation_id
+        +int resource_id
+        +PermissionRole[] permissionRoles
+        +PermissionGroupPermission[] permissionGroupPermissions
+        +Operation operation
+        +Resource resource
+    }
+    class Operation {
+        +int id
+        +string name
+        +Permission permission
+    }
+    class Resource {
+        +int id
+        +string name
+        +string type
+        +string value
+        +Permission permission
+    }
+    class UserGroupUser {
+        +int user_group_id
+        +int user_id
+        +UserGroup userGroup
+        +User user
+    }
+    class UserRole {
+        +int role_id
+        +User user
+        +Role role
+    }
+    class PermissionRole {
+        +int permission_id
+        +int role_id
+        +Permission permission
+        +Role role
+    }
+    class PermissionGroupRole {
+        +int permission_group_id
+        +int role_id
+        +PermissionGroup permissionGroup
+        +Role role
+    }
+    class PermissionGroupPermission {
+        +int permission_group_id
+        +int permission_id
+        +PermissionGroup permissionGroup
+        +Permission permission
+    }
+
+```
+
 #### 3.4.6 接口设计详细说明
 
 > 比如RPC接口，HTTP接口，可以通过单独的文档描述
@@ -214,20 +294,16 @@ reference_link: https://mp.weixin.qq.com/s/SYqNyoeDFK3qygms5hx95A
 ### 3.6 基础模块设计
 
 可以从以下几个角度进行分析：
-
-- >   
     
-- 项目中那些公共组件是很多业务通用的？
+- 项目中哪些公共组件是很多业务通用的？
     
-- 改造了那些公共组件是替他业务也在使用的，对其他业务有什么影响？
+- 改造了哪些公共组件是替他业务也在使用的，对其他业务有什么影响？
     
 - 那些基础设施在本项目中设计，但是以后也打算给其它业务使用？
     
 - 给其它业务使用过程中是否需要扩展，修改？
     
 - 本项目中是否已经做了本项目用不到的超前设计？
-    
-- 超前设计是否需
     
 
 ### 3.8 关联系统改造
@@ -245,28 +321,89 @@ reference_link: https://mp.weixin.qq.com/s/SYqNyoeDFK3qygms5hx95A
 
 示例，权限模型的ER图：
 
-![](https://mmbiz.qpic.cn/mmbiz_png/iaVu5aQDibdR2niaPeqBGibq6p7dLOKE5W09ExM46M10dH7nWue38E2eFaQUKuha590u2634LaVwWENvQHtAFPF9jw/640?wx_fmt=png)
+```mermaid
+erDiagram
+    USER-GROUP ||--o{ USER-GROUP-USER : contains
+    USER ||--o{ USER-GROUP-USER : belongs_to
+    USER ||--o{ USER-ROLE : has
+    ROLE ||--o{ USER-ROLE : belongs_to
+    ROLE ||--o{ PERMISSION-ROLE : has
+    PERMISSION ||--o{ PERMISSION-ROLE : belongs_to
+    ROLE ||--o{ PERMISSION-GROUP-ROLE : has
+    PERMISSION-GROUP ||--o{ PERMISSION-GROUP-ROLE : belongs_to
+    PERMISSION-GROUP ||--o{ PERMISSION-GROUP-PERMISSION : contains
+    PERMISSION ||--o{ PERMISSION-GROUP-PERMISSION : belongs_to
+    PERMISSION ||--|{ OPERATION : has
+    PERMISSION ||--|{ RESOURCE : has
+
+    USER-GROUP {
+        int id
+        string name
+    }
+    USER {
+        int id
+        string username
+    }
+    ROLE {
+        int id
+        string name
+    }
+    PERMISSION-GROUP {
+        int id
+        string name
+    }
+    PERMISSION {
+        int id
+        string name
+        int operation_id
+        int resource_id
+    }
+    OPERATION {
+        int id
+        string name
+    }
+    RESOURCE {
+        int id
+        string name
+        string type
+        string value
+    }
+    USER-GROUP-USER {
+        int user_group_id
+        int user_id
+    }
+    USER-ROLE {
+        int role_id
+    }
+    PERMISSION-ROLE {
+        int permission_id
+        int role_id
+    }
+    PERMISSION-GROUP-ROLE {
+        int permission_group_id
+        int role_id
+    }
+    PERMISSION-GROUP-PERMISSION {
+        int permission_group_id
+        int permission_id
+    }
+
+```
 
 ### 4.2 数据库设计
 
 #### 4.2.1 表结构设计
-
-- >   
     
 - 表中字段长度要留有余量，每个字段都要有详细说明
     
 - 如果记录可能删除，建议用DELETED表示是否删除（0正常，-1删除）]
     
-- 预估变化比较多的表，可以增加extend活着feature字段，用于将来可能增加的字段，以键
+- 预估变化比较多的表，可以增加extend 或着feature字段，用于将来可能增加的字段，以键
     
 
 #### 4.2.2 分库分表设计
 
--   
-    
-    所以，表的访问量高了也要分表。
-    
-- >   
+- 表的访问量高了也要分表。
     
 - 影响分表选择的因素是表的业务是否支持水平拆分、表的大小、表的访问量（QPS+TPS）。
     
