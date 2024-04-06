@@ -32,8 +32,8 @@ jobs:
           pwd
           ls -la
           cat config.yaml
-          # obsidianhtml convert -i config.yaml
-          python -m obsidianhtml -i config.yaml
+          # in this step will be stopped
+          obsidianhtml convert -i config.yaml
           pwd
           ls -la
           # touch html/.nojekyll
