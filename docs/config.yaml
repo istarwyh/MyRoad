@@ -16,6 +16,7 @@ html_template_path_str: ''
 # Exclude subfolders
 # These are relative to obsidian_folder_path_str
 # To exclude a folder two levels deep, use level1/level2
+#https://obsidian-html.github.io/configurations/configuration-options.html
 exclude_subfolders:
   - ".obsidian"
   - ".trash"
@@ -44,16 +45,16 @@ navbar_links:
 #  - name: News
 #    link: News.html
 
-#toggles:
+toggles:
 #  # Opt-in/-out of Obsidian->Md conversion, set to False when using proper markdown as input
 #  compile_md: True
 #
 #  # Opt-in/-out of Md->Html conversion, set to False when only wanting to get proper markdown from Obsidian
 #  compile_html: True
 #
-#  # If this is false only the entrypoint and all its links (recursively) are processed
-#  # if true all the notes will be processed
-#  process_all: False
+  # If this is false only the entrypoint and all its links (recursively) are processed
+  # if true all the notes will be processed
+  process_all: False
 #
 #  img_alt_text_use_figure: True
 #
@@ -81,7 +82,7 @@ navbar_links:
 #  # Will preserve inline tags. This will give polluted markdown output
 #  preserve_inline_tags: True
 #
-#  features:
+  features:
 #    styling:
 #      layout: documentation # documentation, tabs, no_tabs, minimal
 #      max_note_width: 70rem # not supported for layout: tabs
@@ -120,9 +121,9 @@ navbar_links:
 #    embedded_search:
 #      enabled: True
 #
-#    dataview:
-#      enabled: False
-#      folder: 'obs.html/export' # relative to the vault being processed. this folder should always be in the vault
+    dataview:
+      enabled: False
+      folder: 'obs.html/export' # relative to the vault being processed. this folder should always be in the vault
 #
 #    folder_notes:
 #      enabled: True
