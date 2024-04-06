@@ -22,6 +22,7 @@ jobs:
           ls -la
           pip install --upgrade pip
           pip install git+https://github.com/obsidian-html/obsidian-html
+          mkdir output/html
           pwd
           ls -la
           ./convert.sh
