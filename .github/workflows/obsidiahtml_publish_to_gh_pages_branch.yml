@@ -24,8 +24,8 @@ jobs:
           pip install git+https://github.com/obsidian-html/obsidian-html
           pwd
           ls -la
-          # ./convert.sh
-          obsidianhtml convert -i config.yaml
+          ./convert.sh
+          # obsidianhtml convert -i config.yaml
           pwd
           ls -la
           # touch html/.nojekyll
