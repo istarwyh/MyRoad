@@ -27,8 +27,8 @@ jobs:
           obsidianhtml --help
           git config --global user.email "yihui.wang@pku.edu.cn"
           git config --global user.name "istarwyh"
-          ./publish.sh
-          # obsidianhtml convert -i ./config.yaml
+          # ./convert.sh
+          # obsidianhtml convert -i config.yaml
           pwd
           ls -la
           # touch html/.nojekyll
