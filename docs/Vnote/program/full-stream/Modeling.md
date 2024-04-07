@@ -23,3 +23,8 @@
 - excalidraw
 - 架构图绘制：https://www.onemodel.app/
 - [[Code-Oriented-Draw]]
+## Prompt模版
+```
+你正在给一个计费系统设计添加计费比例的模型，下面的mermaid 类代码中缺少注释，请补上
+
+```
