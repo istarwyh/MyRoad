@@ -16,3 +16,5 @@ Achieving an 85% success rate appears to be the optimal condition for efficient 
 遵从第一性原理，第一性原理就是指“系统性地怀疑你可能怀疑的一切事物，直到你获得无可置疑的真相”。--笛卡尔
 
 读书会使得这个人成为这个人，因此读书和性生活一样，都不应该外包。
+
+收集值得思考的问题。--李笑来

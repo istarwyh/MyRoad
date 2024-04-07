@@ -7,6 +7,8 @@
 - 借助AI语义识别后的内容自动格式化归档
 - 无限制地使用网页功能，可参考 https://github.com/Sxvxgee/UnlimitedGPT
 - Agent 打开或者至少导引到各个封闭的门：[AppAgent](https://github.com/mnotgod96/AppAgent)
+- AI Agent 可以通过 RPA 或 Intent-based API 方式收集生活记录。现在 App 一般不提供 API，生活记录器可以用图像识别或者理由操作系统层面API，相当于一个干活很快的秘书在从各个 App 里面把数据一条条抄录出来。以往这种爬数据的方式可能会违反 App 的用户协议，甚至可能构成破坏计算机系统罪，但如果 AI Agent 收集了数据只是供用户个人使用，大概是没有什么问题的。AI Agent 的行为在法律上怎么界定，会是一个很大的挑战。
+未来手机助手成为标配之后，App 一定会提供面向手机助手的 Intent-based API，AI Agent 说清楚想要什么数据，App 就把对应的数据吐出来，这样就彻底解决了 App 数据烟囱化的问题。
 类似产品: https://solidproject.org/
 
 如果数据能集中起来，

@@ -1,3 +1,5 @@
 - 项目脚手架：COLA
 - 代码风格：Google-Style-formatter
 - Spring Boot技术栈下的优雅响应处理器: https://github.com/feiniaojin/graceful-response
+- 参数校验：https://mp.weixin.qq.com/s/bfuMbZBLK1zbn4GIUrUxOA
+- https://github.com/sudheerj/reactjs-interview-questions

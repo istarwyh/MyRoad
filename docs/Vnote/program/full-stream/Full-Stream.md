@@ -1,8 +1,11 @@
 "Full-Stream" 是ThoughtWork 中国区CTO 徐昊仿照"Full-Stack"全栈造出来的一个词，用于表示业务开发的整个流程，按照徐昊的话来说，是知识工程中知识产生、消费、传递的一整个过程。Full-Stream 在我这里体现如下：
 [[full-stream.canvas|full-stream]]
+
+区别于岗位路线图：https://roadmap.sh
 ## [[Analyzing]]
 
 ## [[Modeling]]
+## [[Prototype-Diagram]]
 
 ## Task Breaking down
 
@@ -19,6 +22,7 @@
 - 本地LLM:https://jan.ai/ 、 ollma
 - API: https://api.zetatechs.com/
 - AI加持的terminal: warp
+- RPA：LaVague
 ### Ask
 https://devv.ai
 https://www.phind.com/
@@ -61,6 +65,7 @@ https://github.com/version-fox/vfox
 https://github.com/linyuxuanlin/Auto-i18n
 https://www.i18next.com/
 ## Releasing
+- goreleaser：快速、优雅地发布 Go 应用。
 ### DevOps Platform
 - jira
 - https://coding.net/
@@ -84,5 +89,9 @@ https://www.i18next.com/
 ### Document
 - confluence
 - trello
+### Promotion&SEO
+[[Search Engine Optimization]]
+ReplyGuy: 帮你推广产品的AI回复工具
+- 你的关键词、截图、描述、评分、评论、下载量、应用可靠性等都相辅相成，所以构建一个惊人的解决方案并清晰、吸引地展示它几乎是至关重要的基础。
 ## Practices
 [[Practices-for-Processing-l0-Billion-Bill-data]]
