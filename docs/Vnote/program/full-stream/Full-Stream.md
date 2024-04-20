@@ -38,6 +38,7 @@ Output the final solutions and analyze the time complexity and space complexity 
 [[JUnit5 & Mockito]]
 
 ## Coding
+- https://chuhai.tools
 - 开发需要的各种小工具，可搭配 raycast 等使用：https://he3app.com/zh/
 - 自动从页面跳转代码： https://github.com/zh-lx/code-inspector
 ## Enhanced By AI
