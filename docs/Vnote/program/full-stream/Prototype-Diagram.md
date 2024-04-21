@@ -8,8 +8,11 @@
 - AI 界面转代码: https://kombai.com/
 - ai 生成网页： https://v0.dev/
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
-- wix:https://zh.wix.com/
-- strikingly:https://cn.strikingly.com/
+
 - 移除背景 https://removebg.one
 - 修图：https://clipdrop.co/tools
+- 低代码
+	- wix:https://zh.wix.com/
+	- strikingly:https://cn.strikingly.com/
+	- https://www.framer.com/
 #resource 

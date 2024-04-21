@@ -14,7 +14,7 @@ public class exercise_12_15 {
         java.io.File file = new java.io.File("exercise_12_15.txt");
 
         if (file.exists()) {
-            System.out.println("FIle already exists");
+            System.out.println("File already exists");
             System.exit(1);
         }
         java.io.PrintWriter output = new java.io.PrintWriter(file);

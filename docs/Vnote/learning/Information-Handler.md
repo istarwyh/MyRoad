@@ -69,7 +69,7 @@ Sizzle AI，个性化学习
 
 
 ## Sort out
-- [[How-to-Choose-Note-Software|笔记软件]]
+- [[learning/choice/How-to-Choose-Note-Software|笔记软件]]
 - [eagle](https://eagle.cool/)
 
 ## Process

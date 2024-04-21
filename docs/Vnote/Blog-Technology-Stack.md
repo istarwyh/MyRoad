@@ -3,7 +3,8 @@
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202401012244710.png)
 
 [[xiaohui-blog-technology-architecture.excalidraw]]
-
+ 
+更多细节可看 [BuiltWith](https://builtwith.com/xiaohui.cool)
 ## 相关依赖
 - [[Information-Handler#Publish|Netify]]
 - [obsidian-html](https://github.com/obsidian-html/obsidian-html)
