@@ -42,7 +42,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 
 风险控制 ^VUfg0SXi
 
-对话改写 ^2ewWXmGJ
+扩充信息&
+query改写 ^2ewWXmGJ
 
 对话改写解决多轮对话中指代和省略等问题 ^tVnFgc9P
 
@@ -59,6 +60,10 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 商品（包括同类、关联）信息 ^qje9Q2QD
 
 榜单信息 ^HeV9uZs0
+
+实体识别 ^AxhkOaIo
+
+诉求识别 ^AkF42evu
 
 %%
 ## Drawing
@@ -732,8 +737,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 898,
-			"versionNonce": 852371967,
+			"version": 910,
+			"versionNonce": 410744926,
 			"isDeleted": false,
 			"id": "vE7W3jehaDZf4C7a9Pueh",
 			"fillStyle": "solid",
@@ -742,12 +747,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 2,
 			"opacity": 80,
 			"angle": 0,
-			"x": -269.6355846732043,
-			"y": -86.32377875309717,
+			"x": -269.6274881892339,
+			"y": -86.25199797892941,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 59.601902257260974,
-			"height": 2.952089759044128,
+			"width": 59.59380577329057,
+			"height": 2.864646539754176,
 			"seed": 303057073,
 			"groupIds": [],
 			"frameId": null,
@@ -755,7 +760,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666135,
+			"updated": 1714452781802,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -777,8 +782,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					59.601902257260974,
-					-2.952089759044128
+					59.59380577329057,
+					-2.864646539754176
 				]
 			]
 		},
@@ -824,8 +829,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "rectangle",
-			"version": 666,
-			"versionNonce": 2084732703,
+			"version": 669,
+			"versionNonce": 53720734,
 			"isDeleted": false,
 			"id": "uUfzbSOBBAIQsGZdvSufq",
 			"fillStyle": "hachure",
@@ -834,7 +839,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 58.5150188013838,
+			"x": 58.51501880138379,
 			"y": 273.0140569047285,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -875,14 +880,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666117,
+			"updated": 1714452781783,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 768,
-			"versionNonce": 1345115199,
+			"version": 771,
+			"versionNonce": 2123887838,
 			"isDeleted": false,
 			"id": "DkZas9mH",
 			"fillStyle": "hachure",
@@ -891,7 +896,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 69.19539516819067,
+			"x": 69.19539516819066,
 			"y": 300.7480521841592,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -905,7 +910,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666119,
+			"updated": 1714452781786,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -921,8 +926,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "rectangle",
-			"version": 669,
-			"versionNonce": 153482335,
+			"version": 672,
+			"versionNonce": 1069656350,
 			"isDeleted": false,
 			"id": "fRgL7z14i6dy74mJr62vz",
 			"fillStyle": "hachure",
@@ -931,7 +936,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 63.2006256249274,
+			"x": 63.20062562492738,
 			"y": 459.6388566279725,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -956,14 +961,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666122,
+			"updated": 1714452781790,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 776,
-			"versionNonce": 1340947647,
+			"version": 779,
+			"versionNonce": 2111804894,
 			"isDeleted": false,
 			"id": "E5B62aMe",
 			"fillStyle": "hachure",
@@ -972,7 +977,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 119.43298105667567,
+			"x": 119.43298105667566,
 			"y": 487.3728519074032,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -986,7 +991,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666124,
+			"updated": 1714452781791,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -1002,8 +1007,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 813,
-			"versionNonce": 894281887,
+			"version": 825,
+			"versionNonce": 1327790494,
 			"isDeleted": false,
 			"id": "etsrsDr2NAfEBQZu6D5tq",
 			"fillStyle": "solid",
@@ -1033,7 +1038,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"id": "S8FdlItc"
 				}
 			],
-			"updated": 1710052666123,
+			"updated": 1714452781791,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -2904,8 +2909,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 258,
-			"versionNonce": 327991167,
+			"version": 261,
+			"versionNonce": 1012568926,
 			"isDeleted": false,
 			"id": "BWFwMOEQEf5MAgndbYKdI",
 			"fillStyle": "solid",
@@ -2927,7 +2932,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666118,
+			"updated": 1714452781784,
 			"link": null,
 			"locked": false,
 			"startBinding": null,
@@ -3363,8 +3368,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 86,
-			"versionNonce": 132544415,
+			"version": 89,
+			"versionNonce": 413955998,
 			"isDeleted": false,
 			"id": "UqdIK96r78iIkF0lvldh5",
 			"fillStyle": "solid",
@@ -3386,7 +3391,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666118,
+			"updated": 1714452781784,
 			"link": null,
 			"locked": false,
 			"startBinding": null,
@@ -3455,8 +3460,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "rectangle",
-			"version": 729,
-			"versionNonce": 1975864543,
+			"version": 732,
+			"versionNonce": 393030174,
 			"isDeleted": false,
 			"id": "Gm9A2iTgPVgbV-UXfXcoJ",
 			"fillStyle": "hachure",
@@ -3465,7 +3470,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 60.874081069138,
+			"x": 60.874081069138015,
 			"y": 97.03814983056918,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -3494,14 +3499,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666127,
+			"updated": 1714452781794,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 831,
-			"versionNonce": 1440637311,
+			"version": 834,
+			"versionNonce": 1108940638,
 			"isDeleted": false,
 			"id": "7bhjjF10",
 			"fillStyle": "hachure",
@@ -3510,7 +3515,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 75.59444309268315,
+			"x": 75.59444309268316,
 			"y": 124.77214510999988,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -3524,7 +3529,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666128,
+			"updated": 1714452781795,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -3540,8 +3545,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 80,
-			"versionNonce": 189849887,
+			"version": 92,
+			"versionNonce": 1084471966,
 			"isDeleted": false,
 			"id": "_etazWCP4xb3c28orJPks",
 			"fillStyle": "solid",
@@ -3563,7 +3568,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666127,
+			"updated": 1714452781794,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -3667,8 +3672,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 323,
-			"versionNonce": 1147489727,
+			"version": 329,
+			"versionNonce": 1420122078,
 			"isDeleted": false,
 			"id": "xGSQp-Vd9no7YMEVpwOTp",
 			"fillStyle": "solid",
@@ -3678,11 +3683,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 465.60108829531964,
-			"y": -328.7819634377618,
+			"y": -328.7809105726792,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 187.5207982848243,
-			"height": 160.35230597614725,
+			"width": 187.520393542614,
+			"height": 160.35125311106464,
 			"seed": 1068520767,
 			"groupIds": [],
 			"frameId": null,
@@ -3690,7 +3695,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666131,
+			"updated": 1714452781798,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -3712,15 +3717,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					-187.5207982848243,
-					160.35230597614725
+					-187.520393542614,
+					160.35125311106464
 				]
 			]
 		},
 		{
 			"type": "rectangle",
-			"version": 609,
-			"versionNonce": 1882227231,
+			"version": 610,
+			"versionNonce": 2109730654,
 			"isDeleted": false,
 			"id": "e5uzOX58Ee78Sr5QZDwJb",
 			"fillStyle": "hachure",
@@ -3730,7 +3735,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 100,
 			"angle": 0,
 			"x": -208.8817048768808,
-			"y": -130.58558448391267,
+			"y": -130.32333676255854,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
 			"width": 121.8956807454426,
@@ -3755,14 +3760,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710041670950,
+			"updated": 1714452751667,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 651,
-			"versionNonce": 1252488017,
+			"version": 696,
+			"versionNonce": 750681566,
 			"isDeleted": false,
 			"id": "2ewWXmGJ",
 			"fillStyle": "hachure",
@@ -3771,35 +3776,35 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": -179.9338645041595,
-			"y": -107.36726427313793,
+			"x": -185.68586340552667,
+			"y": -117.1050165517838,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
-			"width": 64,
-			"height": 20,
+			"width": 75.50399780273438,
+			"height": 40,
 			"seed": 1094094079,
 			"groupIds": [],
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710041670950,
+			"updated": 1714452772539,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
 			"fontFamily": 1,
-			"text": "对话改写",
-			"rawText": "对话改写",
+			"text": "扩充信息&\nquery改写",
+			"rawText": "扩充信息&\nquery改写",
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "e5uzOX58Ee78Sr5QZDwJb",
-			"originalText": "对话改写",
+			"originalText": "扩充信息&\nquery改写",
 			"lineHeight": 1.25,
-			"baseline": 14
+			"baseline": 34
 		},
 		{
 			"type": "arrow",
-			"version": 100,
-			"versionNonce": 626849343,
+			"version": 112,
+			"versionNonce": 1822652638,
 			"isDeleted": false,
 			"id": "YtTeRMW0XFFdOn_hMbgga",
 			"fillStyle": "solid",
@@ -3809,11 +3814,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": -80.65623592343013,
-			"y": -97.921958763959,
+			"y": -97.72310024032271,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 47.58992513020822,
-			"height": 2.382119020541353,
+			"width": 47.58992513020826,
+			"height": 2.427068626819846,
 			"seed": 1931596529,
 			"groupIds": [],
 			"frameId": null,
@@ -3821,7 +3826,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666135,
+			"updated": 1714452781802,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -3843,8 +3848,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					47.58992513020822,
-					-2.382119020541353
+					47.58992513020826,
+					-2.427068626819846
 				]
 			]
 		},
@@ -4039,8 +4044,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "rectangle",
-			"version": 591,
-			"versionNonce": 1208079967,
+			"version": 594,
+			"versionNonce": 1773972766,
 			"isDeleted": false,
 			"id": "aadnjZsMjeJrSkeQroIEo",
 			"fillStyle": "hachure",
@@ -4050,7 +4055,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 100,
 			"angle": 0,
 			"x": 475.9209209688787,
-			"y": 96.7104342550064,
+			"y": 96.71043425500642,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
 			"width": 153.1359151204426,
@@ -4079,14 +4084,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666138,
+			"updated": 1714452781805,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 641,
-			"versionNonce": 1264813887,
+			"version": 644,
+			"versionNonce": 655768286,
 			"isDeleted": false,
 			"id": "JRkoQChW",
 			"fillStyle": "hachure",
@@ -4096,7 +4101,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 100,
 			"angle": 0,
 			"x": 504.4888785291,
-			"y": 127.29793578088533,
+			"y": 127.29793578088534,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
 			"width": 96,
@@ -4106,7 +4111,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666139,
+			"updated": 1714452781806,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -4296,8 +4301,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 354,
-			"versionNonce": 1337641983,
+			"version": 366,
+			"versionNonce": 1297087582,
 			"isDeleted": false,
 			"id": "Eq2kc4dgpvvAzJ8oQ5wlb",
 			"fillStyle": "solid",
@@ -4306,12 +4311,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 2,
 			"opacity": 80,
 			"angle": 0,
-			"x": 647.8854440259297,
-			"y": -186.64357992691964,
+			"x": 647.8999823142058,
+			"y": -186.685581071423,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 30.215423335341598,
-			"height": 26.236932765536608,
+			"width": 30.24279980616393,
+			"height": 26.278933910039967,
 			"seed": 1365034495,
 			"groupIds": [],
 			"frameId": null,
@@ -4319,7 +4324,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666146,
+			"updated": 1714452781814,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4341,15 +4346,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					30.215423335341598,
-					26.236932765536608
+					30.24279980616393,
+					26.278933910039967
 				]
 			]
 		},
 		{
 			"type": "rectangle",
-			"version": 656,
-			"versionNonce": 1760929151,
+			"version": 659,
+			"versionNonce": 934687518,
 			"isDeleted": false,
 			"id": "R8ZJrLBTLCeJ05tJhucwM",
 			"fillStyle": "hachure",
@@ -4358,7 +4363,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 952.0273120502025,
+			"x": 952.0273120502023,
 			"y": -286.97179460761095,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4380,14 +4385,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666150,
+			"updated": 1714452781818,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 750,
-			"versionNonce": 281084383,
+			"version": 753,
+			"versionNonce": 32006110,
 			"isDeleted": false,
 			"id": "UvjNVQ0h",
 			"fillStyle": "hachure",
@@ -4396,7 +4401,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 996.5952696104238,
+			"x": 996.5952696104237,
 			"y": -256.38429308173204,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4407,7 +4412,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666151,
+			"updated": 1714452781818,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -4423,8 +4428,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 421,
-			"versionNonce": 628855231,
+			"version": 433,
+			"versionNonce": 117343134,
 			"isDeleted": false,
 			"id": "pk3P_BpyBf9aedp1CG441",
 			"fillStyle": "solid",
@@ -4434,11 +4439,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 946.9552549619864,
-			"y": -243.117906158373,
+			"y": -243.1172908109544,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 119.9776732080345,
-			"height": 88.50845437963011,
+			"width": 119.97759409303217,
+			"height": 88.50800274392972,
 			"seed": 1461402289,
 			"groupIds": [],
 			"frameId": null,
@@ -4446,7 +4451,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666150,
+			"updated": 1714452781818,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4468,15 +4473,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					-119.9776732080345,
-					88.50845437963011
+					-119.97759409303217,
+					88.50800274392972
 				]
 			]
 		},
 		{
 			"type": "rectangle",
-			"version": 693,
-			"versionNonce": 774073855,
+			"version": 696,
+			"versionNonce": 1942795294,
 			"isDeleted": false,
 			"id": "QJq8ZLalwPVWRK9p__Qqo",
 			"fillStyle": "hachure",
@@ -4485,7 +4490,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 951.6157316465573,
+			"x": 951.6157316465574,
 			"y": -173.82286374009794,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4507,14 +4512,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666153,
+			"updated": 1714452781821,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 803,
-			"versionNonce": 1588435551,
+			"version": 806,
+			"versionNonce": 2082635998,
 			"isDeleted": false,
 			"id": "WsI52Hti",
 			"fillStyle": "hachure",
@@ -4523,7 +4528,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 980.1836892067786,
+			"x": 980.1836892067787,
 			"y": -143.23536221421904,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4534,7 +4539,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666154,
+			"updated": 1714452781822,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -4550,8 +4555,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 215,
-			"versionNonce": 1999714879,
+			"version": 227,
+			"versionNonce": 2116600990,
 			"isDeleted": false,
 			"id": "cKouQQMLFuzMXqGD5gIhp",
 			"fillStyle": "solid",
@@ -4561,11 +4566,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 943.6858050921945,
-			"y": -120.65899639938672,
+			"y": -120.65908130595793,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
 			"width": 113.08885995840296,
-			"height": 16.431266826886997,
+			"height": 16.43119929854575,
 			"seed": 1360335839,
 			"groupIds": [],
 			"frameId": null,
@@ -4573,7 +4578,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666154,
+			"updated": 1714452781822,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4596,14 +4601,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				],
 				[
 					-113.08885995840296,
-					-16.431266826886997
+					-16.43119929854575
 				]
 			]
 		},
 		{
 			"type": "rectangle",
-			"version": 712,
-			"versionNonce": 870905471,
+			"version": 715,
+			"versionNonce": 1142600990,
 			"isDeleted": false,
 			"id": "p9zv7EtwgzdpbruA-rGNa",
 			"fillStyle": "hachure",
@@ -4612,7 +4617,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 955.1522103249422,
+			"x": 955.1522103249421,
 			"y": -406.64518022772813,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4634,14 +4639,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666157,
+			"updated": 1714452781825,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 840,
-			"versionNonce": 1867117279,
+			"version": 843,
+			"versionNonce": 197403102,
 			"isDeleted": false,
 			"id": "qje9Q2QD",
 			"fillStyle": "hachure",
@@ -4650,7 +4655,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 967.7201678851635,
+			"x": 967.7201678851634,
 			"y": -386.0576787018492,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4661,7 +4666,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666158,
+			"updated": 1714452781826,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -4677,8 +4682,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 206,
-			"versionNonce": 378446527,
+			"version": 218,
+			"versionNonce": 27952542,
 			"isDeleted": false,
 			"id": "V2jQE7lFNWbPiBjkSu60K",
 			"fillStyle": "solid",
@@ -4688,11 +4693,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 950.9964943825591,
-			"y": -347.99667652122776,
+			"y": -347.9963345374394,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 127.47721229164881,
-			"height": 191.87737275871675,
+			"width": 127.47716578078735,
+			"height": 191.87704558346024,
 			"seed": 1682917791,
 			"groupIds": [],
 			"frameId": null,
@@ -4700,7 +4705,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666157,
+			"updated": 1714452781826,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4722,15 +4727,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					-127.47721229164881,
-					191.87737275871675
+					-127.47716578078735,
+					191.87704558346024
 				]
 			]
 		},
 		{
 			"type": "rectangle",
-			"version": 744,
-			"versionNonce": 275136255,
+			"version": 747,
+			"versionNonce": 283129374,
 			"isDeleted": false,
 			"id": "k3LFwL-iZEo4_0urRpqgO",
 			"fillStyle": "hachure",
@@ -4739,7 +4744,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 954.1533699929108,
+			"x": 954.1533699929109,
 			"y": -44.32589515285849,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4761,14 +4766,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					"type": "arrow"
 				}
 			],
-			"updated": 1710052666161,
+			"updated": 1714452781829,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 866,
-			"versionNonce": 213257055,
+			"version": 869,
+			"versionNonce": 17646302,
 			"isDeleted": false,
 			"id": "HeV9uZs0",
 			"fillStyle": "hachure",
@@ -4777,7 +4782,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 1,
 			"opacity": 100,
 			"angle": 0,
-			"x": 998.7213275531321,
+			"x": 998.7213275531323,
 			"y": -13.738393626979573,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "#b2f2bb",
@@ -4788,7 +4793,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"frameId": null,
 			"roundness": null,
 			"boundElements": [],
-			"updated": 1710052666162,
+			"updated": 1714452781829,
 			"link": null,
 			"locked": false,
 			"fontSize": 16,
@@ -4804,8 +4809,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 132,
-			"versionNonce": 296995647,
+			"version": 144,
+			"versionNonce": 1774438046,
 			"isDeleted": false,
 			"id": "OqJyt87XXmkMDR9gquFmV",
 			"fillStyle": "solid",
@@ -4815,11 +4820,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 948.1009865700593,
-			"y": 0.8924214028992523,
+			"y": 0.8923106296609546,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
 			"width": 122.0468881159552,
-			"height": 113.13485801475974,
+			"height": 113.13476844435326,
 			"seed": 1415232337,
 			"groupIds": [],
 			"frameId": null,
@@ -4827,7 +4832,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666161,
+			"updated": 1714452781829,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4850,14 +4855,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				],
 				[
 					-122.0468881159552,
-					-113.13485801475974
+					-113.13476844435326
 				]
 			]
 		},
 		{
 			"type": "arrow",
-			"version": 227,
-			"versionNonce": 481456063,
+			"version": 233,
+			"versionNonce": 1242225630,
 			"isDeleted": false,
 			"id": "vYYSUulMmP-ro_UycjqgE",
 			"fillStyle": "solid",
@@ -4866,12 +4871,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 2,
 			"opacity": 80,
 			"angle": 0,
-			"x": 362.79861347156714,
+			"x": 362.79450032564773,
 			"y": -164.4803268138284,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 110.03656499302349,
-			"height": 75.37644341525845,
+			"width": 110.0406781389429,
+			"height": 75.37705995790498,
 			"seed": 674480255,
 			"groupIds": [],
 			"frameId": null,
@@ -4879,7 +4884,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666142,
+			"updated": 1714452781810,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4901,15 +4906,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					110.03656499302349,
-					-75.37644341525845
+					110.0406781389429,
+					-75.37705995790498
 				]
 			]
 		},
 		{
 			"type": "arrow",
-			"version": 95,
-			"versionNonce": 55421247,
+			"version": 101,
+			"versionNonce": 752205534,
 			"isDeleted": false,
 			"id": "YmhSQv9rrPbyb2kRZPZzQ",
 			"fillStyle": "solid",
@@ -4919,11 +4924,11 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"opacity": 80,
 			"angle": 0,
 			"x": 658.0223805179061,
-			"y": -101.98140184278084,
+			"y": -101.98140499718139,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
 			"width": 280.3138500025342,
-			"height": 3.6881512227112694,
+			"height": 3.6881492128644027,
 			"seed": 1526127473,
 			"groupIds": [],
 			"frameId": null,
@@ -4931,7 +4936,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666147,
+			"updated": 1714452781815,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -4954,14 +4959,14 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				],
 				[
 					-280.3138500025342,
-					-3.6881512227112694
+					-3.6881492128644027
 				]
 			]
 		},
 		{
 			"type": "arrow",
-			"version": 218,
-			"versionNonce": 1947798175,
+			"version": 224,
+			"versionNonce": 825130398,
 			"isDeleted": false,
 			"id": "WsTOVi7_OWeGlafahIQay",
 			"fillStyle": "solid",
@@ -4970,12 +4975,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 0,
 			"opacity": 80,
 			"angle": 0,
-			"x": 364.6215818604536,
-			"y": -25.355794620756335,
+			"x": 364.62147414523224,
+			"y": -25.355794620756342,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 168.02755604458218,
-			"height": 119.68243727013075,
+			"width": 168.027641789506,
+			"height": 119.68243727013076,
 			"seed": 1462195359,
 			"groupIds": [],
 			"frameId": null,
@@ -4983,7 +4988,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666138,
+			"updated": 1714452781806,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -5005,8 +5010,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					168.02755604458218,
-					119.68243727013075
+					168.027641789506,
+					119.68243727013076
 				]
 			]
 		},
@@ -5064,8 +5069,8 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		},
 		{
 			"type": "arrow",
-			"version": 176,
-			"versionNonce": 513814239,
+			"version": 188,
+			"versionNonce": 969289246,
 			"isDeleted": false,
 			"id": "RSRQnd3O9-4h1kDTFwSSS",
 			"fillStyle": "solid",
@@ -5074,12 +5079,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 0,
 			"opacity": 80,
 			"angle": 0,
-			"x": 472.0018708161349,
-			"y": 182.90268241492095,
+			"x": 472.0018711490047,
+			"y": 182.90268267493087,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 214.69600472173005,
-			"height": 104.93473399570001,
+			"width": 214.69600505459994,
+			"height": 104.9347338416606,
 			"seed": 77377439,
 			"groupIds": [],
 			"frameId": null,
@@ -5087,7 +5092,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666138,
+			"updated": 1714452781806,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -5109,15 +5114,15 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					-214.69600472173005,
-					104.93473399570001
+					-214.69600505459994,
+					104.9347338416606
 				]
 			]
 		},
 		{
 			"type": "arrow",
-			"version": 49,
-			"versionNonce": 5980959,
+			"version": 61,
+			"versionNonce": 462143134,
 			"isDeleted": false,
 			"id": "qrt9uhldmx3POcW9E8BWT",
 			"fillStyle": "solid",
@@ -5126,12 +5131,12 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 			"roughness": 0,
 			"opacity": 80,
 			"angle": 6.270359642168951,
-			"x": 463.0111380283781,
-			"y": 136.78591157046654,
+			"x": 463.0111380222329,
+			"y": 136.7859129507894,
 			"strokeColor": "#1e1e1e",
 			"backgroundColor": "transparent",
-			"width": 203.55185274282962,
-			"height": 0.44979555452815134,
+			"width": 203.55185273053917,
+			"height": 0.4497945963132679,
 			"seed": 151836607,
 			"groupIds": [],
 			"frameId": null,
@@ -5139,7 +5144,7 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 				"type": 2
 			},
 			"boundElements": [],
-			"updated": 1710052666139,
+			"updated": 1714452781806,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -5161,10 +5166,152 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 					0
 				],
 				[
-					-203.55185274282962,
-					0.44979555452815134
+					-203.55185273053917,
+					0.4497945963132679
 				]
 			]
+		},
+		{
+			"type": "rectangle",
+			"version": 613,
+			"versionNonce": 908370782,
+			"isDeleted": false,
+			"id": "F8GK0H9vA8w40ssmmtx6r",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -235.32495992055203,
+			"y": -319.7199182826491,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "#b2f2bb",
+			"width": 121.8956807454426,
+			"height": 66.43664042154947,
+			"seed": 136069086,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": {
+				"type": 3
+			},
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "AxhkOaIo"
+				}
+			],
+			"updated": 1714452783117,
+			"link": null,
+			"locked": false
+		},
+		{
+			"type": "text",
+			"version": 726,
+			"versionNonce": 1424247518,
+			"isDeleted": false,
+			"id": "AxhkOaIo",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -206.37711954783072,
+			"y": -296.50159807187435,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "#b2f2bb",
+			"width": 64,
+			"height": 20,
+			"seed": 1216648222,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": null,
+			"boundElements": [],
+			"updated": 1714452794983,
+			"link": null,
+			"locked": false,
+			"fontSize": 16,
+			"fontFamily": 1,
+			"text": "实体识别",
+			"rawText": "实体识别",
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "F8GK0H9vA8w40ssmmtx6r",
+			"originalText": "实体识别",
+			"lineHeight": 1.25,
+			"baseline": 14
+		},
+		{
+			"type": "rectangle",
+			"version": 613,
+			"versionNonce": 903457630,
+			"isDeleted": false,
+			"id": "Za2Z4U_V1__iHnDoeNZzM",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -91.41247077124649,
+			"y": -330.8310633021804,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "#b2f2bb",
+			"width": 121.8956807454426,
+			"height": 66.43664042154947,
+			"seed": 1539734402,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": {
+				"type": 3
+			},
+			"boundElements": [
+				{
+					"type": "text",
+					"id": "AkF42evu"
+				}
+			],
+			"updated": 1714452795905,
+			"link": null,
+			"locked": false
+		},
+		{
+			"type": "text",
+			"version": 714,
+			"versionNonce": 770962434,
+			"isDeleted": false,
+			"id": "AkF42evu",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": -62.46463039852519,
+			"y": -307.61274309140566,
+			"strokeColor": "#1e1e1e",
+			"backgroundColor": "#b2f2bb",
+			"width": 64,
+			"height": 20,
+			"seed": 976206658,
+			"groupIds": [],
+			"frameId": null,
+			"roundness": null,
+			"boundElements": [],
+			"updated": 1714452802219,
+			"link": null,
+			"locked": false,
+			"fontSize": 16,
+			"fontFamily": 1,
+			"text": "诉求识别",
+			"rawText": "诉求识别",
+			"textAlign": "center",
+			"verticalAlign": "middle",
+			"containerId": "Za2Z4U_V1__iHnDoeNZzM",
+			"originalText": "诉求识别",
+			"lineHeight": 1.25,
+			"baseline": 14
 		}
 	],
 	"appState": {
@@ -5182,10 +5329,10 @@ RLHF (Reinforcement Learning from Human Feedback)：来自人类反馈的强化�
 		"currentItemTextAlign": "left",
 		"currentItemStartArrowhead": null,
 		"currentItemEndArrowhead": "arrow",
-		"scrollX": 846.2595300789228,
-		"scrollY": 520.6051334254096,
+		"scrollX": 866.8655906849834,
+		"scrollY": 681.5710425163188,
 		"zoom": {
-			"value": 0.55
+			"value": 0.45
 		},
 		"currentItemRoundness": "round",
 		"gridSize": null,

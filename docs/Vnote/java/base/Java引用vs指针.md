@@ -91,18 +91,19 @@ void swap(int[] a,int i,int j){
 ## 2. 从swap()窥函数调用的传参策略
 调用函数时,传递不同类型的参数,比如基本数据类型(如int,char,double等，又称为`内建类型`)、结构体/对象、引用、指针给函数时,不同语言中使用这些参数的方式并不一致.一般,`parameter-passing strategy`也可以当作概念更宽泛的`evaluation strategy`的主要部分,并用`evaluation strategy`代指它.
 ### 赋值策略(Evaluation Strategy)
+
 下表摘录自:[Evaluation_strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
 
-|      Evaluation strategy       |  	Representative Languages  | 	Year first introduced |
-| ------------------------------ | ----------------------------- | ------------------------ |
-| Call by reference              | 	FORTRAN II, PL/I	         | 1958                     |
-| Call by value	                 | ALGOL, C, Scheme              | 	1960                    |
-| Call by name                   | 	ALGOL 60, Simula	         | 1960                     |
-| Call by copy-restore           | 	Fortran IV, Ada              | 1962                     |
-| Call by need                   | 	Haskell, R                   | 1971                     |
-| Call by reference parameters   | C++, PHP C# Visual Basic .NET | 		?                   |
-| Call by reference to const	 | C, C++	                     | ?                        |
-| Call by sharing                | 	Java, Python, Ruby           | 	?                       |
+| Evaluation strategy          | Representative Languages      | Year first introduced |
+| ---------------------------- | ----------------------------- | --------------------- |
+| Call by reference            | FORTRAN II, PL/I              | 1958                  |
+| Call by value                | ALGOL, C, Scheme              | 1960                  |
+| Call by name                 | ALGOL 60, Simula              | 1960                  |
+| Call by copy-restore         | Fortran IV, Ada               | 1962                  |
+| Call by need                 | Haskell, R                    | 1971                  |
+| Call by reference parameters | C++, PHP C# Visual Basic .NET | ?                     |
+| Call by reference to const   | C, C++                        | ?                     |
+| Call by sharing              | Java, Python, Ruby            | ?                     |
 
 ### 2.1. call by value 整个副本
 C/C++传递参数一般是值传递，但是也可以传递指针和引用。
