@@ -79,6 +79,7 @@ https://github.com/version-fox/vfox
 #### 快速利用数据库
 - 面向小白的retool: https://retool.com/
 - 面向开发者的airplane：https://www.airplane.dev/
+- 基于数据库操作表格：https://github.com/teableio/teable
 - 可视化创建数据库🀄️数据：https://visualdb.com/
 - 数据库数据 mock: Snaplet 
 #### 数据库开发工具

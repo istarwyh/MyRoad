@@ -5,6 +5,7 @@ DORA (Developer Operations Responsibility Agreement)定义的四个关键指标:
 - 部署频率
 - 平均恢复时间 （MTTR） 
 - 变更失败率
+
 下面是建议的一些基本衡量原则：
 - 衡量团队效率，而不是个人绩效。
 - 衡量成效而不是产出。

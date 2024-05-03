@@ -5,6 +5,7 @@
 - [为什么规定周角为360度？](https://mp.weixin.qq.com/s/8qf3RWCcQD9zVWkWaIkHNA)
 - [Where does my computer get the time from?](https://dotat.at/@/2023-05-26-whence-time.html)
 - [理解时间：闰年，闰秒，时间与时区的原理](https://mp.weixin.qq.com/s/U5vj6KpmdedNEhvVdM679Q)
+- [闭上眼睛还能看到亮光](https://mp.weixin.qq.com/s/T_RwdaeM_9BcVUfsQCUVjw)
 ```dataview
 List from #wiki 
 ```
