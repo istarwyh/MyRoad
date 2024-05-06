@@ -1,7 +1,7 @@
 #startup #resource 
 
 公共 API: https://apivault.dev/
-聚合资源：https://www.freelancethings.co/?type=Tools
+聚合资源：https://www.freelancethings.co/
 
 - 全链路公司创建辅助： Durable 
 ## Prototype

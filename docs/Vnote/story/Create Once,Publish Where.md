@@ -31,6 +31,7 @@
 要真的让这个问题更小一点，或许应该参考政治制度的演化，推行联邦制的内容平台。
 
 阶段性产品：
+- https://buffer.com/: create 、 publish 、analyze 、engage(快捷回复)、start page、 ai assistant 都做了
 - https://www.postpone.app
 - [[mdnice|墨滴]]
 - https://github.com/wechatsync/Wechatsync

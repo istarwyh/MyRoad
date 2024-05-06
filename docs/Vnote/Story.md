@@ -14,7 +14,7 @@ LIST FROM #idea
 
 ## For Others' Story
 我暂时想不到足够好的故事，或许只是没有信心完成我的故事，所以我会先去看看[[Others' Story]],然后[[How-to-choose-your-work|选择一个]]。
-
+- https://fandcode.com/idea
 ## Start-up
 - Feasibility https://www.alpha-sense.com/
 - [[Start-up Resources Collection]]

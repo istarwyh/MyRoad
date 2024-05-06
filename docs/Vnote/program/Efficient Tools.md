@@ -14,3 +14,5 @@ https://tool.browser.qq.com
 
 ### Saving Time
 #### [跳过Android 开屏](https://github.com/zfdang/Android-Touch-Helper)
+
+#resource 

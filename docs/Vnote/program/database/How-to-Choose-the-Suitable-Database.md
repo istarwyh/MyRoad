@@ -112,6 +112,11 @@ The process model provides better isolation, for example, an invalid memory acce
 - ClickHouse uses a lock-free data structure for concurrent query execution.
 #### [[Database Solutions for Distributed Systems]]
 
+Theoretically, distributed databases have higher availability due to the avoidance of single points of failure. However, in practice, there are currently some drawbacks to distributed databases, such as:
+1. Incomplete functionality: They only support simple CRUD operations and do not support complex SQL syntax and analytical functions. The quality of distributed execution plans is not high.
+2. Unstable performance: Due to the need for multiple network communications and distributed coordination, there is a significant performance loss compared to single-machine databases.
+3. High complexity: Distributed databases involve multiple components and nodes, making operations and management difficult, and troubleshooting is challenging.
+4. Low reliability: Distributed databases, **due to the introduction of more failure points**, are prone to issues such as data loss, inconsistency, and split-brain problems.
 
 ### License
 - MySQL Community Edition is licensed under the GPL.

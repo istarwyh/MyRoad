@@ -156,3 +156,5 @@ Sizzle AI，个性化学习
 - obsidian publish:$8/月
 - 简单、轻松的书写&部署博客: https://elog.1874.cool/notion/introduce
 - [[mdnice]]
+
+#resource 

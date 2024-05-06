@@ -46,7 +46,9 @@ Analyze the time complexity and space complexity of the final solutions and
 [[Frequently-Used-Prompt]]
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 - 本地LLM:https://jan.ai/ 、 ollma
-- API: https://api.zetatechs.com/
+- API:
+	- https://api.zetatechs.com/
+	- https://www.closeai-asia.com/
 - AI加持的terminal: warp
 - RPA：LaVague
 ### Ask
@@ -84,6 +86,7 @@ https://github.com/version-fox/vfox
 - 数据库数据 mock: Snaplet 
 #### 数据库开发工具
 - https://webdb.app/page/demo
+- 
 #### 数据库管理工具
 - bytebase:https://www.bytebase.com/zh
 - 数据库、服务器二合一：https://github.com/clockworklabs/SpacetimeDB
