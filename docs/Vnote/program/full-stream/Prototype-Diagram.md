@@ -10,7 +10,9 @@
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
 
 - 移除背景 https://removebg.one
-- 修图：https://clipdrop.co/tools
+- 修图包括无损放大：
+ - https://clipdrop.co/tools
+ - https://www.upscayl.org/
 - 低代码
 	- wix:https://zh.wix.com/
 	- strikingly:https://cn.strikingly.com/
