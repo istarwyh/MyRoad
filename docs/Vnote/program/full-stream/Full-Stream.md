@@ -2,7 +2,36 @@
 [[full-stream.canvas|full-stream]]
 
 区别于岗位路线图：https://roadmap.sh
+
+各个步骤都可能用到 prompt:[[Frequently-Used-Prompt]]。所有prompt都推荐搭配 有`snippet` 功能的软件使用，比如 `raycast`(Mac)、`quicker`(Windows).
 ## [[Analyzing]]
+在分析的时候，你可能还需要不停地游走在各种不知道的概念和领域中，这时候 AI 体现出的“知识平权”效果就特别明显。下面的prompt或许能用到
+```
+
+### Instruction
+
+You are an expert in ${field} development. Your task is to help someone with a backend development background learn about developing ${field}.
+
+### Context
+
+The user is experienced in backend development but is a novice in ${field} development with no prior experience in this field.
+
+### Variables
+
+${field}: Visual Studio Code Extension
+
+### Task 1
+
+Provide a detailed list of the key knowledge areas and tools needed to develop expertise in ${field} development.
+
+### Task 2
+
+Give specific examples and resources that can help the user learn effectively.
+
+### Task 3 
+
+Give me a demo to help me understand ${field}. The demo should be able to run in actual environment. If it's not possible to provide a demo all at once, it's okay to provide it in multiple parts, but please provide the  complete steps.
+```
 
 ## [[Modeling]]
 ## [[Prototype-Diagram]]
@@ -20,9 +49,9 @@ Have a break and then think how to break down the given algorithm problem into s
 ## Step2
 Review the requirements, and if the solutions of each sub-problem aren't met, return to task1.
 ## Step3
-Combine the solutions of each sub-problem to create the complete final answer to the algorithm problem then output it 
+Combine the solutions of each sub-problem to create the complete final answer to the algorithm problem.
 ## Step4
-Analyze the time complexity and space complexity of the final solutions and
+Analyze the time complexity and space complexity of the final solutions.
 # Requirements
 1. Each sub-problem must have clear input and output
 2. The solution method for each sub-problem should follow the Google Code Format and be no more than 5 lines as much as possible
@@ -34,16 +63,40 @@ Analyze the time complexity and space complexity of the final solutions and
 输入任意数字组成的数组,输出一个为该数组前半部分全部变成偶数,后半部分变成奇数的数组。只允许本地处理，不允许新建数组。
 ```
 
-## Testing
-[[Unit Level Test Theory、Tool、Discussion]]
-[[JUnit5 & Mockito]]
+## Test
+在开始编写生产代码之前，鼓励按照 [[Unit Level Test Theory、Tool、Discussion|TDD ]] 的方式先写测试,推荐使用[[JUnit5 & Mockito]].
+继而我们可以基于测试代码生成生产代码：
+```markdown
+## Task
+Implement the method according to the specified test method.
 
+## Context
+You are tasked with implementing a method in Java, ensuring it adheres to the provided test cases and meets the specified requirements.
+
+## Examples
+Provide examples of similar methods implemented in Java 8, focusing on clean, advanced, testable, and functional code styles.
+
+## Role
+You are a senior development engineer with deep knowledge of computer fundamentals, data structures, and excellent coding practices.
+
+## Programming Language
+Java8
+
+## Code Style
+- clean
+- advanced
+- testable
+- functional
+
+## Test Method
+Describe or include the test cases the method needs to pass.
+
+```
 ## Coding
 - https://chuhai.tools
 - 开发需要的各种小工具，可搭配 raycast 等使用：https://he3app.com/zh/
 - 自动从页面跳转代码： https://github.com/zh-lx/code-inspector
-## Enhanced By AI
-[[Frequently-Used-Prompt]]
+
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 - 本地LLM:https://jan.ai/ 、 ollma
 - API:
@@ -94,6 +147,79 @@ https://github.com/version-fox/vfox
 ### i18n
 https://github.com/linyuxuanlin/Auto-i18n
 https://www.i18next.com/
+
+## Test & Review
+对于遗留代码，或者事先不确定需求的代码，依然需要在已有代码基础上再补测试。
+### Test
+```markdown
+  
+# task  
+Have a break, and then output full tests for given INPUT CODE. NOT STEPS ONLY TESTS.  
+# Test Code Requirements  
+  - Coverage goal: 100% branch as much as possible  
+  - Code style  
+    - Use class variables instead of local variables as much as possible  
+    - use static imports  
+  - Test types  
+    - ParametrizedTest as much as possbile
+    - DynamicTest when necessary for more complex scenarios
+  - Avoid unnecessary annotations  
+  - Naming convention: lowercase_underscore   
+  - Mock requirements  
+    - if face with void methods, skip tests with `doNothing()` of Mockito  
+    - avoid to use `any()` directly instead of `anyString()` 、 `anyLong()` .etc  
+# Dependencies  
+  - Base dependencies: Java8、Junit5、Mockito  
+  - Additional dependencies maybe you will use:   
+    - Lombok  
+    - EasyRandom   
+    - Guava  
+    - SpringTest  
+    - Other common test dependencies  
+# INPUT CCODE  
+```java  
+  
+  
+```  
+# OUTPUT TEST
+```
+
+### Review
+```markdown
+- task: review code and modify it  
+- role:你是一位优秀的软件工程师，擅长对代码进行重构.重构的目的是在不改变代码外部行为的前提下，通过优化代码结构以改善其结构、可读性、可维护性和性能等方面。  
+总体而言，代码重构可以通过以下几个步骤进行:  
+  1. 理解代码: 首先要深入理解要重构的代码，包括其功能逻辑和结构等方面的特点。  
+  2. 设计重构计划: 根据代码的特点和需求，制定具体的重构计划。可以根据以下列举的重构方式和技术，选择适合的重构方法。  
+  3. 提取函数(Extract Function): 将一段代码提取为一个独立的函数，以提高代码的可读性和可维护性。  
+  4. 内联函数(Inline Function): 将某个函数调用的地方替换为函数本体，以减少不必要的函数调用开销。  
+  5. 封装字段(Encapsulate Field): 将类中的字段封装起来，通过提供访问器函数来访问和修改字段的值，以提高类的封装性和灵活性。  
+  6. 重命名(Rename): 通过修改标识符的名称来使代码更易于理解和维护。  
+  7. 拆分临时变量(Split Temporary Variable): 将一个临时变量拆分为多个，以减少代码的复杂度和提高可读性。  
+  8. 移除重复代码(Remove Duplicate Code): 通过抽象和封装来消除重复的代码，以减少代码量和提高代码的可维护性。  
+  9. 引入解释性变量(Introduce Explaining Variable): 将复杂的表达式或计算过程提取为一个变量，以增加代码的可读性和可维护性。  
+  10. 替换算法(Replace Algorithm): 通过使用更高效或更简洁的算法来替换现有的算法，以提高代码的性能。  
+  11. 简化条件表达式(Simplify Conditional Expressions): 简化复杂的条件表达式，以提高代码的可读性和可维护性。  
+  12. 简化函数调用(Simplify Function Calls): 简化函数调用的方式，以减少不必要的参数和提高代码的可读性。  
+  13. 搬移函数(Move Function): 将函数从一个类或模块中移动到另一个类或模块中，以减少代码的耦合性和提高代码的可维护性。  
+  14. 搬移字段(Move Field): 将字段从一个类中移动到另一个类中，以减少代码的耦合性和提高代码的可维护性。  
+  15. 提炼类(Extract Class): 将一个类中的一部分代码提取为一个新的类，以提高代码的模块化和可维护性。  
+  16. 提炼接口(Extract Interface): 将一个类的公共接口提取为一个独立的接口，以增加代码的灵活性和可扩展性。  
+  17. 以委托取代继承(Replace Inheritance with Delegation): 使用委托方式替代继承关系，以减少代码的耦合性和提高代码的可维护性。  
+  18. 抽象超类(Abstract Superclass): 将多个相关的子类中的共同部分抽象为一个超类，以减少代码的重复和提高代码的可维护性。  
+  
+- code_style:  
+  - clean  
+  - advanced  
+  - testable  
+  - functional  
+- code:  
+```java  
+  
+```
+```
+```
+
 ## Releasing
 - goreleaser：快速、优雅地发布 Go 应用。
 ### DevOps Platform
