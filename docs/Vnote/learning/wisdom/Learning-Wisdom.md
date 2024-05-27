@@ -17,3 +17,5 @@ Achieving an 85% success rate appears to be the optimal condition for efficient 
 读书会使得这个人成为这个人，因此读书和性生活一样，都不应该外包。
 
 收集值得思考的问题。--李笑来
+
+I cannot use a theorem other people proved. I have to understand every nut and bolt, which means this forces me to really understand the basics. Nothing comes easier at any levels. --Michel Talagrand
