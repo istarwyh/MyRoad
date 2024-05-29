@@ -93,6 +93,7 @@ Describe or include the test cases the method needs to pass.
 
 ```
 ## Coding
+- 优先完成任务，同时[[Code-or-Design-Pattern|注意代码质量]]
 - https://chuhai.tools
 - 开发需要的各种小工具，可搭配 raycast 等使用：https://he3app.com/zh/
 - 自动从页面跳转代码： https://github.com/zh-lx/code-inspector
@@ -176,12 +177,9 @@ Have a break, and then output full tests for given INPUT CODE. NOT STEPS ONLY TE
     - Guava  
     - SpringTest  
     - Other common test dependencies  
-# INPUT CCODE  
-```java  
-  
-  
-```  
-## OUTPUT TEST
+# INPUT CODE  
+
+# OUTPUT TEST
 ```
 
 ### Review
@@ -214,26 +212,24 @@ Have a break, and then output full tests for given INPUT CODE. NOT STEPS ONLY TE
   - testable  
   - functional  
 - code:  
-```java  
+  
   
 ```
-```
-```
 
-### Releasing
+## Releasing
 - goreleaser：快速、优雅地发布 Go 应用。
-#### DevOps Platform
+### DevOps Platform
 - jira
 - https://coding.net/
-#### Domain
+### Domain
 [how to custom domains](https://www.netlify.com/blog/2020/03/26/how-to-set-up-netlify-dns-custom-domains-cname-and-a-records/)
 网站防火墙：https://github.com/chaitin/SafeLine
-#### Website Registration
+### Website Registration
 
 - ICP Query Extension
 
-### Operation
-#### Cloud Platform
+## Operation
+### Cloud Platform
 - 使用云平台像使用操作系统一样 https://sealos.io/ 以及 laf serverless 平台
 - [善用GitHub](https://link.zhihu.com/?target=https%3A//www.bmpi.dev/self/use-github-better/)
 - Cloudflare：Serverless最好的平台，能提供如常用的存储R2、KV数据库、CDN、Pages、Worker、MQ、甚至运行AI模型
@@ -242,12 +238,12 @@ Have a break, and then output full tests for given INPUT CODE. NOT STEPS ONLY TE
 - AWS/Azure/GCP：作为巨头平台，他们可以补充上面云平台所缺失的东西，比如AWS SES就是一个非常好的发邮件服务。
 - [Newrelic](https://link.zhihu.com/?target=https%3A//newrelic.com/)：非常好的监控平台，尤其是它能作为免费的日志搜索平台，我把我产品的[系统日志](https://www.zhihu.com/search?q=%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A3249282055%7D)都上传到这个平台，然后对日志进行监控。一般的日志平台都是ES架构，[价格](https://www.zhihu.com/search?q=%E4%BB%B7%E6%A0%BC&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A3249282055%7D)并不便宜，单Newrelic却能免费。
 - [Optimizely](https://link.zhihu.com/?target=https%3A//www.optimizely.com/)：一个不错的feature toggle平台，可以很方便的做产品的A/B测试。
-#### Document
+### Document
 - confluence
 - trello
-#### Promotion&SEO
+### Promotion&SEO
 [[Search Engine Optimization]]
 ReplyGuy: 帮你推广产品的AI回复工具
 - 你的关键词、截图、描述、评分、评论、下载量、应用可靠性等都相辅相成，所以构建一个惊人的解决方案并清晰、吸引地展示它几乎是至关重要的基础。
-### Practices
+## Practices
 [[Practices-for-Processing-l0-Billion-Bill-data]]

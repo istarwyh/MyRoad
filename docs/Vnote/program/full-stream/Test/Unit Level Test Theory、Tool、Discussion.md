@@ -154,7 +154,7 @@ void setUp(){
 但是也更容易**重构代码和测试**.
 >The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.
 
-另外,考虑到单一职责原则(SRP,Single Responsibility Principle),`Working With Legacy Code`中指出
+另外,考虑到[[Code-or-Design-Pattern#SRP(Single Responsibility Program)|单一职责原则]],`Working With Legacy Code`中指出
 
 >If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .
 
