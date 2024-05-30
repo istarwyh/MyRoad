@@ -32,11 +32,18 @@
 - 无外部反馈，团队没有代码review 氛围，代码上线质量也没有监控
 ## 如何提升代码质量
 1. 对于面向对象的编程范式，首先考虑[[Modeling|如何转化需求到模型]]
-2. 考虑后面提到的设计原则、思想和设计模式
+2. 考虑后面提到的原则、思想和设计模式
 3. TDD 编程或者对已有代码做到一定测试覆盖
 4. 打磨重构自己的代码
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202405290851575.png)
-### 原则
+### 通用原则
+#### BREIF
+人类的阅读和识别能力都是有限的，根据实践我倡议每个方法、函数都应该简短，原则上不应该超过 7 行。
+#### SPOT(Single Point of Truth)/DRY(Don't Repeat yourself)
+尽量不要有重复的代码。有时候一味追求不重复会让代码难懂，而保证自己写的代码在需要的时候只需要改动一处，是更为实际的原则。
+#### KISS (Keep It Simple, Stupid)
+把简单留给别人；如果有复杂的东西，把复杂留给自己。尽可能保证代码和产品易上手，不易出错，把用户当什么都不知道的傻瓜。
+### 设计原则
 一般我们说设计原则，都会谈到“SOLID“：
 
 1. **S - 单一职责原则（Single Responsibility Principle, SRP）**：一个类应该只有一个引起它变化的原因。简单来说，一个类应该只负责一项职责。
@@ -48,8 +55,8 @@
 4. **I - 接口隔离原则（Interface Segregation Principle, ISP）**：A client should not to be forced to implement an interface that it doesn't use。也就是说，一个类对另一个类的依赖应该建立在最小的接口上，这鼓励我们在**内部实现中**将大的、复杂的接口拆分为更小、更具体的接口。
 
 5. **D - 依赖倒置原则（Dependency Inversion Principle, DIP）**：高层模块不应该依赖低层模块，两者都应该依赖其抽象。也就是说，要针对接口编程，不要对实现编程。
-#### Brief
-每个方法、函数都应该简短，原则上不应该超过 7 行。
+
+对其中两个扩展解释下：
 #### SRP(Single Responsibility Program)
 
 ```javascript
@@ -89,11 +96,12 @@ transform1("hello world"); // "HELLO WORLD !"
 transform2("HELLO WORLD"); // "hello world !"
 ```
 对于面向对象的设计来说，单一职责往往意味着一个对象承担一个职责。
-#### SPOT(Single Point of Truth)/DRY(Don't Repeat yourself)
-尽量不要有重复的代码。有时候一味追求不重复会让代码难懂，而保证自己写的代码在需要的时候只需要改动一处，是更为实际的原则。
 
+#### LSP（Liskov Substitution Principle）
+里氏替换原则强调的不仅仅是子类不能更改父类的核心，以便维护系统的健壮性；更是强调实现类不应该实现不适合的接口，比如自行车不应该实现汽车实现的“驾驶”接口。
 #### DIP(Dependency Inversive Principle)
-DIP 强调模块之间不应该直接依赖，而应该通过抽象产生依赖。所谓抽象，一般就是接口。这样就可以做到高层模块不因底层模块而变化，从而降低系统的耦合度，使得使用这个原则的模块可以自闭环。
+DIP 强调模块之间不应该直接依赖，而应该通过抽象产生依赖。所谓抽象，一般就是接口。这样就可以做到高层模块不因底层模块而变化，从而降低系统的耦合度，使得使用这个原则的模块可以**自闭环**。
+
 
 ### 思想
 #### AOP
