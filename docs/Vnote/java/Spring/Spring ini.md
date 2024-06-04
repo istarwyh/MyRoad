@@ -690,7 +690,7 @@ Downloading from central-repository: http://central.maven.org/maven2/org/springf
     - `mvn clean install`到`8`，部署到本地maven仓库
     - `mvn clean deploy`完成全部步骤,部署[^远程发布jar]到local和remote
 
-[^远程发布jar]:[发布Artifact](https://www.liaoxuefeng.com/wiki/1252599548343744/1347981037010977)
+	[^远程发布jar]:[发布Artifact](https://www.liaoxuefeng.com/wiki/1252599548343744/1347981037010977)
 
 **当默认没有在pom.xml 指定任何 `plugin`，但是也能正常构建工程是为什么？**
 这是Maven 自己默认指定了 plugin。如cmd执行 `mvn install` 的输出日志中可以看到一系列的 插件:版本号:目标(phase)[^Maven生命周期]：
