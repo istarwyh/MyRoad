@@ -28,6 +28,8 @@ I don't need to get answer quickly. Have a break, and then...
 ```
 But chatGPT can do it better.
 ```
+## 指定读者
+说明输出结果的读者是什么样的身份，给小学生的和给一个科学家，他们的输出结果是很不一样的
 ## 个人常用
 ### 翻译
 #### 一般翻译

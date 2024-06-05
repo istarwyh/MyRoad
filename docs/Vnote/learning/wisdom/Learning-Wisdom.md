@@ -19,3 +19,5 @@ Achieving an 85% success rate appears to be the optimal condition for efficient 
 收集值得思考的问题。--李笑来
 
 I cannot use a theorem other people proved. I have to understand every nut and bolt, which means this forces me to really understand the basics. Nothing comes easier at any levels. --Michel Talagrand
+
+我正在使用“问题形成框架”（Question Formulation Technique，QFT）进行教学。接下来是改进问题环节，对于我给出的任何封闭性问题，请转换为多个开放性问题。

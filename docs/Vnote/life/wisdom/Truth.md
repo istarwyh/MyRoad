@@ -59,3 +59,5 @@ Hinton和LeCun，在 LLM 是否能产生智能上观点完全相反，这警示�
 弯道超车--等到开源
 遥遥领先--抄袭成功
 被卡脖子--抄袭失败
+
+在人们还不知道飞机为什么能飞的时候，飞机已经在天上飞行了120年。--[科学美国人](https://www.scientificamerican.com/video/no-one-can-explain-why-planes-stay-in-the-air/) 
