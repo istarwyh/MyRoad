@@ -11,6 +11,7 @@
 ### Instruction
 
 You are an expert in ${field} development. Your task is to help someone with a backend development background learn about developing ${field}.
+Before you start, please ask me any questions that you need answered to help me best solve my problem.
 
 ### Context
 

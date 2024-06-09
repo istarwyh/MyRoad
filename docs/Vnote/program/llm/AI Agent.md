@@ -10,8 +10,8 @@ graph TD
     A[Thought] --> B["Action & Action Input"]
     B --> C["Action Output & Observation"]
     C --> A
-    A --> E{Need to Stop or Action?}
-    E -->|Stop| F[Stop]
+    A --> E{Find the Final Answer or Action?}
+    E -->|final Answer| F[Stop]
     E -->|Action| B
 ```
 
