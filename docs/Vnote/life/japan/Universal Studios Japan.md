@@ -10,11 +10,6 @@ https://www.usj.co.jp/tridiondata/usj/zh/cn/files/documents/usj-pdf-studio-guide
 - 名偵探柯南 The Escape[^2]
 - Monster Hunter World: Iceborne XR WALK[^3]
 
-[^1]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/conan
-
-[^2]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/conan
-
-[^3]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/monster-hunter-20th-anniversary
 ### 纽约园区
 [目前剧目](https://www.usj.co.jp/web/zh/tw/events/conan-2024)是
 - 名偵探柯南4-D現場表演秀～星空的寶石～
@@ -73,7 +68,7 @@ USJ 的门票种类还是挺多的。
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202406092013440.png)
 
 一般来说，过了9:00 任天堂园区就会开始限流，到时就需要抽入园号码券（整理券）。到了12:00之后还会抽入园抽签券（抽选券）。
-#### 顶门冲
+### 顶门冲
 >特种兵专属！
 
 原理就是刚开门任天堂园区不限流。不然后面就需要整理券，再到后面还需要抽选券。
@@ -125,3 +120,7 @@ Apple 可以直接下
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202406092202038.png)
 
 ⚠️爆米花桶🍿和饮料杯🥤 都是食物，不能退税。
+
+[^1]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/conan
+[^2]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/conan
+[^3]:https://www.usj.co.jp/web/zh/tw/events/universal-cool-japan-2024/monster-hunter-20th-anniversary
