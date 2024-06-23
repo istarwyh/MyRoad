@@ -14,6 +14,33 @@
 - [`issues.sonatype.org`](https://central.sonatype.org/news/20240109_issues_sonatype_org_deprecation/)： 原本面向用户申请 token的地方，已经被废弃
 
 
-## 具体步骤
+## 手动发布具体步骤
+
+必须说明，以下步骤是比较愚蠢的，只是能用而已。如果你有更好的，能告诉我吗，不甚感激🧎🧎
+
+1. 切到当前module目录下，执行 `mvn clean deploy` ，因为没有正确的 ossrh token , deploy 会报错，不过会生成几个手动上传需要的文件：
+```
+junit-extensions-0.0.2-MINOR.jar
+junit-extensions-0.0.2-MINOR.jar.md5
+junit-extensions-0.0.2-MINOR.jar.sha1
+junit-extensions-0.0.2-MINOR-javadoc.jar
+junit-extensions-0.0.2-MINOR-javadoc.jar.md5
+junit-extensions-0.0.2-MINOR-javadoc.jar.sha1
+junit-extensions-0.0.2-MINOR-sources.jar
+junit-extensions-0.0.2-MINOR-sources.jar.md5
+junit-extensions-0.0.2-MINOR-sources.jar.sha1
+```
+
+2. 这里还缺少pom 文件，所以我们要手动从 本地的`.m2` 目录中复制过来: `cp /Users/mac/.m2/repository/io/github/istarwyh/junit-extensions/0.0.2-MINOR/junit-extensions-0.0.2-MINOR.pom  /Users/mac/Desktop/code-open/TestMuseum/junit-extensions/target `
+3. 但是复制过来的pom 文件没有`md5` 和 `sha1` 文件，所以我们再执行一遍 `mvn  deploy` 来生成pom对应`md5` 和 `sha1` 文件, 注意不要 `clean` !
+4. 现在target 中的文件就全了，我们需要将它们复制到指定目录,即 `io/github/istarwyh/junit-extensions/0.0.2-MINOR` : ` cp -p target/*.{jar,sha1,md5,pom} io/github/istarwyh/junit-extensions/0.0.2-MINOR/`
+5. 接下来切到指定目录，对文件进行GPG签名，
+```sh
+find . $$ -name "*.jar" -or -name "*.pom" $$ -exec gpg -ab {} \;
+```
+	`$$`有可能不被 terminal 认识，报错了就单个 `"*.jar"` 执行也可以。
+6.  签名后文件就算准备齐全，然后将 `io` 目录一起压缩打包，通过 `https://central.sonatype.com/publishing` 上传
+
+
 
 [^trouble]:https://central.sonatype.org/register/legacy/

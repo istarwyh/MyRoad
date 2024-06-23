@@ -23,7 +23,7 @@ Domain 比价:
 域名往往第一年买便宜，第二年贵，所以第二年可以转到其他平台，比如 cloudflare。
 ## 支付
 ### 海外卡
-- wildcard
+- [wildcard](https://wildcard.com.cn/service)
 - nodepay
 - onekey
 ### 渠道
