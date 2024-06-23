@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="code-oriented-draw">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'code-oriented-draw';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 2;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=code-oriented-draw" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js " path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js active" path="/program/full-stream">
+		<button id="folder-21" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js " path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="code-oriented-draw">Code-Oriented-Draw</h1>
+<div class="toc">
+<ul>
+<li><a href="#code-oriented-draw" class="anchor-link">Code-Oriented-Draw</a><ul>
+<li><a href="#markdown" class="anchor-link">Markdown</a><ul>
+<li><a href="#extradraw" class="anchor-link">Extradraw</a></li>
+<li><a href="#mermaid" class="anchor-link">Mermaid</a><ul>
+<li><a href="#h__1" class="anchor-link">画流程图</a></li>
+<li><a href="#h__2" class="anchor-link">画思维导图</a></li>
+<li><a href="#h__3" class="anchor-link">画时序图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#draw-io-diagrams-net" class="anchor-link">Draw.io/Diagrams.net</a></li>
+<li><a href="#css3" class="anchor-link">CSS3</a><ul>
+<li><a href="#h_3-1-papaerclip" class="anchor-link">3.1. Papaerclip</a></li>
+<li><a href="#h_3-2-danger-icon" class="anchor-link">3.2. Danger Icon</a></li>
+</ul>
+</li>
+<li><a href="#h_4-svg" class="anchor-link">4. SVG</a></li>
+<li><a href="#h_5-html" class="anchor-link">5. HTML</a><ul>
+<li><a href="#h_5-1" class="anchor-link">5.1. 表格</a><ul>
+<li><a href="#h_5-1-1" class="anchor-link">5.1.1. 压缩前</a></li>
+<li><a href="#h_5-1-2" class="anchor-link">5.1.2. 压缩后</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><a class="inline-tag" href="/obs.html/tags/tool/index.html">tool</a>   </p>
+<h2 id="markdown">Markdown</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>Hash</th>
+<th>有序数组</th>
+<th>二叉树</th>
+<th>b树(B-tree,Balanced Tree)</th>
+<th>b+树</th>
+<th>b*树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(logn)</td>
+<td>n叉树，每个节点可以有1200个叉</td>
+<td>n叉树，优化b树存储，提供范围查找</td>
+<td>n叉树，优化b+树页分裂空间利用率低的问题</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td></td>
+<td></td>
+<td>O(logn)</td>
+<td>树高不超过3</td>
+<td><strong>所有Key只在叶子节点上出现一次</strong></td>
+<td>非叶子节点的兄弟节点之间也通过指针相连</td>
+</tr>
+<tr>
+<td>Update</td>
+<td></td>
+<td></td>
+<td></td>
+<td>最多只需要访问3次磁盘就可定位数据块</td>
+<td>所有非叶子节点都是<strong>叶子节点</strong>的索引</td>
+<td>如果节点上的子节点满了</td>
+</tr>
+<tr>
+<td>Find</td>
+<td>O(1)</td>
+<td>O(logn)</td>
+<td>O(logn)</td>
+<td>极少io--根节点总在内存中</td>
+<td>叶子结点如果是聚簇索引直接定位到记录</td>
+<td>就将它的子节点挪一部分到旁边没满的兄弟节点上</td>
+</tr>
+<tr>
+<td>Iterator(范围查找n)</td>
+<td><span class="arithmatex">\(\times\)</span></td>
+<td>O(n)</td>
+<td>O(n)?</td>
+<td><strong>所有数据只在节点上出现一次</strong></td>
+<td>叶子结点如果是非聚簇索引存储指向记录的指针</td>
+<td>避免了重新创建新的节点的过程</td>
+</tr>
+<tr>
+<td>Sort/Group by</td>
+<td><span class="arithmatex">\(\times\)</span></td>
+<td></td>
+<td></td>
+<td>搜索可以在非叶子节点结束</td>
+<td>各个叶子节点通过指针跟兄弟节点关联(双指针)</td>
+<td></td>
+</tr>
+<tr>
+<td>supplement</td>
+<td></td>
+<td></td>
+<td></td>
+<td>子节点数目超过后再二分，称作<strong>页分裂</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="extradraw">Extradraw</h3>
+<p>本身是JSON格式存储，渲染为手绘风格的图画。可以导入Mermaid 格式的Flowchart   </p>
+<h3 id="mermaid">Mermaid</h3>
+<h4 id="h__1">画流程图</h4>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+graph LR
+id1(lineText)--基础校验-->id2[validText]--业务校验-->id7{是否是issue查找}
+id7--是-->id4[issue补全]--补全词伙-->id6[词伙补全]
+id7--否-->id3{关键词是否已经补全}--是-->id6
+id3--否-->id5[关键词补全]--补全关键词-->id7
+</div>
+
+</div>
+
+<ol>
+<li>这里的射线是不能转弯的   </li>
+<li>结构换行必须加subgraph &amp; end,也就是独立出来才行   </li>
+<li>文本换行得用<code>&lt;br/&gt;</code>标签...   </li>
+<li>文字中不能包含<code>~</code>   </li>
+</ol>
+<h4 id="h__2">画思维导图</h4>
+<p><a href="https://blog.csdn.net/skytruine/article/details/105828748" class="external-link">https://blog.csdn.net/skytruine/article/details/105828748</a>   </p>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+    graph LR
+    Output--> NAT(对应给客户端)
+    NAT-->为了向Client屏蔽集群信息,Ngnix修改IP-Packet的起始地
+
+    Output--> DR(Direct-Server模式)
+    DR-->处理服务器直接返回给Client
+    DR-->Loopback(包括LoadBalance在内全都是同一IP)
+    Loopback-->为了ARP可以定位LoadBalance,抑制除LR外的ARP响应
+</div>
+
+</div>
+
+<div class="lang-mermaid">
+
+<div class="mermaid">
+graph TD
+保险--> A(核心域)
+A-->A1(承保上下文)
+A-->A2(理赔上下文)
+A1-->投保
+A1-->核保
+A1-->保单
+A1-->收费
+A1-->再保
+A1-->批单
+A1-->通知
+保险--> B(通用域)
+B-->B1(产品上下文)
+B-->B2(收付上下文)
+B-->B3(渠道上下文)
+B-->B4(客户上下文)
+
+保险--> C(支撑域)
+C-->C1(单证上下文)
+C-->C2(再保)
+
+保险-->D(...)
+</div>
+
+</div>
+
+<h4 id="h__3">画时序图</h4>
+<p><a href="https://www.imooc.com/article/292709?block_id=tuijian_wz" class="external-link">https://www.imooc.com/article/292709?block_id=tuijian_wz</a>   </p>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+sequenceDiagram
+participant 信贷
+participant 信保
+participant 产品配置中心
+participant 服务编排
+participant 无界山
+
+信贷 ->> +信保 :  @RequestBody uwApplyPolicyReq
+信保 ->> 信保 : 校验Base参数
+信保 ->> 信保 : 查询数据库初始化InsPolicyDO、InsPolicyLoanDO
+
+信保 ->> + 产品配置中心 : 初始化InsProductResp
+产品配置中心 -->> -信保 : 产品配置(产品属性,模板,计费方式等)
+信保 ->> 信保 : 更新之后需要用的context
+信保 ->> 信保 : 校验Biz(组合)参数
+alt 状态为“PRE_SUCCEED”
+信保 ->> 信保: 根据uwStatus判断是否幂等
+信保 ->> 服务编排 : Map<String, AbstractUwFlow> 通过核保状态路由
+服务编排 -->> 信保 : 对应的AbstractUwFlow
+信保 ->> 信保 : 多态,AbstractUwFlow执行对应的行为
+信保 ->> 信保 : fill入参到uwPolicyContext
+信保 ->> + 无界山 : 查询保单状态
+无界山 -->> - 信保 : 保单状态
+
+信保 ->> + 无界山 : 告知修改后的保额保费,起止期,账单信息数据
+无界山 -->> - 信保 : 修改成功或失败
+信保 ->> + 无界山 : 核保
+无界山 -->> - 信保 : 核保成功或失败
+信保 ->> 信保 : 补充或更新context
+信保 ->> +信保 : updatePolicyFromStatus(依据状态做乐观锁),updateByPrimaryKeySelective
+信保 -->> -信保: 事务结束
+opt 乐观锁结果:首次更新
+信保 ->> 服务编排: 执行后续核保流程
+end
+else 状态为其他终态如“SUCCEED”/“UW_REJECTED”
+信保 -->> 信保: log.info(“申请幂等返回”)
+end
+
+
+信保 -->> -信贷 : 返回组装的响应对象
+</div>
+
+</div>
+
+<h2 id="draw-io-diagrams-net">Draw.io/Diagrams.net</h2>
+<p>GUI画图，xml 格式存储，渲染为drawio风格的图画。支持图形较多。   </p>
+<h2 id="css3">CSS3</h2>
+<h3 id="h_3-1-papaerclip">3.1. Papaerclip</h3>
+<p><a class="paperclip icon"></a>   </p>
+<style type="text/css">   
+.paperclip.icon {   
+  color: #000;   
+  position: absolute;   
+  margin-left: 9px;   
+  margin-top: 2px;   
+  width: 6px;   
+  height: 12px;   
+  border-radius: 4px 4px 0 0;   
+  border-left: solid 1px currentColor;   
+  border-right: solid 1px currentColor;   
+  border-top: solid 1px currentColor;   
+  -webkit-transform: rotate(45deg);   
+          transform: rotate(45deg);   
+}   
+
+.paperclip.icon:before {   
+  content: '';   
+  position: absolute;   
+  top: 11px;   
+  left: -1px;   
+  width: 4px;   
+  height: 6px;   
+  border-radius: 0 0 3px 3px;   
+  border-left: solid 1px currentColor;   
+  border-right: solid 1px currentColor;   
+  border-bottom: solid 1px currentColor;   
+}   
+
+.paperclip.icon:after {   
+  content: '';   
+  position: absolute;   
+  left: 1px;   
+  top: 1px;   
+  width: 2px;   
+  height: 10px;   
+  border-radius: 4px 4px 0 0;   
+  border-left: solid 1px currentColor;   
+  border-right: solid 1px currentColor;   
+  border-top: solid 1px currentColor;   
+}   
+</style>
+<h3 id="h_3-2-danger-icon">3.2. Danger Icon</h3>
+<p><a class="gg-danger"></a>   </p>
+<style>   
+ .gg-danger {   
+ box-sizing: border-box;   
+ position: relative;   
+ display: block;   
+ transform: scale(var(--ggs,1));   
+ width: 20px;   
+ height: 20px;   
+ border: 2px solid;   
+ border-radius: 40px   
+}   
+
+.gg-danger::after,   
+.gg-danger::before {   
+ content: "";   
+ display: block;   
+ box-sizing: border-box;   
+ position: absolute;   
+ border-radius: 3px;   
+ width: 2px;   
+ background: currentColor;   
+ left: 7px   
+}   
+
+.gg-danger::after {   
+ top: 2px;   
+ height: 8px   
+}   
+
+.gg-danger::before {   
+ height: 2px;   
+ bottom: 2px   
+}    
+</style>
+<h2 id="h_4-svg">4. SVG</h2>
+<p><a href="https://www.jianshu.com/p/f14982b2b737" class="external-link">手摸手，带你优雅的使用 icon</a>   </p>
+<p><svg t="1613551927172" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1221" width="20" height="20"><path d="M665.6 374.4c-12.8-57.6-57.6-105.6-118.4-118.4-67.2-16-131.2 9.6-169.6 64-28.8 41.6 0 60.8 16 73.6 6.4 3.2 12.8 9.6 22.4 19.2 12.8 12.8 32 9.6 44.8-3.2 12.8-12.8 9.6-32-3.2-44.8-9.6-6.4-16-12.8-22.4-19.2 22.4-25.6 60.8-38.4 96-28.8 35.2 9.6 60.8 35.2 70.4 70.4 9.6 48-12.8 92.8-54.4 112-41.6 19.2-70.4 57.6-70.4 102.4l0 22.4c0 19.2 12.8 32 32 32 0 0 0 0 0 0 16 0 32-12.8 32-32l0-22.4c0-19.2 12.8-38.4 32-44.8C643.2 528 681.6 451.2 665.6 374.4zM480 729.6c-9.6 9.6-12.8 22.4-12.8 35.2 0 12.8 6.4 25.6 12.8 35.2 9.6 9.6 22.4 12.8 35.2 12.8 12.8 0 25.6-6.4 35.2-12.8 9.6-9.6 12.8-22.4 12.8-35.2 0-12.8-6.4-25.6-12.8-35.2C531.2 710.4 499.2 710.4 480 729.6zM512 67.2c-80 0-160 22.4-227.2 64C246.4 86.4 188.8 64 124.8 64 115.2 64 102.4 70.4 96 80c-6.4 9.6-6.4 22.4 0 32 0 0 32 54.4 41.6 137.6 3.2 16 16 28.8 32 28.8 0 0 3.2 0 3.2 0C192 275.2 204.8 262.4 204.8 243.2 198.4 201.6 188.8 163.2 179.2 137.6 204.8 144 230.4 160 249.6 188.8c0 0 0 0 0 0 0 0 0 0 0 0C252.8 192 252.8 192 252.8 195.2c0 0 3.2 3.2 3.2 3.2 3.2 0 3.2 3.2 6.4 3.2 3.2 0 3.2 3.2 6.4 3.2 3.2 0 3.2 0 6.4 0 3.2 0 3.2 0 6.4 0 3.2 0 3.2 0 6.4-3.2 3.2 0 3.2 0 6.4-3.2 0 0 0 0 0 0 0 0 0 0 0 0 64-44.8 140.8-67.2 217.6-67.2 211.2 0 384 172.8 384 384s-172.8 384-384 384-384-172.8-384-384c0-54.4 9.6-105.6 32-156.8 6.4-16 0-35.2-16-41.6-16-6.4-35.2 0-41.6 16C76.8 390.4 64 451.2 64 515.2c0 246.4 201.6 448 448 448 246.4 0 448-201.6 448-448C960 268.8 758.4 67.2 512 67.2z" p-id="1222" fill="#1296db"></path></svg>   </p>
+<h2 id="h_5-html">5. HTML</h2>
+<h3 id="h_5-1">5.1. 表格</h3>
+<h4 id="h_5-1-1">5.1.1. 压缩前</h4>
+<html>   
+  <head>   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+    <meta http-equiv="Content-Style-Type" content="text/css" />   
+    <meta name="generator" content="Aspose.Words for .NET 17.1.0.0" />   
+    <title>Bug-1</title>   
+  </head>   
+  <style>   
+`{_obsidian_pattern_tag_default}` {   
+      background: black;   
+    }   
+  </style>   
+<body>   
+    <div>   
+      <table cellspacing="0" cellpadding="0" style="border-collapse: collapse;">   
+        <tbody>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">BugID</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;B-1</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">Bug</span>   
+                <span style="font-family:&#39;宋体&#39;">标题</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-top-style: solid;   
+                border-top-width: 0.75pt;   
+                border-right-style: solid;   
+                border-right-width: 0.75pt;   
+                border-left-style: solid;   
+                border-left-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;布尔表达式输入框为空时无提示</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">软件版本</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;CellCover1.0</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">测试环境</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;1</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">测试人员</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;王艺辉</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">开发人员</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">创建时间</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;2020年5月31日</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">Bug</span   
+                ><span style="font-family:&#39;宋体&#39;">状态</span>   
+              </p>   
+            </td>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;待解决</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">测试阶段</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-right-style: solid;   
+                border-right-width: 0.75pt;   
+                border-left-style: solid;   
+                border-left-width: 0.75pt;   
+                border-bottom-style: solid;   
+                border-bottom-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">接口测试、</span>   
+                <input   
+                  type="button"   
+                  id="default"   
+                  style="height: 11px; width: 10px;"   
+                />   
+                <span style="font-family:&#39;宋体&#39;">功能测试、</span>   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">配置测试、</span>   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">回归测试</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">Bu</span   
+                ><span style="font-family: Calibri;">g</span   
+                ><span style="font-family:&#39;宋体&#39;">严重程度</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">紧急、</span>   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">严重、</span>   
+                <input   
+                  type="button"   
+                  id="default"   
+                  style="height: 11px; width: 10px;"   
+                />   
+                <span style="font-family:&#39;宋体&#39;">一般、</span>   
+                <input type="button" style="height: 11px; width: 10px;" />   
+                <span style="font-family:&#39;宋体&#39;">轻微</span>   
+              </p>   
+            </td>   
+            <p></p>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">问题优先级</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >高</span   
+                >   
+                <span style="font-family:&#39;宋体&#39;">、</span>   
+                <input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >较高</span   
+                >   
+                <span style="font-family:&#39;宋体&#39;">、</span>   
+                <input   
+                  type="button"   
+                  id="default"   
+                  style="height: 11px; width: 10px;"   
+                /><span style="font-family:&#39;宋体&#39;">一般</span>   
+                <span style="font-family:&#39;宋体&#39;">、</span>   
+                <input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >低</span   
+                >   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">问题来源</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <input   
+                  type="button"   
+                  id="default"   
+                  style="height: 11px; width: 10px;"   
+                /><span style="font-family:&#39;宋体&#39;">测试</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >升级</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >其他</span   
+                >   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">问题类型</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >功能问题</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >版本问题</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >遗留问题</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >新需求</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >配置错误</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >性能问题</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" id="default" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >设计问题</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >偶发性错误</span   
+                ><span style="font-family:&#39;宋体&#39;">、</span   
+                ><input type="button" style="height: 11px; width: 10px;" /><span   
+                  style="font-family:&#39;宋体&#39;"   
+                  >其他</span   
+                >   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">缺陷的触发条件</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">操作步骤（简）</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;1.打开测试用例生成页面<br>2.设置表达式输入框为空<br>3.点击生成按钮</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">实际结果</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;无任何结果</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr>   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">预期结果</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family: Calibri;">&nbsp;弹出"请重新输入表达式不为空"的提示框</span>   
+              </p>   
+            </td>   
+          </tr>   
+          <tr style="height: 96.1pt;">   
+            <td   
+              style="   
+                width: 92.9pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;">附图</span>   
+              </p>   
+            </td>   
+            <td   
+              colspan="3"   
+              style="   
+                width: 300.3pt;   
+                border-style: solid;   
+                border-width: 0.75pt;   
+                padding-right: 5.03pt;   
+                padding-left: 5.03pt;   
+                vertical-align: middle;   
+              "   
+            >   
+              <p   
+                style="   
+                  margin-top: 0pt;   
+                  margin-bottom: 0pt;   
+                  text-align: center;   
+                  widows: 0;   
+                  orphans: 0;   
+                  font-size: 10.5pt;   
+                "   
+              >   
+                <span style="font-family:&#39;宋体&#39;"   
+                  >(如果语言不清楚可附图，图过多可附件)</span   
+                >   
+              </p>   
+            </td>   
+          </tr>   
+        </tbody>   
+      </table>   
+      <p   
+        style="   
+          margin-top: 0pt;   
+          margin-bottom: 0pt;   
+          text-align: justify;   
+          widows: 0;   
+          orphans: 0;   
+          font-size: 10.5pt;   
+        "   
+      >   
+        <span style="font-family: Calibri;">&nbsp;</span>   
+      </p>   
+    </div>   
+  </body>   
+  <script>   
+    document.getElementById("default").style.background = "gray";   
+  </script>   
+</html>
+
+<h4 id="h_5-1-2">5.1.2. 压缩后</h4>
+<p><a href="https://www.haorooms.com/tools/html_minifier/" class="external-link">html压缩工具</a>   </p>
+<html> <head> <meta http-equiv=Content-Type content="text/html; charset=UTF-8"> <meta http-equiv=Content-Style-Type content="text/css"> <meta name=generator content="Aspose.Words for .NET 17.1.0.0"> <title>Bug-1</title> <style>`{_obsidian_pattern_tag_default}`{background:#000}</style><body> <div> <table cellspacing=0 cellpadding=0 style=border-collapse:collapse> <tbody> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>BugID</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;B-1</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>Bug</span> <span style=font-family:&#39;宋体&#39>标题</span> </p> <td colspan=3 style=width:300.3pt;border-top-style:solid;border-top-width:.75pt;border-right-style:solid;border-right-width:.75pt;border-left-style:solid;border-left-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;布尔表达式输入框为空时无提示</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>软件版本</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;CellCover1.0</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>测试环境</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;1</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>测试人员</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;王艺辉</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>开发人员</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>创建时间</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;2020年5月31日</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>Bug</span><span style=font-family:&#39;宋体&#39>状态</span> </p> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;待解决</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>测试阶段</span> </p> <td colspan=3 style=width:300.3pt;border-right-style:solid;border-right-width:.75pt;border-left-style:solid;border-left-width:.75pt;border-bottom-style:solid;border-bottom-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>接口测试、</span> <input type=button id=default style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>功能测试、</span> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>配置测试、</span> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>回归测试</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>Bu</span><span style=font-family:Calibri>g</span><span style=font-family:&#39;宋体&#39>严重程度</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>紧急、</span> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>严重、</span> <input type=button id=default style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>一般、</span> <input type=button style="height:11px;width:10px"> <span style=font-family:&#39;宋体&#39>轻微</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>问题优先级</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>高</span> <span style=font-family:&#39;宋体&#39>、</span> <input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>较高</span> <span style=font-family:&#39;宋体&#39>、</span> <input type=button id=default style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>一般</span> <span style=font-family:&#39;宋体&#39>、</span> <input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>低</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>问题来源</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <input type=button id=default style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>测试</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>升级</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>其他</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>问题类型</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>功能问题</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>版本问题</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>遗留问题</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>新需求</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>配置错误</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>性能问题</span><span style=font-family:&#39;宋体&#39>、</span><input type=button id=default style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>设计问题</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>偶发性错误</span><span style=font-family:&#39;宋体&#39>、</span><input type=button style="height:11px;width:10px"><span style=font-family:&#39;宋体&#39>其他</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>缺陷的触发条件</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>操作步骤（简）</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;1.打开测试用例生成页面<br>2.设置表达式输入框为空<br>3.点击生成按钮</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>实际结果</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;无任何结果</span> </p> <tr> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>预期结果</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;弹出"请重新输入表达式不为空"的提示框</span> </p> <tr style=height:96.1pt> <td style=width:92.9pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>附图</span> </p> <td colspan=3 style=width:300.3pt;border-style:solid;border-width:.75pt;padding-right:5.03pt;padding-left:5.03pt;vertical-align:middle> <p style=margin-top:0;margin-bottom:0;text-align:center;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:&#39;宋体&#39>(如果语言不清楚可附图，图过多可附件)</span> </p> </table> <p style=margin-top:0;margin-bottom:0;text-align:justify;widows:0;orphans:0;font-size:10.5pt> <span style=font-family:Calibri>&nbsp;</span> </p> </div> <script>document.getElementById("default").style.background="gray";</script>
+
+
+<script>
+                    function initializeMermaid() {
+                        mermaid.initialize({startOnLoad:true})
+                    }
+
+                    if (document.readyState === "complete" || document.readyState === "interactive") {
+                        setTimeout(initializeMermaid, 1);
+                    } else {
+                        document.addEventListener("DOMContentLoaded", initializeMermaid);
+                    }
+            </script></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/learning/Information-Handler.html">information-handler</a></li>
+	<li><a class="backlink" href="/program/full-stream/Modeling.html">modeling</a></li>
+</ul>
+</div>
+
+<div class="tags">
+<h2>Tags</h2>
+<ul>
+	<li><a class="backlink" href="/obs.html/tags/default/index.html">default</a></li>
+	<li><a class="backlink" href="/obs.html/tags/tool/index.html">tool</a></li>
+</ul>
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A175684421400049166590545277752714434597{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D175684421400049166590545277752714434597{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B175684421400049166590545277752714434597{level}" level="{level}" note_temp_id="175684421400049166590545277752714434597" onclick="window.ObsHtmlGraph.run(this, '175684421400049166590545277752714434597', 'code-oriented-draw');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C175684421400049166590545277752714434597{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

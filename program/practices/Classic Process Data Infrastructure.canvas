@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"type":"text","text":"[[MySQL FAQ|MySQL]]","id":"e31431b9725fac65","x":-360,"y":25,"width":115,"height":50},
+		{"type":"text","text":"数据详情页面","id":"1d7d9bab7cfd4cf4","x":-360,"y":-310,"width":171,"height":55},
+		{"type":"text","text":"数据详情页面","id":"3c891ea952dc5f8f","x":-189,"y":-310,"width":340,"height":55},
+		{"type":"text","text":"聚合数据分析页面","id":"f48f9a0c19e26e4a","x":-360,"y":-440,"width":680,"height":60},
+		{"type":"text","text":"聚合数据指标页面","id":"24aee191e63e9d6c","x":-360,"y":-560,"width":680,"height":60},
+		{"type":"text","text":"Hive","id":"41cca696b67de7c5","x":-100,"y":20,"width":420,"height":55},
+		{"type":"text","text":"PostgreSQL","id":"83875f4479fd35a8","x":151,"y":-160,"width":180,"height":60},
+		{"type":"text","text":"结算应用","id":"a7fecbd039ffe260","x":-600,"y":20,"width":137,"height":60},
+		{"type":"text","text":"交易应用","id":"644615ed8a571511","x":-600,"y":-160,"width":137,"height":60},
+		{"type":"text","text":"OSS","id":"5a11c016948836b7","x":-20,"y":-160,"width":160,"height":60},
+		{"type":"text","text":"[[Bigtable]]","id":"c2ba5cc2ccd9ce94","x":-269,"y":-160,"width":160,"height":60},
+		{"type":"text","text":"各计费应用","id":"e23b2e31f0206539","x":-600,"y":-60,"width":137,"height":58}
+	],
+	"edges":[
+		{"id":"1452d2bd45c77ebf","fromNode":"e31431b9725fac65","fromSide":"right","toNode":"41cca696b67de7c5","toSide":"left","label":"dump"},
+		{"id":"d130aa4f5e28d521","fromNode":"e31431b9725fac65","fromSide":"top","toNode":"c2ba5cc2ccd9ce94","toSide":"left","label":"binlog:TT"},
+		{"id":"e99119c9d1b21dc8","fromNode":"c2ba5cc2ccd9ce94","fromSide":"top","toNode":"3c891ea952dc5f8f","toSide":"bottom","label":"Map"},
+		{"id":"2fdbc5fb41f265bf","fromNode":"41cca696b67de7c5","fromSide":"top","toNode":"c2ba5cc2ccd9ce94","toSide":"bottom","label":"数据详情ETL"},
+		{"id":"f0b6cb893ca98f05","fromNode":"41cca696b67de7c5","fromSide":"top","toNode":"83875f4479fd35a8","toSide":"bottom","label":"数据指标聚合"},
+		{"id":"591e46e8a2090d93","fromNode":"83875f4479fd35a8","fromSide":"top","toNode":"f48f9a0c19e26e4a","toSide":"right","label":"POJO"},
+		{"id":"2f6c3f0c26944ecc","fromNode":"c2ba5cc2ccd9ce94","fromSide":"top","toNode":"1d7d9bab7cfd4cf4","toSide":"bottom","label":"Map"},
+		{"id":"f747f9b9f73950e7","fromNode":"a7fecbd039ffe260","fromSide":"right","toNode":"e31431b9725fac65","toSide":"left"},
+		{"id":"9553315a5cad1737","fromNode":"644615ed8a571511","fromSide":"right","toNode":"e31431b9725fac65","toSide":"top"},
+		{"id":"09bb3a62cca7e2a6","fromNode":"f48f9a0c19e26e4a","fromSide":"bottom","toNode":"1d7d9bab7cfd4cf4","toSide":"top","label":"跳转"},
+		{"id":"081c5e7860032c45","fromNode":"e23b2e31f0206539","fromSide":"right","toNode":"e31431b9725fac65","toSide":"top"},
+		{"id":"e04e09861e7f22c4","fromNode":"24aee191e63e9d6c","fromSide":"bottom","toNode":"f48f9a0c19e26e4a","toSide":"top","label":"跳转"},
+		{"id":"94cbe343c747bf64","fromNode":"f48f9a0c19e26e4a","fromSide":"bottom","toNode":"3c891ea952dc5f8f","toSide":"top","label":"跳转"},
+		{"id":"44d2bbbf56782212","fromNode":"41cca696b67de7c5","fromSide":"top","toNode":"5a11c016948836b7","toSide":"bottom","label":"Excel"},
+		{"id":"5e8045e5cdb574fe","fromNode":"5a11c016948836b7","fromSide":"top","toNode":"3c891ea952dc5f8f","toSide":"bottom","label":"Link"},
+		{"id":"3c069fdc76fc4662","fromNode":"83875f4479fd35a8","fromSide":"right","toNode":"24aee191e63e9d6c","toSide":"right","label":"POJO"},
+		{"id":"03b5f2fbc8412df4","fromNode":"c2ba5cc2ccd9ce94","fromSide":"right","toNode":"5a11c016948836b7","toSide":"left","label":"Excel"}
+	]
+}

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="vector-database">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'vector-database';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 2;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=vector-database" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js " path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js " path="/program/full-stream">
+		<button id="folder-21" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js " path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js active" path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="vector-database">Vector-Database</h1>
+<div class="toc">
+<ul>
+<li><a href="#vector-database" class="anchor-link">Vector-Database</a><ul>
+<li><a href="#vectordb" class="anchor-link">vectorDB 直观接触</a></li>
+<li><a href="#nlp-natural-language-processing-vector" class="anchor-link">NLP(Natural Language processing) 与Vector</a><ul>
+<li><a href="#nlp" class="anchor-link">什么是NLP</a></li>
+<li><a href="#gpt-nlp" class="anchor-link">GPT 与 NLP的关系</a></li>
+<li><a href="#nlp_1" class="anchor-link">NLP 的应用</a></li>
+<li><a href="#a-ijson-vector" class="anchor-link">A I时代的JSON-Vector</a></li>
+</ul>
+</li>
+<li><a href="#vector-vectordb" class="anchor-link">Vector 的好伙伴VectorDB</a><ul>
+<li><a href="#h__1" class="anchor-link">对向量索引</a><ul>
+<li><a href="#random-projection" class="anchor-link">Random Projection（随机投影）</a></li>
+<li><a href="#locality-sensitive-hashing" class="anchor-link">Locality-sensitive hashing（局部敏感哈希）</a></li>
+<li><a href="#inverted-index" class="anchor-link">Inverted Index(倒排索引)</a></li>
+<li><a href="#hierarchical-navigable-small-world-hnsw" class="anchor-link">Hierarchical Navigable Small World (HNSW)</a></li>
+</ul>
+</li>
+<li><a href="#h_5" class="anchor-link">相似度比较指标5</a><ul>
+<li><a href="#h__2" class="anchor-link">欧几里得距离</a></li>
+<li><a href="#h__3" class="anchor-link">余弦相似度</a></li>
+<li><a href="#h__4" class="anchor-link">点积</a></li>
+<li><a href="#jaccarddice-f1" class="anchor-link">Jaccard系数、Dice 系数和F1值</a></li>
+</ul>
+</li>
+<li><a href="#h__5" class="anchor-link">元数据/标量数据筛选</a></li>
+</ul>
+</li>
+<li><a href="#h__6" class="anchor-link">向量数据库选型</a></li>
+<li><a href="#h__7" class="anchor-link">向量数据库的具体应用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="vectordb">vectorDB 直观接触</h2>
+<p>简单的向量数据库可以参见: <a href="https://vectordb.com/" class="external-link">https://vectordb.com/</a> ：   </p>
+<div class="lang-python">
+
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>  
+<span class="kn">from</span> <span class="nn">vectordb</span> <span class="kn">import</span> <span class="n">Memory</span>  
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="p">)</span>  
+<span class="n">memory</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">()</span>  
+<span class="n">memory</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>  
+<span class="n">memory</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>  
+    <span class="p">[</span><span class="s2">&quot;apples are red&quot;</span><span class="p">,</span> <span class="s2">&quot;oranges are orange&quot;</span><span class="p">],</span>  
+    <span class="p">[{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://apples.com&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oranges.com&quot;</span><span class="p">}],</span>  
+<span class="p">)</span>  
+<span class="c1"># Search for top n relevant results, automatically using embeddings  </span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>  
+<span class="n">results</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">top_n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>  
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div>
+
+
+</div>
+
+<p>不过在中国大陆大概会遇到以下报错:<code>HTTPSConnectionPool(host='huggingface.co', port=443)</code> <br />
+先看理论吧。   </p>
+<h2 id="nlp-natural-language-processing-vector">NLP(Natural Language processing) 与Vector</h2>
+<h3 id="nlp">什么是NLP</h3>
+<p>自然语言处理（NLP）专注让计算机能够以有意义和有价值的方式理解和响应人类语言。简单来说，我们可以构建一个包含所有句子的词典来实现这一目标，但这有些不切实际，因为人类语言中用于构成句子的单词组合无穷无尽。而且口语中还有口音、多样的同义词汇、错误发音或句中省略单词等等情况，就很复杂，所以诞生了NLP这个学科专门研究如何让计算机处理人类语言。   </p>
+<h3 id="gpt-nlp">GPT 与 NLP的关系</h3>
+<p>NLP 的初始步骤通常是文本数据的预处理。预处理的工作包括   </p>
+<ul>
+<li>分段：将句子分解为组成词   </li>
+<li>token 化：将文本分割为单个单词或 token   </li>
+<li>停用词：去除像停用词和普通词如“the”或“is”这样不携带太多含义的标点   </li>
+<li>应用词干提取：为给定标记推导词干   </li>
+<li>词形还原：从字典中获取标记的含义以得到根源以将单词还原为其基本形式   </li>
+</ul>
+<p>预处理之后的文本会被拿去训练。在大型数据集上接受训练以执行特定NLP任务的深度学习模型被称为 NLP 的预训练模型（PTM，Pre-trained Model），它们可以通过避免从头开始训练新模型来帮助下游 NLP 任务。 <br />
+GPT-<strong>Generative Pre-trained Transformer</strong>,即经过预训练的<code>Transformer</code>模型，就是一个 PTM 。和以往其他PTM不一样的是，GPT3.5已经拥有1750亿的参数，而其功能简单解释就是不断预测输入后的下一个单词。<strong>并且虽然我们已经用了很久GPT，但现在GPT仍然是一个黑盒，业界还不知道为什么GPT可以做到它涌现的能力。</strong> <br />
+值得一提的是,llama-2-70b 就是文件系统上的两个文件，一个参数文件和一个运行这些参数的二进制代码。文件大小也就140G左右(700亿参数，每个参数2byte)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。   </p>
+<h3 id="nlp_1">NLP 的应用</h3>
+<p>后来人们的目标不仅仅是处理自然语言，而是处理各种非结构化信息，比如图像、音乐乃至商品描述的推荐。   </p>
+<ul>
+<li>聊天机器人   </li>
+<li>图像搜索   </li>
+<li>文本搜索   </li>
+<li>商品推荐   </li>
+<li>音乐推荐   </li>
+<li>语言翻译服务   </li>
+<li>情感分析工具   </li>
+<li>内容生成   </li>
+</ul>
+<p>传统的数据库，无论是关系型、Nosql 或者 NewSql数据库，将图片转为二进制到存入都很简单，但是我们没有办法直接以图搜图。当然，如果我们是想要以文搜文，自然语言文本（字符串）也可以正则模糊匹配(<code>%</code>)，或者借由<a href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html#h_2.2.2.5.-levenshtein自动机">Inverted-Index-of-Lucene-and-B-Tree</a> ,但如果输入是一句话呢？ <br />
+NLP尤其是生成型AI引发的热潮促使开发者寻找一种简便的方法来存储与查询各种非结构化信息的<strong>输出</strong>。如果将那些不可以比较的数据转换成为向量，且这些向量的分布和距离可以反映出实体的关系，那么就可以通过比较向量进行检索，也就可以实现图搜图、文搜文的功能。而通过 AI/ML 算法，就可以实现向量化(<code>vector embeddings</code>)。例如可以将不同尺寸、不同内容的图片映射成为由像素值组成的同一个空间内的向量，然后在图像搜索中，当用户输入一张图片进行搜索时，可以将其转换为一个向量，并进行相似度搜索，以便找到与输入图片最相似的图片。同样在推荐系统中，将商品、商品和用户的关系都用向量表示，继而也可以通过相似度搜索来推荐相似、相关的物品给用户。 <br />
+举个形象的例子，如果我们把每一个单词看作向量，king减queen之差与man与woman之差应该是近似的，都代表着性别的差异。   </p>
+<div class="lang-python">
+
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  
+<span class="kn">import</span> <span class="nn">logging</span>  
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>  
+
+<span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>  
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;表示一个点的类&quot;&quot;&quot;</span>  
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">z</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>  
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>  
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;在给定的轴上绘制这个点&quot;&quot;&quot;</span>  
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>  
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>  
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Point plotted: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>  
+
+<span class="k">def</span> <span class="nf">create_figure_and_axes</span><span class="p">():</span>  
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>  
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  
+
+<span class="k">def</span> <span class="nf">set_axes_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>  
+
+<span class="k">def</span> <span class="nf">set_axes_origin</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>  
+
+<span class="k">def</span> <span class="nf">hide_axes_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>  
+
+<span class="k">def</span> <span class="nf">add_axes_arrows</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+
+<span class="k">def</span> <span class="nf">finalize_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>  
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;完成图形设置并显示&quot;&quot;&quot;</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>  
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Plot displayed.&quot;</span><span class="p">)</span>  
+
+<span class="c1"># 使用这些函数  </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">create_figure_and_axes</span><span class="p">()</span>  
+<span class="n">set_axes_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>  
+<span class="n">set_axes_origin</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>  
+<span class="n">hide_axes_lines</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>  
+<span class="n">add_axes_arrows</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>  
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Axes set up complete.&quot;</span><span class="p">)</span>  
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>  
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>  
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>  
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;King&#39;</span><span class="p">,</span> <span class="s1">&#39;Queen&#39;</span><span class="p">,</span> <span class="s1">&#39;Man&#39;</span><span class="p">,</span> <span class="s1">&#39;Woman&#39;</span><span class="p">]</span>  
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>  
+    <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  
+    <span class="n">point</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>  
+
+<span class="n">finalize_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</code></pre></div>
+
+
+</div>
+
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311191505602.png" />   </p>
+<h3 id="a-ijson-vector">A I时代的JSON-Vector</h3>
+<p>不过向量作为一种数学概念 —— <strong>浮点数数组</strong>已经存在数百年了。借由 AI/ML 算法可以将“真实世界”的结构（文本、图像、音频、视频）都用向量的形式表示，并对其存储、查询。这种“通用性”使得 向量成为了AI 时代的JSON<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>。 <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220033738.png" /> <br />
+向量之间<strong>相似度</strong>使用<strong>距离函数</strong>进行衡量：比如欧式距离，或余弦距离，结果通常会按距离排序取 TOP K，即 K 个最为相似的对象（K-NN, k nearest neighbors）。不过载实际应用中，待检索的数据往往是千万甚至亿级，<code>KNN</code>的计算量过大。因会降级采用 <code>ANN</code>（Approximate Nearest Neighbor，相似近邻）来快速相似检索。   </p>
+<p>其中余弦距离我们在高中学过：   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220023552.png" />   </p>
+<h2 id="vector-vectordb">Vector 的好伙伴VectorDB</h2>
+<p>虽然向量是浮点数数组，但是因为其巨大的数量（维度）、索引算法、相似度算法，也诞生了专门存储和查询向量的向量数据库，比如 Milvus 和 <a href="https://www.pinecone.io/learn/vector-database/" class="external-link">Pinecone</a>。   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220047989.png" />   </p>
+<h3 id="h__1">对向量索引</h3>
+<h4 id="random-projection">Random Projection（随机投影）</h4>
+<p>随机投影是一种将高维向量投影到低维空间的技术。它背后的思想是，通过将高维向量投影到一个低维空间，我们可以保留其相似性，同时减少其维度，提高查询性能。例如，在文本数据库中，我们可以使用随机投影将文本向量投影到一个低维空间。这可以使我们更快地找到与查询相似的文本。步骤如下： <br />
+1. 创建一个随机数矩阵。该矩阵的大小将是我们想要的目标低维值。 <br />
+2. 将输入向量与矩阵相乘。 <br />
+3. 保留输出向量的前几维。   </p>
+<p>例如，如果我们想将高维空间投影到一个二维的平面，那么我们需要一个 2xn 的随机数矩阵，其中 n 是高维空间的维度。   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220051345.png" />   </p>
+<p>当我们查询时，我们使用相同的投影矩阵将查询向量投影到低维空间上。然后，我们将投影查询向量与数据库中的投影向量进行比较，以找到最近的邻。由于数据的维数降低，搜索过程比搜索整个高维空间要快得多。   </p>
+<h4 id="locality-sensitive-hashing">Locality-sensitive hashing（局部敏感哈希）</h4>
+<p>局部敏感哈希 （LSH） 是一种在近似最近邻搜索上下文中建立索引的技术。之所以称为敏感Hash, 是因为选用的Hash函数要满足输入向量相似，输出hash 大小也接近特性。 <br />
+传统的最近邻查询方法是线性查询。这种方法将查询向量与数据集中的每个向量进行比较，并返回最相似的向量。但对于高维数据集，线性查询太耗时也可能没必要。高维空间中的两个向量可能非常相似，即使它们在空间中相距很远。所以LSH 使用一组hash函数将相似的向量映射到“桶”中，如下所示： <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220058167.png" />   </p>
+<p>查询的时候再将查询向量hash到特定表，然后与同一表中的其他向量进行比较，以找到最接近的匹配项。这种方法比搜索整个数据集要快得多，因为每个哈希表中的向量比整个空间中的向量少得多。   </p>
+<h4 id="inverted-index">Inverted Index(倒排索引)</h4>
+<p><a href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html#h_2.2.-倒排索引（inverted-index）">倒排索引</a>和 <a href="/program/llm/Vector-Database.html#locality-sensitive-hashing（局部敏感哈希）">LSH</a> 思想类似，都是通过聚类方法把整个向量空间划分为子区域，从而缩小检索时的量级。ANN 中的倒排索引每个区域用中心点聚类，在索引构造阶段，向量与中心点比对，将其归属到距离最近的中心点对应的倒排中。 <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311261151924.png" />   </p>
+<h4 id="hierarchical-navigable-small-world-hnsw">Hierarchical Navigable Small World (HNSW)</h4>
+<p>上面的相似检索都是基于空间划分的方法，每个向量只会属于某个子区域。它们最大的的问题是为了提高召回率，需要搜索较大空间，导致计算量增加。基于图的方法就可以比较好的解决这一问题<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>。   </p>
+<p>图的最朴素的想法是<strong>「邻居的邻居也可能是邻居」</strong>，这样把近邻查找转化为图的遍历。由于图的连通性，可以针对性的搜索部分空间，降低搜索范围。   </p>
+<p>哈佛大学心理学教授斯坦利·米尔格拉姆于1967年提出   </p>
+<blockquote>
+<p>六度分隔理论（Six Degrees of Separation）：认为世界上任何互不相识的两人，只需要很少的中间人（6个以内）就能够建立起联系。   </p>
+</blockquote>
+<p>基于这种假设，向量顶点之间的关系可以分为两种：   </p>
+<ul>
+<li>同质性：相似的顶点会聚集在一起，相互连接具有邻接边   </li>
+<li>弱连接：在每个顶点上会有一些随机的边随机连接到网络中的顶点上   </li>
+</ul>
+<p>Navigable small world的原理简单说就是： <br />
+通过构建一个<code>small world graph</code>，从图中随机选择一个起始顶点，逐个遍历其邻接节点，选择与目标最近的顶点继续遍历，直到找到最近的顶点。   </p>
+<p>那怎么构建<code>small world graph</code>？ <br />
+1. <strong>「随机」</strong>向图中逐个插入顶点 <br />
+2. 插入新顶点（new）时，通过计算邻居顶点和待插入顶点的距离来决定下一个要进入的顶点（next） <br />
+3. 找到与新顶点（new）最近的m个顶点(neighbor)后，将新顶点(new)与它们（neighbor）连接起来形成边 <br />
+如下图所示，采用随机方法来构造m=3的small world graph： <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311261205738.png" />   </p>
+<p>在NSW中，构建图的阶段通过节点的随机插入来引入随机性，构建出一个small world graph，从而实现快速检索。但NSW构造的图并不稳定，节点之间的差异较大：   </p>
+<ul>
+<li>先插入的顶点，其连接的邻居节点，基本都比较远（弱连接属性强）   </li>
+<li>后插入的顶点，其连接的邻居节点，基本都比较近（弱连接属性弱）   </li>
+<li>对于具有聚类效应的点，由于后续插入的点可能都和其建立连接，对应节点的度可能会比较高   </li>
+</ul>
+<p>如何构造具有更稳定的small world graph呢？HNSW算法就在NSW基础之上引入了分层图的思想，通过对图进行分层，实现由粗到细的检索<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup>，如下图<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311261209506.png" />   </p>
+<h3 id="h_5">相似度比较指标<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></h3>
+<h4 id="h__2">欧几里得距离</h4>
+<p>欧几里得距离是多维空间中两个向量之间的直线距离。 <br />
+$$
+d(a, b) = \sqrt{\sum_{i=1}^{n}(a_i - b_i)^2}
+$$   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220110685.png" />   </p>
+<p>欧几里得距离直接与大小有关，所以与计数或测量的属性有关。假如想推荐与用户以前购买相似的商品，欧几里得距离适合比较购买商品时间的向量相似度。   </p>
+<h4 id="h__3">余弦相似度</h4>
+<p>测量向量空间中两个向量之间角度的余弦。它的范围从 -1 到 1，其中 1 表示相同的向量，0 表示正交向量，-1 表示截然相反的向量。   </p>
+<div class="arithmatex">\[
+\cos(\theta) = \frac{a \cdot b}{\|a\| \|b\|}
+\]</div>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220118009.png" />   </p>
+<p>余弦相似度计算时考虑向量的方向，而不考虑向量的大小，所以它适合比较查询内容的整体性质，比如文本分类，但不适合有明确大小比较的场景，图片按<code>温暖</code>分类后,需要用高饱和度图片搜索高饱和度图片。   </p>
+<h4 id="h__4">点积</h4>
+<p>$$
+a \cdot b = |a| |b| \cos(\theta)
+$$ <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220116695.png" />   </p>
+<p>点积是一个标量，同时受向量大小和时间影响，最综合。   </p>
+<p>上面介绍的是向量之间的相似度比较，扩展到集合（一段文本）层面有更多的度量值。   </p>
+<h4 id="jaccarddice-f1">Jaccard系数、Dice 系数和F1值</h4>
+<p>Jaccard系数能够量度有限样本集合的相似度，其定义为两个集合A、B交集大小与并集大小之间的比例： <br />
+$$
+J(A,B) = \frac{|A \cap B|}{|A \cup B|}
+$$ <br />
+Jaccard系数的取值范围为 [0,1]。当 J(A,B)=1 时，表示 A 和 B 完全相同；当 J(A,B)=0 时，表示 A 和 B 完全不相同。在文本相似度计算中，可以使用 Jaccard系数来计算两个文本的共同词汇量与总词汇量的比例，从而衡量两个文本的相似度。   </p>
+<p>Jaccard系数 计算简单，不过当两个集合较大时，Jaccard系数容易受集合中随机元素(噪声)干扰。 <br />
+例如，假设我们有两个集合 A 和 B，其中 A 包含 1000 个元素，B 包含 10000 个元素。如果 A 被 B 完全包括，那么 ∣A∩B∣=1000，∣A∪B∣=11000。Jaccard 系数为：   </p>
+<div class="arithmatex">\[
+J(A,B) = \frac{1000}{11000} = 0.0909
+\]</div>
+<p>如果 A 和 B 中存在 10 个噪声元素，那么 ∣A∩B∣=990，∣A∪B∣=10990。Jaccard 系数为：   </p>
+<div class="arithmatex">\[
+J(A,B) = \frac{990}{10990} = 0.0891
+\]</div>
+<p>可以看出，当两个集合较大时，即使两个集合之间只有很小的差异，Jaccard 系数也会有所下降。为了避免这种情况，人们引入Dice 系数： <br />
+$$
+D(A,B) = \frac{2|A \cap B|}{|A| + |B|}
+$$ <br />
+以及F1 值： <br />
+$$
+P = \frac{|A \cap B|}{|A|}，R = \frac{|A \cap B|}{|B|}，
+F_1(A,B) = \frac{2PR}{P + R}
+$$   </p>
+<p>他们简单的优缺点如下：   </p>
+<table>
+<thead>
+<tr>
+<th>度量方法</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jaccard 系数</td>
+<td>计算简单，易于理解</td>
+<td>对噪声敏感</td>
+</tr>
+<tr>
+<td>Dice 系数</td>
+<td>对噪声不敏感，对不均匀集合敏感</td>
+<td>计算复杂度较高，对异常值敏感</td>
+</tr>
+<tr>
+<td>F1 值</td>
+<td>兼顾了精度和召回率</td>
+<td>计算复杂度较高，对零值敏感</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h__5">元数据/标量数据筛选</h3>
+<p>存储在数据库中的每个向量还包括元数据。除了能够查询相似的向量之外，向量数据库还可以根据元数据查询筛选结果。所谓元数据，就是日期、文本标签、地理标签等。   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202311220123003.png" />   </p>
+<p>筛选过程可以在向量搜索本身之前或之后执行   </p>
+<ul>
+<li>预过滤：在这种方法中，元数据过滤是在向量搜索之前完成的。虽然这有助于减少搜索空间，但也可能导致系统忽略与元数据筛选条件不匹配的相关结果。此外，由于增加了计算开销，广泛的元数据筛选可能会减慢查询过程。   </li>
+<li>后过滤：在这种方法中，元数据过滤是在向量搜索之后完成的。这有助于确保考虑所有相关结果，但也可能会带来额外的开销并减慢查询过程，因为搜索完成后需要筛选掉不相关的结果。   </li>
+</ul>
+<h2 id="h__6">向量数据库选型</h2>
+<p>向量本质上就是浮点数数组，对数据库而言相当于多了一个类似JSON的专门存储类型，所以传统的搜索引擎ES或PostgreSQL的向量版或假装向量插件后都可以，甚至用Redis 还更方便。 pg-vector   </p>
+<h2 id="h__7">向量数据库的具体应用</h2>
+<p><a href="/store/history-program/%E6%B7%98%E5%B7%A5%E5%8E%82%E5%AE%A2%E6%9C%8D%E7%9F%A5%E8%AF%86%E5%BA%93%E5%92%8C%E9%97%AE%E7%AD%94%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B7%A5%E4%BD%9C.html">淘工厂客服知识库和问答相关的工作</a>   </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.youtube.com/watch?v=zjkBMFhNj_g&amp;t=22s" class="external-link">https://www.youtube.com/watch?v=zjkBMFhNj_g&amp;t=22s</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 0 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://jkatz05.com/post/postgres/vectors-json-postgresql/" class="external-link">VECTORS ARE THE NEW JSON IN POSTGRESQL</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://mp.weixin.qq.com/s/dfdNj9CZ3Kj2UwDr9PQcVg" class="external-link">向量召回」相似检索算法</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://www.pinecone.io/learn/series/faiss/hnsw/" class="external-link">https://www.pinecone.io/learn/series/faiss/hnsw/</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://www.pinecone.io/learn/vector-similarity/" class="external-link">https://www.pinecone.io/learn/vector-similarity/</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/database/How-to-Choose-the-Suitable-Database.html">how-to-choose-the-suitable-database</a></li>
+	<li><a class="backlink" href="/program/llm/Vector-Database.html">vector-database</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A8802605837350630244255087279987609764{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D8802605837350630244255087279987609764{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B8802605837350630244255087279987609764{level}" level="{level}" note_temp_id="8802605837350630244255087279987609764" onclick="window.ObsHtmlGraph.run(this, '8802605837350630244255087279987609764', 'vector-database');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C8802605837350630244255087279987609764{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

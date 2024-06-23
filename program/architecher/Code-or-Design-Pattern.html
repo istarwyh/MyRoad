@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="code-or-design-pattern">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'code-or-design-pattern';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 2;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=code-or-design-pattern" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js active" path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js " path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js " path="/program/full-stream">
+		<button id="folder-21" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js " path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="code-or-design-pattern">Code-or-Design-Pattern</h1>
+<div class="toc">
+<ul>
+<li><a href="#code-or-design-pattern" class="anchor-link">Code-or-Design-Pattern</a><ul>
+<li><a href="#h__1" class="anchor-link">什么叫代码质量差？</a></li>
+<li><a href="#h__2" class="anchor-link">为什么会代码质量差？</a><ul>
+<li><a href="#h__3" class="anchor-link">外部原因</a></li>
+<li><a href="#h__4" class="anchor-link">内部原因</a></li>
+</ul>
+</li>
+<li><a href="#h__5" class="anchor-link">如何提升代码质量</a><ul>
+<li><a href="#h__6" class="anchor-link">通用原则</a><ul>
+<li><a href="#brief" class="anchor-link">Brief</a></li>
+<li><a href="#spot-single-point-of-truth-dry-don-t-repeat-yourself" class="anchor-link">SPOT(Single Point of Truth)/DRY(Don't Repeat yourself)</a></li>
+<li><a href="#kiss-keep-it-simple-stupid" class="anchor-link">KISS (Keep It Simple, Stupid)</a></li>
+</ul>
+</li>
+<li><a href="#h__7" class="anchor-link">设计原则</a><ul>
+<li><a href="#srp-single-responsibility-program" class="anchor-link">SRP(Single Responsibility Program)</a></li>
+<li><a href="#lsp-liskov-substitution-principle" class="anchor-link">LSP（Liskov Substitution Principle）</a></li>
+<li><a href="#dip-dependency-inversive-principle" class="anchor-link">DIP(Dependency Inversive Principle)</a></li>
+</ul>
+</li>
+<li><a href="#h__8" class="anchor-link">思想</a><ul>
+<li><a href="#aop" class="anchor-link">AOP</a></li>
+</ul>
+</li>
+<li><a href="#h__9" class="anchor-link">设计模式</a><ul>
+<li><a href="#h__10" class="anchor-link">什么在变化？</a></li>
+<li><a href="#h__11" class="anchor-link">如何封装变化？</a></li>
+<li><a href="#h__12" class="anchor-link">具体的封装手段</a></li>
+<li><a href="#visitor" class="anchor-link">Visitor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="h__1">什么叫代码质量差？</h2>
+<p>有一类代码有着这样的症状：<strong>难维护、易出错、开发效率低</strong>，并且他们往往有这样的特征：   </p>
+<ul>
+<li>名字名不副实   </li>
+<li>超大类   </li>
+<li>超大方法   </li>
+<li>重复代码   </li>
+<li>扩展性差: 新增需求代码多处修改   </li>
+</ul>
+<p>......可谓是“好的代码总是千篇一律，不好的代码各有各的不好”。 <br />
+总结起来，影响代码质量差的原因有几类：   </p>
+<ul>
+<li>编程范式问题：过于习惯过程式编程（俗称面条型代码）、没有合理运用设计模式、滥用全局变量等。   <ul>
+<li>重复处理流程的工作是否可以抽象成模版类   </li>
+<li>新增加的能力是否可以自动注册去使用   </li>
+<li>异步处理是否可以用是事件模式去处理   </li>
+<li>串行处理是否需要用并发提高性能   </li>
+<li>......   </li>
+</ul>
+</li>
+<li>可读性问题：   <ul>
+<li>命名：变量、函数、类的命名没有反映其真实意图,导致代码难以理解。好的命名应该做到见名知意。   </li>
+<li>代码结构：初看工程代码，模块划分、类划分、方法划分就好比书的目录一样可以反映内容的质量。   </li>
+<li>代码的整洁度、注释的质量和数量、代码的复杂度等。如果代码难以阅读，那么它就难以维护和扩展。   </li>
+</ul>
+</li>
+<li>扩展性问题: 当需求变更或新增时，应该尽可能地减少对现有各处代码的关注和修改。要修改尽量修改一个地方。如果代码的扩展性差，那么每次需求变更都可能带来大量的修改，这不仅会消耗更多的开发时间，也会增加出错的风险   </li>
+</ul>
+<h2 id="h__2">为什么会代码质量差？</h2>
+<p>一般我们遇到问题更容易责怪于外部。   </p>
+<h3 id="h__3">外部原因</h3>
+<ul>
+<li>项目排期紧张，只能当时怎么快怎么来   </li>
+<li>日常杂活太多，没有空闲时间思考重构   </li>
+<li>紧急问题修复，临时方案大干快上   </li>
+</ul>
+<p>但是内部原因往往更为本质。   </p>
+<h3 id="h__4">内部原因</h3>
+<ul>
+<li>自我要求不高，仅仅满足于完成当前的需求，给后面不停埋坑，也不追求先进生产力   </li>
+<li>无外部反馈，团队没有代码review 氛围，代码上线质量也没有监控   </li>
+</ul>
+<h2 id="h__5">如何提升代码质量</h2>
+<ol>
+<li>对于面向对象的编程范式，首先考虑<a href="/program/full-stream/Modeling.html">如何转化需求到模型</a>   </li>
+<li>考虑后面提到的原则、思想和设计模式   </li>
+<li>TDD 编程或者对已有代码做到一定测试覆盖   </li>
+<li>打磨重构自己的代码 <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202405290851575.png" />   </li>
+</ol>
+<h3 id="h__6">通用原则</h3>
+<h4 id="brief">Brief</h4>
+<p>人类的阅读和识别能力都是有限的，根据实践我倡议每个方法、函数都应该简短，原则上不应该超过 7 行。   </p>
+<h4 id="spot-single-point-of-truth-dry-don-t-repeat-yourself">SPOT(Single Point of Truth)/DRY(Don't Repeat yourself)</h4>
+<p>尽量不要有重复的代码。有时候一味追求不重复会让代码难懂，而保证自己写的代码在需要的时候只需要改动一处，是更为实际的原则。   </p>
+<h4 id="kiss-keep-it-simple-stupid">KISS (Keep It Simple, Stupid)</h4>
+<p>把简单留给别人；如果有复杂的东西，把复杂留给自己。尽可能保证代码和产品易上手，不易出错，把用户当什么都不知道的傻瓜。   </p>
+<h3 id="h__7">设计原则</h3>
+<p>一般我们说设计原则，都会谈到“SOLID“：   </p>
+<ol>
+<li>
+<p><strong>S - 单一职责原则（Single Responsibility Principle, SRP）</strong>：一个类应该只有一个引起它变化的原因。简单来说，一个类应该只负责一项职责。   </p>
+</li>
+<li>
+<p><strong>O - 开放封闭原则（Open Closed Principle, OCP）</strong>：软件实体（类、模块、函数等等）应该可以扩展，但是不可修改。也就是说，对于扩展是开放的，对于修改是封闭的。   </p>
+</li>
+<li>
+<p><strong>L - 里氏替换原则（Liskov Substitution Principle, LSP）</strong>：子类型必须能够替换掉它们的父类型。也就是说，在软件中，如果使用某个基类的地方都可以使用其子类，那么子类可以替换父类。   </p>
+</li>
+<li>
+<p><strong>I - 接口隔离原则（Interface Segregation Principle, ISP）</strong>：A client should not to be forced to implement an interface that it doesn't use。也就是说，一个类对另一个类的依赖应该建立在最小的接口上，这鼓励我们在<strong>内部实现中</strong>将大的、复杂的接口拆分为更小、更具体的接口。   </p>
+</li>
+<li>
+<p><strong>D - 依赖倒置原则（Dependency Inversion Principle, DIP）</strong>：高层模块不应该依赖低层模块，两者都应该依赖其抽象。也就是说，要针对接口编程，不要对实现编程。   </p>
+</li>
+</ol>
+<p>对其中两个扩展解释下：   </p>
+<h4 id="srp-single-responsibility-program">SRP(Single Responsibility Program)</h4>
+<div class="lang-javascript">
+
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">transform1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="sb">!`</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;Not a string&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">transform2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">str</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span><span class="si">}</span><span class="sb">!`</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;Not a string&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p>有时候你觉得你的程序没有办法拆分成单一职责的,那有可能是语法工具还不够多.   </p>
+<p>有时候你觉得业务复杂，那是因为有太多业务逻辑耦合在了一起。我们需要不停地把业务逻辑分开，把公共逻辑抽象出来并合并。   </p>
+<div class="lang-javascript">
+
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">flow</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;lodash/fp&quot;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">toUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">toLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">str</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">exclaim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">str</span><span class="si">}</span><span class="sb">!`</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">isString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Not a string&quot;</span><span class="p">);</span>
+
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">transform1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">(</span><span class="nx">isString</span><span class="p">,</span><span class="w"> </span><span class="nx">toUpper</span><span class="p">,</span><span class="w"> </span><span class="nx">exclaim</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">transform2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">(</span><span class="nx">isString</span><span class="p">,</span><span class="w"> </span><span class="nx">toLower</span><span class="p">,</span><span class="w"> </span><span class="nx">exclaim</span><span class="p">);</span>
+
+
+<span class="nx">transform1</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;HELLO WORLD !&quot;</span>
+<span class="nx">transform2</span><span class="p">(</span><span class="s2">&quot;HELLO WORLD&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// &quot;hello world !&quot;</span>
+</code></pre></div>
+
+
+</div>
+
+<p>对于面向对象的设计来说，单一职责往往意味着一个对象承担一个职责。   </p>
+<h4 id="lsp-liskov-substitution-principle">LSP（Liskov Substitution Principle）</h4>
+<p>里氏替换原则强调的不仅仅是子类不能更改父类的核心，以便维护系统的健壮性；更是强调实现类不应该实现不适合的接口，比如自行车不应该实现汽车实现的“驾驶”接口。   </p>
+<h4 id="dip-dependency-inversive-principle">DIP(Dependency Inversive Principle)</h4>
+<p>DIP 强调模块之间不应该直接依赖，而应该通过抽象产生依赖。所谓抽象，一般就是接口。这样就可以做到高层模块不因底层模块而变化，从而降低系统的耦合度，使得使用这个原则的模块可以<strong>自闭环</strong>。   </p>
+<h3 id="h__8">思想</h3>
+<h4 id="aop">AOP</h4>
+<p>面向切面封装识别功能的收益，埋点、报表、同比环比等等。 <br />
+面向切面做缓存   </p>
+<h3 id="h__9">设计模式</h3>
+<p><strong>设计模式的本质是找到变化，封装变化。</strong> 这个总结提到了使用设计模式的几个核心的问题：   </p>
+<ul>
+<li>什么在变化？   </li>
+<li>如何封装变化？   </li>
+</ul>
+<h4 id="h__10">什么在变化？</h4>
+<ul>
+<li>对象的属性   </li>
+<li>对象的行为？   </li>
+<li>对象的数量？   </li>
+<li>对象的展示？   </li>
+<li>对象的关系：链表、树、图状？   </li>
+</ul>
+<p>因为解决的对象变化问题不同，设计模式才会分为创建型、结构型和行为型。   </p>
+<h4 id="h__11">如何封装变化？</h4>
+<p>封装可以视为任何形式的对复杂度的隐藏，比如对数据、方法和类型变化的封装。   </p>
+<h4 id="h__12">具体的封装手段</h4>
+<p>配置项、接口、类、注解、插件等等。 <br />
+下面再介绍一些具体的设计模式（套路）。   </p>
+<h4 id="visitor">Visitor</h4>
+<p>visitor模式相当于将原本需要在多态子类中完成的方法放到统一的Visitor类中</p></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html">unit level test theory、tool、discussion</a></li>
+	<li><a class="backlink" href="/program/full-stream/Full-Stream.html">full-stream</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A194165249284081633962002042463932924738{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D194165249284081633962002042463932924738{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B194165249284081633962002042463932924738{level}" level="{level}" note_temp_id="194165249284081633962002042463932924738" onclick="window.ObsHtmlGraph.run(this, '194165249284081633962002042463932924738', 'code-or-design-pattern');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C194165249284081633962002042463932924738{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

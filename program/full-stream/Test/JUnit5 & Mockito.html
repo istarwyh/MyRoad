@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="junit5 & mockito">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'junit5 & mockito';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 3;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=junit5 & mockito" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js " path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js active" path="/program/full-stream">
+		<button id="folder-21" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js active" path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="junit5-mockito">JUnit5 &amp; Mockito</h1>
+<div class="toc">
+<ul>
+<li><a href="#junit5-mockito" class="anchor-link">JUnit5 &amp; Mockito</a><ul>
+<li><a href="#h_1" class="anchor-link">1. 前言</a></li>
+<li><a href="#h_2-junit5" class="anchor-link">2. JUnit5 使用与原理</a><ul>
+<li><a href="#h_2-1" class="anchor-link">2.1. 新的注解</a></li>
+<li><a href="#h_2-2" class="anchor-link">2.2. 新的特性</a><ul>
+<li><a href="#h_2-2-1" class="anchor-link">2.2.1. 超时断言</a></li>
+<li><a href="#h_2-2-2" class="anchor-link">2.2.2. 参数化测试</a><ul>
+<li><a href="#h_2-2-2-1" class="anchor-link">2.2.2.1. 传入单个参数</a></li>
+<li><a href="#h_2-2-2-2" class="anchor-link">2.2.2.2. 传入多个参数</a></li>
+<li><a href="#h_2-2-2-3" class="anchor-link">2.2.2.3. 传入对象&amp;大量数据(文件)</a></li>
+<li><a href="#h_2-2-2-4" class="anchor-link">2.2.2.4. 扩展</a></li>
+</ul>
+</li>
+<li><a href="#h_2-2-3" class="anchor-link">2.2.3. 重复与并发测试</a><ul>
+<li><a href="#h_2-2-3-1" class="anchor-link">2.2.3.1. 重复测试</a></li>
+<li><a href="#h_2-2-3-2" class="anchor-link">2.2.3.2. 并发测试</a></li>
+</ul>
+</li>
+<li><a href="#h_2-2-4" class="anchor-link">2.2.4. 对类中单元测试分组</a></li>
+</ul>
+</li>
+<li><a href="#h_2-3-junit5" class="anchor-link">2.3. JUnit5原理</a></li>
+</ul>
+</li>
+<li><a href="#h_3-mockito" class="anchor-link">3. Mockito使用与原理</a><ul>
+<li><a href="#h_3-1" class="anchor-link">3.1. 常用注解</a><ul>
+<li><a href="#h_3-1-1" class="anchor-link">3.1.1. 介绍</a></li>
+<li><a href="#h_3-1-2" class="anchor-link">3.1.2. 使用建议</a><ul>
+<li><a href="#h_3-1-2-1" class="anchor-link">3.1.2.1. 注解常用实践</a></li>
+<li><a href="#h_3-1-2-2-mockito-patterns" class="anchor-link">3.1.2.2. Mockito Patterns:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_3-2-mockito" class="anchor-link">3.2. Mockito原理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="h_1">1. 前言</h2>
+<p>Junit系列可以解决测试启动、测试状态校验与组织的问题,比如测试启动上有参数化测试、并发测试、顺序测试等功能,校验上有异常断言、超时断言等功能,代码组织上有测试分组、测试报告自定义等功能. <br />
+在上述领域之外,Mockito很好地承担了对测试对象打桩(stub)以及对测试行为校验的功能.有人可能所Mockito都不能mock私有、静态和构造方法,差评!(虽然<a href="#jump" class="anchor-link">要不要测试私有方法还没有定论</a>那你可以从下面挑一款!   </p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>原理</th>
+<th>最小Mock Unit</th>
+<th>对被Mock方法的限制</th>
+<th>上手难度</th>
+<th>总结</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mockito</td>
+<td>动态代理</td>
+<td>类</td>
+<td>不能mock私有、静态和构造方法</td>
+<td>一般</td>
+<td>比较全面就是不能mock方法有限制</td>
+</tr>
+<tr>
+<td>Spock</td>
+<td>动态代理</td>
+<td>类</td>
+<td>不能mock私有、静态和构造方法</td>
+<td>较复杂</td>
+<td>可读性好;mock上也有限制</td>
+</tr>
+<tr>
+<td>PowerMock</td>
+<td>自定义类加载器</td>
+<td>类</td>
+<td><strong>都可以</strong></td>
+<td>较复杂</td>
+<td>Jacoco默认情况下不能统计覆盖率</td>
+</tr>
+<tr>
+<td>JMockit</td>
+<td>运行时修改字节码</td>
+<td>类</td>
+<td>不能mock构造方法</td>
+<td>较复杂</td>
+<td>目前不咋被维护</td>
+</tr>
+<tr>
+<td>TestableMock</td>
+<td>运行时修改字节码</td>
+<td>方法</td>
+<td><strong>都可以</strong></td>
+<td>容易</td>
+<td>思路清奇,指哪打哪,上手简单</td>
+</tr>
+</tbody>
+</table>
+<p>这里也单独提一下<a href="https://alibaba.github.io/testable-mock/" class="external-link">TestableMock</a>. 它绕开了传统Mock工具先mock对象的思路,直接修改运行时被调用的方法,而这只需用一个<code>@MockInvoke</code>注解即可. <br />
+然而Mockito只是方便开发者mock数据,却不能帮开发者把数据造出来,在复杂的业务场景下,如何快速生成有业务含义的对象或者响应体依然时很麻烦的问题.<strong>我们还需要一个工具方便我们从运行时获取依赖数据.</strong>   </p>
+<h2 id="h_2-junit5">2. JUnit5 使用与原理</h2>
+<p>在JUnit4发布十年之后,2017年JUnit团队靠众筹推出了全新的<a href="https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5" class="external-link" class="external-link">JUnit5</a>.   </p>
+<p><center>JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage</center>   </p>
+<ul>
+<li>
+<p>JUnit Platform: 在 JVM 上<a href="https://junit.org/junit5/docs/current/user-guide/#launcher-api" class="external-link">启动测试框架</a>的基础，不仅支持 Junit 的测试引擎<a href="https://junit.org/junit5/docs/current/api/org.junit.platform.engine/org/junit/platform/engine/TestEngine.html" class="external-link">TestEngine</a>，其他测试引擎也都可以接入。   </p>
+</li>
+<li>
+<p>JUnit Jupiter: JUnit Jupiter同时支持JUnit5新的<a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests" class="external-link">programming model </a>以及老的<a href="https://junit.org/junit5/docs/current/user-guide/#extensions" class="external-link">Extension Model</a>.Jupiter实现了自己的TestEngine。   </p>
+</li>
+<li>
+<p>JUnit Vintage: 为了向后兼容提供的TestEngine,支持运行JUnit4,Junit3的测试.注意类路径或者模块路径至少包含JUnit 4.12以以上版本.   </p>
+</li>
+</ul>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&amp;mockito.md/450935910220547.png" />   </p>
+<p>虽然包括三个部分,不过最新版本引入<code>org.junit.jupiter:junit-jupiter</code>就可以了,核心注解都在<code>org.junit.jupiter.api</code>下.   </p>
+<h3 id="h_2-1">2.1. 新的注解</h3>
+<p>下面按照我个人经验列举JUni5的新注解,更多的在<a href="https://junit.org/junit5/docs/current/user-guide/#overview-what-is-junit-5" class="external-link" class="external-link">这里</a>:   </p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Test</td>
+<td>和 JUnit4 的 @Test 不同，这个@Test不能声明任何属性，Jupiter会为不同的test extension提供专门注解</td>
+</tr>
+<tr>
+<td>@ParameterizedTest</td>
+<td>表示方法是参数化测试</td>
+</tr>
+<tr>
+<td>@RepeatedTest</td>
+<td>表示方法可重复执行,可配合并发测试</td>
+</tr>
+<tr>
+<td>@DisplayName</td>
+<td>为测试类或者测试方法设置展示名称,支持emoji😄</td>
+</tr>
+<tr>
+<td>@BeforeEach</td>
+<td>表示在每个单元测试之前执行</td>
+</tr>
+<tr>
+<td>@AfterEach</td>
+<td>表示在每个单元测试之后执行</td>
+</tr>
+<tr>
+<td>@BeforeAll</td>
+<td>表示在所有单元测试之前执行</td>
+</tr>
+<tr>
+<td>@After all</td>
+<td>表示在所有单元测试之后执行</td>
+</tr>
+<tr>
+<td>@Disabled</td>
+<td>表示测试类或测试方法不执行，类似于 JUnit4 中的 @Ignore</td>
+</tr>
+<tr>
+<td>@Timeout</td>
+<td>表示测试方法运行如果超过了指定时间将会返回错误</td>
+</tr>
+<tr>
+<td>@Nested</td>
+<td>该注解允许在测试类中定义非静态测试类.@BeforeAll与@AfterAll不直接适用于@Nested测试类</td>
+</tr>
+<tr>
+<td>@TestClassOrder</td>
+<td>指定测试类的执行顺序</td>
+</tr>
+<tr>
+<td>@TestMethodOrder</td>
+<td>指定测试方法的执行顺序</td>
+</tr>
+<tr>
+<td>@ExtendWith</td>
+<td>为测试类或测试方法甚至字段提供一个或多个扩展环境</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h_2-2">2.2. 新的特性</h3>
+<h4 id="h_2-2-1">2.2.1. 超时断言</h4>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@Test</span>
+<span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;超时测试&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">timeoutTest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//如果测试方法时间超过1s将会异常</span>
+<span class="w">    </span><span class="n">Assertions</span><span class="p">.</span><span class="na">assertTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMillis</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h4 id="h_2-2-2">2.2.2. 参数化测试</h4>
+<p>以下为部分介绍,更多细节<a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests" class="external-link">在这儿</a>.   </p>
+<h5 id="h_2-2-2-1">2.2.2.1. 传入单个参数</h5>
+<ul>
+<li>
+<p>@ValueSource: 为参数化测试指定入参来源，支持八大基础类以及 String 类型, Class 类型   </p>
+</li>
+<li>
+<p>@EmptySource: 提供空白数组或空白集合,支持八大基础类及它们包装类以及 String 类型, 集合类型   </p>
+</li>
+<li>
+<p>@NullSource: 表示为参数化测试提供一个 null 的入参   </p>
+</li>
+<li>
+<p>@EnumSource: 表示为参数化测试提供一个枚举入参   </p>
+</li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@ValueSource</span><span class="p">(</span><span class="n">strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;racecar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;radar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;able was I ere I saw elba&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">palindromes</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">candidate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isPalindrome</span><span class="p">(</span><span class="n">candidate</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@NullSource</span>
+<span class="nd">@EmptySource</span>
+<span class="nd">@ValueSource</span><span class="p">(</span><span class="n">strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;   &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">nullEmptyAndBlankStrings</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="na">trim</span><span class="p">().</span><span class="na">isEmpty</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h5 id="h_2-2-2-2">2.2.2.2. 传入多个参数</h5>
+<ul>
+<li>@MethodSource：读取静态方法的Stream流作为参数化测试入参   </li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@MethodSource</span><span class="p">(</span><span class="s">&quot;stringIntAndListProvider&quot;</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testWithMultiArgMethodSource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">length</span><span class="p">());</span>
+<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">&gt;=</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">static</span><span class="w"> </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Arguments</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">stringIntAndListProvider</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">        </span><span class="n">arguments</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="n">arguments</span><span class="p">(</span><span class="s">&quot;lemon&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;y&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ul>
+<li>@ArgumentsSource: 读取实现了ArgumentsProvider接口的类中方法返回流作为入参   </li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@ArgumentsSource</span><span class="p">(</span><span class="n">MyArgumentsProvider</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testWithArgumentsSource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">argument</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">argument</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyArgumentsProvider</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ArgumentsProvider</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Stream</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Arguments</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">provideArguments</span><span class="p">(</span><span class="n">ExtensionContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">).</span><span class="na">map</span><span class="p">(</span><span class="n">Arguments</span><span class="p">::</span><span class="n">of</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h5 id="h_2-2-2-3">2.2.2.3. 传入对象&amp;大量数据(文件)</h5>
+<ul>
+<li>@CsvSource：表示读取指定 CSV内容作为参数化测试入参   </li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@CsvSource</span><span class="p">({</span>
+<span class="w">    </span><span class="s">&quot;Jane, Doe, F, 1990-05-20&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;John, Doe, M, 1990-10-22&quot;</span>
+<span class="p">})</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testWithArgumentsAggregator</span><span class="p">(</span><span class="nd">@AggregateWith</span><span class="p">(</span><span class="n">PersonAggregator</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// perform assertions against person</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PersonAggregator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ArgumentsAggregator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">aggregateArguments</span><span class="p">(</span><span class="n">ArgumentsAccessor</span><span class="w"> </span><span class="n">arguments</span><span class="p">,</span><span class="w"> </span><span class="n">ParameterContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="n">arguments</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<span class="w">                          </span><span class="n">arguments</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="w">                          </span><span class="n">arguments</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">Gender</span><span class="p">.</span><span class="na">class</span><span class="p">),</span>
+<span class="w">                          </span><span class="n">arguments</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">LocalDate</span><span class="p">.</span><span class="na">class</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ul>
+<li>@CsvFileSource：表示读取指定 CSV 文件内容作为参数化测试入参   </li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="nd">@ParameterizedTest</span>
+<span class="nd">@CsvFileSource</span><span class="p">(</span><span class="n">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/two-column.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">numLinesToSkip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">testWithCsvFileSourceFromClasspath</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h5 id="h_2-2-2-4">2.2.2.4. 扩展</h5>
+<ol>
+<li>
+<p>参数化测试相当于是合并了多个单元测试输入输出数据的"缩写",所以通常会有代表input和output的输入输出.当input都对应相同的output时,可以省略output.   </p>
+</li>
+<li>
+<p>通过外部文件作为参数构造文件,就可以<strong>将测试逻辑与准备数据充分解耦</strong>.具体实现除了官方支持的CSV ,想支持其他格式,如JSON/YAML   </p>
+<ol>
+<li>可以转成对应的CSV   </li>
+<li>自己从文件路径中读取文件,再转成Stream,通过<code>@MethodSource</code>或<code>@ArgumentsSource</code>实现入参   </li>
+</ol>
+</li>
+</ol>
+<p>第二种思路适用性更强，可参考<a href="https://github.com/istarwyh/TestMuseum/blob/main/tdd.java.common/src/main/java/istarwyh/junit5/annotation/JsonFileSource.java" class="external-link">笔者的实现</a>。   </p>
+<h4 id="h_2-2-3">2.2.3. 重复与并发测试</h4>
+<h5 id="h_2-2-3-1">2.2.3.1. 重复测试</h5>
+<p>有人可能会疑惑什么时候能用上重复测试?一种情况是当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParallelTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sleep200</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="p">(</span><span class="n">sleep</span><span class="p">(</span><span class="mi">200</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sleep300</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="p">(</span><span class="n">sleep</span><span class="p">(</span><span class="mi">300</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sleep500</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="p">(</span><span class="n">sleep</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">during</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">during</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">+</span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+<span class="w">        </span><span class="n">runnable</span><span class="p">.</span><span class="na">run</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; ------------------------ &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="s">&quot;I have run &quot;</span><span class="o">+</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">between</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">).</span><span class="na">toMillis</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; ms&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">async</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">run</span><span class="p">(()</span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">allOf</span><span class="p">(</span><span class="n">runAsync</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">sleep200</span><span class="p">),</span><span class="w"> </span><span class="n">runAsync</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">sleep300</span><span class="p">),</span><span class="w"> </span><span class="n">runAsync</span><span class="p">(</span><span class="k">this</span><span class="p">::</span><span class="n">sleep500</span><span class="p">)).</span><span class="na">get</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ExecutionException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">+</span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@RepeatedTest</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="nd">@Execution</span><span class="p">(</span><span class="n">ExecutionMode</span><span class="p">.</span><span class="na">SAME_THREAD</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testAsyncWithSameMethod</span><span class="p">(</span><span class="n">TestInfo</span><span class="w"> </span><span class="n">testInfo</span><span class="p">){</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">testInfo</span><span class="p">.</span><span class="na">getTestMethod</span><span class="p">().</span><span class="na">get</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">async</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091453982.png" />   </p>
+<h5 id="h_2-2-3-2">2.2.3.2. 并发测试</h5>
+<p>并发测试很适合测试下游幂等。JUnit5中的并发执行测试可以分为以下三种场景：   </p>
+<ul>
+<li>多个测试类，它们各自的测试方法同时执行；   </li>
+<li>一个测试类，里面的多个测试方法同时执行；   </li>
+<li>一个测试类，里面的一个测试方法，在重复测试(Repeated Tests)或者参数化测试(Parameterized Tests)的时候，这个测试方法被多个线程同时执行；   </li>
+</ul>
+<p>以最后一种同一个类同一个方法多次执行的并发为例,需要在test/resources目录中加入<code>junit-platform.properties</code>:   </p>
+<div class="lang-properties">
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># 并行开关true/false</span>
+<span class="na">junit.jupiter.execution.parallel.enabled</span><span class="o">=</span><span class="s">true</span>
+<span class="c1"># 方法级多线程开关 same_thread/concurrent</span>
+<span class="na">junit.jupiter.execution.parallel.mode.default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">same_thread</span>
+<span class="c1"># 类级多线程开关 same_thread/concurrent</span>
+<span class="na">junit.jupiter.execution.parallel.mode.classes.default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">same_thread</span>
+
+<span class="c1"># 并发策略有以下三种可选：</span>
+<span class="c1"># fixed：固定线程数，此时还要通过junit.jupiter.execution.parallel.config.fixed.parallelism指定线程数</span>
+<span class="c1"># dynamic：表示根据处理器和核数计算线程数</span>
+<span class="c1"># custom：自定义并发策略，通过这个配置来指定：junit.jupiter.execution.parallel.config.custom.class</span>
+<span class="na">junit.jupiter.execution.parallel.config.strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">fixed</span>
+
+<span class="c1"># 并发线程数，该配置项只有当并发策略为fixed的时候才有用</span>
+<span class="na">junit.jupiter.execution.parallel.config.fixed.parallelism</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5</span>
+</code></pre></div>
+
+
+</div>
+
+<p>然后再原本测试代码标记<code>@Execution(ExecutionMode.CONCURRENT)</code>:   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nd">@RepeatedTest</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="nd">@Execution</span><span class="p">(</span><span class="n">ExecutionMode</span><span class="p">.</span><span class="na">CONCURRENT</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testAsyncConcurrently</span><span class="p">(</span><span class="n">TestInfo</span><span class="w"> </span><span class="n">testInfo</span><span class="p">){</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">testInfo</span><span class="p">.</span><span class="na">getTestMethod</span><span class="p">().</span><span class="na">get</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">async</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091501237.png" />   </p>
+<p>对比之前的结果,可以看到执行的乱序以及最开始确实有问题5个线程并发执行了这个方法,最后总时间1815ms也比起来500*5ms略少一些.   </p>
+<h4 id="h_2-2-4">2.2.4. 对类中单元测试分组</h4>
+<p>如果一个Service类中方法较多,单纯写单元测试也会很多.@Nested 可以允许以静态内部成员类的形式对测试用例类进行逻辑分组.\ <br />
+下面是一个测试Stack功能的例子   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertThrows</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.EmptyStackException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Stack</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.BeforeEach</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.DisplayName</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Nested</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;A stack&quot;</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">TestingAStackDemo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;is instantiated with new Stack()&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">isInstantiatedWithNew</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Nested</span>
+<span class="w">    </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;when new&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">WhenNew</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="nd">@BeforeEach</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">createNewStack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Test</span>
+<span class="w">        </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;is empty&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Test</span>
+<span class="w">        </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;throws EmptyStackException when popped&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">throwsExceptionWhenPopped</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">EmptyStackException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">::</span><span class="n">pop</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Test</span>
+<span class="w">        </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;throws EmptyStackException when peeked&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">throwsExceptionWhenPeeked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">EmptyStackException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">::</span><span class="n">peek</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Nested</span>
+<span class="w">        </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;after pushing an element&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">class</span> <span class="nc">AfterPushing</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">anElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;an element&quot;</span><span class="p">;</span>
+
+<span class="w">            </span><span class="nd">@BeforeEach</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushAnElement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">anElement</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;it is no longer empty&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">isNotEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;returns the element when popped and is empty&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">returnElementWhenPopped</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">anElement</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">());</span>
+<span class="w">                </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="nd">@DisplayName</span><span class="p">(</span><span class="s">&quot;returns the element when peeked but remains not empty&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">returnElementWhenPeeked</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">anElement</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">());</span>
+<span class="w">                </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p><img alt="" src="https://junit.org/junit5/docs/current/user-guide/images/writing-tests_nested_test_ide.png" />   </p>
+<h3 id="h_2-3-junit5">2.3. JUnit5原理</h3>
+<p>单独的JUnit5其实是难以使用的,通常IDE或者代码管理工具,比如IntelliJ IDEA, Eclipse, NetBeans, Visual Studio Code, Gradle, Maven都会对JUnit5进行集成,从而让测试对开发更友好.所以以IDEA+JUnit5为例,第一步其实是从IDEA<a href="https://github.com/JetBrains/intellij-community/tree/61fb94acd0e337972338618b58c38a4509aefcff/plugins/junit5_rt/src/com/intellij/junit5" class="external-link">内部插件</a>代码开始的.   </p>
+<ol>
+<li>触发测试进入插件源码,com.intellij.rt.junit.JUnitStarter::main   </li>
+<li>IDEA构造DefaultDiscoveryRequest对象传入org.junit.platform.launcher.core::execute   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * {@code DefaultDiscoveryRequest} is the default implementation of the</span>
+<span class="cm"> * {@link EngineDiscoveryRequest} and {@link LauncherDiscoveryRequest} APIs.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @since 1.0</span>
+<span class="cm"> */</span>
+<span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultDiscoveryRequest</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">LauncherDiscoveryRequest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// Selectors provided to the engines to be used for discovering tests</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DiscoverySelector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selectors</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Discovery filters are handed through to all engines to be applied during discovery.</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DiscoveryFilter</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">discoveryFilters</span><span class="p">;</span>
+
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>
+<p>解析测试用例生成测试计划   </p>
+</li>
+<li>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&amp;mockito.md/492251015238973.png" />   </p>
+</li>
+<li>
+<p>选择具体的测试引擎执行用例,以JupiterTestEngine为例,会构造JupiterEngineDescriptor   </p>
+</li>
+<li>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/工程实践/测试/junit5&amp;mockito.md/90941715226840.png" />   </p>
+</li>
+<li>
+<p>生成NodeTeskTask然后交给ExecutorService去执行(反射调用具体方法)   </p>
+</li>
+<li>实际执行时会根据注解先去找实现的扩展类,比如启动Spring时的SpringExtension、Mock依赖的 MockitoExtension   </li>
+</ol>
+<h2 id="h_3-mockito">3. Mockito使用与原理</h2>
+<h3 id="h_3-1">3.1. 常用注解</h3>
+<h4 id="h_3-1-1">3.1.1. 介绍</h4>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Mock</td>
+<td>@Mock修饰的对象都是null,用到的每个方法都需要打桩模拟执行结果: Mockito.when().thenReturn()</td>
+</tr>
+<tr>
+<td>@Spy</td>
+<td>@Spy的对象会被无参实例化,在需要的时候可以打桩模拟执行结果: Mockito.doReturn().when()</td>
+</tr>
+<tr>
+<td>@MockBean</td>
+<td>启动Spring容器,替换Spring原本加载的Bean,但是默认对象没有行为</td>
+</tr>
+<tr>
+<td>@SpyBean</td>
+<td>启动Spring容器,替换Spring原本加载的Bean,对象拥有默认行为</td>
+</tr>
+<tr>
+<td>@InjectMocks</td>
+<td>注入mock代理对象;必须修饰实现类,修饰接口会报错</td>
+</tr>
+<tr>
+<td>@Captor</td>
+<td>配合verify在方法调用后使用，捕获调用时的参数值</td>
+</tr>
+</tbody>
+</table>
+<p>其他说明:   </p>
+<ol>
+<li>
+<p><span class="formatting_strikethrough">使用<code>@Spy</code>的前提是对象可以被使用无参构造器初始化,</span><span class="formatting_strikethrough">因为需要得到一个空对象然后来执行它的方法</span>.   </p>
+</li>
+<li>
+<p><code>@Spy</code> 和<code>@InjectMocks</code>可以搭配使用,从而允许验证当前Spy对象中被mock的属性的行为,某些情况下适合在controller/service/dao分的service特别单薄时,在controller层对dao层方法中的行为进行验证,但必须注意这违反了单一职责原则(SRP原则)   </p>
+</li>
+<li><code>@Spy</code> 修饰接口不会报错,不过因为接口没有实现逻辑,所以不打桩模拟的时候,接口方法永远返回<code>null</code>。   </li>
+</ol>
+<p>@Spy 与 @Mock 测试案例:   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">whenCreateMock_thenCreated</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="w"> </span><span class="n">mockedList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">mock</span><span class="p">(</span><span class="n">ArrayList</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">mockedList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">verify</span><span class="p">(</span><span class="n">mockedList</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mockedList</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">whenCreateSpy_thenCreate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="w"> </span><span class="n">spyList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mockito</span><span class="p">.</span><span class="na">spy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">spyList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">verify</span><span class="p">(</span><span class="n">spyList</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">spyList</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h4 id="h_3-1-2">3.1.2. 使用建议</h4>
+<h5 id="h_3-1-2-1">3.1.2.1. 注解常用实践</h5>
+<ol>
+<li>一般来说,<code>@Spy</code>修饰实现类、<code>@InjectMocks</code>修饰需要mock属性的实现类、<code>@Mock</code>修饰接口   </li>
+<li>默认使用<code>@Spy</code>或<code>@SpyBean</code>,有需要打桩模拟返回结果的情况可以自定义模拟返回结果,尽可能的覆盖更多的代码逻辑   </li>
+<li>对无法直接实例化的三方依赖,比如下游接口、Redis等使用<code>@Mock</code>;没有Mock到的依赖会NPE,逐个Mock即可   </li>
+<li>
+<p>检查<code>void</code>方法的执行情况可以使用<code>verify/times</code>校验调用次数和<code>@Captor</code>检查调用参数来进行<strong>行为验证</strong>   </p>
+</li>
+<li>
+<p>正如前言中提到的,使用这种测试框架最麻烦的在于真实生产代码中测试用例中复杂对象的构造   </p>
+</li>
+<li>
+<p>链路录制工具可以帮助生成请求与返回结构体,比如使用AOP拦截RPC请求得到入参和出参   </p>
+</li>
+</ol>
+<h5 id="h_3-1-2-2-mockito-patterns">3.1.2.2. <a href="https://stackoverflow.com/questions/11462697/forming-mockito-grammars" class="external-link">Mockito Patterns</a>:</h5>
+<blockquote>
+<p>When/Then: when(yourMethod()).thenReturn(x); <br />
+Do/When: doReturn(x).when(yourMock.fizzBuzz()); <br />
+Verify/Do: verify(yourMethod()).doThrow(SomeException.class);   </p>
+</blockquote>
+<p>其中<code>when/then</code>以及<code>doxxx/when</code>相似度很高,很多人会疑惑<a href="https://stackoverflow.com/questions/20353846/mockito-difference-between-doreturn-and-when" class="external-link">用哪个</a>. <br />
+官方推荐优先使用<code>When/Then</code>,因为可以保证返回的类型是符合预期的,并且也更可读.但当不需要执行实际的方法的时候,应该用<code>Do/When</code>,比如:   </p>
+<ol>
+<li>mock <code>void</code>方法时,使用<code>doNothing/when</code>(不执行when中的方法)   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mock</span><span class="p">(</span><span class="n">Object</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">doNothing</span><span class="p">().</span><span class="na">when</span><span class="p">(</span><span class="n">o</span><span class="p">).</span><span class="na">notify</span><span class="p">();</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>spy对象的时候   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="n">List</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="p">();</span><span class="w">  </span>
+<span class="n">List</span><span class="w"> </span><span class="n">spy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spy</span><span class="p">(</span><span class="n">list</span><span class="p">);</span><span class="w">  </span>
+
+<span class="c1">//Impossible: real method is called so spy.get(0) throws IndexOutOfBoundsException (the list is yet empty)  </span>
+<span class="n">when</span><span class="p">(</span><span class="n">spy</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w">  </span>
+
+<span class="c1">//You have to use doReturn() for stubbing  </span>
+<span class="n">doReturn</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spy</span><span class="p">).</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>连续对调用方法打桩(Stub)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <br />
+值得一提的是,连续打桩方法直接写是反直觉的:   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// 这个和直觉不一样!这个调用的时候只会返回&quot;world&quot;</span>
+<span class="n">when</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="na">toString</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="n">when</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="na">toString</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+
+<span class="c1">// 下面都可以第一次返回&quot;Hello&quot;,第二次返回&quot;World&quot;</span>
+<span class="c1">// 第一种方式 </span>
+<span class="n">when</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="na">toString</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+<span class="c1">// 第二种方式</span>
+<span class="n">when</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="na">toString</span><span class="p">()).</span><span class="na">thenReturn</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+<span class="c1">// 第三种方式</span>
+<span class="n">doReturn</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">o</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span>
+<span class="n">doReturn</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">o</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span>
+</code></pre></div>
+
+
+</div>
+
+<p>像上面这种后半部分的连续方法调用使用<code>when/then</code>或<code>do/when</code>都是可以的,但还有一种只能用后者,即前一次调用指定了要返回异常,后面又打算覆盖它的时候(虽然这样真的有点奇怪):   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="n">when</span><span class="p">(</span><span class="n">mock</span><span class="p">.</span><span class="na">foo</span><span class="p">())</span>
+<span class="p">.</span><span class="na">thenThrow</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">());</span>
+
+<span class="c1">// 后面想要直接覆盖上面的抛异常打桩</span>
+<span class="n">when</span><span class="p">(</span><span class="n">mock</span><span class="p">.</span><span class="na">foo</span><span class="p">()).</span><span class="na">whenReturn</span><span class="p">(</span><span class="s">&quot;I will be not returned&quot;</span><span class="p">);</span>
+
+<span class="c1">// 必须用Do/When</span>
+<span class="n">doReturn</span><span class="p">(</span><span class="s">&quot;I will be Returned&quot;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">mock</span><span class="p">).</span><span class="na">foo</span><span class="p">();</span>
+</code></pre></div>
+
+
+</div>
+
+<h3 id="h_3-2-mockito">3.2. Mockito原理</h3>
+<p>比如<code>when(mockObject.yourMethod()).thenReturn(x)</code>这样的模式,看起来很连贯,是对<code>yourMenthod()</code>做了一个字面上"拦截"的封装,但明明when中实际传入的只是一个方法返回值而已,到底是怎么完成对<code>yourMethod()</code>这个方法进行打桩的呢?<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>   </p>
+<p>Mockito本质上就是在代理对象调用方法前，用stub的方式设置其返回值，然后在真实调用时，用代理对象返回起预设的返回值。 <br />
+1. org.mockito.internal.creation.bytebuddy.BytecodeGenerator#mockClass 利用ByteBuddy中生成代理类 <br />
+ByteBuddy使用示例:   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">dynamicType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ByteBuddy</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">subclass</span><span class="p">(</span><span class="n">Object</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">method</span><span class="p">(</span><span class="n">ElementMatchers</span><span class="p">.</span><span class="na">named</span><span class="p">(</span><span class="s">&quot;toString&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="na">intercept</span><span class="p">(</span><span class="n">FixedValue</span><span class="p">.</span><span class="na">value</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="na">make</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">Object</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">(),</span><span class="w"> </span><span class="n">ClassLoadingStrategy</span><span class="p">.</span><span class="na">Default</span><span class="p">.</span><span class="na">WRAPPER</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">getLoaded</span><span class="p">();</span>
+<span class="n">StdOut</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">dynamicType</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dynamicType</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<span class="c1">// 输出: Object$ByteBuddy$cmpHDO82   Hello World!</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>缓存代理类,多次请求返回同一个代理类   </li>
+<li>在执行方法调用时保存当前方法调用上下文到某个字段（org.mockito.internal.stubbing.InvocationContainerImpl#invocationForStubbing字段）   </li>
+<li>基于方法调用上下文信息返回<code>InterceptedInvocation</code>对象来表示一次方法调用   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// org.mockito.internal.creation.bytebuddy.MockMethodInterceptor.DispatcherDefaultingToRealMethod#interceptAbstract</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">interceptAbstract</span><span class="p">(</span><span class="nd">@This</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">mock</span><span class="p">,</span><span class="w"> </span><span class="c1">// 当前代理类</span>
+<span class="w">                                       </span><span class="nd">@FieldValue</span><span class="p">(</span><span class="s">&quot;mockitoInterceptor&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">MockMethodInterceptor</span><span class="w"> </span><span class="n">interceptor</span><span class="p">,</span><span class="w"> </span><span class="c1">// 方法拦截器</span>
+<span class="w">                                       </span><span class="nd">@StubValue</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">stubValue</span><span class="p">,</span><span class="w"> </span><span class="c1">// stub值，这里为null</span>
+<span class="w">                                       </span><span class="nd">@Origin</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="n">invokedMethod</span><span class="p">,</span><span class="w"> </span><span class="c1">// 当前调用方法</span>
+<span class="w">                                       </span><span class="nd">@AllArguments</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">arguments</span><span class="p">)</span><span class="w"> </span><span class="cm">/* 方法入参 */</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">interceptor</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stubValue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">interceptor</span><span class="p">.</span><span class="na">doIntercept</span><span class="p">(</span>
+<span class="w">            </span><span class="n">mock</span><span class="p">,</span>
+<span class="w">            </span><span class="n">invokedMethod</span><span class="p">,</span>
+<span class="w">            </span><span class="n">arguments</span><span class="p">,</span>
+<span class="w">            </span><span class="n">RealMethod</span><span class="p">.</span><span class="na">IsIllegal</span><span class="p">.</span><span class="na">INSTANCE</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">InterceptedInvocation</span><span class="w"> </span><span class="nf">createInvocation</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">mock</span><span class="p">,</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="n">invokedMethod</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">arguments</span><span class="p">,</span><span class="w"> </span><span class="n">RealMethod</span><span class="w"> </span><span class="n">realMethod</span><span class="p">,</span><span class="w"> </span><span class="n">MockCreationSettings</span><span class="w"> </span><span class="n">settings</span><span class="p">,</span><span class="w"> </span><span class="n">Location</span><span class="w"> </span><span class="n">location</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InterceptedInvocation</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">MockWeakReference</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mock</span><span class="p">),</span>
+<span class="w">        </span><span class="n">createMockitoMethod</span><span class="p">(</span><span class="n">invokedMethod</span><span class="p">,</span><span class="w"> </span><span class="n">settings</span><span class="p">),</span>
+<span class="w">        </span><span class="n">arguments</span><span class="p">,</span>
+<span class="w">        </span><span class="n">realMethod</span><span class="p">,</span>
+<span class="w">        </span><span class="n">location</span><span class="p">,</span>
+<span class="w">        </span><span class="n">SequenceNumber</span><span class="p">.</span><span class="na">next</span><span class="p">()</span><span class="w"> </span><span class="c1">// 每个InterceptedInvocation对象都有一个唯一序号</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>当Mockito.when()再次调用时根据InterceptedInvocation对象查找对应的stub，如果找到则使用该stub返回特定值，否则返回默认值（int 会返回 0，布尔值返回 false,其他 type 会返回 null）   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// // org.mockito.internal.handler.MockHandlerImpl#handle</span>
+<span class="c1">// 根据invocation匹配对应的stub，匹配规则是 class相同+方法签名相同+入参匹配</span>
+<span class="n">StubbedInvocationMatcher</span><span class="w"> </span><span class="n">stubbing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">invocationContainer</span><span class="p">.</span><span class="na">findAnswerFor</span><span class="p">(</span><span class="n">invocation</span><span class="p">);</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>stub中的值是thenReturn()中塞入的   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">OngoingStubbing</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenReturn</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">thenAnswer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Returns</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">OngoingStubbing</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">thenAnswer</span><span class="p">(</span><span class="n">Answer</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">invocationContainer</span><span class="p">.</span><span class="na">addAnswer</span><span class="p">(</span><span class="n">answer</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConsecutiveStubbing</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">invocationContainer</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addAnswer</span><span class="p">(</span><span class="n">Answer</span><span class="w"> </span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">// 移除最近一次方法调用保存的invocation信息</span>
+<span class="w">    </span><span class="n">registeredInvocations</span><span class="p">.</span><span class="na">removeLast</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">addAnswer</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">StubbedInvocationMatcher</span><span class="w"> </span><span class="nf">addAnswer</span><span class="p">(</span><span class="n">Answer</span><span class="w"> </span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isConsecutive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Invocation</span><span class="w"> </span><span class="n">invocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">invocationForStubbing</span><span class="p">.</span><span class="na">getInvocation</span><span class="p">();</span>
+<span class="w">    </span><span class="n">mockingProgress</span><span class="p">().</span><span class="na">stubbingCompleted</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">answer</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">ValidableAnswer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">((</span><span class="n">ValidableAnswer</span><span class="p">)</span><span class="w"> </span><span class="n">answer</span><span class="p">).</span><span class="na">validateFor</span><span class="p">(</span><span class="n">invocation</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">stubbed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isConsecutive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 连续方式</span>
+<span class="w">            </span><span class="c1">// 连续:针对同一个方法的多次调用，可以按照顺序自定义不同的返回值，如果调用次数超过了自定义返回值个数，默认后续以最后一个自定义返回值为准</span>
+<span class="w">            </span><span class="n">stubbed</span><span class="p">.</span><span class="na">getFirst</span><span class="p">().</span><span class="na">addAnswer</span><span class="p">(</span><span class="n">answer</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 非连续</span>
+<span class="w">            </span><span class="n">stubbed</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StubbedInvocationMatcher</span><span class="p">(</span><span class="n">invocationForStubbing</span><span class="p">,</span><span class="w"> </span><span class="n">answer</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stubbed</span><span class="p">.</span><span class="na">getFirst</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="[https://www.cnblogs.com/vvonline/p/4122991.html" class="external-link">使用Mockito进行单元测试【2】—— stub 和 高级特性</a>](https://www.cnblogs.com/vvonline/p/4122991.html))&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 0 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&amp;mid=2649938607&amp;idx=1&amp;sn=7e17607eb5a537f7734631030d289351&amp;chksm=8f35091ab842800cc88e928fdedd763334c4e6c4c2f750bfc2a04499d41a629740c2f16e78d4&amp;mpshare=1&amp;scene=1&amp;srcid=05068BrILyHdI932MoGI4ikG&amp;sharer_sharetime=1654096335341&amp;sharer_shareid=3d1ec1ef36d6bd7731355ba2c32a8737&amp;key=c679381433df56e2c6adb0d9c6bb48c04cc315ab1b4224641fb565255112d2f0fa6503e5021648d71d2455a199908bd3725283025aa8741a98755e166346ab6ae74f57ae47e10e42ff3ee5dfd243e35f781d9868e43631c475f9698e0ee2c87c1cfe2d5fb3d9abe66fcec4c20327efb6ebd835b47a909d82bed0d007ff629278&amp;ascene=1&amp;uin=MTM2NzczNTcyNQ%3D%3D&amp;devicetype=Windows+10+x64&amp;version=62090529&amp;lang=zh_CN&amp;exportkey=A750s8ExPSWt6dXOhhFNtUU%3D&amp;acctmode=1&amp;pass_ticket=T7MOwQn%2BscxKfclR6Z%2BadHwqUH8ePToAk1KmbgAgFLDFaQtcA6XNlg0kQMgvPvqO&amp;wx_header=0" class="external-link">mockito原理浅析</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html">unit level test theory、tool、discussion</a></li>
+	<li><a class="backlink" href="/program/full-stream/Full-Stream.html">full-stream</a></li>
+	<li><a class="backlink" href="/index.html">index</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A315744784472918452047857152049737346266{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D315744784472918452047857152049737346266{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B315744784472918452047857152049737346266{level}" level="{level}" note_temp_id="315744784472918452047857152049737346266" onclick="window.ObsHtmlGraph.run(this, '315744784472918452047857152049737346266', 'junit5 & mockito');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C315744784472918452047857152049737346266{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

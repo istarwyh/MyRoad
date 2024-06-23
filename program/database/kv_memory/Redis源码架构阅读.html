@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="redis源码架构阅读">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'redis源码架构阅读';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 3;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=redis源码架构阅读" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js active" path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js active" path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js " path="/program/full-stream">
+		<button id="folder-21" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js " path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="redis">Redis源码架构阅读</h1>
+<div class="toc">
+<ul>
+<li><a href="#redis" class="anchor-link">Redis源码架构阅读</a><ul>
+<li><a href="#h_1-redis" class="anchor-link">1. Redis的逆袭</a><ul>
+<li><a href="#h_1-1" class="anchor-link">1.1. 缓存的逆袭之道</a></li>
+</ul>
+</li>
+<li><a href="#h_2-k-v" class="anchor-link">2. 一个简单的K-V数据库主要架构</a><ul>
+<li><a href="#h_2-1-deps-hiredis" class="anchor-link">2.1. 访问框架-deps.hiredis</a><ul>
+<li><a href="#h_2-1-1-resp" class="anchor-link">2.1.1. RESP协议</a></li>
+</ul>
+</li>
+<li><a href="#h_2-2-src" class="anchor-link">2.2. 操作模块-src</a><ul>
+<li><a href="#h_2-2-1-src-server-c" class="anchor-link">2.2.1. 单线程为什么这么快？-src.server.c</a></li>
+<li><a href="#h_2-2-2-io-10" class="anchor-link">2.2.2. IO 多路复用复用了什么？10</a></li>
+<li><a href="#h_2-2-3" class="anchor-link">2.2.3. 单线程的问题</a></li>
+<li><a href="#h_2-2-4-6-0" class="anchor-link">2.2.4. 6.0为什么又要引入多线程？</a><ul>
+<li><a href="#h_2-2-4-1-faq" class="anchor-link">2.2.4.1. FAQ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_2-3" class="anchor-link">2.3. 存储模块</a><ul>
+<li><a href="#h_2-3-1-deps-jemalloc" class="anchor-link">2.3.1. 内存分配器-deps.jemalloc</a></li>
+<li><a href="#h_2-3-2-vm" class="anchor-link">2.3.2. 虚拟内存VM</a></li>
+<li><a href="#h_2-3-3-src-rdb" class="anchor-link">2.3.3. 持久化-src.rdb</a></li>
+<li><a href="#h_2-3-4" class="anchor-link">2.3.4. 数据结构</a><ul>
+<li><a href="#h_2-3-4-1" class="anchor-link">2.3.4.1. 概述</a></li>
+<li><a href="#h_2-3-4-2-c-sds" class="anchor-link">2.3.4.2. 对C中字符串的改造--SDS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_2-4" class="anchor-link">2.4. 索引模块</a><ul>
+<li><a href="#h_2-4-1" class="anchor-link">2.4.1. 概述</a></li>
+<li><a href="#h_2-4-2-16" class="anchor-link">2.4.2. 全局哈希表16</a><ul>
+<li><a href="#h_2-4-2-1-dict" class="anchor-link">2.4.2.1. dict的结构</a></li>
+<li><a href="#h_2-4-2-2-hashcodehash" class="anchor-link">2.4.2.2. hashCode与hash值的计算</a></li>
+<li><a href="#h_2-4-2-3-rehashrehash" class="anchor-link">2.4.2.3. rehash和渐进式rehash</a></li>
+</ul>
+</li>
+<li><a href="#h_2-4-3-ziplist-skiplist-quicklist" class="anchor-link">2.4.3. 对链表的改造--ziplist SkipList quicklist</a></li>
+</ul>
+</li>
+<li><a href="#h_2-5" class="anchor-link">2.5. 更多没介绍的</a></li>
+</ul>
+</li>
+<li><a href="#h_3" class="anchor-link">3. 展望</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="h_1-redis">1. Redis的逆袭</h2>
+<p>Redis最早的需求和Tair诞生的背景类似，当时是antirez这个人想要自己的网站支持用户浏览实时更新的访客记录列表，然后发现查Mysql这种数据库太慢，而市面上居然只有Mysql这种持久化数据库，所以他选择自己写一个内存里面的列表，于是2009年Redis诞生了，同年Tair也诞生了。   </p>
+<blockquote>
+<p>Redis is an open source (BSD licensed), in-memory <strong>data structure store,</strong> used as a database, cache, and message broker. Redis provides data structures such as <strong>strings, hashes, lists, sets, sorted sets</strong> with range queries, <strong>bitmaps, hyperloglogs, geospatial indexes,</strong> and <strong>streams.</strong> Redis has built-in replication, Lua scripting, LRU eviction, transactions, and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster. <br />
+Redis is written in ANSI C and works in most POSIX systems like Linux, *BSD, and OS X, without external dependencies. <span class="formatting_strikethrough">SmartOS</span> <span class="formatting_strikethrough">Windows</span>   </p>
+</blockquote>
+<p><img alt="" src="/program/database/kv_memory/vx_images/324746178980.jpg" />   </p>
+<h3 id="h_1-1">1.1. 缓存的逆袭之道</h3>
+<ul>
+<li>本地缓存   <ul>
+<li>语言类库中实现的Map生命周期随着jvm的销毁而结束，并且在多实例的情况下，每个实例都需要各自保存一份缓存，缓存不具有一致性；   </li>
+</ul>
+</li>
+<li>
+<p>分布式缓存   </p>
+<ul>
+<li>redis分布式缓存，在多实例的情况下，各实例共用一份缓存数据，缓存具有一致性   </li>
+</ul>
+</li>
+<li>
+<p>Redis 最多容纳2的32 次方（超过40亿）数目的key,并且每个实例可以处理2.5亿个key<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>；Map只能容纳<code>1&lt;&lt;30</code>即2的30次方个哈希桶   </p>
+</li>
+<li>
+<p>Redis <code>String</code>类型可以最大512M，对于每一个数据结构可以容纳<code>2^32 - 1</code>个元素<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>   </p>
+</li>
+<li>
+<p>Map因为通过<code>(n-1) &amp; hash</code>来取余，容量n必须保证是2的次幂，然而又因为Integer.MAX_VALUE==2^31 - 1，所以Map只能让MAX_CAPACITY为2^30.   </p>
+</li>
+<li>
+<p>Redis 可持久化，Map 是内存对象--<span class="formatting_strikethrough">断电</span>   </p>
+</li>
+<li>
+<p>在磁盘格式方面数据结构是以紧凑的以追加的方式产生的--他们不需要随机进行访问   </p>
+</li>
+<li>
+<p>Redis对数据结构的操作都是原子的   </p>
+</li>
+<li>
+<p>Redis的数据类型都是基于基本数据结构的同时对程序员透明，无需进行额外的抽象。   </p>
+</li>
+<li>
+<p>Redis 可以实现分布式的缓存，Map 只能存在创建它的程序里   </p>
+</li>
+<li>
+<p>Redis 缓存有过期机制，Map 本身无此功能   </p>
+</li>
+<li>
+<p>Redis 有丰富的 API，Map 就get(),set(),contains()这些   </p>
+</li>
+<li>
+<p>Redis 可以处理每秒百万级的并发，是专业的缓存服务，Map 只是一个普通的对象   </p>
+</li>
+</ul>
+<h2 id="h_2-k-v">2. 一个简单的K-V数据库主要架构</h2>
+<ul>
+<li>内存：IO快但断电会丢   </li>
+<li>外存：IO慢但持久   </li>
+</ul>
+<p><img alt="" src="vx_images/3650860917223.png =700x" />   </p>
+<p><strong>Redis 5.0.8:</strong> <br />
+<img alt="" src="/program/database/kv_memory/vx_images/5493237811439.png" />   </p>
+<h3 id="h_2-1-deps-hiredis">2.1. 访问框架-deps.hiredis</h3>
+<ul>
+<li>提供给外部的调用函数，动态链接到本地   </li>
+<li>网络框架以Socket通信的形式对外提供键值对操作   <ul>
+<li>接收网络包   </li>
+<li>解析协议   </li>
+<li>数据存取   </li>
+<li>用一个线程，多个线程还是多个进程来处理IO？   <ul>
+<li>单线程阻塞   </li>
+<li>多线程竞争   </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="h_2-1-1-resp">2.1.1. RESP协议</h4>
+<p>RESP（Redis Serialization Protocol）是一种redis自定义的序列化协议，主要用作redis客户端和服务端之间通信。redis集群节点之间使用另一种二进制协议进行数据交换。RESP是二进制安全协议，并且处理批量数据无须逐个请求处理，因为批量数据传输时，在请求参数中添加了<strong>数据长度</strong>作为前缀。传输层基于<code>TCP</code>协议，默认端口为6739。<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>   </p>
+<h3 id="h_2-2-src">2.2. 操作模块-src</h3>
+<ul>
+<li>PUT：写入或更新   </li>
+<li>GET   </li>
+<li>DELETE   </li>
+<li>SCAN：根据一段key的范围返回相应的value   </li>
+<li>EXISTS   </li>
+</ul>
+<h4 id="h_2-2-1-src-server-c">2.2.1. 单线程为什么这么快？-src.server.c</h4>
+<p><strong>单线程做了哪些事？哪些事单线程没有做？</strong> <br />
+Redis 的主流程   </p>
+<ul>
+<li>网络 IO   </li>
+<li>键值对读写   </li>
+</ul>
+<p>是由一个线程来完成的: <br />
+<img alt="" src="/program/database/kv_memory/vx_images/5920443129073.png" />   </p>
+<p>Redis 的其他功能，比如   </p>
+<ul>
+<li>持久化   </li>
+<li>异步删除（lazyfree.c ）--后台 IO 线程引用记数算法   </li>
+<li>集群数据同步等   </li>
+</ul>
+<p>其实是由额外的线程执行的   </p>
+<p><strong>总体流程代码</strong><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup><sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>   </p>
+<p>当<code>redis-cli -h host -p port</code>:   </p>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// 5.0.8 伪代码</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">){</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">initServer</span><span class="p">();</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">aeCreateFileEvent</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="n">acceptxxxHandler</span><span class="p">,...);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">aeMain</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">el</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* 1. 创建数据结构，初始化数据结构</span>
+<span class="cm">* 2. 打开TCP监听端口与Unix本地端口</span>
+<span class="cm">* 4. 为socket关联应答处理器</span>
+<span class="cm">* 3. 初始化AOF，集群，脚本系统，BIO等</span>
+<span class="cm">**/</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">initServer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="p">...</span>
+<span class="w">    </span><span class="cm">/* Open the TCP listening socket for the user commands. */</span>
+<span class="w">    </span><span class="c1">// 打开 TCP 监听端口，用于等待客户端的命令请求</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">        </span><span class="n">listenToPort</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">port</span><span class="p">,</span><span class="n">server</span><span class="p">.</span><span class="n">ipfd</span><span class="p">,</span><span class="o">&amp;</span><span class="n">server</span><span class="p">.</span><span class="n">ipfd_count</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">REDIS_ERR</span><span class="p">)</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">...</span>
+
+<span class="w">    </span><span class="cm">/* Create the serverCron() time event, that&#39;s our main way to process</span>
+<span class="cm">     * background operations. */</span>
+<span class="w">    </span><span class="c1">// 为 serverCron() 创建时间事件,后台线程操作</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">aeCreateTimeEvent</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">el</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">serverCron</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">redisPanic</span><span class="p">(</span><span class="s">&quot;Can&#39;t create the serverCron time event.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Create an event handler for accepting new connections in TCP and Unix</span>
+<span class="cm">     * domain sockets. */</span>
+<span class="w">    </span><span class="c1">// 为 TCP 连接关联连接应答（accept）处理器</span>
+<span class="w">    </span><span class="c1">// 用于接受并应答客户端的 connect() 调用</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="n">ipfd_count</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aeCreateFileEvent</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">el</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="n">ipfd</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">AE_READABLE</span><span class="p">,</span>
+<span class="w">            </span><span class="n">acceptTcpHandler</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">redisPanic</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Unrecoverable error creating server.ipfd file event.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 为本地套接字关联应答处理器</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">sofd</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">aeCreateFileEvent</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">el</span><span class="p">,</span><span class="n">server</span><span class="p">.</span><span class="n">sofd</span><span class="p">,</span><span class="n">AE_READABLE</span><span class="p">,</span>
+<span class="w">        </span><span class="n">acceptUnixHandler</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">)</span><span class="w"> </span><span class="n">redisPanic</span><span class="p">(</span><span class="s">&quot;Unrecoverable error creating server.sofd file event.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* 32 bit instances are limited to 4GB of address space, so if there is</span>
+<span class="cm">     * no explicit limit in the user provided configuration we set a limit</span>
+<span class="cm">     * at 3 GB using maxmemory with &#39;noeviction&#39; policy&#39;. This avoids</span>
+<span class="cm">     * useless crashes of the Redis instance for out of memory. */</span>
+<span class="w">    </span><span class="c1">// 对于 32 位实例来说，默认将最大可用内存限制在 3 GB</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">arch_bits</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">32</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="n">maxmemory</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">redisLog</span><span class="p">(</span><span class="n">REDIS_WARNING</span><span class="p">,</span><span class="s">&quot;Warning: 32 bit instance detected but no memory limit set. Setting 3 GB maxmemory limit with &#39;noeviction&#39; policy now.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">server</span><span class="p">.</span><span class="n">maxmemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3072L</span><span class="n">L</span><span class="o">*</span><span class="p">(</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">);</span><span class="w"> </span><span class="cm">/* 3 GB */</span>
+<span class="w">        </span><span class="n">server</span><span class="p">.</span><span class="n">maxmemory_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REDIS_MAXMEMORY_NO_EVICTION</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * 根据 mask 参数(比如AE_READABLE)的值，监听 fd 文件的状态，</span>
+<span class="cm"> * 绑定fd到传入的acceptHandler或writeHandler.etc（即*proc这个函数指针）</span>
+<span class="cm"> */</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">aeCreateFileEvent</span><span class="p">(</span><span class="n">aeEventLoop</span><span class="w"> </span><span class="o">*</span><span class="n">eventLoop</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span>
+<span class="w">        </span><span class="n">aeFileProc</span><span class="w"> </span><span class="o">*</span><span class="n">proc</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">clientData</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">setsize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">errno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ERANGE</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">setsize</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 取出文件事件结构</span>
+<span class="w">    </span><span class="n">aeFileEvent</span><span class="w"> </span><span class="o">*</span><span class="n">fe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">events</span><span class="p">[</span><span class="n">fd</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// 监听指定 fd 的指定事件</span>
+<span class="w">    </span><span class="c1">// 把fd加入到链表中</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aeApiAddEvent</span><span class="p">(</span><span class="n">eventLoop</span><span class="p">,</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 设置文件事件类型，以及事件的处理器</span>
+<span class="w">    </span><span class="c1">// 当 fd 可用时，执行 proc 函数</span>
+<span class="w">        </span><span class="c1">// 比如绑定fd到传入的acceptHandler</span>
+<span class="w">    </span><span class="n">fe</span><span class="o">-&gt;</span><span class="n">mask</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="w"> </span><span class="c1">// 或运算后再进行可读或可写判断</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mask</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AE_READABLE</span><span class="p">)</span><span class="w"> </span><span class="n">fe</span><span class="o">-&gt;</span><span class="n">rfileProc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">proc</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mask</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AE_WRITABLE</span><span class="p">)</span><span class="w"> </span><span class="n">fe</span><span class="o">-&gt;</span><span class="n">wfileProc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">proc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 私有数据</span>
+<span class="w">    </span><span class="n">fe</span><span class="o">-&gt;</span><span class="n">clientData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientData</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 如果有需要，更新事件处理器的最大 fd</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">maxfd</span><span class="p">)</span>
+<span class="w">        </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">maxfd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">AE_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * 事件处理器的主循环</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">aeMain</span><span class="p">(</span><span class="n">aeEventLoop</span><span class="w"> </span><span class="o">*</span><span class="n">eventLoop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">stop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 这样写死循环，给后面关闭这个死循环留下了口子，比如测试以及性能评测时</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 如果有需要在事件处理前执行的函数(beforesleep)，那么运行它</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">beforesleep</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">            </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">beforesleep</span><span class="p">(</span><span class="n">eventLoop</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 开始处理事件</span>
+<span class="w">        </span><span class="c1">// 多路复用：将所有fd作为select的入参以求内核返回可读或可写的fd再处理</span>
+<span class="w">        </span><span class="n">aeProcessEvents</span><span class="p">(</span><span class="n">eventLoop</span><span class="p">,</span><span class="w"> </span><span class="n">AE_ALL_EVENTS</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p><strong>事件接受函数</strong>   </p>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 将fd以aeFileEvent的形式加入aeEventLoop这个大链表当中</span>
+<span class="cm">**/</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">aeApiAddEvent</span><span class="p">(</span><span class="n">aeEventLoop</span><span class="w"> </span><span class="o">*</span><span class="n">eventLoop</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">aeApiState</span><span class="w"> </span><span class="o">*</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eventLoop</span><span class="o">-&gt;</span><span class="n">apidata</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mask</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AE_READABLE</span><span class="p">)</span><span class="w"> </span><span class="n">FD_SET</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="o">&amp;</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">rfds</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mask</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">AE_WRITABLE</span><span class="p">)</span><span class="w"> </span><span class="n">FD_SET</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="o">&amp;</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">wfds</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* aeCreateFileEvent() -&gt; File event structure */</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">aeFileEvent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="w"> </span><span class="cm">/* one of AE_(READABLE|WRITABLE|BARRIER) */</span>
+<span class="w">    </span><span class="n">aeFileProc</span><span class="w"> </span><span class="o">*</span><span class="n">rfileProc</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aeFileProc</span><span class="w"> </span><span class="o">*</span><span class="n">wfileProc</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">clientData</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">aeFileEvent</span><span class="p">;</span>
+
+<span class="cm">/* State of an event based program */</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">aeEventLoop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">maxfd</span><span class="p">;</span><span class="w">   </span><span class="cm">/* highest file descriptor currently registered */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">setsize</span><span class="p">;</span><span class="w"> </span><span class="cm">/* max number of file descriptors tracked */</span>
+<span class="w">    </span><span class="n">aeFileEvent</span><span class="w"> </span><span class="o">*</span><span class="n">events</span><span class="p">;</span><span class="w"> </span><span class="cm">/* Registered events */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aeBeforeSleepProc</span><span class="w"> </span><span class="o">*</span><span class="n">beforesleep</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aeBeforeSleepProc</span><span class="w"> </span><span class="o">*</span><span class="n">aftersleep</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">aeEventLoop</span><span class="p">;</span>
+</code></pre></div>
+
+
+</div>
+
+<p><strong>事件处理函数</strong>   </p>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * 创建一个 TCP 连接处理器</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">acceptTcpHandler</span><span class="p">(</span><span class="n">aeEventLoop</span><span class="w"> </span><span class="o">*</span><span class="n">el</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">privdata</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">...</span>
+<span class="c1">//     控制最大TCP连接数</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">max</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// accept 客户端连接--&gt; 由内核自动生成的一个全新的fd，代表与返回client的TCP连接</span>
+<span class="w">        </span><span class="n">cfd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">anetTcpAccept</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">neterr</span><span class="p">,</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">cip</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">cip</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cport</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cfd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ANET_ERR</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">errno</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">EWOULDBLOCK</span><span class="p">)</span>
+<span class="w">                </span><span class="n">serverLog</span><span class="p">(</span><span class="n">LL_WARNING</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">&quot;Accepting client connection: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="n">neterr</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 为客户端创建客户端状态（redisClient）！</span>
+<span class="w">        </span><span class="n">acceptCommonHandler</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">cip</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* 为每一个链接都创建一个专属的客户端</span>
+<span class="cm">**/</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">acceptCommonHandler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建客户端</span>
+<span class="w">    </span><span class="n">redisClient</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//     createClient比如aeCreateFileEvent(config.el,c-&gt;context-&gt;fd,AE_WRITABLE,writeHandler,c);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createClient</span><span class="p">(</span><span class="n">fd</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">redisLog</span><span class="p">(</span><span class="n">REDIS_WARNING</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;Error registering fd event for the new client: %s (fd=%d)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">),</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w"> </span><span class="cm">/* May be already closed, just ignore errors */</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/* If maxclient directive is set and this is one client more... close the</span>
+<span class="cm">     * connection. Note that we create the client instead to check before</span>
+<span class="cm">     * for this condition, since now the socket is already set in non-blocking</span>
+<span class="cm">     * mode and we can send an error for free using the Kernel I/O */</span>
+<span class="w">    </span><span class="c1">// 如果新添加的客户端令服务器的最大客户端数量达到了</span>
+<span class="w">    </span><span class="c1">// 那么向新客户端写入错误信息，并关闭新客户端</span>
+<span class="w">    </span><span class="c1">// 先创建客户端，再进行数量检查是为了方便地进行错误信息写入</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">listLength</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">clients</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="n">maxclients</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;-ERR max number of clients reached</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* That&#39;s a best effort error message, don&#39;t check write errors */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">write</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">fd</span><span class="p">,</span><span class="n">err</span><span class="p">,</span><span class="n">strlen</span><span class="p">(</span><span class="n">err</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Nothing to do, Just to avoid the warning... */</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 更新拒绝连接数</span>
+<span class="w">        </span><span class="n">server</span><span class="p">.</span><span class="n">stat_rejected_conn</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">freeClient</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* 将fd放入链表，同时绑定readQueryFromClient</span>
+<span class="cm">* （而不是处理新客户端连接的acceptHandler）</span>
+<span class="cm">**/</span>
+<span class="n">client</span><span class="w"> </span><span class="o">*</span><span class="nf">createClient</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">client</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">client</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* passing -1 as fd it is possible to create a non connected client（like a lua acript）.</span>
+<span class="cm">     * This is useful since all the commands needs to be executed</span>
+<span class="cm">     * in the context of a client. When commands are executed in other</span>
+<span class="cm">     * contexts (for instance a Lua script) we need a non connected client. */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">anetNonBlock</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="n">anetEnableTcpNoDelay</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">tcpkeepalive</span><span class="p">)</span>
+<span class="w">            </span><span class="n">anetKeepAlive</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">fd</span><span class="p">,</span><span class="n">server</span><span class="p">.</span><span class="n">tcpkeepalive</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">//复用aeCreateFileEvent绑定处理客户端redis命令的函数readQueryFromClient</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aeCreateFileEvent</span><span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">el</span><span class="p">,</span><span class="n">fd</span><span class="p">,</span><span class="n">AE_READABLE</span><span class="p">,</span>
+<span class="w">            </span><span class="n">readQueryFromClient</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AE_ERR</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">            </span><span class="n">zfree</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<p><strong>总体交互时序图</strong><sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> <br />
+对于每一个socket fd都分配以监听或读事件或写事件处理器以aeFileEvent的结构挂到aeEventLoop的链表中。   </p>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+sequenceDiagram
+participant client
+participant UserMode as server用户态
+participant KernelMode as server内核态
+
+KernelMode ->> KernelMode:lisetnToPort()：socket bind listen accept
+KernelMode ->> UserMode: 流式socket转为监听socket：TCP_LISTEN
+client ->> UserMode:connect🤝
+UserMode ->> client:accept🤝
+client ->> UserMode:conncet🤝
+UserMode ->> UserMode: aeCreateFileEvent: fd && accept(TCP|Unix)Hander
+UserMode ->> KernelMode:accept
+KernelMode ->> UserMode:新的已连接套接字：client fd
+UserMode ->> UserMode: aeCreateFileEvent: cfd && readQueryFromClient
+UserMode ->> KernelMode: select/epoll
+</div>
+
+</div>
+
+<p><img alt="" src="/program/database/kv_memory/vx_images/aeFd.gif" />   </p>
+<p>由于只有一个线程在监听这些文件描述符fd<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>并处理。所以即使<strong>客户端并发地发送命令</strong>，后面仍然是依次取出命令，<strong>顺序执行</strong>，避免了线程之间的资源抢占，也简化了数据结构的操作。这就是使用了Reactor模式<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>的Redis单线程模型<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>：   </p>
+<ul>
+<li>响应IO事件：aeMain()的IO多路复用   </li>
+<li>连接应答处理器：监听连接的文件描述符所绑定的函数 acceptxxxHandler。   </li>
+<li>命令请求处理器: 监听客户端命令（读事件）的文件描述符绑定的函数 readQueryFromClient。   </li>
+<li>命令回复处理器: 监听客户端响应（写事件）的文件描述符绑定的函数 sendReplyToClient。   </li>
+</ul>
+<p><strong>FAQ</strong> <br />
+监听套接字fd不会挂上读事件处理器吗？   </p>
+<h4 id="h_2-2-2-io-10">2.2.2. IO 多路复用复用了什么？<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup></h4>
+<p>IO开销两大头：用户态到内核态的切换开销，read(fd)判断fd是否可用的系统调用开销 <br />
+select,poll,epoll是同类型的IO模式，主要是用户态向内核态做文件描述符fd请求，判断当前持有的fd是否准备就绪。   </p>
+<ul>
+<li>select一次性向内核态传入多个fd（不超过1024或2048），内核态同步遍历，最后返回就绪的fd数量   </li>
+<li>poll一次性向内核态传入不限数量的fd，其他同select   </li>
+<li>epoll在首次接收fd之后内核态会保存一份fd列表，当事件到来时异步IO获取就绪的fd，最后直接返回有效的fd本身。   <ul>
+<li>epoll_create创建文件fd或者说句柄   </li>
+<li>epoll_ctl添加fd到内核维护的红黑树   </li>
+<li>epoll_await事件允许当数据ready后，将其从红黑树移动到链表，再await异步获取链表中准备好数据的fd   </li>
+<li><img alt="" src="/program/database/kv_memory/vx_images/epoll.gif" />   </li>
+</ul>
+</li>
+</ul>
+<h4 id="h_2-2-3">2.2.3. 单线程的问题</h4>
+<p><img alt="" src="vx_images/2104359139000.png =896x" />   </p>
+<p>Redis 单线程模型，综合了select/epoll 与Reactor模式，提供了基于事件的回调机制，即针对不同事件的发生，调用相应的处理函数，使得效率和代码优雅都得到了兼顾。但是单线程也有自己的问题。   </p>
+<ol>
+<li>任意一个请求在server中一旦发生耗时，都会影响整个server的性能，也就是说后面的请求都要等前面这个耗时请求处理完成，自己才能被处理到。耗时的操作包括以下几种： <br />
+    a、操作bigkey：写入一个bigkey在分配内存时需要消耗更多的时间，同样，删除bigkey释放内存同样会产生耗时； <br />
+    b、使用复杂度过高的命令：例如SORT/SUNION/ZUNIONSTORE，或者O(N)命令，但是N很大，例如<code>lrange key 0 -1</code>一次查询全量数据； <br />
+    c、大量key集中过期：3.0之前Redis的过期机制也是在主线程中执行的，大量key集中过期会导致处理一个请求时，耗时都在删除过期key，耗时变长； <br />
+    d、淘汰策略：3.0之前淘汰策略也是在主线程执行的，当内存超过Redis内存上限后，每次写入都需要淘汰一些key，也会造成耗时变长； <br />
+    e、AOF刷盘开启always机制：每次写入都需要把这个操作刷到磁盘，写磁盘的速度远比写内存慢，会拖慢Redis的性能； <br />
+    f、主从全量同步生成RDB：虽然采用fork子进程生成数据快照，但fork这一瞬间也是会阻塞整个线程的，实例越大，阻塞时间越久；   </li>
+<li>并发量非常大时，单线程读写客户端IO数据存在性能瓶颈，虽然采用IO多路复用机制，但是读写客户端数据依旧是同步IO，只能单线程依次读取客户端的数据，无法利用到CPU多核。   </li>
+</ol>
+<p>针对问题2，Redis在6.0推出了多线程。   </p>
+<h4 id="h_2-2-4-6-0">2.2.4. 6.0为什么又要引入多线程？</h4>
+<p>将原本单线程工作的主要内容，IO处理与业务读写两部分，把前者使用多线程改造，使得可以并行连接客户端。   </p>
+<h5 id="h_2-2-4-1-faq">2.2.4.1. FAQ</h5>
+<p><strong>mysql为什么不使用IO多路复用？</strong> <br />
+</p>
+<h3 id="h_2-3">2.3. 存储模块</h3>
+<p><img alt="" src="vx_images/5986130496488.png =800x" />i   </p>
+<h4 id="h_2-3-1-deps-jemalloc">2.3.1. 内存分配器-deps.jemalloc</h4>
+<ul>
+<li>PUT：需要为新的键值对分配存储空间   </li>
+<li>DELETE：删除键值对，释放相应的内存空间   </li>
+</ul>
+<p>内存分配器比如C中<code>glibc</code>的<code>malloc</code>和<code>free</code>.但是键值对通常大小不一，保存数据规模过大或擦除次数过多时，就会引发内存碎片问题。因此为了避免对系统性能产生影响，Redis 使用了 <code>jemalloc</code> 库替换了 glibc 库的内存分配器,优化包括：   </p>
+<ul>
+<li>低地址优先的策略，来降低内存碎片化。   </li>
+<li>相对未使用的页面，优先使用dirty page，提升缓存命中。   </li>
+</ul>
+<h4 id="h_2-3-2-vm">2.3.2. 虚拟内存VM</h4>
+<p>Redis提高数据库容量的办法有两个，一个是将数据分割到多个Redis Server上面，另一个就是虚拟内存机制。区分出热数据与冷数据（不常用的数据），并将冷数据交换到磁盘。同时为了保证查找的速度，只会将value交换出去，而在内存中保留所有的key。因此当Key也很大的时候，VM机制作用有限。   </p>
+<h4 id="h_2-3-3-src-rdb">2.3.3. 持久化-src.rdb</h4>
+<p>如果每次都对新的键值对调用文件系统写盘，性能差；所以只能周期性地保存。但这样面临数据丢失的风险。 <br />
+• RDB：Redis Database ，指定时间内执行指定次数<strong>写操作</strong>，将客户端内存中的数据写入服务器磁盘。 RDB默认开启。 <br />
+• AOF：Append Only File ，默认每秒将<strong>写操作日志</strong>追加写入到磁盘。AOF 需要手动开启，完整性更高。   </p>
+<p><strong>以后应该会更多地支持NVM</strong>   </p>
+<blockquote>
+<p>"应用 + 缓存 + 持久存储"的架构模型-- &gt;"应用 + 具备持久能力的内存数据库"<sup id="fnref2:11"><a class="footnote-ref" href="#fn:11">11</a></sup>   </p>
+</blockquote>
+<ul>
+<li>NVM：非易失性存储器（Non-Volatile Memory）或非依电性存储器，指当电流关掉后，所存储的资料不会消失的资料存储设备。   <ul>
+<li>NVMe SSD:NVM接口标准的固态硬盘   </li>
+</ul>
+</li>
+<li>AEP： Inter推出的持久化内存Optane Memory,又称为Apache Pass(<code>AEP</code>)，弥补DRAM与传统NSND SSD之间的内存读取速度鸿沟（1000倍以上<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup>）。   </li>
+<li>CloudStream：Optane NVMe SSD，又称为Clouidstream，   </li>
+</ul>
+<p>存储结构层次：   </p>
+<p><img alt="" src="vx_images/5199406505616.png =575x" />   </p>
+<p>比如CDB： <br />
+<img alt="" src="vx_images/3204431831367.png =959x" /> <br />
+比如HiKV：改造Redis全局哈希表高效支持范围操作；支持NVM，扩大键值数据库内存   </p>
+<p><strong>最终数据冷热分层结合DRAM/SCM/ESSD等不同存储池实现不同存储策略<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup></strong>   </p>
+<h4 id="h_2-3-4">2.3.4. 数据结构</h4>
+<h5 id="h_2-3-4-1">2.3.4.1. 概述</h5>
+<p>互联网应用的业务场景越来越复杂，面对的数据类型也不再是传统的层次模型和关系性模型能满足的，因此持久化数据库层面层次模型、网状模型、关系模型、文档模型和图模型等多样化数据模型风起云涌，内存数据库为了避免应用程序对象到数据库实体之间的转换相关的开销<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">13</a></sup>，如Redis提供字符串，哈希，列表，集合，排序集合，位图，位域，HyperLogLog，地理空间索引和流作为本机数据结构。并对于每个数据结构，Redis也维护专用命令以对于每个数据结构最有效的方式执行多种类型的操作。 <br />
+<img alt="" src="vx_images/4710195741876.png =1600x" /> <br />
+<img alt="" src="/program/database/kv_memory/vx_images/2125296809846.png" />   </p>
+<ul>
+<li>string 类型是二进制安全的。意思是 redis 的 string 可以安全传输任何数据，比如jpg图片或者序列化的对象。   </li>
+<li>Redis hash 是一个 string 类型的 field 和 value 的映射表   <ul>
+<li>{key(string)-&gt;value(string)},类似于Java中的map<String,String>   </li>
+<li>适合用于表示和存储对象，但受限于value类型是string   </li>
+</ul>
+</li>
+<li>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。毫无疑问list就得O(n)   </li>
+<li>zset/sorted set在set基础上每个元素都会关联一个double类型的分数，redis正是通过分数来为集合中的成员排序。   </li>
+</ul>
+<h5 id="h_2-3-4-2-c-sds">2.3.4.2. 对C中字符串的改造--SDS</h5>
+<ul>
+<li>
+<p>C中的字符串（即以<code>\0</code>结尾的<code>char[]</code>/<code>char*</code>）,   </p>
+<ul>
+<li>strlen(s)--O(N)   </li>
+<li>realloc--O(N)   </li>
+<li>strcmp("Hello","Hello\0Hello") == 0   <ul>
+<li>程序在读字符串的时候就会忽略空字符后面的字符   </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>简单动态字符串:Simple Dynamic String<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup>   </p>
+</li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">value</span><span class="o">[]</span><span class="p">;</span><span class="w"> </span><span class="c1">//JDK8</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="c1">//JDK11</span>
+</code></pre></div>
+
+
+</div>
+
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// 结构体定义</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">sds</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// buf 已占用长度</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// buf 剩余可用长度</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">free</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 实际保存字符串数据的地方</span>
+<span class="w">    </span><span class="c1">// 利用c99(C99 specification 6.7.2.1.16)中引入的 flexible array member</span>
+<span class="w">    </span><span class="c1">// sizeof的结果不包含结构体空间，作为符号地址存在</span>
+<span class="w">    </span><span class="c1">// 通过buf来引用sdshdr后面的地址，</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[];</span>
+<span class="p">};</span>
+
+
+<span class="cm">/*</span>
+<span class="cm"> * 新建字符串对象</span>
+<span class="cm"> *</span>
+<span class="cm"> * T = O(N)</span>
+<span class="cm"> */</span>
+<span class="n">sds</span><span class="w"> </span><span class="nf">sdsnewlen</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">initlen</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="o">*</span><span class="n">sh</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 有初始值:sdshdr长度+字符串长度+一个结束符&#39;\0&#39;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">init</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// zmallloc O(N)</span>
+<span class="w">        </span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)</span><span class="o">+</span><span class="n">initlen</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zcalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)</span><span class="o">+</span><span class="n">initlen</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 内存不足，分配失败</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sh</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initlen</span><span class="p">;</span><span class="w"> </span><span class="c1">// 不包括结构体的长度</span>
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 如果给定了 init 且 initlen 不为 0 的话</span>
+<span class="w">    </span><span class="c1">// 那么将 init 的内容复制至 sds buf</span>
+<span class="w">    </span><span class="c1">// memcpy() O(N)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">initlen</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">init</span><span class="p">)</span>
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">initlen</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 加上终结符</span>
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="n">initlen</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// ！！返回 buf 而不是整个 sdshdr</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">* 得到字符串长度（而不是结构体的长度）</span>
+<span class="cm">* T=O（1）</span>
+<span class="cm">*/</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">sdslen</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">sds</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 如前所说，sizeof不返回柔性数组大小，因此指针运算减去两个int长度后就得到了sds的地址指针sh</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="o">*</span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)(</span><span class="n">s</span><span class="o">-</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * 字符串复制进入原字符串操作</span>
+<span class="cm"> * 将一个 char 数组的前 len 个字节复制至 sds</span>
+<span class="cm"> * 如果 sds 的 buf 不足以容纳要复制的内容，</span>
+<span class="cm"> * 那么扩展 buf 的长度，让 buf 的长度大于等于 len 。</span>
+<span class="cm"> *</span>
+<span class="cm"> * T = O(N)</span>
+<span class="cm"> */</span>
+<span class="n">sds</span><span class="w"> </span><span class="nf">sdscpylen</span><span class="p">(</span><span class="n">sds</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="o">*</span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)));</span>
+
+<span class="w">    </span><span class="c1">// 是否需要扩展 buf ？</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">totlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="o">+</span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">totlen</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 扩展 buf 长度，让它的长度大于等于 len</span>
+<span class="w">        </span><span class="c1">// 具体的大小请参考 sdsMakeRoomFor 的注释</span>
+<span class="w">        </span><span class="c1">// T = O(N)</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="o">-</span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)));</span>
+<span class="w">        </span><span class="n">totlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="o">+</span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// O(N)</span>
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+<span class="w">    </span><span class="n">s</span><span class="p">[</span><span class="n">len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totlen</span><span class="o">-</span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * 字符串追加操作</span>
+<span class="cm"> * 按长度 len 扩展 sds ，并将 t 拼接到 sds 的末尾</span>
+<span class="cm"> *</span>
+<span class="cm"> * T = O(N)</span>
+<span class="cm"> */</span>
+<span class="n">sds</span><span class="w"> </span><span class="nf">sdscatlen</span><span class="p">(</span><span class="n">sds</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="o">*</span><span class="n">sh</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">curlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// O(N)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdsMakeRoomFor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 复制</span>
+<span class="w">    </span><span class="c1">// O(N)</span>
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">curlen</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 更新 len 和 free 属性</span>
+<span class="w">    </span><span class="c1">// O(1)</span>
+<span class="w">    </span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sh</span><span class="o">-&gt;</span><span class="n">free</span><span class="o">-</span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 终结符</span>
+<span class="w">    </span><span class="c1">// O(1)</span>
+<span class="w">    </span><span class="n">s</span><span class="p">[</span><span class="n">curlen</span><span class="o">+</span><span class="n">len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* </span>
+<span class="cm"> * 对 sds 的 buf 进行扩展，扩展的长度不少于 addlen 。</span>
+<span class="cm"> *</span>
+<span class="cm"> * T = O(N)</span>
+<span class="cm"> */</span>
+<span class="n">sds</span><span class="w"> </span><span class="nf">sdsMakeRoomFor</span><span class="p">(</span>
+<span class="w">    </span><span class="n">sds</span><span class="w"> </span><span class="n">s</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">addlen</span><span class="w">   </span><span class="c1">// 需要增加的空间长度</span>
+<span class="p">)</span><span class="w"> </span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="w"> </span><span class="o">*</span><span class="n">sh</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">newsh</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdsavail</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">newlen</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 剩余空间可以满足需求，无须扩展</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">free</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">addlen</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)));</span>
+
+<span class="w">    </span><span class="c1">// 目前 buf 长度</span>
+<span class="w">    </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdslen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 新 buf 长度</span>
+<span class="w">    </span><span class="n">newlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="o">+</span><span class="n">addlen</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 如果新 buf 长度小于 SDS_MAX_PREALLOC 长度</span>
+<span class="w">    </span><span class="c1">// 那么将 buf 的长度设为新 buf 长度的两倍</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newlen</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SDS_MAX_PREALLOC</span><span class="p">)</span>
+<span class="w">        </span><span class="n">newlen</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">newlen</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">SDS_MAX_PREALLOC</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 扩展长度</span>
+<span class="w">    </span><span class="n">newsh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zrealloc</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">sdshdr</span><span class="p">)</span><span class="o">+</span><span class="n">newlen</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newsh</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">newsh</span><span class="o">-&gt;</span><span class="n">free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newlen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newsh</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>长度计算只需O(1)时间复杂度；   </li>
+<li>字符串追加更高效；   </li>
+<li>
+<p>SDS是二进制安全的（并发安全且不会被篡改）   </p>
+<ul>
+<li>SDS引入len,按长度读就不会丢失字符   </li>
+</ul>
+</li>
+<li>
+<p>缺点：不会主动释放内存   </p>
+</li>
+</ol>
+<p><strong>空间换时间，跳表也是</strong> <br />
+所以讲到最后终于发现了一个可能存在的优化点，这是不看源码不能发现也不好理解的： <br />
+即在复制与追加字符串操作中，如果预期的新字符串长度比redis定义的<code>SDS_MAX_PREALLOC</code>（默认1024*1024byte==<code>1MB</code>）小,那么sdsMakeRoomFor会double其长度；如果大于<code>SDS_MAX_PREALLOC</code>，会直接加上<code>SDS_MAX_PREALLOC</code>。即每扩容一次多给一倍的空间以减少内存分配的次数--和HashMap达到threshold时resize类似。如果业务场景中原本容量较大之后小容量的append操作较多，可以适当减少<code>SDS_MAX_PREALLOC</code>的值，不然有点浪费内存。   </p>
+<p><strong>吐槽一下；造名词</strong> <br />
+在字符串变长时，每次多分配一些空间，以便下次变长时可能由于 buf 足够大而不用重新分配（<em>2），这个叫</em><em>空间预分配</em><em>。 <br />
+在字符串变短时，并不立即重新分配内存而回收缩短后多出来的字符串，而是用 free 来记录这些空闲出来的字节（就是个int变量记录），这又减少了内存分配的次数，这叫</em><em>惰性空间释放</em>*。   </p>
+<h3 id="h_2-4">2.4. 索引模块</h3>
+<h4 id="h_2-4-1">2.4.1. 概述</h4>
+<p>根据key找到相应value的存储位置，进而执行操作   </p>
+<ul>
+<li>哈希表   </li>
+<li>B+树   </li>
+<li>红黑树   </li>
+<li>跳表   </li>
+<li>字典树   </li>
+</ul>
+<p>Memcached和Redis采用哈希表作为key-value索引，RocksDB使用跳表 <br />
+内存键值数据库如Redis采用哈希表作为索引，也是因为键值数据基本保存在内存中，而<strong>内存的高性能随机访问特性</strong>可以很好地与哈希表<code>O（1）</code>的操作复杂度相匹配。 <br />
+此外对于value部分同样需要一些高效的索引结构来帮助通过key找到value后再在value中找到实际需要的数据。   </p>
+<h4 id="h_2-4-2-16">2.4.2. 全局哈希表<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">16</a></sup></h4>
+<h5 id="h_2-4-2-1-dict">2.4.2.1. dict的结构</h5>
+<p><img alt="" src="vx_images/4560105539474.png =709x" />   </p>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">//定义dict字典结构体</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dict</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 对应不同类型，操作键值对的函数不同</span>
+<span class="w">    </span><span class="n">dictType</span><span class="w"> </span><span class="o">*</span><span class="n">type</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 类型处理函数的私有数据--&gt;提供给dicType的参数不同</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">privdata</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 哈希表（2个）,用于rehash</span>
+<span class="w">    </span><span class="n">dictht</span><span class="w"> </span><span class="n">ht</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// 记录 rehash 进度的标志，值为-1 表示 rehash 未进行</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rehashidx</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 当前正在运作的安全迭代器数量</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iterators</span><span class="p">;</span><span class="w">      </span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">dict</span><span class="p">;</span>
+
+
+<span class="c1">// 定义哈希表</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dictht</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 哈希表节点指针数组（俗称桶，bucket）</span>
+<span class="w">    </span><span class="c1">// 数组中的元素都是一个指向dictEntry结构的指针,*table[]</span>
+<span class="w">    </span><span class="n">dictEntry</span><span class="w"> </span><span class="o">**</span><span class="n">table</span><span class="p">;</span><span class="w">      </span>
+
+<span class="w">    </span><span class="c1">// 指针数组的大小</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w">     </span>
+
+<span class="w">    </span><span class="c1">// 指针数组的长度掩码，用于计算索引值</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">sizemask</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// 哈希表现有的节点数量</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">used</span><span class="p">;</span><span class="w">     </span>
+<span class="p">}</span><span class="n">dictht</span><span class="p">;</span>
+
+<span class="c1">// 定义哈希桶</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">dictEntry</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 键</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 值，保存类型包括指针或无符号64位整数或64位整数</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">u64</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">s64</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 链往后继节点--&gt;开链法解决哈希冲突，头插入</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">dictEntry</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">;</span><span class="w"> </span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">dictEntry</span><span class="p">;</span>
+
+<span class="c1">// 定义key与value所指向的对象</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">redisObject</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 类型</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">type</span><span class="o">:</span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 编码</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">encoding</span><span class="o">:</span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 对象最后一次被访问的时间</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">lru</span><span class="o">:</span><span class="n">REDIS_LRU_BITS</span><span class="p">;</span><span class="w"> </span><span class="cm">/* lru time (relative to server.lruclock) */</span>
+
+<span class="w">    </span><span class="c1">// 引用计数</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">refcount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 指向底层数据结构的指针：sds/hash/ziplist/quicklist/skiplist/intset</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w"> </span><span class="n">robj</span><span class="p">;</span>
+</code></pre></div>
+
+
+</div>
+
+<p>FAQ: <strong>头插入不会产生1.7时HashMap的并发死锁吗？</strong>   </p>
+<h5 id="h_2-4-2-2-hashcodehash">2.4.2.2. hashCode与hash值的计算</h5>
+<ul>
+<li>
+<p>与JDK定位到哈希桶entry的方法类似，都是hash与数组容量取余得到数组下标   </p>
+</li>
+<li>
+<p>为每一个对象生成唯一的hashCode   </p>
+</li>
+<li>通过hash函数计算hash值 <br />
+<strong>HotSpot VM生成hashCode与JDK生成hash值的方法</strong>   </li>
+</ul>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">//1. 为什么不能用hashcode直接做hash?</span>
+<span class="c1">//在容量为16,即(n-1) 为15(0x1111)时，散列值hash真正生效的只是低4位。</span>
+<span class="c1">//如果直接使用hashcode做hash,</span>
+<span class="c1">//那么当新增的键的hashcode()是2，18，34这样恰好以16的倍数为差的等差数列，就产生了大量碰撞。</span>
+<span class="c1">//2. 为什么要进行这样的扰动hashCode？</span>
+<span class="c1">//高位参与运算--h和h右移16位做异或运算</span>
+<span class="w">    </span><span class="c1">//事实上是用混合后的低位掺杂高位的部分特征，变相保留高位信息作索引</span>
+<span class="c1">// 1000000的二进制: 00000000 00001111 01000010 01000000</span>
+<span class="c1">// 右移16位：       00000000 00000000 00000000 00001111</span>
+<span class="c1">// 异或后:          00000000 00001111 01000010 01001111</span>
+<span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">hashCode</span><span class="p">())</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span>
+</code></pre></div>
+
+
+</div>
+
+<p>在JVM的启动参数中可以通过<code>-XX:Hashcode=1</code>这种方式来指定对象hashcode的生成方式，<strong>也只有这种方式是与对象内存地址有关</strong>。 <br />
+<img alt="" src="/program/database/kv_memory/vx_images/2543722787409.png" />   </p>
+<p><strong>redis的生成hash值的方法</strong>--<code>Dict.c</code>文件<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">17</a></sup>   </p>
+<ul>
+<li>64 bit Mix Functions:根据<code>dict</code><strong>结构体</strong>的当前状态生成一个标识，只要dict的内容变化，指纹也会变化   </li>
+</ul>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="n">A</span><span class="w"> </span><span class="n">fingerprintis</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="mi">64</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">represents</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">dictionary</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">given</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">few</span><span class="w"> </span><span class="n">dictproperties</span><span class="w"> </span><span class="n">xored</span><span class="w"> </span><span class="n">together</span><span class="p">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">When</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">unsafe</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">initialized</span><span class="p">,</span><span class="w"> </span><span class="n">weget</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">dict</span><span class="w"> </span><span class="n">fingerprint</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">check</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">fingerprint</span><span class="w"> </span><span class="n">again</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="n">isreleased</span><span class="p">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">fingerprints</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">itmeans</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">iterator</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">performed</span><span class="w"> </span><span class="n">forbidden</span><span class="w"> </span><span class="n">operations</span><span class="w"> </span><span class="n">against</span><span class="w"> </span><span class="n">thedictionary</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">iterating</span><span class="p">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">longdictFingerprint</span><span class="p">(</span><span class="n">dict</span><span class="w"> </span><span class="o">*</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">integers</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//将dict结构体中的几个状态放入到数组中，以便后面应用到64 bit MixFunctions中。</span>
+<span class="w">    </span><span class="c1">//dict结构体其实就是一个hash表的实现，而这些状态其实就是第一、第二哈希表的表地址、表大小与</span>
+<span class="w">    </span><span class="c1">//已用条目的数量</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">table</span><span class="p">;</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">used</span><span class="p">;</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">table</span><span class="p">;</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">integers</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ht</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">used</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* We hash N integers by summing everysuccessive integer with the integer</span>
+<span class="cm">     * hashing of the previous sum. Basically:</span>
+<span class="cm">     *</span>
+<span class="cm">     * Result =hash(hash(hash(int1)+int2)+int3) ...</span>
+<span class="cm">     *</span>
+<span class="cm">     * This way the same set of integers in adifferent order will (likely) hash</span>
+<span class="cm">     * to a different number. */</span>
+<span class="w">    </span><span class="c1">//利用64 bit Mix Functions，将这些状态信息混合到hash中，组成最后的指纹，如果这些状态中有一个</span>
+<span class="w">    </span><span class="c1">//出现变化，可以通过一个算法逆推出该状态变化之前的值。例如，d-&gt;ht[0].size发生变化，则我们可</span>
+<span class="w">    </span><span class="c1">//以通过hash和其他的几个状态，逆推出d-&gt;ht[0].size的最初值。</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">integers</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">        </span><span class="cm">/* For the hashing step we use TomasWang&#39;s 64 bit integer hash. */</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span><span class="w"> </span><span class="c1">//hash = (hash &lt;&lt; 21) - hash - 1;</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">24</span><span class="p">);</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span><span class="w"> </span><span class="c1">// hash * 265</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// hash * 21</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">28</span><span class="p">);</span>
+<span class="w">        </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">31</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ul>
+<li>MurmurHash2s:针对一个<strong>字符串</strong>生64bit哈希值<sup id="fnref2:17"><a class="footnote-ref" href="#fn:17">17</a></sup>   </li>
+</ul>
+<div class="lang-c">
+
+<div class="codehilite"><pre><span></span><code><span class="cm">/* MurmurHash2, byAustin Appleby</span>
+<span class="cm"> * Note - This code makes a few assumptionsabout how your machine behaves -</span>
+<span class="cm"> * 1. We can read a 4-byte value from anyaddress without crashing</span>
+<span class="cm"> * 2. sizeof(int) == 4</span>
+<span class="cm"> *</span>
+<span class="cm"> * And it has a few limitations -</span>
+<span class="cm"> *</span>
+<span class="cm"> * 1. It will not work incrementally.</span>
+<span class="cm"> * 2. It will not produce the same results onlittle-endian and big-endian</span>
+<span class="cm"> *   machines.</span>
+<span class="cm"> */</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="nf">intdictGenHashFunction</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* &#39;m&#39; and &#39;r&#39; are mixing constantsgenerated offline.</span>
+<span class="cm">     They&#39;re not really &#39;magic&#39;, they justhappen to work well.  */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict_hash_function_seed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x5bd1e995</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Initialize the hash to a &#39;random&#39; value*/</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Mix 4 bytes at a time into the hash */</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">unsignedchar</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">key</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">len</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">h</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">        </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">        </span><span class="n">len</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Handle the last few bytes of the inputarray  */</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/* Do a few final mixes of the hash toensure the last few</span>
+<span class="cm">     * bytes are well-incorporated. */</span>
+<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="n">h</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<ol>
+<li>直接定位到哈希桶entry元素   </li>
+</ol>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// n 永远是2的次幂，取余后的结果一定在容量n内</span>
+<span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tab</span><span class="o">[</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hash</span><span class="o">]</span><span class="c1">// hash % n</span>
+</code></pre></div>
+
+
+</div>
+
+<h5 id="h_2-4-2-3-rehashrehash">2.4.2.3. rehash和渐进式rehash</h5>
+<p>redis的哈希表会随着对其操作而增大或减小，那么为了让负载因子保持合理，也保持字典的高效，需要在哈希表中数量太多或太少时进行扩展或收缩。   </p>
+<ul>
+<li>Redis没有在生成RDB和重写AOF   </li>
+</ul>
+<p>redis最小哈希表大小 <code>DICT_HT_INITIAL_SIZE</code> = 4，扩展操作的话ht[1]的大小为第一个大于等于 <code>ht[0].used*2</code>的 2^n ；收缩操作ht[1]的大小为第一个大于等于ht[0].used的2^n。然后将ht[0]中的所有键值对rehash到ht[1]上，当全部rehash之后，<strong>把ht[1]置为ht[0]</strong>，并为<strong>ht[1]新创建一个空白哈希表</strong>，为下次rehash做准备。<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">18</a></sup>   </p>
+<p>渐进式rehash，让字典同时持有ht[0]和ht[1]，将rehashidx设为0，表示rehash开始；在rehash期间，每次对字典进行增删查改操作时，redis除了执行指定的操作以外，还会<strong>顺带把ht[0]哈希表在rehashidx索引上的所有键值对rehash到ht[1]</strong>，当rehash完成，rehashidx++；随着时间及操作的执行，最终ht[0]的所有键值对会rehash到ht[1]上，然后把rehashidx置为-1；表示rehash结束。   </p>
+<p>在渐进式rehash的过程中，字典的删除，查找，更新等操作会在两个哈希表上进行，新增的键值对会保存到ht[1]里面，这样保证了ht[0]里的键值对只增不减，最终变为空表。这样就巧妙地把一次性大量拷贝的开销，<strong>分摊到了多次处理请求的过程中</strong>，避免了耗时操作，保证了数据的快速访问。   </p>
+<p><img alt="" src="vx_images/1438512747697.png =708x" /> <br />
+<strong>与线上数据库不停服迁移：双写</strong> <br />
+类似，数据库也通过媒介比如binlog来同步操作。   </p>
+<h4 id="h_2-4-3-ziplist-skiplist-quicklist">2.4.3. 对链表的改造--ziplist SkipList quicklist</h4>
+<p>普通链表存在两个问题：内存利用率低和容易产生内存碎片<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">19</a></sup>。   </p>
+<ul>
+<li>ziplist 使用连续内存，减少内存碎片，提供内存利用率。但是更改就得重新分配内存。   </li>
+<li>skiplist 可以用相对简单的实现，达到和红黑树近似的查找效率(常数项)。   </li>
+<li>quicklist 使用分段的ziplist组成双向链表，从而保证性能的前提下，尽可能的提高内存利用率。   </li>
+</ul>
+<h3 id="h_2-5">2.5. 更多没介绍的</h3>
+<ul>
+<li>原子操作上，缺乏更多value类型的操作模块：LPUSH/LPOP，SADD/SREM，HGET/HSET，SCAN...   </li>
+<li>数据结构上，value缺乏广泛的数据结构   <ul>
+<li>内存利用率上，没有压缩数据结构   </li>
+</ul>
+</li>
+<li>内存安全性上，缺乏内存过载的淘汰算法   </li>
+<li>高可用、高扩展上，可参考<a href="https://mp.weixin.qq.com/s/3818RiO0gNF261AsS_1tVA" class="external-link">Redis架构演化之路</a>   </li>
+</ul>
+<h2 id="h_3">3. 展望</h2>
+<p>到2023年实时数据将占到全球数据圈24.5%的份额，这给存储系统带来了挑战。这一趋势必然会让NVM与Redis这种内存数据库得到更多的运用，以提升数据中心的运行效率。“全球内存数据库市场，将以19.65%的复合年增长率不断迅速发展。” <br />
+并且Redis正从分布式缓存迈向分布式数据库系统，据说Redis7.0将整合<code>RedisRaft</code>，目标帮助开发多个Redis数据库之间的数据复制，实现分布式强一致性部署<sup id="fnref:20"><a class="footnote-ref" href="#fn:20">20</a></sup>。   </p>
+<script>
+                    function initializeMermaid() {
+                        mermaid.initialize({startOnLoad:true})
+                    }
+
+                    if (document.readyState === "complete" || document.readyState === "interactive") {
+                        setTimeout(initializeMermaid, 1);
+                    } else {
+                        document.addEventListener("DOMContentLoaded", initializeMermaid);
+                    }
+            </script>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://redis.io/topics/faq" class="external-link">https://redis.io/topics/faq</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 0 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://redis.io/topics/data-types" class="external-link">https://redis.io/topics/data-types</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://developer.aliyun.com/article/553255" class="external-link">https://developer.aliyun.com/article/553255</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://github1s.com/redis/redis/blob/5.0/src/ae.c" class="external-link">https://github1s.com/redis/redis/blob/5.0/src/ae.c</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://github1s.com/huangz1990/redis-3.0-annotated/blob/unstable/src/redis.c" class="external-link">https://github1s.com/huangz1990/redis-3.0-annotated/blob/unstable/src/redis.c</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://www.cnblogs.com/straight/articles/7660889.html" class="external-link">https://www.cnblogs.com/straight/articles/7660889.html</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>每打开或创建一个文件(socket也是)，内核就会向进程返回一个fd，第一个打开文件是0,第二个是1,依次递增。一个socket fd在<code>/proc/net/tcp</code>之下可以看到像<code>socket:[12345]</code>这样的形式，其中12345被称作inode号。&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>一个负责响应 IO 事件，一个负责交给相应的事件处理器去处理.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p><a href="https://mp.weixin.qq.com/s/keVI4Fn8N42VhIhODkuqBA" class="external-link" class="external-link">https://mp.weixin.qq.com/s/keVI4Fn8N42VhIhODkuqBA</a>&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p><a href="https://mp.weixin.qq.com/s/keVI4Fn8N42VhIhODkuqBA" class="external-link" class="external-link">https://mp.weixin.qq.com/s/keVI4Fn8N42VhIhODkuqBA</a>&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p><a href="https://topic.atatech.org/articles/181140#16" class="external-link">https://topic.atatech.org/articles/181140#16</a>&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:11" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p><a href="https://cloud.tencent.com/developer/article/1672694" class="external-link">https://cloud.tencent.com/developer/article/1672694</a>&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p><a href="https://yuque.antfin-inc.com/tair-userdoc/cloud-redis/dhhm1g" class="external-link">https://yuque.antfin-inc.com/tair-userdoc/cloud-redis/dhhm1g</a>&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p><a href="https://www.cnblogs.com/JKayFeng/p/5911544.html" class="external-link">https://www.cnblogs.com/JKayFeng/p/5911544.html</a>&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p><a href="https://www.cnblogs.com/aboutblank/p/4510120.html" class="external-link">https://www.cnblogs.com/aboutblank/p/4510120.html</a>&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p><a href="https://www.cnblogs.com/aboutblank/p/4529115.html" class="external-link">https://www.cnblogs.com/aboutblank/p/4529115.html</a>&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p><a href="https://blog.csdn.net/jasper_xulei/article/details/18364313" class="external-link">https://blog.csdn.net/jasper_xulei/article/details/18364313</a>&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 16 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:17" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p><a href="https://www.cnblogs.com/aboutblank/p/4529115.ht" class="external-link">https://www.cnblogs.com/aboutblank/p/4529115.ht</a>&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p><a href="https://www.cnblogs.com/BeiGuo-FengGuang/p/11313178.html" class="external-link">https://www.cnblogs.com/BeiGuo-FengGuang/p/11313178.html</a>&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 18 in the text">&#8617;</a></p>
+</li>
+<li id="fn:20">
+<p><a href="https://www.jdon.com/54901" class="external-link">https://www.jdon.com/54901</a>&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 19 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/database/How-to-Choose-the-Suitable-Database.html">how-to-choose-the-suitable-database</a></li>
+	<li><a class="backlink" href="/index.html">index</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A172110605869949720167037554492850778793{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D172110605869949720167037554492850778793{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B172110605869949720167037554492850778793{level}" level="{level}" note_temp_id="172110605869949720167037554492850778793" onclick="window.ObsHtmlGraph.run(this, '172110605869949720167037554492850778793', 'redis源码架构阅读');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C172110605869949720167037554492850778793{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="inverted-index-of-lucene-and-b-tree">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'inverted-index-of-lucene-and-b-tree';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 3;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=inverted-index-of-lucene-and-b-tree" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js active" path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js active" path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js " path="/program/full-stream">
+		<button id="folder-21" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js " path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="inverted-index-of-lucene-and-b-tree">Inverted-Index-of-Lucene-and-B-Tree</h1>
+<div class="toc">
+<ul>
+<li><a href="#inverted-index-of-lucene-and-b-tree" class="anchor-link">Inverted-Index-of-Lucene-and-B-Tree</a><ul>
+<li><a href="#h_1" class="anchor-link">1. 数据类型</a></li>
+<li><a href="#h_2" class="anchor-link">2. 数据检索</a><ul>
+<li><a href="#h_2-1-b-tree" class="anchor-link">2.1. B+Tree</a></li>
+<li><a href="#h_2-2-inverted-index" class="anchor-link">2.2. 倒排索引（inverted index）</a><ul>
+<li><a href="#h_2-2-1" class="anchor-link">2.2.1. 倒排索引的组成部分</a></li>
+<li><a href="#h_2-2-2-term-index" class="anchor-link">2.2.2. Term Index</a><ul>
+<li><a href="#h_2-2-2-1-trie" class="anchor-link">2.2.2.1. Trie 树</a></li>
+<li><a href="#h_2-2-2-2-fsm" class="anchor-link">2.2.2.2. FSM</a></li>
+<li><a href="#h_2-2-2-3-fsa" class="anchor-link">2.2.2.3. FSA</a></li>
+<li><a href="#h_2-2-2-4-fst" class="anchor-link">2.2.2.4. FST</a></li>
+<li><a href="#h_2-2-2-5-levenshtein" class="anchor-link">2.2.2.5. LevenShtein自动机</a></li>
+<li><a href="#h_2-2-2-6-faq" class="anchor-link">2.2.2.6. FAQ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_2-3-b" class="anchor-link">2.3. B+树与倒排索引实例</a><ul>
+<li><a href="#h_2-3-1-1-idb" class="anchor-link">2.3.1.1. 以id列为主键的B+树的聚簇索引</a></li>
+<li><a href="#h_2-3-1-2-address" class="anchor-link">2.3.1.2. 以address列为索引的二级索引</a></li>
+<li><a href="#h_2-3-1-3-address" class="anchor-link">2.3.1.3. 为address列建立的倒排索引</a></li>
+<li><a href="#h_2-3-2" class="anchor-link">2.3.2. 联合索引查询方式不同</a><ul>
+<li><a href="#h_2-3-2-1-skip-list-8" class="anchor-link">2.3.2.1. 利用 Skip List 合并8</a></li>
+<li><a href="#h_2-3-2-2-bitset-8" class="anchor-link">2.3.2.2. 利用 Bitset 合并8</a></li>
+</ul>
+</li>
+<li><a href="#h_2-3-3" class="anchor-link">2.3.3. 倒排索引的其他特性</a><ul>
+<li><a href="#h_2-3-3-1" class="anchor-link">2.3.3.1. 分段存储</a></li>
+<li><a href="#h_2-3-3-2" class="anchor-link">2.3.3.2. 不可变</a></li>
+<li><a href="#h_2-3-3-3" class="anchor-link">2.3.3.3. 延迟写</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_2-4-b-vs" class="anchor-link">2.4. B+树 Vs 倒排索引</a><ul>
+<li><a href="#h_2-4-1" class="anchor-link">2.4.1. 优点</a></li>
+<li><a href="#h_2-4-2" class="anchor-link">2.4.2. 缺点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#h_3" class="anchor-link">3. 使用注意事项</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="h_1">1. 数据类型</h2>
+<ul>
+<li>结构化数据：典型的如可以使用二维表结构来逻辑表达和实现的数据。   </li>
+<li>非结构化数据：不定长或无固定格式的数据，比如图片、音视频、Word文档等信息。   </li>
+<li>半结构化数据：可以根据需要按结构化数据处理，也可以当作非结构化数据的数据，比如XML、HTML等具有自己特定的标签格式的数据。   </li>
+</ul>
+<h2 id="h_2">2. 数据检索</h2>
+<h3 id="h_2-1-b-tree">2.1. B+Tree</h3>
+<p>通常结构化数据会通过关系型数据库进行存储和管理，比如Mysql、Oracle等。以Mysql的InnoDB存储引擎为例，默认会使用B+树的聚簇索引方式组织二维表格结构化数据中的每一条记录，以下摘录整理自《Mysql是怎样运行的？》：   </p>
+<ul>
+<li>使用记录主键值的大小进行记录和页（磁盘和内存之间的基本单位）的排序   <ul>
+<li>页（包括叶子结点和内节点）内的记录按照主键的大小顺序排成一个单向链表，页内的记录被划分为若干组，每个组中主键值最大的记录在页内的偏移量会被当作槽依次存放在页目录中。可以通过二分法快速定位到主键列等于某个值的记录   </li>
+<li>各个存放用户记录的页也是根据用户记录的主键大小顺序排成一个双向链表   </li>
+<li>存放目录项记录的页分为不同的层级，在同一层级中的页也是通过页中目录项记录的主键大小顺序排成双向链表   </li>
+</ul>
+</li>
+<li>B+树的叶子节点存储的是完整的用户记录（包括默认的隐藏列）   </li>
+</ul>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/560085891826124.png" />   </p>
+<h3 id="h_2-2-inverted-index">2.2. 倒排索引（inverted index）</h3>
+<p>而对于非结构化数据，则需要将从非结构化数据选取某些信息提取出来再进行组织成索引。比如ElasticSearch使用的Lucene工具包中提供的倒排索引（inverted index）。   </p>
+<h4 id="h_2-2-1">2.2.1. 倒排索引的组成部分</h4>
+<ol>
+<li>对原始文档<code>Doc</code>进行分词后得到倒排索引里面最小的存储和查询单元称为<code>Term</code>，对于英文来说是一个单词，对于中文来说一般指分词后的一个词。   </li>
+<li>文档集合中出现的<strong>不重复</strong>词条 Term 的<strong>有序</strong>集合称之为词典<code>Term Dictionary</code>。因为是有序集合，所以可以使用二分法在LogN的时间复杂度内查找到对应Term。   </li>
+<li>为了避免磁盘的随机读<code>random access</code>操作（10ms), 在词典之上再建立<code>term</code>前缀到词典的索引<code>Term Index</code>。Term Index 大小只有所有 term 的几十分之一，因此可以在内存中   </li>
+<li>通过Term Index索引到的每条词典中的也是一条索引项，其记载term本身的一些信息以及指向倒排列表<code>Posting list</code>的指针。   </li>
+<li>倒排表可以简单是一个int数组，记录某个词属于哪个文档的文档编号。其中每条记录称为一个倒排项<code>Posting</code>。   </li>
+<li>所有单词的<code>Posting list</code>一般顺序地存储在磁盘的倒排文件<code>Inverted File</code>。   </li>
+<li>被写入磁盘的Posting list是Immutable（不可变）的一段段（<code>Segment</code>）   </li>
+</ol>
+<p><code>Term Index</code>、<code>Term Dictionary</code>与<code>Posting list</code>的关系如下图所示<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>： <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/112395918901151.png" />   </p>
+<p>图中的Posting List只描述了document id以示意，一般Posting会包括：   </p>
+<ul>
+<li>
+<p>这个Term的 document list   </p>
+</li>
+<li>
+<p>这个Term的所有 document 的数量：<code>IDF</code>（inverse document frequency）   </p>
+</li>
+<li>
+<p>这个Term在每个 document 中出现的次数：<code>TF</code>（term frequency）   </p>
+</li>
+<li>
+<p>这个Term在这个 document 中的次序   </p>
+</li>
+<li>
+<p>每个 document 的长度：length norm   </p>
+</li>
+<li>
+<p>这个Term的所有 document 的平均长度   </p>
+</li>
+</ul>
+<p>通常来说，TF也被称为词频，TF越高，这个Term可能对这个doc越重要；但是如果IDF很大，而每个TF还很高，这个Term对整体就越不重要。   </p>
+<h4 id="h_2-2-2-term-index">2.2.2. Term Index</h4>
+<h5 id="h_2-2-2-1-trie">2.2.2.1. Trie 树</h5>
+<p>Trie 树即字典树，是一种空间换时间的数据结构，利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较。其通常可视化如下，遍历路径就是单词本身： <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/260867035940957.png" />   </p>
+<p>假设字符的种数有<code>ALPHABAT_SIZE</code>种，有<code>N</code>个长度为<code>L</code>的字符串构成了一个Trie树。则在最坏的情况下，每个节点的出度为ALPHABET_SIZE（即每个节点的可能子节点数量为ALPHABET_SIZE），Trie树的高度为L,此时Trie树的最坏空间复杂度为O(<code>ALPHABET_SIZE</code> * <code>N</code> * <code>L</code>)，相比二叉搜索树（BST）的<code>O(N*L)</code>毫无疑问是巨大的空间浪费。但是TRIE树总是可以沿着树的一个个分支高效的向下逐个字符的查询,其最坏时间复杂度<code>O(L)</code>，高于BST的<code>O(L * logN)</code>,这正是空间换时间的体现。   </p>
+<h5 id="h_2-2-2-2-fsm">2.2.2.2. FSM</h5>
+<p>Term Index 与字典树Trie树类似，但是为了<strong>极致的降低存储空间</strong>，还进行了压缩，使用了一种称为确定无环状态转化器<code>FST</code>（<code>Deterministic Acyclic Finite State Transducer</code>）的结构来构建词典。FST首先是一个有限状态机<code>FSM</code>(<code>Finite State Machines</code>)，即用来表示有限个状态的集合以及这些状态之间转移和动作的数学模型，简单说它有三个特征<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>：   </p>
+<ul>
+<li>状态总数（state）是有限的。   </li>
+<li>任一时刻，只处在一种状态之中。   </li>
+<li>某种条件下，会从一种状态转变（transition）到另一种状态。   </li>
+</ul>
+<p>举个现实的例子：网页上有一个菜单元素。鼠标悬停的时候，菜单显示；鼠标移开的时候，菜单隐藏。如果使用有限状态机描述，就是这个菜单只有两种状态（显示和隐藏），鼠标会引发状态转变。   </p>
+<h5 id="h_2-2-2-3-fsa">2.2.2.3. FSA</h5>
+<p>前面提到Term Dictionary是一个有序集合，对有序集合索引通常可以使用多路平衡二叉树实现，但也可以使用FSM的一种有限状态接收机<code>FSA</code>(<code>finite state acceptor</code>)来实现。FSA具有这样的特性：   </p>
+<ul>
+<li>确定：意味着指定任何一个状态，只可能最多有一个转移可以访问到。   </li>
+<li>无环： 不可能重复遍历同一个状态   </li>
+<li>接收机：有限状态机只“接受”特定的输入序列，并终止于final状态。   </li>
+</ul>
+<p>举个FSA的简单例子--“大笑机”<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>： <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/384832622268595.png" />   </p>
+<p>图中的节点可以表示定义的某种状态，简单来说可以分为两类：non-final state与其中4代表的final state。➡️上的字母代表该字母的输入可以使前一个状态转移到后一个状态。为什么称之为大笑机呢？因为这个机器能识别笑声！ <br />
+比如，我们以输入的笑声到达终态作为笑声的判定条件。它可以接收<code>ha!</code>,节点状态1-&gt;2-&gt;3-&gt;4;也可以接收<code>haha!</code>,节点状态1-&gt;2-&gt;3-&gt;2-&gt;3-&gt;4;还能接收<code>hahaha!</code>,节点状态最后会转移到final state...然而它不能接收<code>haha</code>,易知节点会停在2这个non-final state；它也不能接收<code>hoho</code>,因为节点状态从1转移到2后，<code>o</code>本身就不被当前节点接收来作为转移条件。   </p>
+<p>大笑机也可以如下表示<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>： <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/267872717268598.png" />   </p>
+<p>作为转换的条件当然也可以是两个字母当成的一个组合。   </p>
+<p>事实上传统的前缀树或者说字典树也是一种FSA，但TRIE树只共享前缀，而FSA不仅共享前缀还共享后缀<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>。 <br />
+假设我们用星期一、二、四去掉共同的<code>day</code>后缀组成一个Set: mon,tues,thurs。相应的TRIE是这样的，只共享了前缀。 <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/591757299889361.png" /> <br />
+TRIE有重复的3个final state:3、8、11。 而8、11都是s转移，是可以合并的，FSA共享后缀后： <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/80565828576003.png" />   </p>
+<p>上图来自申艳超的博客，个人认为t-&gt;u对应的状态应该是2，可能是ta画错了。   </p>
+<h5 id="h_2-2-2-4-fst">2.2.2.4. FST</h5>
+<p>FST和FSA很像，但比它给定一个key除了能回答是否存在，还能输出一个关联的值<sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup>。   </p>
+<p>具有这样的特性：   </p>
+<ul>
+<li>确定：意味着指定任何一个状态，只可能最多有一个转移可以遍历到。   </li>
+<li>无环： 不可能重复遍历同一个状态   </li>
+<li>transducer：接收特定的序列，终止于final状态，同时<strong>会输出一个值</strong>。   </li>
+</ul>
+<p>FST最通常的运用就是翻译，比如a走过FST后返回b即翻译成了b<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>。   </p>
+<p>依然以<code>{mon,tues,thurs}</code>这个集合为例，以星期天为一周的第1天，我们的mon对应2，tues对应3，thurs对应5，那么最后生成的FST就如下图所示，<code>/</code>后表示要输出的值：   </p>
+<ul>
+<li>路径m-&gt;o-&gt;n将会输出2   </li>
+<li>路径t-&gt;u-&gt;e-&gt;s将会输出3   </li>
+<li>路径t-&gt;h-&gt;u-&gt;r-&gt;s将会输出5   </li>
+</ul>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/423582028122481.png" />   </p>
+<p>当然，满足上诉输出条件并不只有这一种FST，比如<code>m -&gt; o -&gt; n</code>的路径上的<code>m/2</code>改成<code>o/1</code>与<code>n/1</code>.   </p>
+<h5 id="h_2-2-2-5-levenshtein">2.2.2.5. LevenShtein自动机</h5>
+<p>通常我们接触到的索引都假定具有确切的数据，并允许查询键的确切值或排序值的取值范围。但对于拼写错误的Term，索引不支持查询。那么Lucene是如何支持错误Term或者部分Term模糊查询的呢？ <br />
+事实上，FST可以转换成<a href="https://www.cnblogs.com/med-dandelion/p/4532276.html" class="external-link">LevenShtein自动机</a>，这允许Lucene能够在某个编辑距离<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>内搜索文本。Leetcode第72题《Edit Distance》便是计算编辑距离的题目。   </p>
+<h5 id="h_2-2-2-6-faq">2.2.2.6. FAQ</h5>
+<p>以Term: Monday、TuesDay、ThursDay为例，FSA可以变成下面这样吗？   </p>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+stateDiagram-v2 
+    [*] --> m
+        m --> o
+        o --> n
+    [*] --> t
+        t--> u
+        t --> h
+        h --> u
+        u --> r
+        r --> s
+        u --> e
+        e --> s
+
+        n --> d
+        s --> d
+         d --> a
+          a --> y
+    y --> [*]
+
+</div>
+
+</div>
+
+<p>提示：Final State 怎么确定？   </p>
+<h3 id="h_2-3-b">2.3. B+树与倒排索引实例</h3>
+<p>给这样一张表   </p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>age</th>
+<th>gender</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>lele</td>
+<td>20</td>
+<td>女</td>
+<td>中国浙江杭州</td>
+</tr>
+<tr>
+<td>2</td>
+<td>youyou</td>
+<td>21</td>
+<td>女</td>
+<td>中国江苏连云港</td>
+</tr>
+<tr>
+<td>3</td>
+<td>papa</td>
+<td>18</td>
+<td>男</td>
+<td>中国安徽芜湖</td>
+</tr>
+<tr>
+<td>4</td>
+<td>anan</td>
+<td>20</td>
+<td>男</td>
+<td>中国浙江宁波</td>
+</tr>
+<tr>
+<td>5</td>
+<td>nunu</td>
+<td>20</td>
+<td>男</td>
+<td>美国加州</td>
+</tr>
+<tr>
+<td>#### 2.3.1. 索引完全不同</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="h_2-3-1-1-idb">2.3.1.1. 以id列为主键的B+树的聚簇索引</h5>
+<p>为方便说明，假设目录页不受限制，数据页只能存储两条用户数据。 <br />
+<img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/关系型数据库/mysql快问快答.md/514964595899450.png =1000x" />   </p>
+<h5 id="h_2-3-1-2-address">2.3.1.2. 以address列为索引的二级索引</h5>
+<p>假设该二级索引 中address 列按字典序排列。二级索引包含了索引列以及指向主键的指针。   </p>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/关系型数据库/mysql快问快答.md/410113724586092.png =1000x" />   </p>
+<h5 id="h_2-3-1-3-address">2.3.1.3. 为address列建立的倒排索引</h5>
+<ul>
+<li>Term Distionary:{"中国","浙江","杭州","宁波","江苏","连云港","美国","芜湖","加州"}   </li>
+<li>Term Index: 通过FST 返回<code>Term Distionary</code>对应的地址   </li>
+</ul>
+<div class="lang-mermaid">
+
+<div class="mermaid">
+graph LR
+c1((Root))
+c1 --> z((中))
+z --> g((国))
+g --> zj((浙江))
+zj --> h((杭))
+h --> zhou((州))
+c1 --> m((美))
+m --> g
+g --> jz((加))
+jz --> zhou
+
+
+</div>
+
+</div>
+
+<p>以中国浙江杭州“和“美国加州”两个Term 集合为例构成的FST，查询时”走到“中国”会返回<code>[1,2,3,4]</code>,走到“中国浙江”会返回<code>[1,4]</code>，走完路径“中国浙江杭州”会返回<code>[1]</code>。   </p>
+<ul>
+<li>Posting List: 通过倒排链返回对应的document的主键值   </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>term</th>
+<th>posting list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国</td>
+<td>[1, 2, 3, 4]</td>
+</tr>
+<tr>
+<td>浙江</td>
+<td>[1, 4]</td>
+</tr>
+<tr>
+<td>杭州</td>
+<td>[1]</td>
+</tr>
+<tr>
+<td>宁波</td>
+<td>[4]</td>
+</tr>
+<tr>
+<td>江苏</td>
+<td>[2]</td>
+</tr>
+<tr>
+<td>连云港</td>
+<td>[2]</td>
+</tr>
+<tr>
+<td>美国</td>
+<td>[5]</td>
+</tr>
+<tr>
+<td>加州</td>
+<td>[5]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h_2-3-2">2.3.2. 联合索引查询方式不同</h4>
+<p>假设现在查询人员信息，给定查询过滤条件 age=18 与gender= 女 ，对于Mysql来说如果只是如果你给 age 和 gender 两个字段都建立了索引，查询的时候会先采样选一个最好的，然后另外一个条件是在遍历行的过程中在内存中计算之后过滤掉；如果是建立了联合索引age-gender，那才可能一次定位到age=18 与gender= 女 的页。而Lucene的检索流程其实是<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>   </p>
+<p>先从 term index 找到 18 在 term dictionary 的大概位置，然后再从 term dictionary 里精确地找到 18 这个 term，然后得到一个 posting list 或者一个指向 posting list 位置的指针。然后再查询 gender= 女 的过程也是类似的。最后得出 age=18 AND gender= 女 就是把两个 posting list 做一个“与”的合并。   </p>
+<p>"与"的操作并不好做，通常有两种办法：   </p>
+<ul>
+<li>使用 skip list 数据结构。同时遍历 gender 和 age 的 posting list，互相 skip；   </li>
+<li>使用 bitset 数据结构。对 gender 和 age 两个 filter 分别求出 bitset，对两个 bitset 做逻辑操作。   </li>
+</ul>
+<h5 id="h_2-3-2-1-skip-list-8">2.3.2.1. 利用 Skip List 合并<sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup></h5>
+<p><img alt="" src="https://gitee.com/istarwyh/images/raw/master/vnote/程序员练级之路/技术/database/elasticsearch与mysql.md/349563376936825.png" />   </p>
+<p>以上是三个 posting list。我们现在需要把它们用 AND 的关系合并，得出 posting list 的交集。首先选择最短的 posting list，然后从小到大遍历。遍历的过程可以跳过一些元素，比如我们遍历到绿色的 13 的时候，就可以跳过蓝色的 3 了，因为 3 比 13 要小。 <br />
+最后得出的交集是 [13,98]，所需的时间比完整遍历三个 posting list 要快得多。   </p>
+<h5 id="h_2-3-2-2-bitset-8">2.3.2.2. 利用 Bitset 合并<sup id="fnref3:8"><a class="footnote-ref" href="#fn:8">8</a></sup></h5>
+<p>bitset 是一种很直观的数据结构，对应 posting list 如： <br />
+<center>[1,3,4,7,10]</center> <br />
+对应的 bitset 就是： <br />
+<center>[1,0,1,1,0,0,1,0,0,1]</center> <br />
+每个文档按照文档 id 排序对应其中的一个 bit。Bitset 自身就有压缩的特点，其用一个 byte 就可以代表 8 个文档。所以 100 万个文档只需要 12.5 万个 byte。但是考虑到文档可能有数十亿之多，在内存里保存 bitset 仍然是很奢侈的事情。而且对于个每一个 filter 都要消耗一个 bitset，比如 age=18 缓存起来的话是一个 bitset，18&lt;=age&lt;25 是另外一个 filter 缓存起来也要一个 bitset。 <br />
+Lucene 会对bitset再进行压缩，称之为 Roaring Bitmap。压缩的思路其实很简单:与其保存 100 个 0，占用 100 个 bit;还不如保存 0 一次，然后声明这个 0 重复了 100 遍。   </p>
+<p>这两种合并使用索引的方式都有其用途。Elasticsearch 对其性能有详细的<a href="https://www.elastic.co/blog/frame-of-reference-and-roaring-bitmaps" class="external-link">对比</a>。简单来说对于简单的相等条件的过滤缓存成纯内存的 bitset 还不如需要访问磁盘的 skip list 的方式要快。   </p>
+<h4 id="h_2-3-3">2.3.3. 倒排索引的其他特性</h4>
+<h5 id="h_2-3-3-1">2.3.3.1. 分段存储</h5>
+<blockquote>
+<p>适当的索引可以加速读取查询，但每个索引都会减慢写速度。--《数据密集型系统设计》   </p>
+</blockquote>
+<p>数据库维护索引除了占用存储空间，也会减慢写速度。 <br />
+如果为整个文档集合创建一个庞大的倒排索引，当索引需要更新时，相比每次只更新索引的一小部分，全量替换原有索引成本太高。所以倒排索引会被拆分为多个子文件存储。每个子文件为一段，所以倒排索引其实是分段（<code>Segment</code>）存储的。当段太多时会触发段合并，即将多个段合并生成新段，合并结束后会将老的段删除。   </p>
+<h5 id="h_2-3-3-2">2.3.3.2. 不可变</h5>
+<p>前面提到Lucene使用FST尽可能地压缩Term Index的大小，因为压缩的缘故，Term Index实际上不方便直接在原数据结构上做修改了。所以一开始倒排索引就被设计成Inmmutable不可变<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>：   </p>
+<ul>
+<li>因为已有的倒排索引不会改变，所以理论上读请求都会直接命中内存中的Term Index，不会发生走到磁盘的Term Dictionary的情况。   </li>
+<li>同理，建有的其他缓存（比如Filter缓存）在索引的生命周期内始终有效。   </li>
+<li>因为已有索引本身不被更新，所以也不用考虑并发修改数据的问题。   </li>
+</ul>
+<p>既然索引不可变，那数据本身改变了怎么办呢？所以数据更新与删除其实都是“伪”的，即   </p>
+<ul>
+<li>新增数据时，其实是新增一个段   </li>
+<li>对旧数据更新时，其实是新增一个段来存储数据并标记为新的，最后在返回结果时对结果进行更新   </li>
+<li>对旧数据进行删除时，其实也是对旧数据在<code>.del</code>文件中做标记，最后采用bitset的办法在原索引搜索出结果后进行过滤   </li>
+</ul>
+<p>在原数据之外另外维护数据的变动来实现增删改的效果自然要付出代价，   </p>
+<ul>
+<li>如果新增数据太多，则新建段的数量太多，对服务器的资源如文件句柄的消耗很大，而且每个段都会参与搜索结果的逻辑操作，段越多搜索也越慢   </li>
+<li>若有一条数据反复更新，其实还是反复新建段...也浪费空间   </li>
+<li>删除旧数据可能是为了释放存储空间，但短时间内不会有效果   </li>
+</ul>
+<h5 id="h_2-3-3-3">2.3.3.3. 延迟写</h5>
+<p>同样为了提升写的性能ES不可能同步写数据:<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup>   </p>
+<ol>
+<li>每当需要新增数据（可能是为了更新），会将其先写到JVM的内存中。   </li>
+<li>当达到默认的时间(<strong>1s</strong>）或者内存中的数据够大时，会触发Refresh,将内存中的数据生成到一个新的段上并缓存到操作系统的文件缓存系统上。   </li>
+<li>因为在最终落盘之前数据是可能因为宕机而丢失的，所以数据在落盘前还会记录一份到事务日志中。因为是直接顺序记录，IO压力比刷新到磁盘小很多。   </li>
+<li>当事务日志超过512M或者时间超过30min或者超过文件系统缓存限制才会真正通过<code>Fsync</code>刷新到磁盘上。   </li>
+</ol>
+<p>必须注意的是，JVM内存中的数据并不是以段存储的，所以不能提供搜索功能；当数据被refresh到文件缓存系统中时才可以,所以以Lucene为基础的会被称为"近实时搜索引擎".   </p>
+<h3 id="h_2-4-b-vs">2.4. B+树 Vs 倒排索引</h3>
+<p>B+树和倒排索引其实分别适用于两种不同的应用场景:   </p>
+<ul>
+<li>OLTP:On-Line Transaction Processing,联机事务处理,重点在执行数据库的写操作(增删改)   </li>
+<li>OLAP:On-Line Analytical Processing,联机分析处理,重点在执行数据库的读操作   </li>
+</ul>
+<p>当数据在源源不断生产,我们离不开Mysql这类偏OLTP的数据库,但为了优化读,我们可以通过后续再把数据清洗一部分到OLAP数据库中做专门的查询分析,如ES.如此,两类数据库共存,各自发挥了自己最擅长的事.   </p>
+<h4 id="h_2-4-1">2.4.1. 优点</h4>
+<p>非结构化数据如果使用关系数据库中存储，再使用like的方式模糊查询，因为不能利用索引，效率是很低的；但是结构化数据如果使用倒排索引的方式去组织，查询尤其过滤查询性能仍然会得到提升。   </p>
+<ul>
+<li>相对于B+树即使是目录页也在磁盘中，倒排索引的不仅设计了Term Dictionary这样的目录页，还在其上又设计了一层使得定位Term更为迅速的Term Index，并且通过FST压缩使得能完全在内存中使用Term Index   </li>
+<li>
+<p>在 Mysql 中给两个字段独立建立的索引无法联合起来使用，必须对联合查询的场景建立复合索引，而Mysql 如果经过索引过滤之后可能仍然要加载很多行。而 lucene 可以任何 AND 或者 OR 组合使用索引进行检索。   </p>
+</li>
+<li>
+<p>Elasticsearch 支持 nested document，可以把一批数据点嵌套存储为一个 document block，减少需要索引的文档数。   </p>
+</li>
+<li>
+<p>Lucene 支持分 segment，Elasticsearch 支持分 index。Elasticsearch 可以把分开的数据当成一张表来查询和聚合。相比之下 Mysql 如果自己做分库分表的时候，联合查询不方便。   </p>
+<ul>
+<li>当索引上数据量太大，ES可以水平拆分，这并不像InnoDB的页分裂，因为数据并不会重新排序，而像Mysql数据量太大时的分库分表的水平拆分。拆分出来的索引数据块称为分片（sharding）。   </li>
+</ul>
+</li>
+</ul>
+<h4 id="h_2-4-2">2.4.2. 缺点</h4>
+<p>搜素引擎可以带来查询性能提升，但是相对Mysql也有一定局限性，比如   </p>
+<ul>
+<li>对深分页支持效果不好   <ul>
+<li>例如pageSize = 100,pageNo = 101,一共有个6个shard.则需要在6个shard上都排序算分(score)10100条数据,最后再在coordinating node上之后捞出来的人60600条数据,这很容易OOM   </li>
+<li>搜索最好不要超过5000条(ES的<code>max_result_window</code>默认为10000)   </li>
+</ul>
+</li>
+<li>搜索结果的排序、统计在大数据量时结果不稳定(可能是因为分片堆排序的原因)   </li>
+<li>更新慢,当出现索引较大更新时，因为倒排索引本身不可变需要重新构建整个索引   </li>
+</ul>
+<h2 id="h_3">3. 使用注意事项</h2>
+<ol>
+<li>使用的索引ID最好要有规律性，UUID那种非常不适合Lucene查询   </li>
+<li>如果字段本身不需要分词,看不同的产品注意设置为不分词,不然白白创建分词后的索引   </li>
+<li>索引刷新间隔默认为1s,业务不需要如此高的实时性的话,可以更改   </li>
+<li>段合并会消耗大量磁盘I/O,注意设置参与段合并的线程数量   </li>
+<li>大数据量写入的场景,会占用大量的网络带宽,很可能会使节点之间的心跳超时(通常默认1s)   </li>
+<li>创建索引的时候就确定好主分片的数量并且最好不要改变这个数量，因为分片后原本对查询的路由都会无效   </li>
+<li>为了提高集群稳定性和读时的高并发，还可以对索引数据做副本（Copy）。不过这同时也会增加写成本   </li>
+</ol>
+<p>以上部分参考: <a href="https://c1n.cn/gC52J" class="external-link">https://c1n.cn/gC52J</a>   </p>
+<script>
+                    function initializeMermaid() {
+                        mermaid.initialize({startOnLoad:true})
+                    }
+
+                    if (document.readyState === "complete" || document.readyState === "interactive") {
+                        setTimeout(initializeMermaid, 1);
+                    } else {
+                        document.addEventListener("DOMContentLoaded", initializeMermaid);
+                    }
+            </script>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.infoq.cn/article/database-timestamp-02?source=app_share" class="external-link" class="external-link">https://www.infoq.cn/article/database-timestamp-02?source=app_share</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 0 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="http://www.ruanyifeng.com/blog/2013/09/finite-state_machine_for_javascript.html" class="external-link">http://www.ruanyifeng.com/blog/2013/09/finite-state_machine_for_javascript.html</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node2.html#l1.fsas" class="external-link">https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node2.html#l1.fsas</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node3.html#l1.examples" class="external-link">https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node3.html#l1.examples</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://www.shenyanchao.cn/blog/2018/12/04/lucene-fst/" class="external-link">https://www.shenyanchao.cn/blog/2018/12/04/lucene-fst/</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node13.html#l2.transducers" class="external-link">https://cs.union.edu/~striegnk/courses/nlp-with-prolog/html/node13.html#l2.transducers</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>Levenshtein distance，编辑距离为1表示已经添加、删除或替换了一个字母。&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p><a href="https://www.infoq.cn/article/database-timestamp-02?source=app_share" class="external-link" class="external-link">https://www.infoq.cn/article/database-timestamp-02?source=app_share</a>&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:8" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:8" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p><a href="https://xie.infoq.cn/article/5501ae1652c9adac088c10646?source=app_share" class="external-link">https://xie.infoq.cn/article/5501ae1652c9adac088c10646?source=app_share</a>&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p><a href="https://mp.weixin.qq.com/s/PIl9_1ogyKVDd0nxz8PhUw" class="external-link">https://mp.weixin.qq.com/s/PIl9_1ogyKVDd0nxz8PhUw</a>&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/llm/Vector-Database.html">vector-database</a></li>
+	<li><a class="backlink" href="/program/database/How-to-Choose-the-Suitable-Database.html">how-to-choose-the-suitable-database</a></li>
+	<li><a class="backlink" href="/index.html">index</a></li>
+</ul>
+</div>
+
+<div class="tags">
+
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A146079232491790690029636892105314142345{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D146079232491790690029636892105314142345{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B146079232491790690029636892105314142345{level}" level="{level}" note_temp_id="146079232491790690029636892105314142345" onclick="window.ObsHtmlGraph.run(this, '146079232491790690029636892105314142345', 'inverted-index-of-lucene-and-b-tree');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C146079232491790690029636892105314142345{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>

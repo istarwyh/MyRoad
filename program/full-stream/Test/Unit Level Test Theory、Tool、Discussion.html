@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+        <head>
+                <!-- Page information -->
+                <meta charset="UTF-8" />
+                <meta name="node_id" content="unit level test theory、tool、discussion">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+
+                <!-- Set title -->
+                <title>晓灰-初早天空刚从混沌中醒来</title>
+
+                <!-- Includes -->
+                <script src="/obs.html/static/obsidian_core.js"></script>
+<script src="/obs.html/static/encoding.js"></script>
+<link rel="stylesheet" href="/obs.html/static/master.css" />
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+            'securityLevel': 'loose',
+            'theme': 'dark',
+            'themeVariables': {
+                    'darkMode': true,
+            }
+    });
+</script>
+<script>
+  MathJax = {
+    loader: {
+      load: [
+        '[tex]/action',
+        'output/chtml',
+        '[tex]/centernot'
+      ]
+    },
+    tex: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true,
+      packages: {'[+]': ['centernot']}
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<script src="/obs.html/static/flexsearch.bundle.js"></script>
+<script src="/obs.html/static/pako.js"></script>
+<script src="/obs.html/static/search.js"></script>
+<script src="/obs.html/static/dirtree.js"></script>
+
+
+
+
+                <!-- Onload tweaks -->
+                <script>
+                        const CURRENT_NODE = 'unit level test theory、tool、discussion';
+                        const HTML_URL_PREFIX = '';
+                        const PAGE_DEPTH = 3;
+                </script>
+        </head>
+
+<body class="theme-obs-light">
+        <div id="antiflash" style="display: none;"></div>
+        <script>
+                document.getElementById('antiflash').style.display = 'block';
+        </script>
+        <div id="search-master-div">
+    <div id="search-slab" king_ramses="return the slaaab">
+            <div id="search-controls">
+                    <input id="search_string" placeholder="Type to search notes" type="text" />
+                    <div class="tooltip" style="display: none;">
+                        <input type="checkbox" id="hard_search" name="hard" />
+                        <span class="tooltiptext">Hard search (require exact match)</span>
+                    </div>
+                    <div id="search-results-box">
+                        <div id="search-results"></div>
+                    </div>
+                    <div id="search-instructions">
+                        <div class="prompt-instruction mobile">
+                            <button onclick="toggle_id('search-master-div');"><b>Close</b> Search </button>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("search-master-div").addEventListener('click', e => {
+            if(e.target !== e.currentTarget){
+                    return
+            }
+            toggle_id('search-master-div');
+    })
+    document.getElementById("search_string").addEventListener("input", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    }); 
+    document.getElementById("hard_search").addEventListener("click", function(event) {
+            setTimeout( () =>run_search('search_string', 'hard_search'), 100 );
+    });
+
+    window.addEventListener('keydown', e => {
+        if((e.key=='Escape'||e.key=='Esc'||e.keyCode==27)){
+            toggle_id('search-master-div');
+            return false;
+        } 
+    }, true);
+
+    function click_list_link(element){
+        element.parentElement.getElementsByTagName('a')[0].click()
+    }
+</script>
+
+        <div id="page_holder" class="flex_col">
+                <div id="header" class="header">
+    <div id="header_flex" class="flex_row">
+            <a href="/index.html" id="homelink" title="Clear screen and go to homepage">晓灰-初早天空刚从混沌中醒来</a>
+            <div id="menu_toggle_button" class="navbar-button requires_js" onclick="toggle_menu()">
+                    ≡
+            </div>
+            <div id="navbar" class="navbar requires_js">
+                    <a class="navbar-link" href="/index.html" title="Home">Home</a>
+<a class="navbar-link" href="/CyberFarmer.html" title="About">About</a>
+<a class="navbar-link" href="/program/full-stream/Full-Stream.html" title="FULL-STREAM">FULL-STREAM</a>
+<a class="navbar-link" href="/program/database/How-to-Choose-the-suitable-Database.html" title="CHOOSE-DB">CHOOSE-DB</a>
+                    <div class="icon-tray">
+                            <div id="theme-button" class="theme-button requires_js" title="Change theme" onclick="toggle_theme_popup(this)">
+    T
+</div>
+<script>
+    function toggle_theme_popup(el){
+        // make theme button show that it's active by adding the .active class
+        toggle(el);
+
+        // show the theme selector
+        toggle_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            toggle(pu);
+        }
+    }
+
+    function disable_theme_popup(){
+        disable_id('theme-button');
+
+        // show the theme selector
+        disable_id('theme-popup')
+
+        let h2 = document.getElementById('header2')
+        if (h2){
+            let pu = document.getElementById('header2').getElementsByClassName('popup')[0];
+            disable(pu);
+        }
+    }
+</script>
+                                    <div onclick="openSearch()" class="theme-button requires_js">
+            <img src = "/obs.html/static/search.svg" alt="Search notes" title="Search notes" style="margin: 4px;"/>
+        </div>
+        <script>
+            function openSearch(){
+                // toggle search popup and continue with extra code if it is enabled this time
+                if (toggle_id('search-master-div')){
+                    // get input field and temporarily disable it
+                    let ss = document.getElementById('search_string');
+                    ss.value = 'Seach data initializing...';
+                    ss.readOnly = true; 
+
+                    // load search data if not yet done so
+                    setTimeout(function(){
+                        LoadSearchData()
+
+                        // clear input and put focus on it so that we can start typing immediately
+                        ss.value = '';
+                        ss.readOnly = false; 
+                        ss.focus()
+                        ss.select()
+                    }, 100);
+                }
+            }
+        </script>
+                                    <div class="graph_header_div requires_js">
+            <a id="graph_link" class="system-link" href="/obs.html/graph/index.html?node=unit level test theory、tool、discussion" title="Open fullpage Graph">
+                    <img class="graph_header_div_svg" src = "/obs.html/static/graph.svg" alt="Open fullpage Graph" style="margin: 2px; width: 17px;"/>
+            </a>
+        </div>
+                                    <div >
+            <a id="dirtree_link" class="system-link" href="/obs.html/dir_index.html" title="View directory tree">
+                    <img src = "/obs.html/static/dirtree.svg" style="width: 12px; padding: 4px;" alt="Directory tree link"/>
+            </a>
+        </div>
+                            <div>
+    <a href="/obs.html/tags/index.html" title="Open tag view">
+            <img src = "/obs.html/static/hashtag.svg" alt="RSS Feed link" style="width: 24px; margin-left: -2px; margin-top: -2px;"/>
+    </a>
+</div>
+                            
+                    </div>
+                    <div style="display: flex; flex-direction:column">
+                        <div id="left_pane_toggle_nav" class="left_pane_toggle_nav">Toggle Directory Tree Pane</div>
+                        <div id="right_pane_toggle_nav" class="right_pane_toggle_nav">Toggle Table of Contents Pane</div>
+                    </div>
+            </div>
+    </div>
+    <div class="popup" id="theme-popup">
+    <label for="cars">Theme </label>
+
+    <select name="theme" id="theme" onchange="set_theme(this.value)">
+      <option value="obs-light" selected="selected">obsidian-light</option>
+      <option value="obs-dark">obsidian-dark</option>
+    </select> 
+</div>
+</div>
+                <div class="flex_row">
+                        <div id="left_pane" class="left_pane active">
+    <div id="left_pane_fold_header" class="left_pane_fold_header fold_header">x</div>
+    <div id="left_pane_content" class="left_pane_content">
+            <div id="dirtree"><button id="folder-1" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>java</button>
+<div id="folder-container-1" class="dir-container requires_js " path="/java">
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/java/Java Framework & Dependency.html"  >Java Framework & Dependency</a></li>
+	</ul>
+</div>
+<button id="folder-2" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>learning</button>
+<div id="folder-container-2" class="dir-container requires_js " path="/learning">
+	<button id="folder-3" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>choice</button>
+	<div id="folder-container-3" class="dir-container requires_js " path="/learning/choice">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/choice/How-to-Choose-Note-Software.html"  >How-to-Choose-Note-Software</a></li>
+		</ul>
+	</div>
+	<button id="folder-4" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>reading</button>
+	<div id="folder-container-4" class="dir-container requires_js " path="/learning/reading">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/How-to-read-books-better.html"  >How-to-read-books-better</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/Self-Determination-Theory.html"  >Self-Determination-Theory</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The Idea of History.html"  >The Idea of History</a></li>
+			<li><div class="file-icon"></div><a class="" href="/learning/reading/The-Formula-The-Universal-Laws-of-Success.html"  >The-Formula-The-Universal-Laws-of-Success</a></li>
+		</ul>
+	</div>
+	<button id="folder-5" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>wisdom</button>
+	<div id="folder-container-5" class="dir-container requires_js " path="/learning/wisdom">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/learning/wisdom/Absent-Minded Learning Yields No Gain.html"  >Absent-Minded Learning Yields No Gain</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/learning/Frequently-Used-Prompt.html"  >Frequently-Used-Prompt</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information Diffusion.html"  >Information Diffusion</a></li>
+		<li><div class="file-icon"></div><a class="" href="/learning/Information-Handler.html"  >Information-Handler</a></li>
+	</ul>
+</div>
+<button id="folder-6" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>life</button>
+<div id="folder-container-6" class="dir-container requires_js " path="/life">
+	<button id="folder-7" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>experience</button>
+	<div id="folder-container-7" class="dir-container requires_js " path="/life/experience">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/experience/Life-Experience.html"  >Life-Experience</a></li>
+		</ul>
+	</div>
+	<button id="folder-8" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+	<div id="folder-container-8" class="dir-container requires_js " path="/life/story">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-Love-That-Only-Made-Me-More-Insecure.html"  >A-Love-That-Only-Made-Me-More-Insecure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/A-man-who-wants-to-save-face.html"  >A-man-who-wants-to-save-face</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Alcohol Addiction.html"  >Alcohol Addiction</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Fail-then-Two-year-For-Overseas-Education.html"  >Fail-then-Two-year-For-Overseas-Education</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/I have done my best-to-play-the-bad-hand-well.html"  >I have done my best-to-play-the-bad-hand-well</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Marriage-Sale.html"  >Marriage-Sale</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/My ex-boyfriend destroys my worldview.html"  >My ex-boyfriend destroys my worldview</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/So-it-went-for-30-years.html"  >So-it-went-for-30-years</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Step-by-Step-Error-Choice.html"  >Step-by-Step-Error-Choice</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The construction industry has declined, where lies the new blue ocean.html"  >The construction industry has declined, where lies the new blue ocean</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/The loneliness after breaking up is really scary.html"  >The loneliness after breaking up is really scary</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/Trapped in the cycle of  anxiety-procrastination-depression-anxiety.html"  >Trapped in the cycle of  anxiety-procrastination-depression-anxiety</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/ZhangYiMing.html"  >ZhangYiMing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/life/story/resign from a state-owned enterprise job & give up their household registration to pursue self-discovery.html"  >resign from a state-owned enterprise job & give up their household registration to pursue self-discovery</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/life/How-to-choose-your-work.html"  >How-to-choose-your-work</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come.html"  >The-Era-When-HumansWill-Understand-Each-Other-Will-Eventually-Come</a></li>
+		<li><div class="file-icon"></div><a class="" href="/life/信息牢笼.html"  >信息牢笼</a></li>
+	</ul>
+</div>
+<button id="folder-9" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>program</button>
+<div id="folder-container-9" class="dir-container requires_js active" path="/program">
+	<button id="folder-10" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>architecher</button>
+	<div id="folder-container-10" class="dir-container requires_js " path="/program/architecher">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/architecher/Code-or-Design-Pattern.html"  >Code-or-Design-Pattern</a></li>
+		</ul>
+	</div>
+	<button id="folder-11" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>bot</button>
+	<div id="folder-container-11" class="dir-container requires_js " path="/program/bot">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/bot/Ding-Ding-Bot.html"  >Ding-Ding-Bot</a></li>
+		</ul>
+	</div>
+	<button id="folder-12" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>database</button>
+	<div id="folder-container-12" class="dir-container requires_js " path="/program/database">
+		<button id="folder-13" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>HTAP</button>
+		<div id="folder-container-13" class="dir-container requires_js " path="/program/database/HTAP">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/HTAP/Hologres.html"  >Hologres</a></li>
+			</ul>
+		</div>
+		<button id="folder-14" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>kv_memory</button>
+		<div id="folder-container-14" class="dir-container requires_js " path="/program/database/kv_memory">
+			<button id="folder-15" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>vx_images</button>
+			<div id="folder-container-15" class="dir-container requires_js " path="/program/database/kv_memory/vx_images">
+				<ul class="dir-list">
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2125296809846.png"  class="external-link">2125296809846.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/2543722787409.png"  class="external-link">2543722787409.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/324746178980.jpg"  class="external-link">324746178980.jpg</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5493237811439.png"  class="external-link">5493237811439.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/5920443129073.png"  class="external-link">5920443129073.png</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/aeFd.gif"  class="external-link">aeFd.gif</a></li>
+					<li><div class="file-icon non-md-file"></div><a class="" href="/program/database/kv_memory/vx_images/epoll.gif"  class="external-link">epoll.gif</a></li>
+				</ul>
+			</div>
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/kv_memory/Redis源码架构阅读.html"  >Redis源码架构阅读</a></li>
+			</ul>
+		</div>
+		<button id="folder-16" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>olap</button>
+		<div id="folder-container-16" class="dir-container requires_js " path="/program/database/olap">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/olap/Optimized-Row-Columnar.html"  >Optimized-Row-Columnar</a></li>
+			</ul>
+		</div>
+		<button id="folder-17" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>product</button>
+		<div id="folder-container-17" class="dir-container requires_js " path="/program/database/product">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/Bigtable.html"  >Bigtable</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/product/OceanBase.html"  >OceanBase</a></li>
+			</ul>
+		</div>
+		<button id="folder-18" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>relational_database</button>
+		<div id="folder-container-18" class="dir-container requires_js " path="/program/database/relational_database">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL FAQ.html"  >MySQL FAQ</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/MySQL Index Introduction.html"  >MySQL Index Introduction</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/database/relational_database/Possible Problems with Sharding and Partitioning.html"  >Possible Problems with Sharding and Partitioning</a></li>
+			</ul>
+		</div>
+		<button id="folder-19" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>search</button>
+		<div id="folder-container-19" class="dir-container requires_js " path="/program/database/search">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/database/search/Inverted-Index-of-Lucene-and-B-Tree.html"  >Inverted-Index-of-Lucene-and-B-Tree</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/database/Binlog Master-Slave Data Synchronization.html"  >Binlog Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Common Metrics of MySQL.html"  >Common Metrics of MySQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Database Solutions for Distributed Systems.html"  >Database Solutions for Distributed Systems</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Horizontal Scaling.html"  >Horizontal Scaling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/How-to-Choose-the-Suitable-Database.html"  >How-to-Choose-the-Suitable-Database</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Prevention and Monitoring of Slow SQL.html"  >Prevention and Monitoring of Slow SQL</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Redo-log Master-Slave Data Synchronization.html"  >Redo-log Master-Slave Data Synchronization</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/SST(Sorted String Table).html"  >SST(Sorted String Table)</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Storage-Compute Architecture.html"  >Storage-Compute Architecture</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/database/Write-Ahead Logging.html"  >Write-Ahead Logging</a></li>
+		</ul>
+	</div>
+	<button id="folder-20" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>full-stream</button>
+	<div id="folder-container-20" class="dir-container requires_js active" path="/program/full-stream">
+		<button id="folder-21" class="dir-button active" onclick="toggle_dir(this.id)"><div class="file-icon"></div>Test</button>
+		<div id="folder-container-21" class="dir-container requires_js active" path="/program/full-stream/Test">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/JUnit5 & Mockito.html"  >JUnit5 & Mockito</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/Test/Test Need Geek.html"  >Test Need Geek</a></li>
+				<li><div class="file-icon"></div><a class="active current_page_dirtree" href="/program/full-stream/Test/Unit Level Test Theory、Tool、Discussion.html"  >Unit Level Test Theory、Tool、Discussion</a></li>
+			</ul>
+		</div>
+		<button id="folder-22" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>seo</button>
+		<div id="folder-container-22" class="dir-container requires_js " path="/program/full-stream/seo">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/full-stream/seo/Search Engine Optimization.html"  >Search Engine Optimization</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Analyzing.html"  >Analyzing</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Code-Oriented-Draw.html"  >Code-Oriented-Draw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Full-Stream.html"  >Full-Stream</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Modeling.html"  >Modeling</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/full-stream/Prototype-Diagram.html"  >Prototype-Diagram</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/full-stream/full-stream.canvas"  class="external-link">full-stream.canvas</a></li>
+		</ul>
+	</div>
+	<button id="folder-23" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>llm</button>
+	<div id="folder-container-23" class="dir-container requires_js " path="/program/llm">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Enhanced-Search-With-AI.excalidraw.html"  >Enhanced-Search-With-AI.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/llm/Vector-Database.html"  >Vector-Database</a></li>
+		</ul>
+	</div>
+	<button id="folder-24" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>networking</button>
+	<div id="folder-container-24" class="dir-container requires_js " path="/program/networking">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/networking/RDMA.html"  >RDMA</a></li>
+		</ul>
+	</div>
+	<button id="folder-25" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>operation-system</button>
+	<div id="folder-container-25" class="dir-container requires_js " path="/program/operation-system">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/operation-system/PageCache.html"  >PageCache</a></li>
+		</ul>
+	</div>
+	<button id="folder-26" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>practices</button>
+	<div id="folder-container-26" class="dir-container requires_js " path="/program/practices">
+		<button id="folder-27" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Distributed System</button>
+		<div id="folder-container-27" class="dir-container requires_js " path="/program/practices/Distributed System">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Distributed System Problems.html"  >Distributed System Problems</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Master-Slave-Switch.html"  >Master-Slave-Switch</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Optimize Kinds of Resource Use.html"  >Optimize Kinds of Resource Use</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Paxos.html"  >Paxos</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/Raft.html"  >Raft</a></li>
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Distributed System/缓存带来的各种问题.html"  >缓存带来的各种问题</a></li>
+			</ul>
+		</div>
+		<button id="folder-28" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Git</button>
+		<div id="folder-container-28" class="dir-container requires_js " path="/program/practices/Git">
+			<ul class="dir-list">
+				<li><div class="file-icon"></div><a class="" href="/program/practices/Git/Frequently Git Command.html"  >Frequently Git Command</a></li>
+			</ul>
+		</div>
+		<ul class="dir-list">
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Classic Process Data Infrastructure.canvas"  class="external-link">Classic Process Data Infrastructure.canvas</a></li>
+			<li><div class="file-icon non-md-file"></div><a class="" href="/program/practices/Finance Technology Area Relation.canvas"  class="external-link">Finance Technology Area Relation.canvas</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Frequently-IDEA-Shortcut.html"  >Frequently-IDEA-Shortcut</a></li>
+			<li><div class="file-icon"></div><a class="" href="/program/practices/Practices-for-Processing-l0-Billion-Bill-data.html"  >Practices-for-Processing-l0-Billion-Bill-data</a></li>
+		</ul>
+	</div>
+	<button id="folder-29" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>technology</button>
+	<div id="folder-container-29" class="dir-container requires_js " path="/program/technology">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/program/technology/Distributed Computing.html"  >Distributed Computing</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-30" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>society</button>
+<div id="folder-container-30" class="dir-container requires_js " path="/society">
+	<ul class="dir-list">
+		<li><div class="file-icon non-md-file"></div><a class="" href="/society/业财一体.canvas"  class="external-link">业财一体.canvas</a></li>
+	</ul>
+</div>
+<button id="folder-31" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>store</button>
+<div id="folder-container-31" class="dir-container requires_js " path="/store">
+	<button id="folder-32" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>Buffer</button>
+	<div id="folder-container-32" class="dir-container requires_js " path="/store/Buffer">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/Buffer/Java Fuzz Test.html"  >Java Fuzz Test</a></li>
+		</ul>
+	</div>
+	<button id="folder-33" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history-program</button>
+	<div id="folder-container-33" class="dir-container requires_js " path="/store/history-program">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Knowledge-Management-System.html"  >Knowledge-Management-System</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/Servicer-Chat-System.excalidraw.html"  >Servicer-Chat-System.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/index-insight.excalidraw.html"  >index-insight.excalidraw</a></li>
+			<li><div class="file-icon"></div><a class="" href="/store/history-program/淘工厂客服知识库和问答相关的工作.html"  >淘工厂客服知识库和问答相关的工作</a></li>
+		</ul>
+	</div>
+	<button id="folder-34" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>微信公众号</button>
+	<div id="folder-container-34" class="dir-container requires_js " path="/store/微信公众号">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/store/微信公众号/假如你五行属商家，如何和淘天做生意？.html"  >假如你五行属商家，如何和淘天做生意？</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+	</ul>
+</div>
+<button id="folder-35" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>story</button>
+<div id="folder-container-35" class="dir-container requires_js " path="/story">
+	<button id="folder-36" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>history</button>
+	<div id="folder-container-36" class="dir-container requires_js " path="/story/history">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/history/Alibaba-C2M.html"  >Alibaba-C2M</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Others' Story.html"  >Others' Story</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/Xiao-Hong-Shu.html"  >Xiao-Hong-Shu</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/history/mdnice.html"  >mdnice</a></li>
+		</ul>
+	</div>
+	<button id="folder-37" class="dir-button " onclick="toggle_dir(this.id)"><div class="file-icon"></div>observe</button>
+	<div id="folder-container-37" class="dir-container requires_js " path="/story/observe">
+		<ul class="dir-list">
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Customer-Behavior.html"  >Customer-Behavior</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/E-Commerce Business Models.html"  >E-Commerce Business Models</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/High-risk Areas for Young People's Entrepreneurship Failure.html"  >High-risk Areas for Young People's Entrepreneurship Failure</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Overseas Lack of Chinese Similar Products.html"  >Overseas Lack of Chinese Similar Products</a></li>
+			<li><div class="file-icon"></div><a class="" href="/story/observe/Work Involved In Opening an E-Commerce Store.html"  >Work Involved In Opening an E-Commerce Store</a></li>
+		</ul>
+	</div>
+	<ul class="dir-list">
+		<li><div class="file-icon"></div><a class="" href="/story/Start-up Resources Collection.html"  >Start-up Resources Collection</a></li>
+		<li><div class="file-icon"></div><a class="" href="/story/搜索需求的分流.html"  >搜索需求的分流</a></li>
+	</ul>
+</div>
+<ul class="dir-list">
+	<li><div class="file-icon"></div><a class="" href="/A Brand Called xiaohui.html"  >A Brand Called xiaohui</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Blog-Technology-Stack.html"  >Blog-Technology-Stack</a></li>
+	<li><div class="file-icon"></div><a class="" href="/CyberFarmer.html"  >CyberFarmer</a></li>
+	<li><div class="file-icon"></div><a class="" href="/Story.html"  >Story</a></li>
+	<li><div class="file-icon"></div><a class="" href="/index.html"  >index</a></li>
+	<li><div class="file-icon"></div><a class="" href="/xiaohui-blog-technology-architecture.excalidraw.html"  >xiaohui-blog-technology-architecture.excalidraw</a></li>
+</ul>
+</div>
+    </div>
+</div>
+                        <div class="container">
+                                <div class="content"><h1 id="unit-level-test-theorytooldiscussion">Unit Level Test Theory、Tool、Discussion</h1>
+<div class="toc">
+<ul>
+<li><a href="#unit-level-test-theorytooldiscussion" class="anchor-link">Unit Level Test Theory、Tool、Discussion</a><ul>
+<li><a href="#h__1" class="anchor-link">为什么写测试？</a><ul>
+<li><a href="#h__2" class="anchor-link">测试左移</a></li>
+<li><a href="#h__3" class="anchor-link">方便重构</a></li>
+<li><a href="#h__4" class="anchor-link">描述功能</a></li>
+</ul>
+</li>
+<li><a href="#h_-tdd-test-driven-development" class="anchor-link">面向功能开发- TDD（Test Driven Development)</a></li>
+<li><a href="#h__5" class="anchor-link">测试工具和框架介绍</a><ul>
+<li><a href="#junit5-mockito" class="anchor-link">JUnit5 &amp; Mockito 好基友</a></li>
+<li><a href="#testme" class="anchor-link">TestMe 少写重复的测试</a></li>
+<li><a href="#junit5-extension" class="anchor-link">junit5-extension: 致力于一切想测的都能测</a></li>
+</ul>
+</li>
+<li><a href="#h__6" class="anchor-link">最后讨论一下</a><ul>
+<li><a href="#gwt" class="anchor-link">GWT ？</a></li>
+<li><a href="#vs" class="anchor-link">集成测试 Vs 单元测试？</a></li>
+<li><a href="#mock-vs-real" class="anchor-link">Mock Vs Real?</a></li>
+<li><a href="#h__7" class="anchor-link">是否需要测试私有方法?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="h__1">为什么写测试？</h2>
+<h3 id="h__2">测试左移</h3>
+<p><a href="/store/Buffer/Java%20Fuzz%20Test.html">Java Fuzz Test</a>   </p>
+<h3 id="h__3">方便重构</h3>
+<p>每次commit 之后自动执行测试。   </p>
+<h3 id="h__4">描述功能</h3>
+<p>真正随着代码变更的“PRD”。   </p>
+<h2 id="h_-tdd-test-driven-development">面向功能开发- TDD（Test Driven Development)</h2>
+<blockquote>
+<p>测试应当与生产代码解耦 --Bob大叔《匠艺整洁之道:程序员的职业修养》   </p>
+</blockquote>
+<p><a href="[https://www.bilibili.com/video/BV1pd4y147MP/?share_source=copy_web" class="external-link">使用JUnit5与芝加哥学派TDD驱动产出一个简单的Stack类</a>](https://www.bilibili.com/video/BV1pd4y147MP/?share_source=copy_web))   </p>
+<ul>
+<li>伦敦学派   <ul>
+<li>预先设计   </li>
+<li>调用栈   </li>
+</ul>
+</li>
+<li>芝加哥学派   <ul>
+<li>不假设任何实现，演进式重构   </li>
+</ul>
+</li>
+</ul>
+<p>伦敦学派强调按调用栈自外而内的写测试，芝加哥强调按功能写测试然后再从内重构。如果一开始就胸有成竹、有能力顶层设计的好就按伦敦学派来，不然一步步按芝加哥学派重构也可以得到更好的代码。 <br />
+🌰 <br />
+<code>foo()</code> 处理业务数据之前有一些校验逻辑   </p>
+<ul>
+<li>伦敦学派会设计好一个<code>validator</code>的接口，再专注于实现这个<code>validator</code>   </li>
+<li>芝加哥学派则会选择直接先在<code>foo()</code>中实现各种校验逻辑，再视情况逐渐重构出一个<code>validator</code>   </li>
+</ul>
+<h2 id="h__5">测试工具和框架介绍</h2>
+<h3 id="junit5-mockito"><a href="/program/full-stream/Test/JUnit5%20%26%20Mockito.html">JUnit5 &amp; Mockito</a> 好基友</h3>
+<h3 id="testme">TestMe 少写重复的测试</h3>
+<p>IDEA上的<code>testme</code>插件，相比有人可能用过<code>squareTest</code>这些测试代码自动生成工具,但是先不说它是收费的,有时候它默认生成的数据类真的一言难尽,实在不如自己写的好用,这里我提供一个用于包装上游调用接口的通用模板,看一下应该不难看懂:)   </p>
+<div class="lang-java">
+
+<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;TestMe macros.java&quot;</span><span class="p">)</span>
+<span class="err">#</span><span class="n">set</span><span class="p">(</span><span class="n">$hasMocks</span><span class="o">=</span><span class="n">$MockitoMockBuilder</span><span class="p">.</span><span class="na">hasMockable</span><span class="p">(</span><span class="n">$TESTED_CLASS</span><span class="p">.</span><span class="na">fields</span><span class="p">))</span>
+<span class="err">#</span><span class="k">if</span><span class="p">(</span><span class="n">$PACKAGE_NAME</span><span class="p">)</span>
+<span class="kn">package</span><span class="w"> </span><span class="err">${</span><span class="nn">PACKAGE_NAME</span><span class="p">};</span>
+<span class="err">#</span><span class="n">end</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.BeforeEach</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Nested</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.TestInstance</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.params.ParameterizedTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.params.provider.Arguments</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.params.provider.MethodSource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Stream</span><span class="p">;</span>
+<span class="err">#</span><span class="k">if</span><span class="p">(</span><span class="n">$hasMock</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.InjectMocks</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mock</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.mockito.Mockito.any</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.mockito.Mockito.when</span><span class="p">;</span>
+<span class="err">#</span><span class="n">end</span>
+
+<span class="err">#</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;File Header.java&quot;</span><span class="p">)</span>
+<span class="err">#</span><span class="k">if</span><span class="p">(</span><span class="n">$hasMock</span><span class="p">)</span>
+<span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="err">#</span><span class="n">end</span>
+<span class="kd">class</span> <span class="nc">$</span><span class="p">{</span><span class="n">CLASS_NAME</span><span class="p">}{</span>
+<span class="err">#</span><span class="n">renderMockedFields</span><span class="p">(</span><span class="n">$TESTED_CLASS</span><span class="p">.</span><span class="na">fields</span><span class="p">)</span>
+<span class="err">#</span><span class="n">renderTestSubjectInit</span><span class="p">(</span><span class="n">$TESTED_CLASS</span><span class="p">,</span><span class="n">$TestSubjectUtils</span><span class="p">.</span><span class="na">hasTestableInstanceMethod</span><span class="p">(</span><span class="n">$TESTED_CLASS</span><span class="p">.</span><span class="na">methods</span><span class="p">),</span><span class="n">$hasMocks</span><span class="p">)</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">testErrorCode</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">testErrorMsg</span><span class="p">;</span>
+
+<span class="nd">@BeforeEach</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">testErrorCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;testErrorCode&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">testErrorMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;testErrorMsg&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">#</span><span class="n">foreach</span><span class="p">(</span><span class="n">$method</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">$TESTED_CLASS</span><span class="p">.</span><span class="na">methods</span><span class="p">)</span>
+<span class="w">    </span><span class="err">#</span><span class="k">if</span><span class="p">(</span><span class="n">$TestSubjectUtils</span><span class="p">.</span><span class="na">shouldBeTested</span><span class="p">(</span><span class="n">$method</span><span class="p">))</span>
+
+<span class="w">        </span><span class="nd">@Nested</span>
+<span class="w">        </span><span class="nd">@TestInstance</span><span class="p">(</span><span class="n">TestInstance</span><span class="p">.</span><span class="na">Lifecycle</span><span class="p">.</span><span class="na">PER_CLASS</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">class</span> <span class="err">#</span><span class="nc">renderTestMethodName</span><span class="p">(</span><span class="n">$method</span><span class="p">.</span><span class="na">name</span><span class="p">){</span>
+
+<span class="w">            </span><span class="c1">//exception</span>
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">should_throw_exception_when_upstream_input_null</span><span class="p">(){}</span>
+
+<span class="w">            </span><span class="c1">//exception</span>
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">should_throw_exception_when_upstream_invoke_failed</span><span class="p">(){}</span>
+
+<span class="w">            </span><span class="c1">//exception</span>
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">should_throw_exception_when_upstream_return_null</span><span class="p">(){}</span>
+
+<span class="w">            </span><span class="c1">//default value</span>
+<span class="w">            </span><span class="nd">@Test</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">should_set_default_value_to_empty_optional_or_list_when_not_success</span><span class="p">(){}</span>
+
+<span class="w">            </span><span class="nd">@ParameterizedTest</span><span class="p">()</span>
+<span class="w">            </span><span class="nd">@MethodSource</span><span class="p">(</span><span class="s">&quot;resultOfUpstream&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="nf">should_return_the_same_when_get_normal_data</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">resultOfUpstream</span><span class="p">){}</span>
+
+<span class="w">            </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Arguments</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">resultOfUpstream</span><span class="p">(){</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w">    </span>
+
+<span class="w">    </span><span class="err">#</span><span class="n">end</span>
+<span class="err">#</span><span class="n">end</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</div>
+
+<h3 id="junit5-extension"><a href="https://github.com/istarwyh/TestMuseum" class="external-link"> junit5-extension</a>: 致力于一切想测的都能测</h3>
+<p><a href="/program/full-stream/Test/Test%20Need%20Geek.html">Test Need Geek</a>   </p>
+<h2 id="h__6">最后讨论一下</h2>
+<h3 id="gwt">GWT ？</h3>
+<ol>
+<li>Given:情景/条件   </li>
+<li>When:采取什么行动   </li>
+<li>Then:得到什么结果   </li>
+</ol>
+<h3 id="vs">集成测试 Vs 单元测试？</h3>
+<p>之所以写测试，是因为正确的测试确实可以提高开发效率，所以选择怎样写测试的判断标准之一就是要找到<code>ROI</code>(Return Of Investment) 最高的截面。柳胜认为测试的ROI计算公式为<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>   </p>
+<blockquote>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091459177.png" />   </p>
+</blockquote>
+<p>在测试金字塔模型下，越往底部，测试的ROI越高。又因为UI 测试关注功能场景测试，易用性测试和可执行性测试；而接口测试关注不同数据的循环，接口的性能和错误恢复能力；单元测试关注算法的正确性和性能。所以各个测试专注的范围应该如下图所示： <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202309091458922.png" />   </p>
+<p>在我的理解中，上图中的UI测试通常也被称为<code>端到端测试</code>,对外的<code>接口测试</code>对后端通常也就是<code>集成测试</code>。而单元测试是什么呢？是针对一个类或者某个方法的测试吗？不是，徐昊指出<code>单元测试</code>（Unit Test）是一个具有误导性的提法，在TDD中不应该有这样的说法，应代之以<code>单元级别功能测试</code>（Unit Level Functional Test）,<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>其本质是<strong>能提供快速反馈的低成本的研发测试</strong><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>。柳胜之所以认为测试金字塔模型下，越往底部，测试的ROI越高，是因为越往下手工运行时间是越短的，运行次数是越多的；而越往上开发测试和维护测试的成本都越高。   </p>
+<p>同时柳胜认为<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>   </p>
+<blockquote>
+<p>集成测试是处在单元测试和端到端测试中间的一个状态。如果所有的外部服务都 Mock 了，集成测试就变成了单元测试，往另外一个方向，如果所有的外部服务都是真实的，集成测试又变成了端到端的测试。   </p>
+</blockquote>
+<p>集成测试通常ROI不如单元测试，并且和单元测试测试内容有较多重合，所以两者使用需要追求平衡，<a href="https://time.geekbang.org/column/article/507443" class="external-link" class="external-link">柳胜提出</a>   </p>
+<blockquote>
+<p><strong>1. 在单元测试阶段验证尽可能多的业务逻辑，这样能让集成测试关注在外部依赖上。 <br />
+2. 在依赖可控的情况下，集成测试应走尽可能多的</strong>真实的<strong>外部依赖服务。</strong>   </p>
+</blockquote>
+<p>可控的依赖比如数据库，就应该尽可能真实地去交互；不可控的如第三方接口，应该尽可能用定好的逻辑来Mock接口。 <br />
+<img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202307232321182.png" />   </p>
+<h3 id="mock-vs-real">Mock Vs Real?</h3>
+<p>能Real 肯定Real。对于完全可控依赖的服务，虽然是应用之外的一个进程，但可以把跟它的交互当作开发的内部实现。 <br />
+而不可控依赖服务，比如公共的服务，做Real 凭空增加服务方QPS，不是自己能决定的，基于交互契约来Mock即可。   </p>
+<p><img alt="" src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202307232327590.png" />   </p>
+<h3 id="h__7">是否需要测试私有方法?</h3>
+<p>这是一个还没有定论的<a href="https://jesseduffield.com/Testing-Private-Methods/" class="external-link">话题</a>.一般来说,抽象层次越高,对于测试越不友好,表现在:   </p>
+<ul>
+<li>更多时间运行   </li>
+<li>mock更多的数据   </li>
+<li>需要mock更复杂的行为交互   </li>
+<li>更容易因为小改动而失败   </li>
+</ul>
+<p>但是也更容易<strong>重构代码和测试</strong>.   </p>
+<blockquote>
+<p>The higher the level of encapsulation, the harder to test, but the lower the level of encapsulation, the harder to refactor.   </p>
+</blockquote>
+<p>另外,考虑到<a href="/program/architecher/Code-or-Design-Pattern.html#srp(single-responsibility-program)">单一职责原则</a>,<code>Working With Legacy Code</code>中指出   </p>
+<blockquote>
+<p>If we need to test a private method, we should make it public. If making it public bothers us, in most cases, it means that our class is doing too much and we ought to fix it .   </p>
+</blockquote>
+<p>如何测试私有方法便是在<strong>易用性</strong>,<strong>重构性</strong>和<strong>SRP</strong>作权衡. <br />
+通常来说:   </p>
+<blockquote>
+<ol>
+<li>Try to have as slim a public interface as possible in your classes, by defaulting every method to private.    </li>
+<li>If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires.    </li>
+<li>If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.   </li>
+</ol>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://time.geekbang.org/column/article/497405" class="external-link">3KU法则：如何找出最优自动化实施截面？</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 0 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://time.geekbang.org/column/article/496699" class="external-link">TDD中的测试（3）：集成测试还是单元测试？</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://martinfowler.com/bliki/UnitTest.html" class="external-link">UnitTest.html</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://time.geekbang.org/column/article/507443" class="external-link" class="external-link">集成测试（一）：一条Happy Path扫天下</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+<div class="note-footer">
+<div class="backlinks">
+<h2>Backlinks</h2>
+<ul>
+	<li><a class="backlink" href="/program/full-stream/Full-Stream.html">full-stream</a></li>
+	<li><a class="backlink" href="/index.html">index</a></li>
+</ul>
+</div>
+
+<div class="tags">
+<h2>Tags</h2>
+<ul>
+	<li><a class="backlink" href="/obs.html/tags/renderMockedFields/index.html">renderMockedFields</a></li>
+	<li><a class="backlink" href="/obs.html/tags/parse/index.html">parse</a></li>
+	<li><a class="backlink" href="/obs.html/tags/if/index.html">if</a></li>
+	<li><a class="backlink" href="/obs.html/tags/end/index.html">end</a></li>
+	<li><a class="backlink" href="/obs.html/tags/foreach/index.html">foreach</a></li>
+	<li><a class="backlink" href="/obs.html/tags/renderTestMethodName/index.html">renderTestMethodName</a></li>
+	<li><a class="backlink" href="/obs.html/tags/renderTestSubjectInit/index.html">renderTestSubjectInit</a></li>
+	<li><a class="backlink" href="/obs.html/tags/set/index.html">set</a></li>
+</ul>
+</div>
+
+</div>
+<div class="graph requires_js ">
+    <div id="A43806390400038704166518372749596056572{level}" class="graph_div"></div>
+
+    <div class="graph-instructions" id="D43806390400038704166518372749596056572{level}">
+        Left-click: follow link, Right-click: select node, Scroll: zoom
+    </div>
+    
+    <div class="graph-button-row" style="display:flex;">
+        <button class="graph_button graph_show_button" id="B43806390400038704166518372749596056572{level}" level="{level}" note_temp_id="43806390400038704166518372749596056572" onclick="window.ObsHtmlGraph.run(this, '43806390400038704166518372749596056572', 'unit level test theory、tool、discussion');">
+            Show Graph
+        </button>
+        <button class="graph_button graph_type_button" id="C43806390400038704166518372749596056572{level}" style="flex:1" onclick="window.ObsHtmlGraph.switch_graph_type(this);">
+            2D
+        </button>
+    </div>
+</div>
+
+<script type="module">
+    if (window.ObsHtmlGraph == undefined){
+        import('/obs.html/static/graph.js').then((Module) => {
+            window.ObsHtmlGraph = Module;
+            window.ObsHtmlGraph.arm_page(document.getElementById('page_holder'))
+        })
+    }
+</script>
+
+
+
+
+                                <!-- end content -->
+                        </div>
+                        <div class="container_filler">
+                        </div>
+                        <div id="right_pane" class="right_pane active">
+    <div id="right_pane_fold_header" class="right_pane_fold_header fold_header">x</div>
+    <div id="right_pane_content" class="right_pane_content">
+            
+    </div>
+</div>
+                </div>
+        </div>
+
+        <script>
+                function handle_toggle_side_bar(e){
+                        let header;
+                        let pane; 
+                        let target = e.target
+
+                        // switch out the navbar button click for a header click
+                        if (target.id == 'left_pane_toggle_nav'){
+                                target = document.getElementById('left_pane_fold_header')
+                        }
+                        else if (target.id == 'right_pane_toggle_nav'){
+                                target = document.getElementById('right_pane_fold_header')
+                        }
+
+                        // get header and pane
+                        if (target.classList.contains('fold_header')) {
+                                header = target;
+                                pane = target.parentElement;
+                        }
+                        else {
+                                pane = target;
+                                header = target.getElementsByClassName('fold_header')[0];
+                        }
+                        toggle_side_bar(pane, header, true)
+                        e.stopPropagation();
+                }
+                function handle_toggle_side_bar_button(e){
+                        document.getElementById('menu_toggle_button').click()
+                        handle_toggle_side_bar(e);
+                }
+
+                function toggle_side_bar(pane, header, save) {
+                        let active = (pane.classList.contains('active'))
+                        if (active){
+                                disable_side_bar(pane, header, save);
+                        }
+                        else {
+                                enable_side_bar(pane, header, save);
+                        }
+                }
+                function enable_side_bar(pane, header, save){
+                        pane.classList.add('active');
+                        pane.removeEventListener('click', handle_toggle_side_bar);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, true) }
+                }
+                function disable_side_bar(pane, header, save){
+                        pane.classList.remove('active');
+                        pane.addEventListener('click', handle_toggle_side_bar);
+                        header.removeEventListener('click', handle_toggle_side_bar);
+                        set_correct_header_symbol(header);
+                        if (save){ save_panel_folding_state(header, false) }
+                }
+                function set_correct_header_symbol(header){
+                        let pane = header.parentElement;
+                        let symbol = [['>', '<'],['<', '>']]
+                        symbol = symbol[Number(header.classList.contains('right_pane_fold_header'))][Number(pane.classList.contains('active'))];
+                        console.log(symbol);
+                        header.innerHTML = symbol
+                        return header;
+                }
+                function panel_folding_get_panel_name(header){
+                        return ['left', 'right'][Number(header.classList.contains('right_pane_fold_header'))]
+                }
+                function save_panel_folding_state(header, active){
+                        ls_set('pane_folding_state_'+panel_folding_get_panel_name(header), Number(active));
+                }
+                function load_panel_folding_state(panel_name){
+                        val = ls_get('pane_folding_state_'+panel_name)
+                        if (!val){ return {'exists': false, 'value': null}}
+                        return {'exists': true, 'value': Boolean(Number(val))}
+                }
+                function set_pane_folding_start(left_header, right_header){
+                        // small screen = closed
+                        let right_pane_enabled = true;
+                        let left_pane_enabled = true;
+                        let w = window.visualViewport.width
+                        if (w < 1000){
+                                left_pane_enabled = false
+                        }
+                        if (w < 800){
+                                right_pane_enabled = false
+                        }
+
+                        // get saved values if present
+                        let rval = load_panel_folding_state('right')
+                        if (rval['exists']){
+                                right_pane_enabled = rval['value']
+                        }
+                        let lval = load_panel_folding_state('left')
+                        if (lval['exists']){
+                                left_pane_enabled = lval['value']
+                        }
+
+                        // default = enabled, so we only need to disable
+                        if (!left_pane_enabled){
+                                disable_side_bar(document.getElementById('left_pane'), document.getElementById('left_pane_fold_header'))
+                        }
+                        if (!right_pane_enabled){
+                                disable_side_bar(document.getElementById('right_pane'), document.getElementById('right_pane_fold_header'))
+                        }
+                }
+
+                function init_pane_folding(header){
+                        set_correct_header_symbol(header);
+                        header.addEventListener('click', handle_toggle_side_bar);
+                }
+                
+                
+                set_pane_folding_start()
+                init_pane_folding(document.getElementById('left_pane_fold_header'));
+                init_pane_folding(document.getElementById('right_pane_fold_header'));
+
+                document.getElementById('left_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+                document.getElementById('right_pane_toggle_nav').addEventListener('click', handle_toggle_side_bar_button);
+        </script>
+
+        <script src="/obs.html/static/load_dirtree_footer.js" type="text/javascript"></script>
+
+        
+
+
+
+
+</body>
+</html>
