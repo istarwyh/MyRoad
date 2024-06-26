@@ -1,1 +1,2 @@
 - https://github.com/google/google-java-format
+-  Java 版本切换：sdkman
