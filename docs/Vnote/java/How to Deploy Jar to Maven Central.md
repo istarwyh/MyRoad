@@ -39,8 +39,6 @@ junit-extensions-0.0.2-MINOR-sources.jar.sha1
 find . $$ -name "*.jar" -or -name "*.pom" $$ -exec gpg -ab {} \;
 ```
 	`$$`有可能不被 terminal 认识，报错了就单个 `"*.jar"` 执行也可以。
-6.  签名后文件就算准备齐全，然后将 `io` 目录一起压缩打包，通过 `https://central.sonatype.com/publishing` 上传
-
-
+6. 签名后文件就算准备齐全，然后将 `io` 目录一起压缩打包，通过 `https://central.sonatype.com/publishing` 上传
 
 [^trouble]:https://central.sonatype.org/register/legacy/
