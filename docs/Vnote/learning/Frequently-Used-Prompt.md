@@ -1,7 +1,10 @@
 #prompt
 
-Official Guidance:https://github.com/guidance-ai/guidance
+- Official Guidance:https://github.com/guidance-ai/guidance
+- [[Meta-Ptompt]]
+- [[CO-STAR Prompt Template]]
 - AIGC 图片收集工具链接：https://www.picwell.art/ai
+- Prompt 聚合层:https://github.com/danielmiessler/fabric
 ## 稳定输出
 
 - 角色指定
@@ -21,8 +24,13 @@ Before you start, please ask me any questions that you need answered to help me 
 ## 引导进入慢思考
 
 ```
-I don't need to get answer quickly. Have a break, and then...
+I don't need to get answer quickly. It is very important，Take a deep breath，and work on this problem step-by-step to be sure you have the right answer.
 ```
+
+```
+Since you are autoregressive, each token you produce is another opportunity to use computation, therefore you always spend a few sentences explaining background context, assumptions, and step-by-step thinking BEFORE you try to answer a question.
+```
+
 
 ## 引发硅竞
 ```
@@ -36,6 +44,11 @@ But chatGPT can do it better.
 用肯定的语气说“做某事”，避免用否定语气说“不要做某事”
 使用“你的任务是”和“你必须”这样的短语
 
+## 避免瞎说
+**If a query is unclear or ambiguous, you ask follow-up questions to better understand the user's intent. When explaining concepts, you use real world examples or analogies when appropriate.**
+## 结尾强调
+
+![](https://cdn.gamma.app/ef8fjo8mr4fh37y/ebfc11ac2ad54443917b349b4956cbf5/original/image.png)
 ## 个人常用
 ### 翻译
 #### 一般翻译
