@@ -31,14 +31,21 @@ junit-extensions-0.0.2-MINOR-sources.jar.md5
 junit-extensions-0.0.2-MINOR-sources.jar.sha1
 ```
 
-2. 这里还缺少pom 文件，所以我们要手动从 本地的`.m2` 目录中复制过来: `cp /Users/mac/.m2/repository/io/github/istarwyh/junit-extensions/0.0.2-MINOR/junit-extensions-0.0.2-MINOR.pom  /Users/mac/Desktop/code-open/TestMuseum/junit-extensions/target `
-3. 但是复制过来的pom 文件没有`md5` 和 `sha1` 文件，所以我们再执行一遍 `mvn  deploy` 来生成pom对应`md5` 和 `sha1` 文件, 注意不要 `clean` !
-4. 现在target 中的文件就全了，我们需要将它们复制到指定目录,即 `io/github/istarwyh/junit-extensions/0.0.2-MINOR` : ` cp -p target/*.{jar,sha1,md5,pom} io/github/istarwyh/junit-extensions/0.0.2-MINOR/`
-5. 接下来切到指定目录，对文件进行GPG签名，
+2. 这里还缺少pom 文件，所以我们要手动从 本地的`.m2` 目录中复制过来: 
+```sh
+cp /Users/mac/.m2/repository/io/github/istarwyh/junit-extensions/0.0.4-MINOR/junit-extensions-0.0.4-MINOR.pom  /Users/mac/Desktop/code-open/TestMuseum/junit-extensions/target 
+```
+4. 但是复制过来的pom 文件没有`md5` 和 `sha1` 文件，所以我们再执行一遍 `mvn  deploy` 来生成pom对应`md5` 和 `sha1` 文件, 注意不要 `clean` !
+5. 现在target 中的文件就全了，我们需要将它们复制到指定目录,即 `io/github/istarwyh/junit-extensions/0.0.4-MINOR` : ` 
+```sh
+mkdir -p io/github/istarwyh/junit-extensions/0.0.4-MINOR && cp -p target/*.{jar,sha1,md5,pom} io/github/istarwyh/junit-extensions/0.0.4-MINOR/`
+```
+
+6. 接下来切到指定目录`cd io/github/istarwyh/junit-extensions/0.0.4-MINOR/`，对文件进行GPG签名，
 ```sh
 find . $$ -name "*.jar" -or -name "*.pom" $$ -exec gpg -ab {} \;
 ```
 	`$$`有可能不被 terminal 认识，报错了就单个 `"*.jar"` 执行也可以。
-6. 签名后文件就算准备齐全，然后将 `io` 目录一起压缩打包，通过 `https://central.sonatype.com/publishing` 上传
+7. 签名后成功如果生成`.asc`文件，文件就算准备齐全，然后将 `io` 目录一起压缩打包，通过 https://central.sonatype.com/publishing 上传
 
 [^trouble]:https://central.sonatype.org/register/legacy/

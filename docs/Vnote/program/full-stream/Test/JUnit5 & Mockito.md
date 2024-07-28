@@ -162,7 +162,7 @@ void testWithCsvFileSourceFromClasspath(String input, int output) {
     1. 可以转成对应的CSV
     2. 自己从文件路径中读取文件,再转成Stream,通过`@MethodSource`或`@ArgumentsSource`实现入参
     
-第二种思路适用性更强，可参考[笔者的实现](https://github.com/istarwyh/TestMuseum/blob/main/tdd.java.common/src/main/java/istarwyh/junit5/annotation/JsonFileSource.java)。
+第二种思路适用性更强，可参考[笔者的实现](https://github.com/istarwyh/TestMuseum/tree/main/junit-extensions)。
 #### 2.2.3. 重复与并发测试
 ##### 2.2.3.1. 重复测试
 有人可能会疑惑什么时候能用上重复测试?一种情况是当方法重复执行输出或者函数副作用不同时,比如统计并发异步执行的方法最终耗时:

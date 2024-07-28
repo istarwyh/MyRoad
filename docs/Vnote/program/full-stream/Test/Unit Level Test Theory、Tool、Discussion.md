@@ -105,7 +105,7 @@ void setUp(){
 }
 ```
 
-### [ junit5-extension](https://github.com/istarwyh/TestMuseum): 致力于一切想测的都能测
+### [ junit5-extension](https://github.com/istarwyh/TestMuseum/tree/main/junit-extensions): 致力于一切想测的都能测
 [[Test Need Geek]]
 
 ## 最后讨论一下
@@ -164,6 +164,9 @@ void setUp(){
 >1. Try to have as slim a public interface as possible in your classes, by defaulting every method to private. 
 >2. If you find yourself wanting to test a set of private methods directly, seriously consider extracting a class (or standalone function), but only if it makes sense independent of your testing desires. 
 >3. If you want to test a single private method and don't see the point in extracting it out of the class, convert it into a pure function (no references to instance variables) and test that method. That way, if later on you decide to move the function somewhere else, moving the tests is as simple as copy+paste.
+
+### 其他测试类型
+![](https://substackcdn.com/image/fetch/w_550,c_limit,f_auto,q_auto:good,fl_lossy/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4886cb0-e840-4d4a-84c7-8d9543d98101_1280x1664.gif)
 
 [^3KU]:[3KU法则：如何找出最优自动化实施截面？](https://time.geekbang.org/column/article/497405)
 [^IntegrationVsUnit]:[TDD中的测试（3）：集成测试还是单元测试？](https://time.geekbang.org/column/article/496699)

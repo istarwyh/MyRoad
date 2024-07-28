@@ -5,7 +5,7 @@ AutoGen、Crew AI 和 LangGraph 等新兴框架提供了丰富的方法来构建
  ![](https://lilianweng.github.io/posts/2023-06-23-agent/agent-overview.png)
 
 
-上图很好地解释了Agent的工作原理，其中Memory 结合 Planning 使得 Agent 可以事前 Thought,事后 Observation 然后继续 Thought 判断下一步的Action, Action 则是利用 Tools 对现实世界产生影响。这个也被称为 ReAct(Reason & Act) 框架：
+上图很好地解释了Agent的工作原理，其中Memory 结合 Planning 使得 Agent 可以事前 Thought,事后 Observation。然后继续 Thought 判断下一步的Action, Action 则是利用 Tools 对现实世界产生影响。这个也被称为 ReAct(Reason & Act) 框架：
 ```mermaid
 graph TD
     A[Thought] --> B["Action & Action Input"]

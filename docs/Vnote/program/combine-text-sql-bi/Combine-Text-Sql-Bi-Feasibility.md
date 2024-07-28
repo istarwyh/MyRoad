@@ -9,6 +9,7 @@ https://a16z.com/emerging-architectures-for-modern-data-infrastructure/
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202312282018821.png)
 
 https://future.com/data50/
+上面这张图里居然没有 tableau ,因为 tableau其实根本不需要投资了么。
 
 ### 竞品
 轻量的只负责功能，不连接数据库的产品：

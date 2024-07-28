@@ -59,7 +59,7 @@ ETL的全称为`Extraction-Transformation-Loading`,中文名为数据抽取、�
 #### 2.2.3. 参数化测试
 如前所述，账单涉及数据时间跨度长，计费规则也常变，如何既覆盖各种异常case，同时长期保证transformation 的数据质量值得思考。
 物流服务费账单因为实际计费口径和希望给用户展示的口径不一致，后台需要处理来自三个不同接口的4份数据，然后再按照订单包裹维度解析。然而4份数据：物流费、包材费、防护费和仓内操作费都没有办法和订单包裹关联上，只能按照一定的顺序和商品的关系关联，又因为历史上包材计费的系统迁移过，历史数据格式大变过且是灰度逐渐切流，更增加了数据处理的难度。基于此，可以采用参数化测试。
-这就是最简单的参数化测试：将数据和逻辑分离。同样地，我开发了[`@JsonFileSource`](https://github.com/istarwyh/TestMuseum/blob/main/tdd.java.common/src/main/java/istarwyh/junit5/annotation/JsonFileSource.java) 传入JSON格式的对象，并将每个时期变动的计费逻辑都覆盖到，于是我们对数据处理正确的信心大大增加了。
+这就是最简单的参数化测试：将数据和逻辑分离。同样地，我开发了[`@JsonFileSource`](https://github.com/istarwyh/TestMuseum/tree/main/junit-extensions) 传入JSON格式的对象，并将每个时期变动的计费逻辑都覆盖到，于是我们对数据处理正确的信心大大增加了。
 ```java
 @ParameterizedTest
 @CsvSource(value = {
