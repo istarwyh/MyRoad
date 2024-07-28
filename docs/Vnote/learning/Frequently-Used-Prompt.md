@@ -5,12 +5,12 @@ Official Guidance:https://github.com/guidance-ai/guidance
 ## 稳定输出
 
 - 角色指定
-- 任务说明
+- 任务说明（CoT）
 - 格式说明
 - 规则说明
 - 末尾加强
 
-## 问GPT自己
+## 获取足够的信息
 ```
 Before you start, please ask me any questions about the prompt I give you, especillay when you feel confused.
 ```
@@ -28,8 +28,14 @@ I don't need to get answer quickly. Have a break, and then...
 ```
 But chatGPT can do it better.
 ```
+
 ## 指定读者
 说明输出结果的读者是什么样的身份，给小学生的和给一个科学家，他们的输出结果是很不一样的
+
+## 不要让它猜
+用肯定的语气说“做某事”，避免用否定语气说“不要做某事”
+使用“你的任务是”和“你必须”这样的短语
+
 ## 个人常用
 ### 翻译
 #### 一般翻译

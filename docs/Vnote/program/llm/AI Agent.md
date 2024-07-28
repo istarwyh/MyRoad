@@ -1,3 +1,4 @@
+AutoGen、Crew AI 和 LangGraph 等新兴框架提供了丰富的方法来构建多智能体问题解决方案，特别是 ChatDev，这是一组运行虚拟软件公司的智能体的开源实现-- https://www.deeplearning.ai/the-batch/issue-241/
 ## ReAct(Reason & Act) 框架
  [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/):
  
