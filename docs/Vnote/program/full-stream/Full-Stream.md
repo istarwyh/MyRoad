@@ -140,6 +140,7 @@ https://github.com/version-fox/vfox
 - 可视化创建数据库🀄️数据：https://visualdb.com/
 - 数据库数据 mock: Snaplet 
 - LLM 的知识库问答系统：https://github.com/1Panel-dev/MaxKB
+- 数据库 DDL 设计工具：DrawDB
 #### 数据库开发工具
 - https://webdb.app/page/demo
 - 
