@@ -12,3 +12,6 @@ https://github.com/plbrault/youre-the-os
 
 解释程序如何运行：
 https://github.com/hackclub/putting-the-you-in-cpu
+
+
+独立开发者出海工具梳理： https://lyc.fyi/article/toolbox-dev#498935ea52a540848e1f192c5cc1c13f
