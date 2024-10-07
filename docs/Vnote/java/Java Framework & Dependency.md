@@ -11,7 +11,7 @@
 
 ## 日志
 - `Lombok @SLf4j` + [Log4j2 介绍](https://mp.weixin.qq.com/s/yO2lfvA2Jvw_HxP5LKwJsQ)
-
+- 无盘化日志框架：https://github.com/aliyun/aliyun-log-log4j2-appender
 ## 单元测试
 ```groovy
 io.github.istarwyh:junit-extensions:0.0.4-MINOR
