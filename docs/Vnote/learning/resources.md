@@ -5,6 +5,7 @@ Trancy —— 沉浸式 AI 语言学习工具链接：https://www.trancy.org/zh-
 
 修理东西： https://zh.ifixit.com/
 
+干净的windows 操作系统：github.com/Atlas-OS/Atlas
 带入操作系统视角的游戏：
 https://github.com/plbrault/youre-the-os
 
@@ -16,7 +17,7 @@ https://github.com/hackclub/putting-the-you-in-cpu
 
 独立开发者出海工具梳理： https://lyc.fyi/article/toolbox-dev#498935ea52a540848e1f192c5cc1c13f
 
-
+证件照制作：photo4you.win
 <svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
   <rect width="100%" height="100%" fill="#f4f4f4"/>
   <rect x="20" y="20" width="360" height="560" fill="#ffffff" stroke="#000000" stroke-width="2"/>
