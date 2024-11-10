@@ -73,18 +73,29 @@ RPA(`Robot Process Automation`) 是对业务流程自动化技术的传统称呼
 
 ### Agent 框架选型
 这里值得单独再写一篇文章，目前看来我们遇到的 Agent 框架包括：
-- AgentUniverse
-- LangGraph
-- [Autogen](https://github.com/microsoft/autogen)
-- [Langraph](https://www.langchain.com/langgraph)
-- [Taskweaver](https://github.com/microsoft/taskweaver/)
-- Swarm
+- AgentUniverse:亮点在于有蚂蚁及内部业务方在背后支持，比较完善与落地
+- [Autogen](https://github.com/microsoft/autogen)：支持不同领域或工具的专门化代理之间的协作，模拟人类团队合作
+- [LangGraph](https://www.langchain.com/langgraph)：很灵活，同时提供了 Human-In-The-Loop
+- [Taskweaver](https://github.com/microsoft/taskweaver/)：亮点在于对代码执行的场景做了优化，使得代码执行本身有状态
+- [Swarm](https://github.com/openai/swarm)：agent之间互相传递信息与任务简单
+- [Magentic-One](https://github.com/microsoft/autogen/tree/main/python/packages/autogen-magentic-one#magentic-one): 亮点在于计划是动态生成的，并且集成了多模态识图、代码生成并执行以及浏览器内容提取等agent
 
 以及业界流行的 4 种基本 Agent 模式：
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202410140018655.png)
 
 
-最后我们选择了蚂蚁开源的 Agentuniverse 和 综合了 4 中基本 Agent模式的 PEER （Plan-Execute-Expressing-Review）模式。
+最后我们选择了蚂蚁开源的 Agentuniverse 和 综合了 4 种基本 Agent模式的 PEER （Plan-Execute-Expressing-Review）模式。
+
+不过 Au 
+
+### AgentUniverse 原理简介
+- load the configuration file
+- load user custom key
+- init loguru loggers
+- init web server
+- init all extension module
+- init monitor module
+- scan and register the components
 ## 问题拆解
 ### 技术栈
 检测层
@@ -96,6 +107,9 @@ RPA(`Robot Process Automation`) 是对业务流程自动化技术的传统称呼
 意图 shot 
 意图 key 和方法调用一一对应，方法参数由 NER 提取得到
 
+ask -> Facade Agent -> NER agent -> Planner Agent -> planning agent 决定调查方向 -> 查询调查方向对应 Agent 是否已经已经在 executing 数组中,在就执行  -》 expressing agent -》 review agent 
+
+planner Agent 是某一个模式的封装
 ### 解法
 #### 工具准备
 LLM 自己的知识再丰富，也需要 Tool 来帮他获取现实中的信息。通过将工具描述作为上下文输入，可以让模型自己决策选择哪些工具。为了让 LLM 处理更容易点，工具描述应当简单并且结构化。但是还有另外一个问题，就是参数。LLM 选择完工具调用时必须要提供足够的参数，考虑到我们的场景不会涉及写入数据，只有查询并消费数据，我们将所有必要的中间过程数据都放入 context 中，这样被调用的工具提取自己需要的参数消费即可。

@@ -22,7 +22,7 @@
 #### Integration
 http://libgen.li/
 
-[Z-Library](https://singlelogin.re/)
+[Z-Library](https://singlelogin.re/) ⚠️ z-library 地址经常换，如果现在的地址挂了，需要去 tg 或者 x 上找它的最新地址
 
 [中国国家数字图书馆](http://find.nlc.cn)
 
