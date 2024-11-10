@@ -1,0 +1,1 @@
+[Cape](https://getcape.app/en/index.html): 戒瘾，增加使用 APP 的难度
