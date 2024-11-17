@@ -29,7 +29,8 @@ Domain 比价:
 ### 渠道
 #### LemonSqueezy
 #### Stripe
-https://itangtalk.com/stripe/
+- https://itangtalk.com/stripe/
+- https://www.ifb.me/zh/blog/short/stripe
 #### Paddle
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202308061525272.png)
 ### Promotion

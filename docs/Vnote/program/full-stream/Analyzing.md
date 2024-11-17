@@ -3,7 +3,7 @@
 
 “我有一个梦想”，这个梦想就是故事的开始。但是怎么样找到一个好[[Story|故事]]是一个很复杂也很靠运气的事。一个好故事应该可以优雅地解决社会问题。那么如何找到可靠的社会问题？
 你可以分析已有的商业模型从中获取灵感，比如[[E-Commerce Business Models|电商模型]]；
-可以参考别人的经验：[做自己、近市场、近流量、看榜单、抄同行](https://mp.weixin.qq.com/s/TqsKacR1lKPWALDjsxmiXw)；
+可以参考别人的经验：[做自己、近市场、近流量、看榜单、抄同行](https://mp.weixin.qq.com/s/TqsKacR1lKPWALDjsxmiXw)，看看[谁正在搞钱](https://whoismaking.money/)；
 也可以现实中具体的职业或流程看如何优化，比如[为Figma这种大平台做插件](https://www.bmms.me/blog/slash-programmer-digital-nomad-transition)、[[Work Involved In Opening an E-Commerce Store|开一个网店要做哪些]];值得注意的是，微妙的不对劲往往就是机会所在之处，如果能充分论证已有的“不对劲”确实是错误的，那么这种不对劲对应的就是一个确切的发现，比如“活字印刷术”之于“雕版印刷术”；
 还可以观察现实中人们的行为，挖掘人们潜在的需求，比如[[Customer-Behavior|消费者行为]];
 也可以借鉴孙正义的“时间机器”理论，看一个市场有的产品，而另外一个市场缺少什么，比如[[Overseas Lack of Chinese Similar Products|海外缺少的中国产品]]；
