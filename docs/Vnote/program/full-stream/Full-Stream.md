@@ -218,7 +218,7 @@ Have a break, and then output full tests for given INPUT CODE. NOT STEPS ONLY TE
   
   
 ```
-
+AI 自动 review:https://github.com/Gijela/CR-Mentor
 ## Releasing
 - goreleaser：快速、优雅地发布 Go 应用。
 ### DevOps Platform
