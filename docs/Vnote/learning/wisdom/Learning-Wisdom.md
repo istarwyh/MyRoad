@@ -23,3 +23,5 @@ I cannot use a theorem other people proved. I have to understand every nut and b
 我正在使用“问题形成框架”（Question Formulation Technique，QFT）进行教学。接下来是改进问题环节，对于我给出的任何封闭性问题，请转换为多个开放性问题。
 
 人类是工具的制造者，我们制造的工具可以极大地放大我们与生俱来的能力。--乔布斯
+
+哀莫大于心死，而身死次之。古典诗词中凝聚了古代伟大之诗人的所有心灵、智慧、品格、襟抱和修养。诵读古典诗词，可以让你的心灵不死。--叶嘉莹
