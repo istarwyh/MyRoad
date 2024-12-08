@@ -3,3 +3,5 @@
 
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202310292109953.png)
+
+- https://openbuild.xyz/learn/career_path

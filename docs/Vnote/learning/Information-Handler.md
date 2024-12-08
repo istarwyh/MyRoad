@@ -152,6 +152,7 @@ Sizzle AI，个性化学习
 - “The Day You Became a Better Writer”
 - GitHub Pages: 免费但是慢
 - [Netlify](https://app.netlify.com/): CDN服务商,免费100G/月
+- Cloudflare: CDN服务商
 - [Substack](https://xiaohuihui.substack.com/): 发布每个人自己的博客网站并提供订阅服务
 - obsidian publish:$8/月
 - 简单、轻松的书写&部署博客: https://elog.1874.cool/notion/introduce
