@@ -1,1 +1,6 @@
 .windsurfrules
+node_modules/
+package.json
+package-lock.json
+.prettierrc
+.git/hooks/pre-commit
