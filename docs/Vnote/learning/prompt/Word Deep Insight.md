@@ -47,37 +47,88 @@
 4. 解释内容并居中
 5. 展示几何图案，与文字不重叠
 
-### SVG卡片示例:
-```
-</svg>
-<svg width="400" height="600" xmlns="http://www.w3.org/2000/svg"> <rect width="100%" height="100%" fill="#f4f4f4"/> <rect x="20" y="20" width="360" height="560" fill="#ffffff" stroke="#000000" stroke-width="2"/> <text x="200" y="60" text-anchor="middle" font-family="KaiTi" font-size="24" font-weight="bold">汉语新解</text> <line x1="20" y1="80" x2="380" y2="80" stroke="#000000" stroke-width="2"/> <text x="200" y="120" text-anchor="middle" font-family="KaiTi" font-size="20">案件分析</text> <text x="200" y="160" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">[àn jiàn fēn xī]</text> <text x="200" y="200" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">Case Analysis</text> <text x="200" y="240" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">事件分析</text> <text x="200" y="320" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="360" style="word-wrap: break-word;">人性黑暗面的解剖课</text> <text x="200" y="360" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="360" style="word-wrap: break-word;">用理性的手术刀剖开社会的脓包</text> <text x="200" y="400" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="360" style="word-wrap: break-word;">在道德的迷宫中寻找真相的碎片</text><text x="200" y="440" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="360" style="word-wrap: break-word;">追寻真相的绿洲，逃脱迷雾笼罩的沙丘</text>
-<text x="200" y="440" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="360" style="word-wrap: break-word;">"案件分析：社会病理学的实践课"</text> <polygon points="150,500 250,500 200,550" fill="#ffffff" stroke="#000000" stroke-width="2"/> <line x1="200" y1="500" x2="200" y2="550" stroke="#000000" stroke-width="2"/> <line x1="175" y1="525" x2="225" y2="525" stroke="#000000" stroke-width="2"/> 
-
-</svg>
-
-```
+### SVG卡片示例
 
 
+<svg class="concept-card" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:1" />
+    </linearGradient>
+    <!-- 定义鸟的路径 -->
+    <path id="birdPath" d="M -20,0 C -10,-10 10,-10 20,0" fill="none"/>
+    <!-- 定义断裂的锁链 -->
+    <symbol id="brokenChain" viewBox="0 0 60 20">
+        <path d="M 0,10 L 20,10 M 40,10 L 60,10" stroke="#666" stroke-width="3"/>
+        <circle cx="10" cy="10" r="5" fill="none" stroke="#666" stroke-width="3"/>
+        <circle cx="50" cy="10" r="5" fill="none" stroke="#666" stroke-width="3"/>
+    </symbol>
+</defs>
 
-<svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
-<rect width="100%" height="100%" fill="#f4f4f4"/>
-<rect x="20" y="20" width="360" height="560" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-<text x="200" y="60" text-anchor="middle" font-family="KaiTi" font-size="24" font-weight="bold">汉语新解</text>  
-<line x1="20" y1="80" x2="380" y2="80" stroke="#000000" stroke-width="2"/>
-<text x="200" y="120" text-anchor="middle" font-family="KaiTi" font-size="20">自由</text>  
-<text x="200" y="160" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">[zì yóu]</text>  
-<text x="200" y="200" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">Freedom</text>  
-<text x="200" y="240" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#666666">自由</text>
-<text x="200" y="300" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="320">
-<tspan x="200" dy="0">人类永恒的幻梦</tspan>
-<tspan x="200" dy="30">囚笼中的鸟儿向往的天空</tspan>
-<tspan x="200" dy="30">被锁链束缚的灵魂渴望的解脱</tspan>
-<tspan x="200" dy="30">一个被无数人追逐却始终难以捕获的海市蜃楼</tspan>
+<rect width="100%" height="100%" fill="#f8f9fa"/>
+<rect x="20" y="20" width="360" height="560" fill="#ffffff" stroke="url(#headerGrad)" stroke-width="2"/>
+<text x="200" y="60" text-anchor="middle" font-family="KaiTi" font-size="24" font-weight="bold" fill="#2c3e50">汉语新解</text>
+<line x1="20" y1="80" x2="380" y2="80" stroke="url(#headerGrad)" stroke-width="2"/>
+<text x="200" y="120" text-anchor="middle" font-family="KaiTi" font-size="20" fill="#34495e">自由</text>
+<text x="200" y="160" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#7f8c8d">[zì yóu]</text>
+<text x="200" y="200" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#7f8c8d">Freedom</text>
+<text x="200" y="240" text-anchor="middle" font-family="KaiTi" font-size="16" fill="#7f8c8d">自由</text>
+
+<text x="200" y="300" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#2c3e50" width="320">
+<tspan x="200" dy="0" fill="#e74c3c">人类永恒的幻梦</tspan>
+<tspan x="200" dy="30" fill="#e67e22">囚笼中的鸟儿向往的天空</tspan>
+<tspan x="200" dy="30" fill="#f1c40f">被锁链束缚的灵魂渴望的解脱</tspan>
+<tspan x="200" dy="30" fill="#27ae60">一个被无数人追逐却始终难以捕获的海市蜃楼</tspan>
 </text>
-<text x="200" y="460" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#333333" width="320">
+
+<text x="200" y="460" text-anchor="middle" font-family="KaiTi" font-size="18" fill="#2980b9" width="320">
 "自由：人类永恒的镣铐与翅膀"
 </text>
-<circle cx="200" cy="520" r="40" fill="none" stroke="#000000" stroke-width="2"/>
-<line x1="200" y1="480" x2="200" y2="560" stroke="#000000" stroke-width="2"/>
-<line x1="160" y1="520" x2="240" y2="520" stroke="#000000" stroke-width="2"/>
+
+<!-- 飞鸟动画 -->
+<g transform="translate(200,520)">
+    <path d="M -15,0 C -5,-10 5,-10 15,0 M -10,-5 L -15,0 L -10,5 M 10,-5 L 15,0 L 10,5"
+          stroke="#3498db" 
+          stroke-width="2" 
+          fill="none">
+        <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="0,0; 0,-10; 0,0"
+            dur="2s"
+            repeatCount="indefinite"/>
+        <animate
+            attributeName="d"
+            values="M -15,0 C -5,-10 5,-10 15,0 M -10,-5 L -15,0 L -10,5 M 10,-5 L 15,0 L 10,5;
+                   M -15,0 C -5,0 5,0 15,0 M -10,-5 L -15,0 L -10,5 M 10,-5 L 15,0 L 10,5;
+                   M -15,0 C -5,-10 5,-10 15,0 M -10,-5 L -15,0 L -10,5 M 10,-5 L 15,0 L 10,5"
+            dur="1s"
+            repeatCount="indefinite"/>
+    </path>
+</g>
+
+<!-- 断裂的锁链 -->
+<use href="#brokenChain" x="170" y="540" width="60" height="20">
+    <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; -5,0; 0,0"
+        dur="3s"
+        repeatCount="indefinite"/>
+</use>
+
+<!-- 光芒效果 -->
+<circle cx="200" cy="520" r="30" fill="none" stroke="#3498db" stroke-width="1" opacity="0.5">
+    <animate
+        attributeName="r"
+        values="30;40;30"
+        dur="3s"
+        repeatCount="indefinite"/>
+    <animate
+        attributeName="opacity"
+        values="0.5;0.1;0.5"
+        dur="3s"
+        repeatCount="indefinite"/>
+</circle>
 </svg>
