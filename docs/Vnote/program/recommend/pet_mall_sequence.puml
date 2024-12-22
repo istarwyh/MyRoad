@@ -1,0 +1,80 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+participant "用户端" as Client
+participant "宠物商城后端" as Backend
+participant "风控推荐服务" as RecSys
+participant "特征构建服务" as Feature
+participant "商品过滤服务" as Filter
+participant "缓存系统" as Cache
+participant "效果优化平台" as ABTest
+participant "监控日志系统" as Monitor
+
+== 初始化阶段 ==
+Cache <- Filter: 定时预热各类缓存数据
+note right: 疲劳度/粗排/推荐/商品状态
+
+== 推荐请求处理 ==
+Client -> Backend: 发起商品推荐请求
+activate Backend
+
+Backend -> RecSys: 转发推荐请求
+activate RecSys
+
+RecSys -> RecSys: 用户档案补全
+RecSys -> Feature: 获取用户特征
+activate Feature
+
+par 特征并行构建
+    Feature -> Feature: 构建用户特征
+    Feature -> Feature: 构建商品特征
+    Feature -> Feature: 构建交互特征
+end
+
+Feature -> Feature: 特征实时融合
+Feature --> RecSys: 返回特征数据
+deactivate Feature
+
+RecSys -> RecSys: 召回候选商品
+
+par 并行打分
+    RecSys -> RecSys: 特征工程
+    RecSys -> RecSys: 模型打分
+end
+
+RecSys -> Filter: 请求过滤
+activate Filter
+
+par 多维度过滤
+    Filter -> Cache: 获取疲劳度数据
+    Filter -> Cache: 获取互斥规则
+    Filter -> Cache: 检查商品状态
+end
+
+Filter --> RecSys: 返回过滤结果
+deactivate Filter
+
+RecSys -> RecSys: 排序、分页处理
+
+alt 正常流程
+    RecSys -> RecSys: 返回推荐结果
+else 异常情况
+    RecSys -> RecSys: 使用稳定模型兜底
+end
+
+RecSys --> Backend: 返回最终结果
+deactivate RecSys
+
+Backend --> Client: 展示推荐商品
+deactivate Backend
+
+== 异步监控 ==
+RecSys ->> Monitor: 记录推荐日志
+Filter ->> Monitor: 记录过滤日志
+Feature ->> Monitor: 记录特征日志
+
+== 效果分析 ==
+ABTest -> Monitor: 获取实验数据
+ABTest -> ABTest: 达尔文实验分析
+@enduml
