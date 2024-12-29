@@ -15,7 +15,10 @@ graph_attr = {
     "splines": "ortho",
     "nodesep": "1.2",
     "ranksep": "1.5",
-    "concentrate": "true"
+    "concentrate": "true",
+    "compound": "true",     # 允许边连接到子图
+    "clusterrank": "local", # 允许子图独立排序
+    "constraint": "false"   # 减少边的约束
 }
 
 core_graph_attr = {
@@ -36,11 +39,14 @@ with Diagram("宠物商城风控推荐系统架构", direction="LR", graph_attr=
             backend = AppEngine("宠物商城后端")
 
         # 风控推荐核心链路，与商城系统并排
-        with Cluster("风控推荐核心链路",graph_attr=core_graph_attr):
+        with Cluster("风控推荐核心链路", graph_attr=core_graph_attr):
             profile = AIHub("用户档案补全")
             recall = AutoML("HA3 召回商品")
             scoring = Functions("AI Studio算法打分")
             ranking = Functions("排序、过滤、分页")
+
+            # 强制水平布局
+            profile >> recall >> scoring >> ranking
 
     # 支撑系统组
     with Cluster("支撑系统"):
@@ -56,7 +62,7 @@ with Diagram("宠物商城风控推荐系统架构", direction="LR", graph_attr=
             log_process = Dataflow("日志处理")
 
     # 特征构建系统 - 使用水平布局
-    with Cluster("特征工程", graph_attr={"rankdir": "LR"}) as feature_eng:
+    with Cluster("特征工程", graph_attr={"rankdir": "LR", "rank": "same", "constraint": "false"}) as feature_eng:
         # 离线特征组
         with Cluster("离线特征组") as offline:
             user_features = Dataproc("用户特征")
@@ -70,12 +76,12 @@ with Diagram("宠物商城风控推荐系统架构", direction="LR", graph_attr=
             feature_fusion = Dataflow("特征实时融合")
 
         # 使用不可见边缘连接节点，强制水平布局
-        user_features >> Edge(style="invis") >> view_stream
-        item_features >> Edge(style="invis") >> purchase_stream
-        ui_features >> Edge(style="invis") >> feature_fusion
+        user_features >> Edge(style="invis", constraint="false") >> view_stream
+        item_features >> Edge(style="invis", constraint="false") >> purchase_stream
+        ui_features >> Edge(style="invis", constraint="false") >> feature_fusion
 
     # 过滤和缓存系统
-    with Cluster("过滤与缓存"):
+    with Cluster("过滤与缓存", graph_attr={"rank": "same", "constraint": "false"}):
         # # 商品过滤
         with Cluster("商品过滤"):
             filter_engine = Run("过滤模块")
@@ -115,3 +121,6 @@ with Diagram("宠物商城风控推荐系统架构", direction="LR", graph_attr=
         component >> Edge(style="dotted", color="gray") >> log_collect
 
     log_collect >> log_process
+
+    # 添加一个不可见的边来连接特征工程和过滤缓存系统
+    feature_fusion >> Edge(style="invis", minlen="10", constraint="false") >> filter_engine
