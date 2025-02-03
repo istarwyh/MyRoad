@@ -4,6 +4,8 @@
 
 各个步骤都可能用到 prompt:[[Frequently-Used-Prompt]]。所有prompt都推荐搭配 有`snippet` 功能的软件使用，比如 `raycast`(Mac)、`quicker`(Windows).
 
+在中国大陆特需全局[换源工具](https://github.com/RubyMetric/chsrc?tab=readme-ov-file)
+
 ## [[Analyzing]]
 
 在分析的时候，你可能还需要不停地游走在各种不知道的概念和领域中，这时候 AI 体现出的“知识平权”效果就特别明显。下面的prompt或许能用到
