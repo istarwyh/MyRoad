@@ -11,16 +11,16 @@
 - [[Information-Handler#Publish|Cloudfalre]]
 - [Quartz](https://github.com/jackyzha0/quartz.gitl)
 
-## 致谢·Thanks for
+## Thanks
 
 <span style="font-family: cursive">
+
 - World Wide Web
-<br>
+
 - Cloudflare
-<br>
+
 - Quartz
-<br>
+
 - [零成本搭建现代博客之搭建篇](https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/)
-<br>
-- [quartz-syncer](https://github.com/saberzero1/quartz-syncer)
-</span>
+
+- [quartz-syncer](https://github.com/saberzero1/quartz-syncer) <br> </span>

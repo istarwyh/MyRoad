@@ -1,14 +1,14 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
+
 ==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 ## Excalidraw Data
+
 ### Text Elements
+
 Users ^QVPlrbNm
 
 GitHub ^eecVyYdv
@@ -66,7 +66,9 @@ PicGo ^tS05kzuA
 domain ^yrXH7Gve
 
 %%
+
 ### Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebTieGjoghH0EDihmbgBtcDBQMELoeHF0Ig4kfiLGFnYuNAAWAGYATirIGtZOADlOMW4eBqGeFoA2Jr48yEIOYixuCFwABiTC
 
@@ -414,4 +416,5 @@ mfMzLmZSM0ejczzmUTc3DkbAnmQczUgG7BQfnkB3me19DmUFoyURPBfmXMzUgEeAnQRPVgWfMyp1CoMy
 
 Nc0VWeBITwJ+pfmfcyEAF8yLCJwBaMT8y4AIEAzAMIB8Mp4RiAAKzmKBn5QiLnhPCO39XmD6BggOxBy0dgBsiAKiTgOep+mVvDK4MER+kH89qghyy7APSRAHN99z1HAB3KHMBPTg6zCcikRI7OEBizIuJJYEAA==
 ```
+
 %%

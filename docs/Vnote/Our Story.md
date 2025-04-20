@@ -22,5 +22,3 @@ LIST FROM #idea
 - [[Start-up Resources Collection]]
 - [Bytebase SAAS Collection](https://mp.weixin.qq.com/s/Z4W4JiWLFUY-uIXT5C7-2g)
 - [创业者股权架构](https://mp.weixin.qq.com/s/hxPY3HDUk7ReWo_9zL_l_A)
-
-a,b,c, d select \* from t where c = xx and a = xx;
