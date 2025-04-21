@@ -16,7 +16,9 @@
 
 ![](https://lilianweng.github.io/posts/2023-06-23-agent/agent-overview.png)
 
-lilianweng 提出 Agent = Planning + Action(Tools) + Memory 这时候各种多智能体框架也如火如荼的发展起来，比如 AutoGen、Crew AI 、 LangGraph 和 AgentUniverse等。多智能体的交互范式也基于不同的场景加以运用。基于 AgentUniverse 和 PEER 模式的 [[Case Analysis AI Agent]] 是这个阶段的作品。不过这时候公司内部只能使用 Qwen系列，不指导足够 COT 和 few-shot 的Agent 表现不太稳定，可以参见 [[痛定思痛，AI Agent 给我的教训]]。
+lilianweng 提出 $Agent = Planning + Action(Tools) + Memory$
+
+这时候各种多智能体框架也如火如荼的发展起来，比如 AutoGen、Crew AI 、 LangGraph 和 AgentUniverse等。多智能体的交互范式也基于不同的场景加以运用。基于 AgentUniverse 和 PEER 模式的 [[Case Analysis AI Agent]] 是这个阶段的作品。不过这时候公司内部只能使用 Qwen系列，不指导足够 COT 和 few-shot 的Agent 表现不太稳定，可以参见 [[痛定思痛，AI Agent 给我的教训]]。
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202410140018655.png)
 
@@ -89,7 +91,15 @@ MCP 最近的爆火，除了万物互联的理想、生态逐渐成熟，期望 
 
 OneAgent 将是每个闭环领域内的一种Agent 智能落地实践。在各个领域或组织都涌现出自己的 Agent 之后，Agent 与 Agent 更大维度上的交流合作也会随之发生(A2A, Agent2Agent 协议)，而这些具有一定自主能力的会形成一个 Agent Society。到那时Agent 就是我们同事的一份子。
 
-我们先看一个OneAgent 借助Cline 这个原本是设计给程序员用的Coding 插件，回答精算师一个实际业务问题的案例：
+### 这些范式是优先级逐渐更高的吗？
+
+我认为不管是那种Agent 开发范式都是为了更好地完成业务需求，即使相对最简单的LLM 调用，我也认为它们之间没有优劣，而且一个复杂的系统往往是他们的混合。这里引用 Anthropic 的[《Build Effective Agents》](https://www.anthropic.com/engineering/building-effective-agents)以说明如何选择：
+
+> 在使用 LLMs 构建应用时，我们建议先从最简单的方案入手，只在确实需要时才增加复杂性。这可能意味着你根本不需要构建 Agentic 系统。Agentic 系统通常会牺牲一些延迟和成本，来换取更好的任务表现，你应该仔细权衡这种取舍是否划算。
+>
+> 当确实需要更高复杂度时，Workflows 在处理界定清晰的任务时，能提供更好的可预测性和一致性；而当需要在规模化场景下实现灵活性和模型驱动的决策时，Agents 则是更好的选择。
+
+现在让我们继续 OneAgent 的范式介绍。这里是一个OneAgent 借助Cline 这个原本是设计给程序员用的Coding 插件，回答精算师一个实际业务问题的案例：
 
 ## OneAgent POC 案例
 
@@ -236,12 +246,6 @@ When calling MCP services, provide comprehensive context including:
 
 ## 保险风控当前实践
 
-### 领域知识 MCP
-
-有向无环图Plan
-
-### 挑选责任保费
-
 ## Agent 系统智能提升
 
 我认为，OpenAI 的 DeepResearch 某种程度上是OpenAI "Model as Agent" 理念的代表--o3 POC（Proof of Concept） 的产物。在 DeepResearch 发布 4 个月后，我们看到 OpenAI 对 o3 的tool use 进行了端到端的强化学习，使其能够在推理过程中链式地调用外部工具（如搜索引擎、计算器、代码解释器等），甚至在思维链中进行图像推理。
@@ -270,4 +274,4 @@ https://mp.weixin.qq.com/s/fztINLF_lTTcS9fpmdfJmw
 
 ## 我与Agent 做同事
 
-虽然还没有实现通用的业务需求打工Agent, 我们已经在用Cline配合公司内部 V3模型深度使用 AI Coding ，很多胶水代码、CRUD 代码尽量交给 AI 来做，我负责维护输出"vibe"。
+虽然还没有实现通用的业务需求打工Agent, 但是我们已经在用Cline配合公司内部 V3模型深度使用 AI Coding ，很多胶水代码、CRUD 代码尽量交给 AI 来做，我负责维护输出"vibe":) 希望后面每个业务场景都可以借助OneAgent + MCPs 实现AI Coding。
