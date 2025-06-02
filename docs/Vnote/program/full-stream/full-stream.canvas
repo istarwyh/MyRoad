@@ -7,7 +7,7 @@
 		{"id":"c321d627c8467505","type":"text","text":"Acceptance Confirmation & [[Unit Level Test Theory、Tool、Discussion|Testing]]","x":-542,"y":-225,"width":297,"height":50},
 		{"id":"ad89f7840afb3d6f","type":"text","text":"[[Prototype-Diagram]]","x":-113,"y":-236,"width":169,"height":50},
 		{"id":"3809de72505f03d1","type":"text","text":"[[Modeling]]","x":-550,"y":-531,"width":149,"height":54},
-		{"id":"bd523023149345d0","type":"text","text":"[[Analyzing]]","x":-508,"y":-725,"width":187,"height":55},
+		{"id":"bd523023149345d0","type":"text","text":"[[Requirements Analysis]]","x":-508,"y":-725,"width":187,"height":55},
 		{"id":"418a5a2472eec141","x":-261,"y":300,"width":250,"height":60,"type":"text","text":"[[Scaling By Investing]]\n"}
 	],
 	"edges":[

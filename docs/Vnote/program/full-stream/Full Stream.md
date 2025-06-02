@@ -6,7 +6,7 @@
 
 在中国大陆特需全局[换源工具](https://github.com/RubyMetric/chsrc?tab=readme-ov-file)
 
-## [[Analyzing]]
+## [[Requirements Analysis]]
 
 在分析的时候，你可能还需要不停地游走在各种不知道的概念和领域中，这时候 AI 体现出的“知识平权”效果就特别明显。下面的prompt或许能用到
 
@@ -141,7 +141,7 @@ Describe or include the test cases the method needs to pass.
 
 ### Ask
 
-https://devv.ai https://www.phind.com/ https://copilot.microsoft.com/
+什么 AI 网站都可以： https://devv.ai https://www.phind.com/ https://copilot.microsoft.com/
 
 ### IDE
 

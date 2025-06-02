@@ -4,15 +4,15 @@
 
 ### 工作项目
 
-- 24 年 12月～至今，我负责蚂蚁保保险科技的MCP相关工作
+- 24 年 12月～至今，我负责蚂蚁保保险科技的[[领域 Agent 如何像 Manus 交付业务需求-OneAgent + MCPs 范式|MCP相关工作]]
 - 24 年 6月～11月，我负责蚂蚁保风控 AI Agent 驱动的 [[Case Analysis AI Agent| 案件分析]] 工作
 - 23年 10 月～24年6月，我负责淘宝[[淘工厂客服知识库和问答相关的工作]]
 - 22 年 10 月～23 年 10 月，我负责淘宝[[假如你五行属商家，如何和淘天做生意？|淘工厂钱账票一体化以及参与业财一体的建设]]
-- 21 年 7 月～ 22 年 10 月，我参与重建了淘宝淘工厂的补货计划链路
+- 21 年 7 月～ 22 年 10 月，我参与重建了淘宝淘工厂的[[补货计划链路]]
 
 ### 开源项目
 
-- 一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 5500+下载
+- 一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 12000+下载
 - [[JUnit5 & Mockito|Junit5]] 扩展 junit5-extension，解决 JSON 参数化测试和任意测试类加载等问题
 
 ## 我能给您带来什么
