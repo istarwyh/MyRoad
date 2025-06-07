@@ -420,3 +420,18 @@ OneAgent + MCPs 范式旨在通过强大的基础Agent 结合 MCP 派生领域 A
 ## 我与Agent 做同事
 
 虽然还没有实现通用的业务需求打工Agent, 但是我们已经在用Cline配合公司内部 V3模型深度使用 AI Coding ，很多胶水代码、CRUD 代码尽量交给 AI 来做，我负责维护输出"vibe":) 希望后面每个业务场景都可以借助OneAgent + MCPs 实现AI Coding。
+
+```
+
+## 参考
+
+- [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/) by Lilian Weng
+- [Manus 源码](https://gist.github.com/jlia0/db0a9695b3ca7609c9b1a08dcbf872c9) - GitHub Gist
+- [Build Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) by Anthropic
+- [ReSearch 项目](https://github.com/Agent-RL/ReSearch) - GitHub 仓库
+- [ReSearch 介绍](https://mp.weixin.qq.com/s/fztINLF_lTTcS9fpmdfJmw) - 微信公众号文章
+- 内部文档：[[Case Analysis AI Agent]]
+- 内部文档：[[痛定思痛，AI Agent 给我的教训]]
+- [Greg Benson 教授关于分层多智能体架构的分析](https://github.com/SnapLogic/agent-continuations?tab=readme-ov-file)
+- [A2A (Agent2Agent) 协议](https://google-a2a.github.io/A2A/specification/#723-taskartifactupdateevent-object)
+```
