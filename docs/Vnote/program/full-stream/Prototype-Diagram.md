@@ -9,14 +9,19 @@
 
 - 设计师： https://webdesigner.tools/
 - https://js.design/ai-upcoming 描述生成原型
-- Flowstep——AI生成用户流程图、线框图和UI链接：https://flowstep.ai/先用AI生成流程图，再生成线框图，最后生成UI，每一步都能调整。相比于纯AI生成UI，这样更好的把控业务逻辑和操作流程，最终生成的UI更符合自己的需求。
+- Flowstep——AI生成用户流程图、线框图和UI：https://flowstep.ai/   
+  先用AI生成流程图，再生成线框图，最后生成UI，每一步都能调整。相比于纯AI生成UI，这样更好的把控业务逻辑和操作流程，最终生成的UI更符合自己的需求。
 - AI 界面转代码:
   - https://kombai.com/
   - https://copyweb.ai
   -  same.new
 
 - Figma 插件：html-to-figma
-- ai 生成网页： https://v0.dev/
+- ai 生成网页：
+  - https://v0.dev/
+  - https://www.framer.com/
+  - https://reweb.so
+  - https://app.trickle.so/project
 - 简笔画转AI图片：https://clipdrop.co/stable-doodle
 
 - 移除背景 https://removebg.one
@@ -26,8 +31,6 @@
 - 低代码
   - wix:https://zh.wix.com/
   - strikingly:https://cn.strikingly.com/
-  - https://www.framer.com/
-  - https://reweb.so
-  - https://app.trickle.so/project
+  -
 
 #resource

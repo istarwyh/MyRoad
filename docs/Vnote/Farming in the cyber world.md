@@ -12,7 +12,7 @@
 
 ### 开源项目
 
-- 一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 12000+下载
+- 一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 13000+下载
 - [[JUnit5 & Mockito|Junit5]] 扩展 junit5-extension，解决 JSON 参数化测试和任意测试类加载等问题
 
 ## 我能给您带来什么
@@ -20,7 +20,6 @@
 - 语聊机器人、AI Agent 的专业经验
 - 财务后端开发的专业经验
 - Java 、[[Optimize Kinds of Resource Use#1.2.2. 数据库可以当操作系统|Flink]]、[[How-to-Choose-the-Suitable-Database|数据库]] （[[Hologres]](PostgreSQL变种)、[[MySQL FAQ|MySQL]]、[[Possible Problems with Sharding and Partitioning|TDDL]]、[[Redis源码架构阅读|Redis]]、 [[Inverted-Index-of-Lucene-and-B-Tree|HavenAsk3]](淘宝的推荐引擎) 、[[Practices-for-Processing-l0-Billion-Bill-data|TableStore]]）、[[Unit Level Test Theory、Tool、Discussion|测试]]（TDD） 方面、Java&React 全栈、[[Distributed System Problems|分布式系统]] 的**高质量**开发经验
-- 本科给排水转行后端开发，2021校招阿里sp offer的经验
 
 ## 欢迎联系我～
 
