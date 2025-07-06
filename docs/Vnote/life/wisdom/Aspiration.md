@@ -42,3 +42,10 @@
 
 这个从混沌繁杂的物理世界中提取意义的过程，就是人之为人的关键。--《世界之门》
 
+
+
+自由不是能去任何地方，而是无论在哪里都能抵达自己。
+
+Dying for one's country… assumes a moral grandeur which would be unintelligible in a medieval Christendom. --Benedict Anderso《想象的共同体》指出正是这种想象，使得死亡获得了意义。
+
+物品的价值本来是在流通和消费中得以体现，我既不消费，也不流通，那相当于是个河流中的障碍物，所以在我这里很快就会产生淤积。--和菜头

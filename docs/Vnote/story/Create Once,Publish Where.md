@@ -36,4 +36,5 @@
 - [[mdnice|墨滴]]
 - https://github.com/wechatsync/Wechatsync
 - 卡兹克改造过
+- MD 发布到微信：https://github.com/caol64/wenyan-mcp
 
