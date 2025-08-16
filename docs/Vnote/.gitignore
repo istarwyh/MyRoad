@@ -5,3 +5,5 @@ package-lock.json
 .prettierrc
 .git/hooks/pre-commit
 oceanbase-test/
+untitled.*
+Untitled.*
