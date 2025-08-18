@@ -36,13 +36,15 @@ LangGraph的核心理念是其共享状态模型，即`StateGraph`。`State`是�
 
 **状态快照（StateSnapshot）**：一个`checkpoint`本质上是一个`StateSnapshot`对象，它不仅仅是图状态的简单副本，还包含了丰富的元数据，例如：
 
-- `values`：图状态通道的值，即共享状态的实际数据 3。
+- `values`：图状态通道的值，即共享状态的实际数据 3。这个值是一个字典，包含了所有需要持久化的数据，例如对话历史（ messages）、工具调用的中间结果（tool_results）以及任何其他自定义状态字段。例如，在一个研究代理中，这可能包括用户初始问题、生成的搜索查询列表、从网络上检索到的内容以及最终的答案。
 
 - `config`：与此快照关联的配置信息，例如线程ID 3。
 
 - `metadata`：描述本次超步的元数据，包括写入了哪些节点、步骤编号等 3。
 
 - `next`：一个元组，包含了下一个要执行的节点名称 3。
+
+- `tasks`: 一个元组，包含待执行任务的信息 。如果某个步骤之前已尝试过，它还会包含错误信息，这对于实现容错和重试机制至关重要。
 
 ```mermaid
 graph TD
@@ -84,6 +86,8 @@ graph TD
 为了管理一系列连续的检查点，LangGraph引入了“线程”（Thread）的概念。`Thread`是一个唯一的标识符，通常与用户ID或会话ID相关联，用于组织和存储整个对话或任务的历史状态 3。
 
 每个`thread`都包含一个按时间顺序排列的检查点序列。通过将`thread_id`与一个特定的`checkpoint_id`（检查点的唯一标识符）结合起来，开发者可以实现所谓的“时间旅行”（time travel）能力 3。这意味着，即使工作流已经执行了很长一段时间，开发者也可以通过指定一个历史检查点，让图从该点恢复并重新执行，这对于复杂的调试、错误恢复或探索不同的执行路径至关重要。框架能够识别哪些步骤已经被执行过，并跳过这些步骤的重新计算，从而只执行从指定检查点开始的新步骤，确保了效率 3。
+
+**在一个包含多个节点和复杂逻辑（如循环、分支和多代理协作）的 LangGraph 图中，持久化发生在每个“超步”结束时 。这意味着，当一个或多个节点完成执行并更新图状态后，检查点机制会捕获这个新的状态快照并将其写入数据库 。这为调试提供了极大的便利，因为开发者可以“回溯”到任何一个中间状态快照，查看特定节点的输出 。此外，LangGraph 的“回放”（replay）功能允许工作进程从指定的checkpoint_id 开始恢复执行，跳过那些已经完成的步骤，从而实现精确的任务续航 3。**
 
 ## 3. 数据流与生产级架构图剖析
 
@@ -213,6 +217,23 @@ sequenceDiagram
 | `Redis` | 生产服务器 | 中等 | 生产环境、高并发实时任务 | 极低延迟，支持`pub-sub`和任务队列 | 不适合作为主持久化层，需要配合其他数据库 |
 | `Couchbase` | 生产服务器 | 中等 | 企业级特定需求 | 可扩展性强，适应特定数据生态系统 | 需要额外的自定义集成 |
 
+\*\*
+
+以 PostgresSaver 的同步和异步实现为例，其配置和使用方式如下 31：
+
+```Python
+# PostgreSQL 检查点同步示例
+from langgraph.checkpoint.postgres import PostgresSaver
+DB_URI = "postgresql://postgres:postgres@localhost:5442/postgres?sslmode=disable"
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    # 首次使用时需调用 setup() 来创建必要的表
+    # checkpointer.setup()
+    graph = builder.compile(checkpointer=checkpointer)
+    config = {"configurable": {"thread_id": "1"}}
+    # 调用并自动保存检查点
+    graph.invoke({"messages": [{"role": "user", "content": "hi! I'm bob"}]}, config)**
+```
+
 ## 5. 真实项目案例深度分析
 
 ### 5.1 案例一：字节跳动 DeerFlow — 多智能体协作与人机回路
@@ -327,3 +348,4 @@ LangGraph的持久化机制不仅仅是一项技术实现，它更是一种根�
 29. Example - Trace and Evaluate LangGraph Agents - Langfuse, accessed on August 17, 2025, [https://langfuse.com/guides/cookbook/example_langgraph_agents](https://langfuse.com/guides/cookbook/example_langgraph_agents)
 
 30. Trace with LangGraph (Python and JS/TS) | 🦜️🛠️ LangSmith, accessed on August 17, 2025, [https://docs.smith.langchain.com/observability/how_to_guides/trace_with_langgraph](https://docs.smith.langchain.com/observability/how_to_guides/trace_with_langgraph)\*\*
+31. langgraph-checkpoint-postgres - PyPI, accessed on August 17, 2025, [https://pypi.org/project/langgraph-checkpoint-postgres/](https://pypi.org/project/langgraph-checkpoint-postgres/)
