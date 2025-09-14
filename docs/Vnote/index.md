@@ -16,7 +16,7 @@ aliases:
 1. [[Farming in the cyber world|赛博农耕说明]]
 2. [[Full Stream|全流开发]]
 3. [[My Graduation Note Leaving Alibaba|阿里离职手记]]
-4. [[When we talk about BlockChain, what are we talking about]]
+4. [[AOSIP (Agent-Oriented System Interaction Protocol)]]
 5. [[忍不住看网络小说]]
 
 ## 🚜 最新耕作记录

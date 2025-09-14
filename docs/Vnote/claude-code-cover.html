@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code 最佳实践 - WeChat Cover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@zumer/snapdom/dist/snapdom.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for precise proportions and modern design */
+        .cover-container {
+            aspect-ratio: 3.35 / 1;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .main-cover {
+            aspect-ratio: 2.35 / 1;
+        }
+
+        .share-cover {
+            aspect-ratio: 1 / 1;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 25%, #60a5fa 50%, #93c5fd 75%, #dbeafe 100%);
+        }
+
+        .code-pattern {
+            background-image:
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .floating-elements {
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+        }
+
+        /* Responsive text scaling */
+        .main-title {
+            font-size: clamp(1.5rem, 8vw, 4rem);
+        }
+
+        .main-subtitle {
+            font-size: clamp(0.8rem, 4vw, 1.8rem);
+        }
+
+        .share-text {
+            font-size: clamp(1rem, 6vw, 2.5rem);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
+    <!-- Cover Image Container -->
+    <div id="coverImage" class="cover-container mx-auto bg-white rounded-none shadow-2xl overflow-hidden">
+        <div class="flex h-full">
+            <!-- Main Cover (2.35:1 ratio) -->
+            <div class="main-cover flex-shrink-0 relative gradient-bg code-pattern">
+                <!-- Floating Code Elements -->
+                <div class="floating-elements top-4 left-4 text-white/30 animate-float">
+                    <i class="fas fa-code text-2xl"></i>
+                </div>
+                <div class="floating-elements top-8 right-8 text-white/20 animate-float" style="animation-delay: -2s;">
+                    <i class="fas fa-robot text-3xl"></i>
+                </div>
+                <div class="floating-elements bottom-6 left-8 text-white/25 animate-float" style="animation-delay: -4s;">
+                    <i class="fas fa-terminal text-xl"></i>
+                </div>
+                <div class="floating-elements bottom-4 right-4 text-white/20 animate-float" style="animation-delay: -1s;">
+                    <i class="fas fa-microchip text-2xl"></i>
+                </div>
+
+                <!-- Main Content -->
+                <div class="h-full flex flex-col justify-center items-center p-8 text-center relative z-10">
+                    <!-- Main Title -->
+                    <h1 class="main-title font-black text-white glow-text mb-4 leading-tight tracking-tight">
+                        最强 AI Coding
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <h2 class="main-subtitle font-semibold text-blue-100 mb-6 leading-relaxed">
+                        Claude Code 最佳实践
+                    </h2>
+
+                    <!-- Tech Badge -->
+                    <div class="flex items-center space-x-3 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-4">
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <span class="text-white font-medium text-sm">万字长文</span>
+                        <i class="fas fa-code-branch text-green-300"></i>
+                        <span class="text-white font-medium text-sm">开发效率</span>
+                    </div>
+
+                    <!-- Code Snippet Decoration -->
+                    <div class="code-font text-xs text-white/60 bg-black/20 rounded-lg p-3 max-w-md">
+                        <div class="flex items-center mb-1">
+                            <div class="w-2 h-2 bg-red-400 rounded-full mr-1"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full mr-1"></div>
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-purple-300">const</span>
+                            <span class="text-blue-300">ai</span> =
+                            <span class="text-green-300">'Claude Code'</span>;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Share Cover (1:1 ratio) -->
+            <div class="share-cover flex-shrink-0 relative gradient-bg">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 code-pattern opacity-30"></div>
+
+                <!-- AI Icon Background -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fas fa-brain text-white/10 text-6xl"></i>
+                </div>
+
+                <!-- Share Content -->
+                <div class="h-full flex flex-col justify-center items-center p-6 text-center relative z-10">
+                    <div class="space-y-2">
+                        <!-- Top Row -->
+                        <div class="flex justify-center space-x-3">
+                            <span class="share-text font-black text-white glow-text">最</span>
+                            <span class="share-text font-black text-white glow-text">强</span>
+                        </div>
+
+                        <!-- Bottom Row -->
+                        <div class="flex justify-center space-x-3">
+                            <span class="share-text font-black text-blue-100">AI</span>
+                            <span class="share-text font-black text-blue-100">码</span>
+                        </div>
+                    </div>
+
+                    <!-- Small decorative elements -->
+                    <div class="mt-4 flex space-x-2">
+                        <div class="w-2 h-2 bg-white/60 rounded-full"></div>
+                        <div class="w-2 h-2 bg-white/40 rounded-full"></div>
+                        <div class="w-2 h-2 bg-white/60 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Button -->
+    <div class="flex justify-center mt-8">
+        <button id="downloadBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-colors duration-200 flex items-center space-x-2">
+            <i class="fas fa-download"></i>
+            <span>下载封面图片</span>
+        </button>
+    </div>
+
+    <!-- Instructions -->
+    <div class="max-w-2xl mx-auto mt-6 p-4 bg-blue-50 rounded-lg">
+        <h3 class="font-semibold text-blue-900 mb-2">使用说明:</h3>
+        <ul class="text-sm text-blue-800 space-y-1">
+            <li>• 整体比例: 3.35:1 (符合微信公众号封面要求)</li>
+            <li>• 主封面: 2.35:1 比例，突出标题文字</li>
+            <li>• 分享封面: 1:1 比例，四字布局</li>
+            <li>• 响应式设计，支持各种屏幕尺寸</li>
+            <li>• 点击下载按钮保存高质量图片</li>
+        </ul>
+    </div>
+
+    <script>
+        // Download functionality using snapdom
+        document.getElementById('downloadBtn').addEventListener('click', async function() {
+            const button = this;
+            const originalText = button.innerHTML;
+
+            try {
+                // Change button state
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span class="ml-2">生成中...</span>';
+                button.disabled = true;
+
+                // Get the cover element
+                const coverElement = document.getElementById('coverImage');
+
+                // Use snapdom to capture the image
+                const canvas = await snapdom.toCanvas(coverElement, {
+                    width: coverElement.offsetWidth * 2, // Higher resolution
+                    height: coverElement.offsetHeight * 2,
+                    style: {
+                        transform: 'scale(2)',
+                        transformOrigin: 'top left'
+                    }
+                });
+
+                // Convert to blob and download
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'claude-code-best-practices-cover.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 'image/png', 1.0);
+
+            } catch (error) {
+                console.error('Download failed:', error);
+                alert('图片生成失败，请重试');
+            } finally {
+                // Reset button state
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
