@@ -229,45 +229,47 @@ flowchart TD
           pass
   ```
 
-````
 - **沙箱机制**：脚本执行通过安全的沙箱环境（如WebAssembly、Docker容器或受限子进程）进行，防止恶意代码访问主机资源。沙箱仅能访问Agent的VFS和有限的系统资源。
 
 - **持久化选项**：Agent可以通过工具管理器将VFS文件保存到持久存储（如数据库、云存储）或共享上下文中。例如：
+
 ### **2. AOSIP Agent (代理)**
 
 每个 Agent 是一个独立的进程，内部运行着一个异步事件循环。
 
--   **Agent 内部循环 (Event Loop)**:
-    ```python
-    import asyncio
+- **Agent 内部循环 (Event Loop)**:
 
-    class AOSIPAgent:
-        def __init__(self, kernel_address):
-            self.kernel = connect_to_kernel(kernel_address) # 连接到内核
-            self.abilities = ["web_search", "text_generation"] # 向内核注册的能力
+  ```python
+  import asyncio
 
-        async def run(self):
-            await self.kernel.register(self.abilities) # 启动时向内核注册
-            while True:
-                # 1. 从内核请求任务（非阻塞等待）
-                task = await self.kernel.request_task(self.agent_id)
+  class AOSIPAgent:
+      def __init__(self, kernel_address):
+          self.kernel = connect_to_kernel(kernel_address) # 连接到内核
+          self.abilities = ["web_search", "text_generation"] # 向内核注册的能力
 
-                # 2. 感知：从上下文读取相关信息
-                context = await self.kernel.context_read(task.context_id)
+      async def run(self):
+          await self.kernel.register(self.abilities) # 启动时向内核注册
+          while True:
+              # 1. 从内核请求任务（非阻塞等待）
+              task = await self.kernel.request_task(self.agent_id)
 
-                # 3. 规划与执行：核心逻辑（可能调用LLM）
-                # 此过程会频繁调用内核的工具管理器
-                result = await self.execute_task(task, context)
+              # 2. 感知：从上下文读取相关信息
+              context = await self.kernel.context_read(task.context_id)
 
-                # 4. 将结果写回共享上下文
-                await self.kernel.context_append(task.context_id, "result", result)
+              # 3. 规划与执行：核心逻辑（可能调用LLM）
+              # 此过程会频繁调用内核的工具管理器
+              result = await self.execute_task(task, context)
 
-                # 5. 通知内核任务完成
-                await self.kernel.report_task_done(task.id, result)
-    ```
--   **技术实现要点**：
-    -   **自治性**： Agent 内部 `execute_task` 方法包含了其核心“智能”（如提示工程、思维链推理），这是其自治性的体现。
-    -   **协作性**： 通过内核的上下文和工具管理器与其他 Agent 间接协作，符合 **Actor 模型**——不直接共享内存，而是通过消息（经内核转发）通信。
+              # 4. 将结果写回共享上下文
+              await self.kernel.context_append(task.context_id, "result", result)
+
+              # 5. 通知内核任务完成
+              await self.kernel.report_task_done(task.id, result)
+  ```
+
+- **技术实现要点**：
+  - **自治性**： Agent 内部 `execute_task` 方法包含了其核心“智能”（如提示工程、思维链推理），这是其自治性的体现。
+  - **协作性**： 通过内核的上下文和工具管理器与其他 Agent 间接协作，符合 **Actor 模型**——不直接共享内存，而是通过消息（经内核转发）通信。
 
 ```mermaid
 sequenceDiagram
@@ -319,7 +321,7 @@ sequenceDiagram
     B->>CM: 将最终报告保存到共享上下文
     B->>S: 任务完成报告
     S->>U: 返回最终结果
-````
+```
 
 ## **三、 关键协议与接口 (A2C & A2A)**
 
