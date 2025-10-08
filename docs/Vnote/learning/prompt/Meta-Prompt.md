@@ -1,5 +1,7 @@
-## Mega-Prompt
-最近Anthropic官方推出了一个[Prompt生成器](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator)，能够将你输入的一句很简单、不完善不规范的提示语“翻译”成为一段优秀的提示语。其核心逻辑其实依靠的也是一条超级prompt，或者英文叫mega-prompt。
+## Anthropic Mega-Prompt
+
+最近 Anthropic 官方推出了一个[Prompt生成器](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator)，能够将你输入的一句很简单、不完善不规范的提示语“翻译”成为一段优秀的提示语。其核心逻辑其实依靠的也是一条超级prompt，或者英文叫mega-prompt。
+
 ```xml
 Today you will be writing instructions to an eager, helpful, but inexperienced and unworldly AI assistant who needs careful instruction and examples to understand how best to behave. I will explain a task to you. You will write instructions that will direct the assistant on how best to accomplish the task consistently, accurately, and correctly. Here are some examples of tasks and instructions.
 
@@ -97,7 +99,7 @@ Answer the question immediately without preamble.
 	<example>
 		<Student> I'm working on -4(2 - x) = 8. I got to -8-4x=8, but I'm not sure what to do next.</Student>
 		<Socratic Tutor (Claude)>
-			<Inner monologue> 
+			<Inner monologue>
 			First, I will solve the problem myself, thinking step by step.
 				-4(2 - x) = 8
 				2 - x = -2
@@ -110,9 +112,9 @@ Answer the question immediately without preamble.
 			</Inner monologue>
 			Have you double-checked that you multiplied each term by negative 4 correctly?
 		</Socratic Tutor>
-		
+
 		<Student> Ah! I see. I should have written -8 + 4x = 8.<Student>
-		
+
 		<Socratic Tutor>
 			<Inner monologue>
 			I will double-check the student's work by assuming their last expression, which is -8 + 4x = 8, and deriving the answer that expression would entail.
@@ -132,7 +134,7 @@ Great job correcting your mistake. What do you think you should do next?
 			</Inner monologue>
 			Why don't you see if you can get X by itself?
 		</Socratic Tutor>
-		
+
 		<Student> OK, I subtract 8 from both sides, 4x = 0, so x = 0. </Student>
 
 		<Socratic Tutor>
@@ -143,7 +145,7 @@ Great job correcting your mistake. What do you think you should do next?
 			</Inner monologue>
 			Hmm, did you really subtract 8 from both sides?
 		</Socratic Tutor>
-			
+
 		<Student> Ohh, I need to add 8 to both sides. 4x = 16. x = 4.</Student>
 
 		<Socratic Tutor>
@@ -155,8 +157,8 @@ Great job correcting your mistake. What do you think you should do next?
 			Wonderful job! That's exactly right.
 		</Socratic Tutor>
 	</example>
-	
-	<example>	
+
+	<example>
 		<Student> I'm trying to find an equation that will go through the points ( 3, 8 ) and ( 1, 2 ). Can you please help me?</Student>
 
 		<Socratic Tutor>
@@ -196,7 +198,7 @@ Great job correcting your mistake. What do you think you should do next?
 			<Inner Monologue>
 			I will double-check the student's work by assuming their last expression, which is "Slope is 3", and deriving the answer that expression would entail. If the slope is 3, then point-slope form means:
 			y - 8 = 3(x - 3)
-			y - 8 = 3x - 9			
+			y - 8 = 3x - 9
 			y = 3x - 1
 			The original solution I calculated was also y = 3x - 1. Therefore the student is on the right track. Give them a hint about what to do next. </Inner Monologue>
 			Good work calculating the slope. Now you can use point-slope form: y - y1 = slope(x - x1). </Socratic Tutor>
@@ -212,7 +214,7 @@ Great job correcting your mistake. What do you think you should do next?
 			Great work! You found the formula. Feel free to double-check to make sure it goes through the other point. </Socratic Tutor>
 
 	</example>
-	
+
 	<example>
 		<Student> Can you help me differentiate f(x) = 3x^2 - 4x + 3? </Student>
 		<Socratic Tutor>
@@ -250,7 +252,7 @@ Great job correcting your mistake. What do you think you should do next?
 			Terrific! You've solved the problem. </Socratic Tutor>
 	</example>
 	Are you ready to act as a Socratic tutor? Remember: begin each inner monologue [except your very first, where you solve the problem yourself] by double-checking the student's work carefully. Use this phrase in your inner monologues: "I will double-check the student's work by assuming their last expression, which is ..., and deriving the answer that expression would entail."
-	
+
 	Here is the user's question to answer:
 	<Student>{$MATH QUESTION}</Student>
 	</Instructions>
@@ -287,7 +289,7 @@ Great job correcting your mistake. What do you think you should do next?
 			</function>
 		</functions>
 		<question>What is the current temperature in San Francisco?</question>
-		<scratchpad>I do not have access to the current temperature in San Francisco so I should use a function to gather more information to answer this question. I have been equipped with the function get_current_temp that gets the current temperature for a given city so I should use that to gather more information.  
+		<scratchpad>I do not have access to the current temperature in San Francisco so I should use a function to gather more information to answer this question. I have been equipped with the function get_current_temp that gets the current temperature for a given city so I should use that to gather more information.
 		I have double checked and made sure that I have been provided the get_current_temp function.
 		</scratchpad>
 		<function_call>get_current_temp(city="San Francisco")</function_call>
@@ -351,7 +353,7 @@ Here is an example that shows what to do in the case of an error:
 		<question>What is the current stock price of The General Motors Company LLC?</question>
 		<scratchpad>
 			To answer this question, I will need to:
-			1. Get the ticker symbol for The General Motors Company LLC using the get_ticker_symbol() function.	
+			1. Get the ticker symbol for The General Motors Company LLC using the get_ticker_symbol() function.
 			2. Use the returned ticker symbol to get the current stock price using the get_current_stock_price() function.
 			I have double checked and made sure that I have been provided the get_ticker_symbol and the get_current_stock_price functions.
 		</scratchpad>
@@ -386,12 +388,12 @@ Here is an example that shows what to do in the case of an error:
 				<raises>TickerNotFound: If no matching ticker symbol is found.</raises>
 				<example_call> get_ticker_symbol(company_name="Apple") </example_call>
 			</function>
-		</functions>  
+		</functions>
 		<question>What is the current exchange rate for USD to Euro?</question>
 		<scratchpad>
 		After reviewing the functions I was equipped with I realize I am not able to accurately answer this question since I can't access the current exchange rate for USD to Euro. Therefore, I should explain to the user I cannot answer this question.
 		</scratchpad>
-	
+
 		<answer>
 		Unfortunately, I don't know the current exchange rate from USD to Euro.
 		</answer>
@@ -403,7 +405,7 @@ Here is an example that shows what to do in the case of an error:
 	The result of a function call will be added to the conversation history as an observation. If necessary, you can make multiple function calls and use all the functions I have equipped you with. Always return your final answer within <answer> tags.
 	The question to answer is:
 	<question>{$QUESTION}</question>
-	
+
 	</Instructions>
 </Task Instruction Example>
 
@@ -434,20 +436,23 @@ Note: If you want the AI to output its entire response or parts of its response 
 ```
 
 ## 结构分析
-解析：https://richchat.cc/2024/07/24/anthropic-mega-promopt/
 
 ### 1. 任务说明
+
 ```xml
 Today you will be writing instructions to an eager, helpful, but inexperienced and unworldly AI assistant who needs careful instruction and examples to understand how best to behave. I will explain a task to you. You will write instructions that will direct the assistant on how best to accomplish the task consistently, accurately, and correctly. Here are some examples of tasks and instructions.
 ```
 
 ### 2. 示例任务和指令
+
 ```xml
 <Task Instruction Example>
 ...
 </Task Instruction Example>
 ```
+
 ### 3. 目标任务描述
+
 ```xml
 To write your instructions, follow THESE instructions:
 
@@ -459,7 +464,9 @@ To write your instructions, follow THESE instructions:
 
 Note: This is probably obvious to you already, but you are not *completing* the task here. You are writing instructions for an AI to complete the task.
 ```
+
 ### 4. 指令编写指南
+
 ```xml
 Note: This is probably obvious to you already, but you are not *completing* the task here. You are writing instructions for an AI to complete the task.
 
@@ -472,5 +479,8 @@ Note: If the task is particularly complicated, you may wish to instruct the AI t
 Note: If you want the AI to output its entire response or parts of its response inside certain tags, specify the name of these tags (e.g. "write your answer inside <answer> tags") but do not include closing tags or unnecessary open-and-close tag sections.
 ```
 
+更多可见：https://richchat.cc/2024/07/24/anthropic-mega-promopt/
+
 ## 效果示例
+
 ![](https://richchat.cc/media/claude-mega-prompt.png)

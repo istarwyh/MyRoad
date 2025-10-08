@@ -1,4 +1,4 @@
-Claude Code 是目前最强的AI Coding Agent，没有加之一，应该也没有人反对吧：）如果还没用上 Claude Code（CC）,直接看 https://cc.xiaohui.cool
+Claude Code 是目前最强的AI Coding Agent，没有加之一，应该也没有人反对吧：）如果还没用上 Claude Code（CC）,直接看 https://aispeeds.me/#get-started
 
 ## 📋 目录
 
@@ -237,7 +237,7 @@ mkdir -p .claude/commands
 
 #### Meta-Slash-Commands
 
-和 Meta-Prompt 类似，又到了套娃的环节了！当然不用命令，直接说和 CC 说创建一个 Slash Command 也可以。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202507201749933.png)
+和 [[Meta-Prompt]] 类似，又到了套娃的环节了！当然不用命令，直接说和 CC 说创建一个 Slash Command 也可以。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202507201749933.png)
 
 ````
 ---
@@ -361,7 +361,7 @@ author:xiaohui
 | ❌ 模糊指令 | ✅ 详细指令                                                                    |
 | ----------- | ------------------------------------------------------------------------------ |
 | "添加测试"  | "为 UserService 的 login 方法添加测试，验证密码错误时抛出 AuthenticationError" |
-| "修复 bug"  | "修复 Issue #123：用户登出后仍然可以访问受保护页面"                            |
+| "修复 bug"  | "修复 Issue \#123：用户登出后仍然可以访问受保护页面"                           |
 | "优化性能"  | "优化 /api/users 接口，将响应时间从 2s 降低到 500ms 以内"                      |
 
 #### 精准用词
@@ -622,3 +622,5 @@ System prompt:
 - [GitHub 集成指南](https://cli.github.com/)
 - [Claude Code Hooks：变革你 2025 年的开发工作流程](https://mp.weixin.qq.com/s/Pnk2NS4PoDnU095jmH17QQ)
 - [Vol 55. 你离顶级 Vibe Coder 至少差一个超级指令](https://mp.weixin.qq.com/s/TgXRZE33yiUzpBOVAai08g)
+
+#practice #claudecode
