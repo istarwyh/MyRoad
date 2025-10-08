@@ -1,5 +1,4 @@
-公众号标题不能放Emoji 源于[一个Javascript 报错](https://mp.weixin.qq.com/s/LH2PtRWsHHrVMhJekLDLOA),以下Emoji 可以规避掉这个报错：
-face-smiling: 🤣🫠
+公众号标题不能放Emoji 源于[一个Javascript 报错](https://mp.weixin.qq.com/s/LH2PtRWsHHrVMhJekLDLOA),以下Emoji 可以规避掉这个报错：face-smiling: 🤣🫠
 
 face-affectionp: 🥰🤩🥲
 
@@ -141,4 +140,6 @@ punctuation: ‼️⁉️〰️
 
 other-symbol: 〽©®™
 
-keycap: #️⃣*️⃣0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣
+keycap: \#️⃣\*️⃣0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣
+
+#startup

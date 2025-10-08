@@ -1,10 +1,11 @@
 #prompt
 
 - Official Guidance:https://github.com/guidance-ai/guidance
-- [[Meta-Ptompt]]
+- [[Meta-Prompt]]
 - [[CO-STAR Prompt Template]]
 - AIGC 图片收集工具链接：https://www.picwell.art/ai
 - Prompt 聚合层:https://github.com/danielmiessler/fabric
+
 ## 稳定输出
 
 - 角色指定
@@ -14,13 +15,17 @@
 - 末尾加强
 
 ## 获取足够的信息
+
 ```
 Before you start, please ask me any questions about the prompt I give you, especillay when you feel confused.
 ```
+
 ## 引导反问
+
 ```
 Before you start, please ask me any questions that you need answered to help me best solve my problem.
 ```
+
 ## 引导进入慢思考
 
 ```
@@ -31,26 +36,32 @@ I don't need to get answer quickly. It is very important，Take a deep breath，
 Since you are autoregressive, each token you produce is another opportunity to use computation, therefore you always spend a few sentences explaining background context, assumptions, and step-by-step thinking BEFORE you try to answer a question.
 ```
 
-
 ## 引发硅竞
+
 ```
 But chatGPT can do it better.
 ```
 
 ## 指定读者
+
 说明输出结果的读者是什么样的身份，给小学生的和给一个科学家，他们的输出结果是很不一样的
 
 ## 不要让它猜
-用肯定的语气说“做某事”，避免用否定语气说“不要做某事”
-使用“你的任务是”和“你必须”这样的短语
+
+用肯定的语气说“做某事”，避免用否定语气说“不要做某事”使用“你的任务是”和“你必须”这样的短语
 
 ## 避免瞎说
+
 **If a query is unclear or ambiguous, you ask follow-up questions to better understand the user's intent. When explaining concepts, you use real world examples or analogies when appropriate.**
+
 ## 结尾强调
 
 ![](https://cdn.gamma.app/ef8fjo8mr4fh37y/ebfc11ac2ad54443917b349b4956cbf5/original/image.png)
+
 ## 个人常用
+
 ### 翻译
+
 #### 一般翻译
 
 ```
@@ -58,6 +69,7 @@ Please translate:
 ```
 
 #### 论文翻译
+
 ```
 你是一位精通简体中文的专业翻译，尤其擅长将专业学术论文翻译成浅显易懂的科普文章。请你帮我将以下英文段落翻译成中文，风格与中文科普读物相似。
 
@@ -104,6 +116,7 @@ Please translate:
 ```
 
 ### 总结
+
 ```jinja2
 {#- 简体中文摘要与重点提取 -#}
 
@@ -114,7 +127,7 @@ Please translate:
 """
 
 标题：{{ document.title }}
-作者：{{ document.author }} 
+作者：{{ document.author }}
 来源：{{ document.domain }}
 
 另外，在阅读此文章时，我对以下部分进行了高亮，认为这些是文章的重点，给你学习参考：
@@ -143,7 +156,7 @@ Please translate:
 
 答案：{# 对应问题 1 的答案，应该包含对应的重点内容 #}
 
-**问题 2：{# 同上 #}** 
+**问题 2：{# 同上 #}**
 
 答案：{# 对应问题 2 的答案，应该包含对应的重点内容 #}
 
@@ -151,12 +164,15 @@ Please translate:
 
 答案：{# 对应问题 3 的答案，应该包含对应的重点内容 #}
 ```
+
 ### 自定义风格
 
 #### LLM的默认风格
+
 LLM 由于训练者的选择是有自己的默认风格的，比如喜欢用1、2、3或者"是的...首先、然后“这样的表述。
+
 #### 自己的风格
-	
+
 ```json
 ## 术语定义
 ### 查询
@@ -188,9 +204,13 @@ LLM 由于训练者的选择是有自己的默认风格的，比如喜欢用1、
 ## 任务
 现在请你介绍“线程同步开销”
 ```
+
 #### 名人的风格
+
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202402171549868.png)
+
 ### Midjourney AI
+
 ```
 您现在将充当名为“Midjourney”的生成式 AI 的提示生成器。 Midjourney AI 根据给定的提示生成图像。
 我会提供一个概念，你会提供 Midjourney AI 的提示。

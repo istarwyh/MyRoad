@@ -3,17 +3,16 @@ Learning requires focus. The reason is simple:
 学习需要专注，原因很简单：
 
 1. **Learning is a process of building long-term memories.**
-    
-    **学习是一个建立长期记忆的过程。**
-    
+
+   **学习是一个建立长期记忆的过程。**
+
 2. **You form long-term memories of what you pay attention to.**
-    
-    **你专注于什么，就会形成对什么的长期记忆。**
-    
+
+   **你专注于什么，就会形成对什么的长期记忆。**
+
 3. **Attention is limited. You can’t pay attention to multiple things at once.**
-    
-    **注意力是有限的，你无法同时专注于多件事情。**
-    
+
+   **注意力是有限的，你无法同时专注于多件事情。**
 
 But just because learning demands our focus doesn’t mean it can’t be enjoyable. Many activities put strenuous demands on our attention but we enjoy doing them anyway: video games, sports, puzzles and more.
 
@@ -25,9 +24,7 @@ The opportunity cost theory of effort helps to explain the discrepancy. Accord
 
 It feels effortful to do an activity that demands a lot of attention but doesn’t offer much reward. We may feel bored or amused by an activity that demands little attention, but it won’t feel hard. In contrast, it feels engaging to do an activity that demands a lot of attention and is highly rewarding.
 
-做需要投入大量专注力却没什么回报的事，会让人觉得费力。在完成只需要很少专注力的事时，我们可能感到无聊或有趣，但不会感到困难。与之相反，如果一项活动需要大量专注力并且会带来丰厚回报，我们就会感到十分投入。
-
-![](https://mmbiz.qpic.cn/mmbiz_png/9vYr4OhCAobBOibdviaLiaghxZlo1QicpJTrdicpBncmFsO8G8ic3wUj2COz2Jv9Lh58yVNSexCMsGTaxfQglTXeO92Q/640?wx_fmt=png&from=appmsg)
+做需要投入大量专注力却没什么回报的事，会让人觉得费力。在完成只需要很少专注力的事时，我们可能感到无聊或有趣，但不会感到困难。与之相反，如果一项活动需要大量专注力并且会带来丰厚回报，我们就会感到十分投入。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202509212251778.png)
 
 According to the principles outlined above, effective learning can’t happen in the low-attention conditions. Subliminal learning is not a real thing. But we can make learning more fun by increasing the reward dimension. If learning is more consistently rewarding, it will be more engaging rather than dull or frustrating.
 
@@ -35,13 +32,9 @@ According to the principles outlined above, effective learning can’t happen in
 
 ## 1. Keep Your Success Rate high—aim for 85% Correct.
 
-## 1. 保持较高的成功率——争取85%正确率
-
 The experience of learning is a flow of tiny joys and frustrations. Consider going through flashcards: As you go through them, you probably experience mild bumps of interest whenever you get a card right, and mild dips of frustration whenever you get one wrong.
 
-学习经历是由微小的快乐和挫折构成的。以回顾闪卡为例，每答对一张卡片，你可能体会到轻微的兴奋；每答错一张卡片，你也可能体会到轻微的沮丧。
-
-![](https://mmbiz.qpic.cn/mmbiz_png/9vYr4OhCAobBOibdviaLiaghxZlo1QicpJTrdxqW49VlNIu0EnJH0gQ2ia5aib8R2UNfib5qI9gib8CsHQ5Vjjtliaiab1hA/640?wx_fmt=png&from=appmsg)
+学习经历是由微小的快乐和挫折构成的。以回顾闪卡为例，每答对一张卡片，你可能体会到轻微的兴奋；每答错一张卡片，你也可能体会到轻微的沮丧。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202509212251850.png)
 
 How much fun you have doing flashcards depends a great deal on the overall path of that flow. If you get too many cards wrong in a row, you will find the task more straining as the motivational centers in your brain look for other distractions. Conversely, if you easily get them all correct, the task may not require much attention—causing you to feel bored and distracted. Your attention has spare capacity that might be deployed elsewhere.
 
@@ -56,29 +49,26 @@ How can you control the difficulty of the activity? One way is to put the tasks 
 你如何才能控制活动的难度？一个办法是将任务按难度分级，有几种方法可以做到这一点：
 
 1. **Open book to closed book.** The easiest form of practice is to work a problem with a nearly-identical example in front of you. The hardest is to solve a novel problem without access to any reference material. When studying, adjust your reference material to get to the sweet spot of mostly success with occasional failure.
-    
-    **从开卷到闭卷。**最简单的练习形式是按照面前的例子，解决一个几乎一模一样的问题。最难的练习形式则是在没有任何参考资料的情况下解决一个全新问题。学习时，通过调整参考资料的多少，使自己处于大部分成功、偶尔失败的最佳状态。
-    
+
+   **从开卷到闭卷。**最简单的练习形式是按照面前的例子，解决一个几乎一模一样的问题。最难的练习形式则是在没有任何参考资料的情况下解决一个全新问题。学习时，通过调整参考资料的多少，使自己处于大部分成功、偶尔失败的最佳状态。
+
 2. **Work from simple to complex problems.** A complex problem has multiple components that must be done correctly to get the answer right. So, one way to increase your success rate is to split complex problems into simpler parts. Alternatively, if the simple parts are too easy, you can tackle more complex problems that command your full attention.
-    
-    **从简单问题到复杂问题。**复杂问题由许多部分组成，必须全部完成才能得到正确答案。因此，提高正确率的一个办法是，将复杂问题分解成简单的部分。另外，如果简单的部分太容易，你也可以通过解决更复杂问题来迫使自己全神贯注。
-    
+
+   **从简单问题到复杂问题。**复杂问题由许多部分组成，必须全部完成才能得到正确答案。因此，提高正确率的一个办法是，将复杂问题分解成简单的部分。另外，如果简单的部分太容易，你也可以通过解决更复杂问题来迫使自己全神贯注。
+
 3. **Change the standard you set for yourself.** For problems with degrees of success, rather than simple right or wrong answers, you can adjust the difficulty by changing the standard you set.
-    
-    **改变自己设定的标准。**对于按程度而不是简单对错来判定成功与否的问题，可以通过改变自己设定的标准来调节难度。
-    
+
+   **改变自己设定的标准。**对于按程度而不是简单对错来判定成功与否的问题，可以通过改变自己设定的标准来调节难度。
+
 4. **Adjusting the timing.** Performing under time pressure can increase the difficulty. Similarly, relaxing time pressure can make a task easier.
-    
-    **调整时间。**限定完成时间会增加难度。同样，放宽时间限制也会让任务变得更容易。
-    
+
+   **调整时间。**限定完成时间会增加难度。同样，放宽时间限制也会让任务变得更容易。
 
 Our ability to completely change the motivational flow of rewards within our studying is often limited. Thus, it’s unlikely that we’ll be able to take full advantage of video game designers’ tools to make studying as compelling as learning to play a new game. But, we can dial down the frustration in subtle ways to shift a draining task into an interesting one.
 
 我们在学习过程中完全改变奖励动机流的能力通常是有限的。因此，我们不太可能能够充分利用游戏设计师的工具，让学习变得像学玩新游戏一样有吸引力。但我们可以用一些巧妙的方式减少挫败感，从而将枯燥的任务转变为有趣的任务。
 
 ## 2. Reward Yourself Frequently.
-
-## 2. 经常奖励自己
 
 Extrinsic rewards have a complicated history in psychology. Research has shown that explicit rewards can sometimes crowd out intrinsic motivation—if you pay someone to do a task, they may enjoy it less or stop doing it altogether when they stop being paid to do it, even if it is a task they might gladly do without being paid.
 
@@ -98,8 +88,6 @@ Because extrinsic rewards can crowd out intrinsic motivation, avoid using them w
 
 ## 3. Eliminate Temptations and Distractions.
 
-## 3. 排除诱惑和干扰
-
 The opportunity cost theory of effort has an important implication: how much effort we perceive a a task requires depends on the implicit alternatives we have available to us. The strain of studying isn’t merely a property of that task; it’s also influenced by every other possible thing we could do in that moment with our limited attention.
 
 努力的机会成本理论有一个重要含义：我们对某项任务需要付出多少努力的认知，取决于我们还有哪些隐含的选择。学习的压力不仅仅是这项任务自身的属性，还受到当时用有限的注意力可以完成的所有其他事情的影响。
@@ -114,8 +102,6 @@ Clearing our our attention environments is a good first step to making studying 
 
 ## 4. Smooth Unnecessary Friction.
 
-## 4. 消除不必要的摩擦
-
 Looking through the motivational lens again, we can see that the environment creates many micro-rewards and punishments that are not directly related to the task.
 
 再从动机的角度来看，我们会发现环境带来了许多与任务没有直接关系的小奖励或小惩罚
@@ -129,8 +115,6 @@ Frictions are the little snags that make a task more effortful to perform. Reduc
 摩擦是让任务完成更费力的小困难。减少这类障碍，让过程更顺畅，可以使学习更有趣。由于它们与学习本身的注意力要求无关，因此你可以在不影响学习效率的情况下加以改进。
 
 ## 5. Make Studying More Meaningful.
-
-## 5. 让学习更有意义
 
 Thus far, every suggestion I’ve made involves a task’s superficial rewards and punishments: Success rate, extrinsic rewards, external temptations and frictions. Getting these under control is essential since they’re the easiest to adjust directly.
 
@@ -149,30 +133,31 @@ Increasing meaning isn’t always easy for a few reasons:
 增加意义并非易事，原因有以下几点：
 
 1. **The importance of a piece of knowledge or method depends on its relation to other knowledge.** Thus, we tend to find subjects more interesting as we learn more about them, as new information is built in a richer context. But this creates a Catch-22 in that we need to expend effort learning about something before we can appreciate learning it.
-    
-    **一种****知识或方法的重要性取决于它与其他知识的联系。**因此当我们了解更多的知识时，往往会发现发现课题更有趣，因为新信息是建立在更丰富的背景下的。但这就带来了一个矛盾，即我们需要花精力去了解某件事，然后才能体会到学习它的乐趣。
-    
+
+   **一种\*\***知识或方法的重要性取决于它与其他知识的联系。\*\*因此当我们了解更多的知识时，往往会发现发现课题更有趣，因为新信息是建立在更丰富的背景下的。但这就带来了一个矛盾，即我们需要花精力去了解某件事，然后才能体会到学习它的乐趣。
+
 2. **Cognitive load may make meaningless drills necessary.** Sometimes, the projects we find meaningful are too difficult to succeed at. We want to make the next Google, but the only program we can write is “Hello World.” We want to paint like Da Vinci, but can’t get beyond stick figures. Building up from fundamentals is often necessary, even if it isn’t always fun—thus, superficial tricks for boosting motivation may be an important tool for this phase of learning.
-    
-    **认知负荷可能使无意义的练习成为必要。**有时候，我们认为有意义的项目太难取得成功。我们想做下一个谷歌，但能写的程序只有”Hello World“。我们想像达芬奇一样画画，但只有画火柴棍小人的水平。从基础做起往往是必要的，尽管这并不总是有趣。因此，提高学习动力的表面技巧可能是这一学习阶段的重要工具。
-    
+
+   **认知负荷可能使无意义的练习成为必要。** 有时候，我们认为有意义的项目太难取得成功。我们想做下一个谷歌，但能写的程序只有”Hello World“。我们想像达芬奇一样画画，但只有画火柴棍小人的水平。从基础做起往往是必要的，尽管这并不总是有趣。因此，提高学习动力的表面技巧可能是这一学习阶段的重要工具。
+
 3. **The meaningful context is far away.** We’re learning French, but our trip to France isn’t for months. We’re learning statistics, but our career as a data scientist is years off. In these cases, there’s a genuine motivation to learn, but distance from the desired outcome makes it impotent to drive the interest in the task itself. Researchers find that temporal delay is a central factor in procrastination.
-    
-    **有意义的情境还很遥远。**我们正在学习法语，但法国之行是几个月以后的事。我们在学习统计学，但作为数据科学家的职业生涯还要等上好几年。在这些例子中，学习的动机是真实存在的，但与预期结果之间的距离使其无法激发对任务本身的兴趣。研究人员发现，时间滞后是导致拖延的核心影响因素。
-    
+
+   **有意义的情境还很遥远。** 我们正在学习法语，但法国之行是几个月以后的事。我们在学习统计学，但作为数据科学家的职业生涯还要等上好几年。在这些例子中，学习的动机是真实存在的，但与预期结果之间的距离使其无法激发对任务本身的兴趣。研究人员发现，时间滞后是导致拖延的核心影响因素。
 
 But even if we can’t always make studying deeply meaningful, we can make efforts to increase the meaning we get from it:
 
 但即使我们不能总让学习具有深刻的意义，依然可以想办法提升我们从中获得的意义：
 
 1. **Read more on the background of the skills and knowledge you’re trying to learn.** Getting more context can make what you’re learning make more sense—and be more engaging.
-    
-    **阅读更多有关所学技能和知识的背景资料。**了解更多背景可以让你的学习更有意义，也更有吸引力。
-    
+
+   **阅读更多有关所学技能和知识的背景资料。** 了解更多背景可以让你的学习更有意义，也更有吸引力。
+
 2. **Alternate between meaningful activities and the drills that support them.** Doing real programming projects, having real conversations in another language, or doing real chemistry experiments—even badly—can provide a motivational backdrop for the necessary building blocks of learning.
-    
-    **交替进行有意义的活动，和支持这些活动的枯燥练习。**开展真实的编程项目，用另一种语言进行真实的对话，或做真实的化学实验——即使做得很糟糕——也能为必要的基础学习提供动力支持。
-    
+
+   **交替进行有意义的活动，和支持这些活动的枯燥练习。** 开展真实的编程项目，用另一种语言进行真实的对话，或做真实的化学实验——即使做得很糟糕——也能为必要的基础学习提供动力支持。
+
 3. **Find friends and forums for people interested in the skill.** Social bonds can make an otherwise abstract task into something fascinating. Community can make learning compelling.
-    
-    **寻找对这项技能感兴趣的朋友和论坛。**社交关系可以把一个抽象的任务变成引人入胜。社区能让学习变得吸引人。
+
+   **寻找对这项技能感兴趣的朋友和论坛。** 社交关系可以把一个抽象的任务变成引人入胜。社区能让学习变得吸引人。
+
+#ScottYoung
