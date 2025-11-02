@@ -204,6 +204,8 @@ claude --debug
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202507202037009.png)
 
+也不用刻意记这些命令，只要知道有这些命令就好了，忘记了具体是啥就用下 `/help`.
+
 ### 2.3 自定义 Slash 命令
 
 **创建命令**：在 `.claude/commands/` 目录下创建 Markdown 文件。可以在 家目录下或者当前项目下。
