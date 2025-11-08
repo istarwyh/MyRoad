@@ -258,21 +258,11 @@ sequenceDiagram
 
 ---
 
-## 4. 容量规划与性能调优
+## ## 4. 容量规划与性能调优
 
-### 水平扩展
+### 当前应用现状
 
-读者应该注意到了，当前部署架构的缺陷：当机器上只部署了一个worker的时候，其实就只会有一个 CPU 核被利用。如果你是 CPU 密集型任务，那么如果要充分利用机器资源，需要在一个机器上再水平扩展多个woker,这时候每进程自有一套 Loop 与连接池。 水平扩展后，对于下游资源需要进一步评估，以连接池为例，总连接消耗 ≈ `进程数 × pool.maxsize`，需与 OceanBase 限额对齐。
-
-### 连接池
-
-- DSN 查询参数（`pool_size/maxsize/minsize/pool_recycle/saver_count`）按并发与 OceanBase 限额调优。
-- 结合压测：观察连接等待、慢查询、平均/尾延迟。
-- 健康性：`_health_check_saver()` 与 `_rebuild_ob_pool()` 在获取失败时重建，日志用于观测异常波动。
-
-### App Loop 负载
-
-当前应用单进程内多个请求线程并发进入 Flask/WSGI。
+当前项目并没有使用原生异步的框架比如 Uvicorn ，而是使用了 Gunicorn + gthread ，理论上如果项目切换为 Gunicorn + Uvicorn 性能会更好-- 在Gunicorn启动的每一个进程内部，Uvicorn 直接完全接管 `asyncio` 事件循环实现协程并发。之所以使用Gunicron，主要是SofaApp 本身是Flask的。Gunicorn 启动的时候，会至少启动一个Master 进程，和一个woker 子进程，worker 为实际应用所在的进程，当一个用户请求过来的时候，会占用一个线程处理，因为App Loop的原因，对于每个worker的线程来说，请求未完成前实际上这个线程会被完全占用。此时应用的并发能力(依赖数据库的请求)的上限就是 worker数目 \* worker中的线程数目。在一个App Loop线程内，
 
 - 一个 App Loop 线程调度所有协程（协作式并发，I/O 处 `await` 让出）。
 - `aiomysql` 连接池限制并发连接数（`maxsize`），超出部分在“获取连接”处 `await`，形成自然背压（Natural Backpressure），防止高并发数据库被压垮
@@ -284,19 +274,34 @@ sequenceDiagram
 import asyncio
 
 def blocking_fn(arg: str) -> str:
-  # 同步阻塞调用，例如 CPU 密集或第三方 SDK
-  return arg.upper()
+    # 同步阻塞调用，例如 CPU 密集或第三方 SDK
+    return arg.upper()
 
 async def step():
-  result = await asyncio.to_thread(blocking_fn, "payload")
-  return result
+    result = await asyncio.to_thread(blocking_fn, "payload")
+    return result
 ```
+
+### Agent 系统薛定谔的并发上限
+
+传统的API 接口，通过压测可以很明确整个系统的QPS 和 TPS，但是对于Agent 系统来说，因为LLM 这个"智能"("不确定性") 源头的存在，Agent 的行为取决于输入和上下文，评估Agent 系统的并发相当困难，主要有2点:
+
+#### 非线性放大效应
+
+一个 Agent 请求可能触发几十次下游调用。举个例子，假如你现在问了一个问题“阿里的股价走势如何？” ， Agent 会首先经过意图路由，继而加载用户画像和偏好（如果有的话），之后就进入自己反复搜索的过程，可能搜索4次，也可能搜索14次，直到它觉得自己可以写一篇5000字以上的报告，报告撰写后将会交给 verifyAgent进行验证，验证步骤数正比于刚刚报告中的引用数-这是不确定的，验证过程是否需要写代码反复测试也是不确定的，而每次验证过程之后，主 Agent 需要根据意见修改，修改之后再借助 verifyAgent 验证--直到验证为100% 正确。相比于传统API 的放大倍数，这里的放大倍数不仅大，而且难以估计。
+
+#### 时间累积效应
+
+还是上面的例子，一个需要交付结果的 Agent 往往是一个长时工作的Agent, 这样一个长时运行的任务会持续占用资源,比如数据库连接、模型服务的SSE 连接，这都会让资源复用和异步的加速方法没有特别效果，从而耗尽资源。
+
+### 压力测试与水平扩展
+
+压力测试可以选用locust ，可以比较方便的模拟用户数和RPS。读者也应该注意到当前部署架构的缺陷：当机器上只部署了一个worker的时候，其实就只会有一个 CPU 核被利用。如果你是 CPU 密集型任务，那么如果要充分利用机器资源，需要在一个机器上再水平扩展多个woker,这时候每进程自有一套 Loop 与连接池。水平扩展后，对于下游资源需要进一步评估，以连接池为例，总连接消耗 ≈ `进程数 × pool.maxsize`，DSN 查询参数（`pool_size/maxsize/minsize/pool_recycle/saver_count`）按并发与 OceanBase 限额调优。一般来说，OB 还是比较稳，LLM的接口就不一定了(**可能根本没有那么多卡...**)
 
 ## 5. 总结
 
-当前项目的设计实际上是**将Python的劣势（GIL和Asyncio的限制）转化为了DB资源隔离的一种特性**，并将**业务与基础设施解耦**,使得不同团队可以独立开发Agent逻辑和基础设施。 不过当前项目并没有使用原生异步的框架比如 Uvicorn 来替换Gunicorn +gthread ，理论上如果项目切换为 Gunicorn + Uvicorn 性能会更好:
+当前项目的设计实际上是**将Python的劣势（GIL和Asyncio的限制）转化为了DB资源隔离的一种特性**，并将**业务与基础设施解耦**,使得不同团队可以独立开发Agent逻辑和基础设施。
 
-- **Gunicorn (在外层):** 充当**进程管理器**。它负责启动和管理多个工作进程（例如 `-w 4` 启动4个进程），利用服务器的**所有CPU核心** (实现并行)。它还负责监控这些进程的健康状况，并在进程崩溃时自动重启它们。
-- **Uvicorn (在内层):** 充当**工作单元** (`-k uvicorn.workers.UvicornWorker`)。在Gunicorn启动的*每一个*进程内部，Uvicorn会接管并运行其高性能的 `asyncio` 事件循环（实现并发）。
+最后这个Agent Runtime 还只是很基础的版本。理论上应该做到，对于任意会话，**Agent 可以随时被中断、回滚、热切换**，Agent 可以工作时调度多个哪怕跨应用的Agent,以及用户可以在Agent 工作事调度多个Agent… 目前我只能做到Agent随时被中断、回滚、热切换, Agent 工作时跨应用的Agent做了一半，其他还没做。这里涉及的是意图路由和基于消息队列的A2A交互的部分，后面有时间再分享。
 
-此外必须强调的是，在Python 中任何没有被正确`await`的I/O或同步CPU计算（如复杂的数据处理、JSON序列化一个大对象、循环处理） 都会阻塞唯一的App Loop。最后这个Agent Runtime 还只是很基础的版本。理论上应该做到，对于任意会话，Agent 可以随时被中断、回滚、**热切换**，Agent 可以工作时调度多个哪怕跨应用的Agent,以及用户可以在Agent 工作事调度多个Agent... 目前我只能做到Agent随时被中断、回滚、**热切换**, Agent 工作时跨应用的Agent做了一半，其他还没做。这里涉及的是意图路由和基于消息队列的A2A交互的部分，后面有时间再分享。希望后面可以做到多 Agent 和人像在一个群里面一样干活吧，我把任务给 Agent甲，甲干活的时候我又给了Agent乙布置了个任务，然后我再和甲说我走了，你待会儿收一下乙的作业一起给丙... hh 这样比较有意思。
+希望后面可以做到多 Agent 和人像在一个群里面一样干活吧，我把任务给 Agent甲，甲干活的时候我又给了Agent乙布置了个任务，然后我再和甲说我走了，你待会儿收一下乙的作业一起给丙… 我愿称之为 Human-In-The-Group :)
