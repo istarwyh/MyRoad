@@ -33,3 +33,40 @@
 没有什么真正的独唱，一定是穿越时空的重唱、合唱。我们都是围绕古老基音产生的泛音，在历史重复的韵脚里形成越来越丰富和谐的音调。
 
 #wisdom #education
+
+```mermaid
+sequenceDiagram
+    participant User as 开发者
+    participant Terminal as 终端
+    participant JVM as JVM进程
+    participant IDE as IDE调试器
+    participant App as 应用程序
+
+    Note over User,App: 1. 启动调试会话
+    User->>Terminal: 执行调试命令
+    Terminal->>JVM: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5679 -jar app.jar    JVM->>JVM: 启动JDWP调试代理
+    JVM->>App: 启动应用程序
+    App->>Terminal: 输出"Please input:"<br/>等待用户输入
+        Note over User,App: 2. IDE连接调试器
+    User->>IDE: 配置远程调试<br/>localhost:5679
+    IDE->>JVM: 建立调试连接
+    JVM->>IDE: 确认连接成功
+    Note over User,App: 3. 设置断点调试
+    User->>IDE: 在StringProcessor.main()<br/>第14行设置断点
+    IDE->>JVM: 注册断点信息
+    Note over User,App: 4. 触发断点
+    User->>Terminal: 输入测试文本
+    Terminal->>App: 传递用户输入
+    App->>JVM: 执行到断点位置
+    JVM->>IDE: 发送断点命中事件
+    IDE->>User: 显示断点命中<br/>高亮当前行
+    Note over User,App: 5. 调试交互
+    User->>IDE: 查看变量值<br/>单步执行
+    IDE->>JVM: 执行调试命令<br/>(step, continue等)
+    JVM->>App: 继续程序执行
+    App->>Terminal: 输出处理结果
+    Note over User,App: 6. 结束调试
+    User->>IDE: 断开调试连接
+    IDE->>JVM: 关闭调试会话
+    JVM->>App: 程序继续正常运行
+```
