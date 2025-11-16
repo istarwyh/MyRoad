@@ -114,8 +114,6 @@ graph LR
 
 %% 定义节点
 
-User[User]
-
 MainAgent[Host Agent（Loop）]
 
 LLM1[LLM]
@@ -138,8 +136,6 @@ Tool4[Builtin Tools]
 
 %% 定义连接
 
-User <--> MainAgent
-
 MainAgent <--> LLM1
 
 MainAgent <--> Tool1
@@ -159,8 +155,6 @@ SubAgent <--> Tool4
 
 
 %% 定义节点样式以匹配原图颜色
-
-style User fill:#f1f8e9,stroke:#555,stroke-width:2px,rx:8,ry:8
 
 style MainAgent fill:#e3f2fd,stroke:#555,stroke-width:2px,rx:8,ry:8
 
