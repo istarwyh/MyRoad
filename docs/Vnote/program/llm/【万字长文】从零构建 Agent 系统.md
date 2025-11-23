@@ -1,8 +1,18 @@
-## 简介
+今年 5 月份我们提出了受 Manus 和 Claude Code 启发的 [[如何快速创建领域Agent - OneAgent + MCPs 范式|OneAgent +MCPs]] 范式。这个范式也被评为了阿里& 蚂蚁 Top10 最佳 Agent 实践。OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文结合此前的分享，做一个综述。
 
-今年 5 月份我们提出了受 Manus 和 Claude Code 启发的 [[如何快速创建领域 Agent -OneAgent + MCPs 范式|OneAgent +MCPs]] 范式。这个范式也被评为了阿里& 蚂蚁 Top10 最佳 Agent 实践。OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。
+# OneAgent 应用架构
 
-OneAgent 本质上是在 Loop（循环）中使用工具的模型。这种架构是表面上很好理解的，但可能会产生的智能体无法在更长、更复杂的任务中进行规划和行动。但是像 Manus 和 Claude Code 这种强大的 Agent 都是以主 Loop 为主的架构，我认为他们主要通过出色的上下文工程，更明确的说是四个要素的组合来释放模型的潜力：
+## OneAgent 执行流程与 Claude Code 一致
+
+![](https://minusx.ai/images/claude-code/control_loop.gif)
+
+## 应用架构
+
+[[如何打造可靠的Agent系统]] 相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent。
+
+## OneAgent 架构
+
+OneAgent 本质上是在 Loop（循环）中使用工具的模型。这种架构是表面上很好理解的，但不免让人质疑，仅仅是Loop 可以在更长、更复杂的任务中进行规划和行动吗？不过像 Manus 和 Claude Code 这种强大的 Agent 都是以主 Loop 为主的架构，他们是怎么解决这个问题的呢？首先得说明，Loop 之所以如此有用本质上靠的是模型的 Agentic 能力，也就是预训练时对于模型在 Loop 反复执行工具调用的训练。其次我认为他们主要通过出色的上下文工程，更明确的说是四个要素的组合来释放模型的潜力：
 
 - **规划工具** (write_todos)
 - **子智能体** (通过 task 方法转交)
@@ -50,106 +60,249 @@ style Tool3 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 style Tool4 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 ```
 
-在系统中为了区分主子Agent，OneAgent 会称呼为 hostagent 和 subagent.
+在系统中为了区分主子Agent，OneAgent 会称呼为 hostagent 和 subagent。
 
-### OneAgent 执行流程与 Claude Code 一致
+# OneAgent 详细实现
 
-![](https://minusx.ai/images/claude-code/control_loop.gif)
+## OneAgent 本身是什么？
 
-## 派生领域 Agent
+在物理层面上，模型仍然是一个 Token 生成器，它一次只能吐出一个 Token。它并不能“同时”一边说话一边调工具。但是，**OpenAI 定义的 API 响应结构（Schema）** 将它们分开了。当你在 API 返回中看到：
 
-你可以向 `create_host_agent` 传递三个参数来创建自己的领域Agent。
-
-### `tools` /`mcps`(必需)
-
-`create_host_agent` 的第一个参数是 `tools`。这应该是一个函数列表或 LangChain `@tool` 对象。
-
-智能体（和任何子智能体）将可以访问这些工具。必须说明，我非常希望将除了内置工具以外的工具都统一成基于 MCP的调用，但是受限于项目节奏，还未能做到--单纯从自己项目的工具调用来说，自己发布一个 MCP 再给自己调用不如单纯 function call 来得快...
-
-### `instructions` (必需)
-
-`create_host_agent` 的第二个参数是 `instructions`。这是你需要的领域 Agent 的提示词，至于 OneAgent 本身还有自己的系统提示词。 系统提示词加上领域提示词是完整的给模型的系统提示词。
-
-### `subagents` (可选)
-
-`create_host_agent` 可以选择是否使用子 Agent ,这个取决于你的任务是否需要上下文窗口的隔离。上下文隔离是非常有用的解决上下文窗口不足以及腐败的手段之一，后文我将会详细介绍。
-
-`subagents` 应该是一个字典列表，其中每个字典遵循此模式：
-
-```python
-
-class SubAgent(TypedDict):
-	name: str
-	description: str
-	prompt: str
-	tools: NotRequired[list[str]]
-	model_settings: NotRequired[dict[str, Any]]
-
-class CustomSubAgent(TypedDict):
-	name: str
-	description: str
-	graph: Runnable
-```
-
-**SubAgent 字段：**
-
-- **name**: 这是子智能体的名称，也是主智能体调用子智能体的方式
-- **description**: 这是显示给主智能体的子智能体描述
-- **prompt**: 这是用于子智能体的提示词
-- **tools**: 这是子智能体可以访问的工具列表。默认情况下将可以访问所有传入的工具以及所有内置工具。
-- **model_settings**: 每个子智能体模型配置的可选字典（省略时继承主模型）。
-
-**CustomSubAgent 字段：**
-
-- **name**: 这是子智能体的名称，也是主智能体调用子智能体的方式
-- **description**: 这是显示给主智能体的子智能体描述
-- **graph**: 将用作子智能体的预构建 LangGraph 图/智能体
-
-#### 使用 SubAgent
-
-```python
-research_subagent = {
-	"name": "research-agent",
-	"description": "Used to research more in depth questions",
-	"prompt": sub_research_prompt,
+```json
+{
+  "content": null,
+  "tool_calls": [{"name": "get_weather", ...}]
 }
-subagents = [research_subagent]
-agent = create_host_agent(
-	tools,
-	prompt,
-	subagents=subagents
-)
 ```
 
-#### 使用 CustomSubAgent
+这意味着：推理服务器（Inference Server）拦截了模型的原始输出，发现里面包含特定的**特殊标记（Special Tokens）**，于是它把这部分内容切分出来，填入了 `tool_calls` 字段，而不是 `content` 字段。
 
-对于更复杂的用例，你可以提供自己的预构建 LangGraph 图作为子智能体。 不一定所有人都会想要使用 Loop ，可能更倾向于 workflow ,这时候完全可以使用自定义的 LangGraph workflow：
+**工具的定义并没有被写进 `messages` (Prompt 文本) 里，而是作为 API 请求的一个独立参数 (`tools` 参数) 并行发送给模型的。**
+
+我们来拆解一下这里发生的“隐形操作”：
+
+### 1. 关键的魔法代码：`bind_tools`
+
+在你的代码中有这样一行，它至关重要：
+
+Python
+
+```
+model = model.bind_tools(tools)
+```
+
+这行代码并没有立即调用模型，而是做了一个**配置绑定**。它在后台做了两件事：
+
+1. **格式转换**：它读取你的 Python 函数 `get_weather` 的签名（函数名、docstring、参数类型），将其转换成 **JSON Schema** 格式。
+
+2. **参数注入**：它返回了一个新的对象（通常是 `RunnableBinding`），这个对象记住了：下次调用 `invoke` 时，**必须**把转换好的 JSON Schema 塞进 API 请求的 `tools` 参数里。
+
+### 2. 实际上发给 OpenAI 的请求长什么样？
+
+当代码运行到 `model.invoke(...)` 时，LangChain 最终向 OpenAI 发送的 HTTP 请求并不是单纯的一段文本，而是一个结构化的 JSON Payload。
+
+它大概长这样（简化版）：
+
+```json
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    { "role": "system", "content": "You are a helpful AI assistant..." },
+    { "role": "user", "content": "what is the weather in sf" }
+  ],
+  // 注意这里！工具定义在这里，与 messages 平级，而不是在 messages 里面
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Call to get the weather from a specific location.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": { "type": "string" }
+          },
+          "required": ["location"]
+        }
+      }
+    }
+  ]
+}
+```
+
+**结论**：你之所以在 `invoke` 的 `input` 处理中看不到工具提示词，是因为工具定义**绕过**了 Prompt 文本拼接环节，直接走“VIP 通道”进入了模型的 `tools` 槽位。
+
+### 3. 模型是如何“知道”怎么用的？
+
+虽然我们没有在文本里写“你有一个工具叫 get_weather...”，但 OpenAI 的模型在预训练和微调阶段（Fine-tuning with Function Calling），已经被训练成能够理解 `tools` 参数了。
+
+当模型看到 `tools` 参数里有定义，且 `messages` 里的用户意图（"weather in sf"）与工具描述（"get the weather"）匹配时，模型内部的注意力机制会被触发，它就不会输出普通的文本，而是输出一个指向该工具的 **Stop Sequence** 和结构化数据。
 
 ```python
-from langgraph.prebuilt import create_react_agent
-# 创建自定义智能体图
-custom_graph = custom_graph_node.compile()
+def bind_tools(
+    self,
+    tools: Sequence[dict[str, Any] | type | Callable | BaseTool],
+    *,
+    tool_choice: dict | str | bool | None = None,
+    strict: bool | None = None,
+    parallel_tool_calls: bool | None = None,
+    **kwargs: Any,
+) -> Runnable[LanguageModelInput, AIMessage]:
+    """Bind tool-like objects to this chat model.
 
-# 将其用作自定义子智能体
-custom_subagent = {
-	"name": "data-analyzer",
-	"description": "Specialized agent for complex data analysis tasks",
-	"graph": custom_graph
-}
-
-subagents = [custom_subagent]
-agent = create_host_agent(
-	tools,
-	prompt,
-	subagents=subagents
-)
+    Assumes model is compatible with OpenAI tool-calling API.
+    Args:        tools: A list of tool definitions to bind to this chat model.            Supports any tool definition handled by            `langchain_core.utils.function_calling.convert_to_openai_tool`.        tool_choice: Which tool to require the model to call. Options are:
+            - `str` of the form `'<<tool_name>>'`: calls `<<tool_name>>` tool.            - `'auto'`: automatically selects a tool (including no tool).            - `'none'`: does not call a tool.            - `'any'` or `'required'` or `True`: force at least one tool to be called.            - `dict` of the form `{"type": "function", "function": {"name": <<tool_name>>}}`: calls `<<tool_name>>` tool.            - `False` or `None`: no effect, default OpenAI behavior.        strict: If `True`, model output is guaranteed to exactly match the JSON Schema            provided in the tool definition. The input schema will also be validated according to the            [supported schemas](https://platform.openai.com/docs/guides/structured-outputs/supported-schemas?api-mode=responses#supported-schemas).            If `False`, input schema will not be validated and model output will not            be validated. If `None`, `strict` argument will not be passed to the model.        parallel_tool_calls: Set to `False` to disable parallel tool use.            Defaults to `None` (no specification, which allows parallel tool use).        kwargs: Any additional parameters are passed directly to `bind`.    """  # noqa: E501
+    if parallel_tool_calls is not None:
+        kwargs["parallel_tool_calls"] = parallel_tool_calls
+    formatted_tools = [
+        convert_to_openai_tool(tool, strict=strict) for tool in tools
+    ]
+    tool_names = []
+    for tool in formatted_tools:
+        if "function" in tool:
+            tool_names.append(tool["function"]["name"])
+        elif "name" in tool:
+            tool_names.append(tool["name"])
+        else:
+            pass
+    if tool_choice:
+        if isinstance(tool_choice, str):
+            # tool_choice is a tool/function name
+            if tool_choice in tool_names:
+                tool_choice = {
+                    "type": "function",
+                    "function": {"name": tool_choice},
+                }
+            elif tool_choice in WellKnownTools:
+                tool_choice = {"type": tool_choice}
+            # 'any' is not natively supported by OpenAI API.
+            # We support 'any' since other models use this instead of 'required'.            elif tool_choice == "any":
+                tool_choice = "required"
+            else:
+                pass
+        elif isinstance(tool_choice, bool):
+            tool_choice = "required"
+        elif isinstance(tool_choice, dict):
+            pass
+        else:
+            msg = (
+                f"Unrecognized tool_choice type. Expected str, bool or dict. "
+                f"Received: {tool_choice}"
+            )
+            raise ValueError(msg)
+        kwargs["tool_choice"] = tool_choice
+    return super().bind(tools=formatted_tools, **kwargs)
 ```
 
-使用 `create_host_agent` 创建的智能体只是一个 LangGraph 图 - 因此你可以像与任何 LangGraph 智能体交互一样与它交互（流式传输、 Human-in-the-loop）。
+在 Native Tool Calling 模式下，模型非常清楚“调用工具”和“回复用户”是两个完全不同的状态。
 
-## OneAgent 详解
+### 1. 为什么不会冲突？（底层机制）
 
-以下组件内置于 `deepagents` 中，并帮助它开箱即用地处理深度任务。
+在 Native 模式（OpenAI/GPT-4 等）中，模型输出有两个独立的通道：
+
+1. **Tool Calls 通道**：当模型决定调用工具时，它填充的是 `tool_calls` 字段，`content` 字段通常为空（或包含简短的思考）。
+
+2. **Content 通道**：当模型决定**不**调用工具，或者已经拿到了工具结果准备回答用户时，它填充的是 `content` 字段。
+
+你的需求（HTML 输出）仅仅是约束 **第 2 种情况**（Content 通道）的格式。只要 Prompt 逻辑清晰，模型不会傻到把 `tool_calls` 的 JSON 结构包在 `<div>` 里。
+
+### 2. 如何正确编写 Prompt？
+
+关键在于明确告诉模型：**HTML 格式仅适用于“最终回答 (Final Answer)”。**
+
+**推荐的 System Prompt 模板：**
+
+Python
+
+````
+system_prompt = """
+你是一个智能助手，负责回答用户的问题。你可以使用工具来获取数据。
+
+关于输出格式的严格要求：
+1. **工具调用阶段**：请正常使用 Native Tool Calling 机制，不要添加任何 HTML 标签。
+2. **最终回答阶段**：当你获取了所有必要信息并准备向用户陈述时，请必须将你的回答渲染为 **HTML 格式**。
+   - 使用语义化的标签（如 <h3>, <ul>, <li>, <table>, <p> 等）。
+   - 不要包含 ```html 或 markdown 代码块标记，直接输出 HTML 字符串。
+   - 样式应简洁美观。
+
+例如，如果用户问天气，先调用 get_weather，然后在最终回答时输出：
+<div class="weather-card">
+  <h3>San Francisco</h3>
+  <p>Status: Sunny ☀️</p>
+</div>
+"""
+````
+
+### 3. 可能遇到的两个“坑”及解决方案
+
+虽然 Native 模式很强，但在强行要求 HTML 时，偶尔会出现以下边缘情况：
+
+#### 坑 1：模型“急于表现”，跳过工具直接写 HTML
+
+**现象**：用户问“今天天气怎么样”，模型为了满足 HTML 要求，直接编造了一个 `<p>今天天气不错</p>`，而不去调用 `get_weather`。 **原因**：HTML 格式指令的权重太高，压过了“事实准确性”的权重。 **解决**：在 Prompt 中强调逻辑顺序——“**必须先**使用工具获取事实，**然后**再将结果格式化为 HTML。”
+
+```mermaid
+graph TD
+    %% 定义样式
+    classDef start fill:#f9f,stroke:#333,stroke-width:2px,color:black;
+    classDef decision fill:#fff9c4,stroke:#fbc02d,color:black;
+    classDef toolPath fill:#fff3e0,stroke:#e65100,color:black;
+    classDef contentPath fill:#e8f5e9,stroke:#2e7d32,color:black;
+    classDef apiLayer fill:#e1f5fe,stroke:#0288d1,color:black;
+    classDef endNode fill:#eceff1,stroke:#455a64,color:black;
+
+    A["用户输入 + Prompt (要求最终输出HTML) + Tools 定义 (bind_tools)"]:::start --> B(LLM 接收输入并开始推理);
+
+    subgraph "推理服务器内部 (Inference Engine Black Box)"
+        B --> C{模型决策: 我现在需要调用工具吗?};
+        class C decision;
+
+        %% === 通道一：工具调用路径 ===
+        subgraph "【通道 1】严管区: Native Tool Calling 阶段"
+            style D fill:#fff3e0,stroke:#e65100
+            style E fill:#fff3e0,stroke:#e65100
+            style F fill:#fff3e0,stroke:#e65100
+
+            C -- "是 (步骤1: 触发特殊信令)" --> D["模型输出隐形特殊 Token<br>(例如 <|tool_call_start|>)"];
+
+            D --> E["步骤2: 推理引擎介入，开启【语法约束模式】<br>(关键点：物理屏蔽 HTML/< 标签等 Token，<br>强制只能生成符合 JSON 语法的字符)"];
+
+            E --> F["模型在约束下生成<br>纯净的结构化 JSON 数据"];
+        end
+
+        %% === 通道二：内容回复路径 ===
+        subgraph "【通道 2】自由区: Final Content Generation 阶段"
+            style H fill:#e8f5e9,stroke:#2e7d32
+            style I fill:#e8f5e9,stroke:#2e7d32
+
+            C -- "否 (或已拿到工具结果)" --> H["进入普通文本生成模式<br>(无特殊语法约束)"];
+
+            H --> I["模型遵循 System Prompt<br>自由生成文本，并渲染 HTML"];
+        end
+
+        %% === 步骤三：API 封装 ===
+        subgraph "步骤3: API 响应封装层"
+            class G,K apiLayer;
+            F --> G["识别到工具数据 -> 封装进响应体的 tool_calls 字段<br>(设置 content: null)"];
+            I --> K["识别到普通文本 -> 封装进响应体的 content 字段<br>(设置 tool_calls: null)"];
+        end
+    end
+
+    %% 输出结果
+    G --> L("返回给 LangGraph (Python对象)<br>执行对应 Python 函数");
+    K --> M("返回给前端/用户 (字符串)<br>浏览器渲染 HTML");
+
+    class L,M endNode;
+
+    %% 添加连接线注释，强调关键点
+    linkStyle 3,4,5 stroke:#e65100,stroke-width:2px,fill:none;
+    linkStyle 6,7 stroke:#2e7d32,stroke-width:2px,fill:none;
+```
+
+## OneAgent 的上下文工程
+
+以下组件内置于 `hostagent` 中，并帮助它开箱即用地处理各种任务，并结合领域派生Agent 更好地处理各种各样的领域任务。
 
 ### System Prompt
 
@@ -188,7 +341,7 @@ cd /foo/bar && pytest tests
 
 系统提示词还包含关于如何使用内置规划工具、文件系统工具和子智能体的详细说明，详见附录。
 
-### 上下文工程之 TODO
+### 上下文工程之指令遵循
 
 Context Rot 是长运行Agent 中常见的难题。Agent 一开始智能地思考、搜索、写代码、调工具，但随着运行时上下文的累积，逐渐迷失方向，最终Agent 就忘了自己要做什么。所以 `hostagent` 带有一个内置规划工具。这个规划工具最早源自 Manus 的启发，基于 ClaudeCode 的 TodoWrite 工具。这个工具实际上不做任何事情 -- 它只是一种让Agent 不停地写自己的 todo，然后将todo的返回值放到 context 的末尾以提醒 Agent 当下的进度与状态。
 
@@ -476,11 +629,108 @@ hostagent 有5个基础内置工具：
 
 通过使用 [Langchain MCP Adapter 库](https://github.com/langchain-ai/langchain-mcp-adapters) 可以将 MCP 工具当做正常的 tool 来使用。
 
-## 路线图
+## 派生领域 Agent
+
+你可以向 `create_host_agent` 传递三个参数来创建自己的领域Agent。
+
+### `tools` /`mcps`(必需)
+
+`create_host_agent` 的第一个参数是 `tools`。这应该是一个函数列表或 LangChain `@tool` 对象。
+
+智能体（和任何子智能体）将可以访问这些工具。必须说明，我非常希望将除了内置工具以外的工具都统一成基于 MCP的调用，但是受限于项目节奏，还未能做到--单纯从自己项目的工具调用来说，自己发布一个 MCP 再给自己调用不如单纯 function call 来得快...
+
+### `instructions` (必需)
+
+`create_host_agent` 的第二个参数是 `instructions`。这是你需要的领域 Agent 的提示词，至于 OneAgent 本身还有自己的系统提示词。 系统提示词加上领域提示词是完整的给模型的系统提示词。
+
+### `subagents` (可选)
+
+`create_host_agent` 可以选择是否使用子 Agent ,这个取决于你的任务是否需要上下文窗口的隔离。上下文隔离是非常有用的解决上下文窗口不足以及腐败的手段之一，后文我将会详细介绍。
+
+`subagents` 应该是一个字典列表，其中每个字典遵循此模式：
+
+```python
+
+class SubAgent(TypedDict):
+	name: str
+	description: str
+	prompt: str
+	tools: NotRequired[list[str]]
+	model_settings: NotRequired[dict[str, Any]]
+
+class CustomSubAgent(TypedDict):
+	name: str
+	description: str
+	graph: Runnable
+```
+
+**SubAgent 字段：**
+
+- **name**: 这是子智能体的名称，也是主智能体调用子智能体的方式
+- **description**: 这是显示给主智能体的子智能体描述
+- **prompt**: 这是用于子智能体的提示词
+- **tools**: 这是子智能体可以访问的工具列表。默认情况下将可以访问所有传入的工具以及所有内置工具。
+- **model_settings**: 每个子智能体模型配置的可选字典（省略时继承主模型）。
+
+**CustomSubAgent 字段：**
+
+- **name**: 这是子智能体的名称，也是主智能体调用子智能体的方式
+- **description**: 这是显示给主智能体的子智能体描述
+- **graph**: 将用作子智能体的预构建 LangGraph 图/智能体
+
+#### 使用 SubAgent
+
+```python
+research_subagent = {
+	"name": "research-agent",
+	"description": "Used to research more in depth questions",
+	"prompt": sub_research_prompt,
+}
+subagents = [research_subagent]
+agent = create_host_agent(
+	tools,
+	prompt,
+	subagents=subagents
+)
+```
+
+#### 使用 CustomSubAgent
+
+对于更复杂的用例，你可以提供自己的预构建 LangGraph 图作为子智能体。 不一定所有人都会想要使用 Loop ，可能更倾向于 workflow ,这时候完全可以使用自定义的 LangGraph workflow：
+
+```python
+from langgraph.prebuilt import create_react_agent
+# 创建自定义智能体图
+custom_graph = custom_graph_node.compile()
+
+# 将其用作自定义子智能体
+custom_subagent = {
+	"name": "data-analyzer",
+	"description": "Specialized agent for complex data analysis tasks",
+	"graph": custom_graph
+}
+
+subagents = [custom_subagent]
+agent = create_host_agent(
+	tools,
+	prompt,
+	subagents=subagents
+)
+```
+
+使用 `create_host_agent` 创建的智能体只是一个 LangGraph 图 - 因此你可以像与任何 LangGraph 智能体交互一样与它交互（流式传输、 Human-in-the-loop）。
+
+# Agent 时代基于MCP的微服务调用
+
+[[如何快速创建领域Agent - OneAgent + MCPs 范式]]
+
+# 附录
+
+## 网传Claude Code 架构图
 
 沿着 Claude Code 的发展路径继续走... ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511172317323.png)
 
-## 附录
+## 网传Claude Code Prompt
 
 <details>
 <summary>主要的 Claude Code System Prompt</summary>
