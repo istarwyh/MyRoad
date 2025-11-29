@@ -1,16 +1,12 @@
-今年 5 月份我们提出了受 Manus 和 Claude Code 启发的 [[如何快速创建领域Agent - OneAgent + MCPs 范式|OneAgent +MCPs]] 范式。这个范式也被评为了阿里& 蚂蚁 Top10 最佳 Agent 实践。OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文结合此前的分享，做一个综述。
+# 前言
 
-# OneAgent 应用架构
+今年 5 月份我们提出了受 Manus 和 Claude Code 启发的 [[如何快速创建领域Agent - OneAgent + MCPs 范式|OneAgent +MCPs]] 范式。这个范式也被评为了阿里& 蚂蚁 Top10 最佳 Agent 实践。
 
-## OneAgent 执行流程与 Claude Code 一致
+OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文结合此前的分享，做一个综述。
 
-![](https://minusx.ai/images/claude-code/control_loop.gif)
+# OneAgent 概览
 
-## 应用架构
-
-[[如何打造可靠的Agent系统]] 相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent。
-
-## OneAgent 架构
+## OneAgent 是一个 Loop
 
 OneAgent 本质上是在 Loop（循环）中使用工具的模型。这种架构是表面上很好理解的，但不免让人质疑，仅仅是Loop 可以在更长、更复杂的任务中进行规划和行动吗？不过像 Manus 和 Claude Code 这种强大的 Agent 都是以主 Loop 为主的架构，他们是怎么解决这个问题的呢？首先得说明，Loop 之所以如此有用本质上靠的是模型的 Agentic 能力，也就是预训练时对于模型在 Loop 反复执行工具调用的训练。其次我认为他们主要通过出色的上下文工程，更明确的说是四个要素的组合来释放模型的潜力：
 
@@ -62,9 +58,17 @@ style Tool4 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 
 在系统中为了区分主子Agent，OneAgent 会称呼为 hostagent 和 subagent。
 
+## OneAgent 执行流程与 Claude Code 一致
+
+![](https://minusx.ai/images/claude-code/control_loop.gif)
+
+## 应用架构
+
+相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。 [[如何打造可靠的Agent系统]]
+
 # OneAgent 详细实现
 
-## OneAgent 本身是什么？
+## OneAgent 的 ReAct 如何实现？
 
 在物理层面上，模型仍然是一个 Token 生成器，它一次只能吐出一个 Token。它并不能“同时”一边说话一边调工具。但是，**OpenAI 定义的 API 响应结构（Schema）** 将它们分开了。当你在 API 返回中看到：
 
@@ -302,11 +306,15 @@ graph TD
 
 ## OneAgent 的上下文工程
 
-以下组件内置于 `hostagent` 中，并帮助它开箱即用地处理各种任务，并结合领域派生Agent 更好地处理各种各样的领域任务。
+基于LangGraph, 基础的 ReAct Agent 实现已经相当简单，但在实际运行中，由海量工具调用和 long horizon reasoning 产生的冗长上下文，会让模型的能力难以发挥且越来越差。所以我们需要上下文工程来让 OneAgent 可以开箱即用地处理各种任务，并结合领域派生Agent 更好地处理各种各样的领域任务。
+
+Context Engineering 是在正确时间为 agent 提供正确信息的方法论，这个概念覆盖并超越了 prompt engineering 和 RAG，成为了 agent 开发的核心胜负手。如果把 LLM 类比为计算机的 CPU，那么 context window 就是计算机的 RAM，它处理信息的信噪比直接决定了产品的效果，因为在构建 agent 的过程中，输入的 context 不仅来自人类指令，还来自 agent 运行中的工具调用和思维链，把内存空间压缩到最关键的信息上就至关重要。
+
+我们知道， 模型本质上是一个 token 输出器，模型接收的就是
 
 ### System Prompt
 
-OneAgent 的 System Prompt 几乎完全来自于 Claude Code,之所以不是全部，因为 Claude Code拥有完整的文件系统，需要大幅度删减。即使在prompt 技巧普及化的今天（比如pricinple、 COT、few-shot 之类的技巧），Claude Code的提示词依然有很多值得学习的地方，
+OneAgent 的 System Prompt 几乎完全来自于 Claude Code,之所以不是全部，因为 Claude Code 拥有完整的文件系统，需要大幅度删减。即使在prompt 技巧普及化的今天（比如pricinple、 COT、few-shot 之类的技巧），Claude Code的提示词依然有很多值得学习的地方，
 
 1. Claude Code 综合使用 XML 标签和 Markdown 构建 prompt ，用 XML 作为单模块区分，用 markdown 做层次和目录区分。Markdown 标题示例包括：
 
