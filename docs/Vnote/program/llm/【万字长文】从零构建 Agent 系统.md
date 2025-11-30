@@ -186,7 +186,7 @@ app = workflow.compile()
 蚂蚁的灵光率先开启了模型直接输出 HTML 或者 JS 和用户交互的范式，那么当我们要求 React Agent必须使用HTML 和用户交互时，模型还能进行正常的工具调用吗？ 因为直觉上，用于 Function Call 的参数不可能是 HTML。答案是没问题。如前所述，模型输出有两个独立的通道：
 
 1. **Tool Calls 通道**：当模型决定调用工具时，它填充的是 `tool_calls` 字段，`content` 字段通常为空（或包含简短的思考）。
-2. **Content 通道**：当模型决定**不**调用工具，或者已经拿到了工具结果准备回答用户时，它填充的是 `content` 字段。
+2. **Content 通道**：当模型决定**不**调用工具，或者已经拿到了工具结果准备回答用户时，它填充的是 `content` 字段。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301824756.png)
 
 关键在于明确告诉模型：**HTML 格式仅适用于“最终回答 (Final Answer)”。** 比如我们可以这样写 prompt:
 
@@ -720,6 +720,19 @@ agent = create_host_agent(
 ```
 
 使用 `create_host_agent` 创建的智能体只是一个 LangGraph 图 - 因此你可以像与任何 LangGraph 智能体交互一样与它交互（流式传输、 Human-in-the-loop）。
+
+# 总结
+
+本文系统性地介绍了如何从零构建一个生产级的 Agent 系统 —— OneAgent。通过借鉴 Claude Code 和 Manus 的优秀实践,结合阿里 & 蚂蚁内部的实践经验,我们总结出了 OneAgent + MCPs 的范式,这一范式已被评为阿里 & 蚂蚁 Top10 最佳 Agent 实践。
+
+构建生产级 Agent 系统不是简单地调用 LLM API,而是一个系统工程,涉及架构设计、上下文工程、工具体系、提示词优化等多个维度。OneAgent 通过借鉴业界最佳实践,结合自身业务场景,形成了一套可复用、可扩展的解决方案。简单来说下，我们可以:
+
+1. **保持简单**: 不要过早优化,从最简单的 Loop 开始
+2. **关注上下文**: Context Engineering 是 Agent 能力的倍增器
+3. **工具为王**: 好的工具设计胜过复杂的 Prompt
+4. **持续迭代**: Agent 系统需要在实际使用中不断调优
+
+希望本文能为你构建自己的 Agent 系统提供有价值的参考。OneAgent 的实践仍在持续演进中,预计会在多模态（图像、音视频交互） 和 Human-In-The-Loop 方面进行增强，欢迎交流探讨。
 
 # 附录
 
