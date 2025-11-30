@@ -62,57 +62,87 @@ style Tool4 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 
 ![](https://minusx.ai/images/claude-code/control_loop.gif)
 
-## 应用架构
+## 一个经典的 OneAgent 应用架构
 
-相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。 [[如何打造可靠的Agent系统]]
+相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202510191740337.png) 更多信息在 [[如何打造可靠的Agent系统]] 中详细介绍过，这里不再赘述。下面介绍即Domain Service 层经典的Agent Builder -- OneAgent 具体如何实现。
 
 # OneAgent 详细实现
 
+OneAgent 的技术栈是Python + LangChain + LangGraph, 实际构建过程中从 [deepagents](https://github.com/langchain-ai/deepagents) 项目受益良多。
+
 ## OneAgent 的 ReAct 如何实现？
 
-在物理层面上，模型仍然是一个 Token 生成器，它一次只能吐出一个 Token。它并不能“同时”一边说话一边调工具。但是，**OpenAI 定义的 API 响应结构（Schema）** 将它们分开了。当你在 API 返回中看到：
+### 几行代码
 
-```json
-{
-  "content": null,
-  "tool_calls": [{"name": "get_weather", ...}]
-}
+其实就是下面的伪代码：
+
+```python
+context = Context()
+tools = Tools(env)
+system_prompt = "Goals, constraints, and how to act"
+user_prompt = get_user_prompt()
+#开启循环
+while True:
+	#思考（Reason）下一步做什么
+	action = llm.run(system_prompt + user_prompt + context.state )
+	if action != continue:
+		break
+	#行动(Act)并更新上下文状态
+	context.state = tools.run(action)
 ```
 
-这意味着：推理服务器（Inference Server）拦截了模型的原始输出，发现里面包含特定的**特殊标记（Special Tokens）**，于是它把这部分内容切分出来，填入了 `tool_calls` 字段，而不是 `content` 字段。
+对应到LangGraph 中，就是三个元素：
 
-**工具的定义并没有被写进 `messages` (Prompt 文本) 里，而是作为 API 请求的一个独立参数 (`tools` 参数) 并行发送给模型的。**
+- **Context**：一个不断增长的列表（`AgentState`）。
+- **Act**：一个被赋予了函数调用能力的 API（`bind_tools`）。
+- **Reason**：一个带有 `if-else` 的循环图。- **AgentNode**：生成 action 指令。- **Tool 节点**：执行指令。- **Edge**：判断是结束还是继续执行指令。用 LangGraph 的代码实现如下：
 
-我们来拆解一下这里发生的“隐形操作”：
+```python
+from langgraph.graph import StateGraph, END
 
-### 1. 关键的魔法代码：`bind_tools`
+# 1. 创建一张白纸
+workflow = StateGraph(AgentState)
 
-在你的代码中有这样一行，它至关重要：
+# 2. 画上两个圈圈（节点）
+workflow.add_node("agent", agent_node)
+workflow.add_node("tools", tool_node) # 直接用预构建的 ToolNode
 
-Python
+# 3. 设置起点
+workflow.set_entry_point("agent")
 
+# 4. 画上条件边
+# 逻辑：从 agent 出发 -> 运行 should_continue -> 决定去 tools 还是去 END
+workflow.add_conditional_edges(
+    "agent",
+    should_continue,
+    {
+        "continue": "tools",
+        "end": END
+    }
+)
+
+# 5. 画一条回环的线（普通边）
+# 逻辑：工具执行完 -> 必须回到 agent 再思考一下
+workflow.add_edge("tools", "agent")
+
+# 6. 编译！变成可执行程序
+app = workflow.compile()
 ```
-model = model.bind_tools(tools)
-```
 
-这行代码并没有立即调用模型，而是做了一个**配置绑定**。它在后台做了两件事：
+不过LangGraph 已经有实现好的 create_react_agent,我们直接用即可。
 
-1. **格式转换**：它读取你的 Python 函数 `get_weather` 的签名（函数名、docstring、参数类型），将其转换成 **JSON Schema** 格式。
+### 工具调用细节
 
-2. **参数注入**：它返回了一个新的对象（通常是 `RunnableBinding`），这个对象记住了：下次调用 `invoke` 时，**必须**把转换好的 JSON Schema 塞进 API 请求的 `tools` 参数里。
+#### 实际上发给 OpenAI 的请求长什么样？
 
-### 2. 实际上发给 OpenAI 的请求长什么样？
-
-当代码运行到 `model.invoke(...)` 时，LangChain 最终向 OpenAI 发送的 HTTP 请求并不是单纯的一段文本，而是一个结构化的 JSON Payload。
-
-它大概长这样（简化版）：
+当代码运行到 `model.invoke(...)` 时，我们最终向 OpenAI风格 API 发送的 HTTP 请求并不是单纯的一段文本，而是一个结构化的 JSON Payload。它大概长这样（简化版）：
 
 ```json
 {
   "model": "gpt-4o-mini",
   "messages": [
     { "role": "system", "content": "You are a helpful AI assistant..." },
-    { "role": "user", "content": "what is the weather in sf" }
+    { "role": "user", "content": "what is the weather in 上海" }
   ],
   // 注意这里！工具定义在这里，与 messages 平级，而不是在 messages 里面
   "tools": [
@@ -134,92 +164,33 @@ model = model.bind_tools(tools)
 }
 ```
 
-**结论**：你之所以在 `invoke` 的 `input` 处理中看不到工具提示词，是因为工具定义**绕过**了 Prompt 文本拼接环节，直接走“VIP 通道”进入了模型的 `tools` 槽位。
+虽然我们没有在 Prompt 文本里写“你有一个工具叫 get_weather...”，但 OpenAI 的模型在预训练和微调阶段（Fine-tuning with Function Calling），已经被训练成能够理解 `tools` 参数了。
 
-### 3. 模型是如何“知道”怎么用的？
+#### 模型是如何“知道”怎么用的？
 
-虽然我们没有在文本里写“你有一个工具叫 get_weather...”，但 OpenAI 的模型在预训练和微调阶段（Fine-tuning with Function Calling），已经被训练成能够理解 `tools` 参数了。
+在物理层面上，模型仍然是一个 Token 生成器，它一次只能吐出一个 Token。它并不能“同时”一边说话一边调工具。那么所谓模型调工具是怎么回事？在没有 Function Call 之前，实际上使用者需要正则匹配模型吐出的文本，然后将文本转化为实际的工具调用。
 
-当模型看到 `tools` 参数里有定义，且 `messages` 里的用户意图（"weather in sf"）与工具描述（"get the weather"）匹配时，模型内部的注意力机制会被触发，它就不会输出普通的文本，而是输出一个指向该工具的 **Stop Sequence** 和结构化数据。
+不过现在模型基本都支持了原生的Function Call。
 
-```python
-def bind_tools(
-    self,
-    tools: Sequence[dict[str, Any] | type | Callable | BaseTool],
-    *,
-    tool_choice: dict | str | bool | None = None,
-    strict: bool | None = None,
-    parallel_tool_calls: bool | None = None,
-    **kwargs: Any,
-) -> Runnable[LanguageModelInput, AIMessage]:
-    """Bind tool-like objects to this chat model.
+当模型看到 `tools` 参数里有定义，且 `messages` 里的用户意图（"weather in 上海"）与工具描述（"get the weather"）匹配时，模型内部的注意力机制会被触发，它就不会输出普通的文本，而是输出一个指向该工具的 **Stop Sequence** 和结构化数据。模型本身清楚“调用工具”和“回复用户”是两个完全不同的状态。接着推理服务器（Inference Server）拦截模型的原始输出，发现里面包含特定的工具调用标记，于是它把这部分内容切分出来，填入了 `tool_calls` 字段，而不是一般的 `content` 字段。即在 **OpenAI 定义的 API 响应结构（Schema）** 中，ReAct 模式下API 返回实际上是两个字段：
 
-    Assumes model is compatible with OpenAI tool-calling API.
-    Args:        tools: A list of tool definitions to bind to this chat model.            Supports any tool definition handled by            `langchain_core.utils.function_calling.convert_to_openai_tool`.        tool_choice: Which tool to require the model to call. Options are:
-            - `str` of the form `'<<tool_name>>'`: calls `<<tool_name>>` tool.            - `'auto'`: automatically selects a tool (including no tool).            - `'none'`: does not call a tool.            - `'any'` or `'required'` or `True`: force at least one tool to be called.            - `dict` of the form `{"type": "function", "function": {"name": <<tool_name>>}}`: calls `<<tool_name>>` tool.            - `False` or `None`: no effect, default OpenAI behavior.        strict: If `True`, model output is guaranteed to exactly match the JSON Schema            provided in the tool definition. The input schema will also be validated according to the            [supported schemas](https://platform.openai.com/docs/guides/structured-outputs/supported-schemas?api-mode=responses#supported-schemas).            If `False`, input schema will not be validated and model output will not            be validated. If `None`, `strict` argument will not be passed to the model.        parallel_tool_calls: Set to `False` to disable parallel tool use.            Defaults to `None` (no specification, which allows parallel tool use).        kwargs: Any additional parameters are passed directly to `bind`.    """  # noqa: E501
-    if parallel_tool_calls is not None:
-        kwargs["parallel_tool_calls"] = parallel_tool_calls
-    formatted_tools = [
-        convert_to_openai_tool(tool, strict=strict) for tool in tools
-    ]
-    tool_names = []
-    for tool in formatted_tools:
-        if "function" in tool:
-            tool_names.append(tool["function"]["name"])
-        elif "name" in tool:
-            tool_names.append(tool["name"])
-        else:
-            pass
-    if tool_choice:
-        if isinstance(tool_choice, str):
-            # tool_choice is a tool/function name
-            if tool_choice in tool_names:
-                tool_choice = {
-                    "type": "function",
-                    "function": {"name": tool_choice},
-                }
-            elif tool_choice in WellKnownTools:
-                tool_choice = {"type": tool_choice}
-            # 'any' is not natively supported by OpenAI API.
-            # We support 'any' since other models use this instead of 'required'.            elif tool_choice == "any":
-                tool_choice = "required"
-            else:
-                pass
-        elif isinstance(tool_choice, bool):
-            tool_choice = "required"
-        elif isinstance(tool_choice, dict):
-            pass
-        else:
-            msg = (
-                f"Unrecognized tool_choice type. Expected str, bool or dict. "
-                f"Received: {tool_choice}"
-            )
-            raise ValueError(msg)
-        kwargs["tool_choice"] = tool_choice
-    return super().bind(tools=formatted_tools, **kwargs)
+```json
+{
+  "content": null,
+  "tool_calls": [{"name": "get_weather", ...}]
+}
 ```
 
-在 Native Tool Calling 模式下，模型非常清楚“调用工具”和“回复用户”是两个完全不同的状态。
+### 如果要模型输出HTML 还能思考吗？
 
-### 1. 为什么不会冲突？（底层机制）
-
-在 Native 模式（OpenAI/GPT-4 等）中，模型输出有两个独立的通道：
+蚂蚁的灵光率先开启了模型直接输出 HTML 或者 JS 和用户交互的范式，那么当我们要求 React Agent必须使用HTML 和用户交互时，模型还能进行正常的工具调用吗？ 因为直觉上，用于 Function Call 的参数不可能是 HTML。答案是没问题。如前所述，模型输出有两个独立的通道：
 
 1. **Tool Calls 通道**：当模型决定调用工具时，它填充的是 `tool_calls` 字段，`content` 字段通常为空（或包含简短的思考）。
-
 2. **Content 通道**：当模型决定**不**调用工具，或者已经拿到了工具结果准备回答用户时，它填充的是 `content` 字段。
 
-你的需求（HTML 输出）仅仅是约束 **第 2 种情况**（Content 通道）的格式。只要 Prompt 逻辑清晰，模型不会傻到把 `tool_calls` 的 JSON 结构包在 `<div>` 里。
+关键在于明确告诉模型：**HTML 格式仅适用于“最终回答 (Final Answer)”。** 比如我们可以这样写 prompt:
 
-### 2. 如何正确编写 Prompt？
-
-关键在于明确告诉模型：**HTML 格式仅适用于“最终回答 (Final Answer)”。**
-
-**推荐的 System Prompt 模板：**
-
-Python
-
-````
+````python
 system_prompt = """
 你是一个智能助手，负责回答用户的问题。你可以使用工具来获取数据。
 
@@ -238,13 +209,7 @@ system_prompt = """
 """
 ````
 
-### 3. 可能遇到的两个“坑”及解决方案
-
-虽然 Native 模式很强，但在强行要求 HTML 时，偶尔会出现以下边缘情况：
-
-#### 坑 1：模型“急于表现”，跳过工具直接写 HTML
-
-**现象**：用户问“今天天气怎么样”，模型为了满足 HTML 要求，直接编造了一个 `<p>今天天气不错</p>`，而不去调用 `get_weather`。 **原因**：HTML 格式指令的权重太高，压过了“事实准确性”的权重。 **解决**：在 Prompt 中强调逻辑顺序——“**必须先**使用工具获取事实，**然后**再将结果格式化为 HTML。”
+不过我们同样需要注意，如果我们在 Prompt 中一定要求模型输出 HTML 时，模型就会“急于表现”，跳过工具直接写 HTML。而因为实际上没有调用工具，输出的内容大概率就是编的。比如用户问“今天天气怎么样”，模型为了满足 HTML 要求，直接编造了一个 `<p>今天天气不错</p>`，而不去调用 `get_weather`。HTML 输出要求下模型的推理过程：
 
 ```mermaid
 graph TD
@@ -256,7 +221,7 @@ graph TD
     classDef apiLayer fill:#e1f5fe,stroke:#0288d1,color:black;
     classDef endNode fill:#eceff1,stroke:#455a64,color:black;
 
-    A["用户输入 + Prompt (要求最终输出HTML) + Tools 定义 (bind_tools)"]:::start --> B(LLM 接收输入并开始推理);
+    A["用户输入 + Prompt (要求最终输出HTML) + Tools"]:::start --> B(LLM 接收输入并开始推理);
 
     subgraph "推理服务器内部 (Inference Engine Black Box)"
         B --> C{模型决策: 我现在需要调用工具吗?};
@@ -304,15 +269,7 @@ graph TD
     linkStyle 6,7 stroke:#2e7d32,stroke-width:2px,fill:none;
 ```
 
-## OneAgent 的上下文工程
-
-基于LangGraph, 基础的 ReAct Agent 实现已经相当简单，但在实际运行中，由海量工具调用和 long horizon reasoning 产生的冗长上下文，会让模型的能力难以发挥且越来越差。所以我们需要上下文工程来让 OneAgent 可以开箱即用地处理各种任务，并结合领域派生Agent 更好地处理各种各样的领域任务。
-
-Context Engineering 是在正确时间为 agent 提供正确信息的方法论，这个概念覆盖并超越了 prompt engineering 和 RAG，成为了 agent 开发的核心胜负手。如果把 LLM 类比为计算机的 CPU，那么 context window 就是计算机的 RAM，它处理信息的信噪比直接决定了产品的效果，因为在构建 agent 的过程中，输入的 context 不仅来自人类指令，还来自 agent 运行中的工具调用和思维链，把内存空间压缩到最关键的信息上就至关重要。
-
-我们知道， 模型本质上是一个 token 输出器，模型接收的就是
-
-### System Prompt
+## OneAgent 的 System Prompt
 
 OneAgent 的 System Prompt 几乎完全来自于 Claude Code,之所以不是全部，因为 Claude Code 拥有完整的文件系统，需要大幅度删减。即使在prompt 技巧普及化的今天（比如pricinple、 COT、few-shot 之类的技巧），Claude Code的提示词依然有很多值得学习的地方，
 
@@ -349,15 +306,36 @@ cd /foo/bar && pytest tests
 
 系统提示词还包含关于如何使用内置规划工具、文件系统工具和子智能体的详细说明，详见附录。
 
-### 上下文工程之指令遵循
+## OneAgent 的上下文工程
 
-Context Rot 是长运行Agent 中常见的难题。Agent 一开始智能地思考、搜索、写代码、调工具，但随着运行时上下文的累积，逐渐迷失方向，最终Agent 就忘了自己要做什么。所以 `hostagent` 带有一个内置规划工具。这个规划工具最早源自 Manus 的启发，基于 ClaudeCode 的 TodoWrite 工具。这个工具实际上不做任何事情 -- 它只是一种让Agent 不停地写自己的 todo，然后将todo的返回值放到 context 的末尾以提醒 Agent 当下的进度与状态。
+基于LangGraph, 基础的 ReAct Agent 实现已经相当简单，但在实际运行中，由海量工具调用和 long horizon reasoning 产生的冗长上下文--可能多达数十万 token，正如Chroma 在 7 月发布的报告 [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://research.trychroma.com/context-rot) 显示，随着 context 长度增加，模型的注意力会分散，推理能力也会随之下降, 直到模型失能变得不断重复或者幻觉频出。
+
+所以我们需要上下文工程来让 OneAgent 可以开箱即用地处理各种任务，并结合领域派生Agent 更好地处理各种各样的领域任务。
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511292333784.png)
+
+下面是我要讲的上下文工程模块：
+
+| **策略概念** | **基础释义** |
+| --- | --- |
+| **Plan(规划** | Plan 指的是在 context 中显式地维护一个动态更新的 Todo List（任务清单）,以此锁定 Agent 长程任务的上下文焦点，防止模型迷失目标。 |
+| **Offload ( 卸载)** | Offload 指的是 agent 不把运行时产生的上下文（比如工具输出）直接传回模型，而是将这些信息卸载到可以后续召回的地方，最常见的是卸载到文件系统。 |
+| **Isolate ( 隔离 )** | Isolate 指的是在 multi-agent 架构中将 context 拆分开来，从而避免不同类型信息相互干扰。 |
+| **Reduce ( 压缩 )** | Reduce 指的是通过摘要（ summarization ）、裁剪（ pruning ）等方法来减少 context 所包含的内容。 |
+| **Retrieve ( 检索 )** | Retrieve 指的是从外部资源检索与当前任务相关的信息，然后把这些检索到的内容加入到 context window 或是做 indexing，并选择合适的加入 memory。 |
+| **Cache ( 缓存 )** | Cache 指的是把模型已经计算过的结果临时存储，下次遇到相同或相似请求时可以直接复用，主要用于降低成本。 |
+
+### 上下文规划(Context Plan)
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301645121.png)
+
+Manus 在官方发布的《AI 代理的 context 工程：构建 Manus 的经验教训》中表示 Manus 中的一个典型任务平均需要大约 50 次工具调用。这是一个很长的循环。Agent 一开始智能地思考、搜索、写代码、调工具，但随着运行时上下文的累积，逐渐迷失方向，最终Agent 就忘了自己要做什么。所以 hostagent 参考 Manus 也带有一个内置规划工具，同时也类似于 ClaudeCode 的 TodoWrite 工具。这个工具实际上不做任何事情 -- 它只是一种让Agent 不停地写自己的 todo，然后将todo的返回值放到 context 的末尾以提醒 Agent 当下的进度与状态。
 
 这确保了 LLM 始终按计划进行（它被频繁地提示参考 todo ），同时赋予模型在实施过程中进行中途调整的灵活性。因为 todo 是Agent 自己维护的，Agent 能够动态地拒绝或添加新的todo。
 
-### 上下文工程之 Context Offloading
+### 上下文卸载(Context Offload)
 
-**Context Offloading 即将信息存储到上下文窗口外部，按需检索** 关键机制：
+**Context Offloading 即将信息存储到上下文窗口外部，按需检索**： ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301215626.png)
 
 - 信息存储在 **State 对象模拟的文件系统**中
 - 通过**工具调用**按需读取
@@ -402,10 +380,6 @@ state = {
 
 ```
 
-**Token 使用**: ~50,000 tokens (10 轮) **风险**: 高 Context Rot
-
----
-
 ##### ✅ **使用 Offloading（信息存储在 State 中）**
 
 ```python
@@ -447,29 +421,54 @@ state["messages"].extend([
 # 3. 避免 Context Rot：信息不会被埋在深层
 ```
 
-**Token 使用**: ~5,500 tokens (10 轮，仅 2 次读取) **节省**: 89% **风险**: 低 Context Rot
+### 上下文隔离(Context Isolate)
 
-### 上下文工程之 Context Quarantine
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301622476.png)
 
-**Context Quarantine 即将不同子任务隔离到独立的上下文窗口中** 通过创建子智能体，每个智能体都可以拥有自己独立的上下文窗口，避免：
+**Context Isolate 即将不同子任务隔离到独立的上下文窗口中** 通过创建子智能体，每个智能体都可以拥有自己独立的上下文窗口，避免：
 
 1. **Context Clash**: 不同子任务的信息冲突
 2. **Context Distraction**: 单一上下文过长导致注意力分散
 
 基于 Claude Code 的实践，hostagent 可以访问一个 `general-purpose` 子智能体 -- 这是一个与主智能体具有相同指令和所有工具访问权限的子智能体。对于搜索-生成-验证也都可以创建自己的子智能体
 
-### 上下文工程之 Tool Loadout
+### 上下文检索
 
-### 上下文工程之 Context Pruning
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301305724.png)
+
+#### 数据按需召回(RAG)
+
+Retrieval 的出现时间早于 Context Engineering，最早以`RAG`(Retrieval Augmented Generation) 的技术为人们所知。即从外部资源（比如知识库、历史对话、文档、工具输出等）检索与当前任务相关的信息，然后把这些检索到的内容加入到模型的 Context 中，来辅助模型生成更准确、可靠的输出。
+
+RAG 就是一种传统检索方法，用经典的向量检索或语义检索。用我们常用的 Cursor 举例子。Cursor 会把代码拆分成独立的代码块，并为这些代码块生成向量嵌入（embedding），然后利用语义相似性向量搜索来完成检索。同时 Cursor 也会结合传统的 grep 搜索，甚至构建知识图谱，最后将所有检索结果统一排序和整合，在用户使用过程中不断召回问题相关的上下文给模型。
+
+值得一提的是，grep 全称为 global regular expression print ，本身是 unix 工具，是一种基于正则或字符串匹配的文本搜索方法。相对来说是比较简单的检索方式。但是负责 Claude code 的 Boris Cherny 就表示 Claude Code 完全没有做任何索引，只依靠生成式检索。而我们也知道 Claude Code 的实际运行效果也是相当好的。这也引入了另一个概念-- Agentic Search -- 虽然是简单的工具，但是模型足够只能，模型自己可以进行 Agentic 智能地搜索，反而能获得比人类提前索引数据更好的效果。
+
+Latent Space 主持人 Shawn Wang 认为简单的方法往往已经能够解决 80% 的问题，而复杂的索引和多步骤检索可能只在少数追求极高精度的场景下才是真正必要的。
+
+#### 工具按需挑选(Tool Loadout)
+
+相比 RAG，目前还没有受到足够重视的是Agent 运行过程中对工具的按需挑选。现在的Agent 基本是静态创建好的，Agent 运行前就知道拥有哪些工具（包括MCP 中的工具）。在领域边界足够清晰、任务足够聚焦的情况下，这是没有问题的，不过随着对 Agent 能力的期望越来越高，Agent 预加载的工具也会越来越多，此时就会出现：
+
+- 执行鲁棒性问题
+- 多轮一致性问题
+- 上下文过载
+- token 浪费
+
+### 上下文压缩(Context Reduce)
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301257435.png)
+
+#### 上下文剪裁(Context Pruning)
 
 **Context Pruning即 主动删除无关信息，只保留与查询相关的内容** 与 RAG 的区别：
 
 - **RAG**: 检索前过滤（选择性添加）
 - **Pruning**: 检索后过滤（主动删除）
 
-#### 场景：用户询问 "reward hacking 的类型有哪些？"
+##### 场景：用户询问 "reward hacking 的类型有哪些？"
 
-##### ❌ **没有 Pruning（直接使用检索结果）**
+###### ❌ **没有 Pruning（直接使用检索结果）**
 
 ```python
 # 检索到的文档块（未修剪）
@@ -518,15 +517,7 @@ state = {
 	# 4. 可能导致 Context Distraction
 ```
 
-**Token 使用**: ~3,000 tokens
-
-**相关度**: 20%
-
-**风险**: Context Distraction
-
----
-
-##### ✅ **使用 Pruning**
+###### ✅ **使用 Pruning**
 
 ```python
 
@@ -583,11 +574,9 @@ state = {
 
 ```
 
-**Token 使用**: ~600 tokens (节省 80%) **相关度**: 100% **风险**: 低 Context Distraction
+#### 上下文总结(Context Summarization)
 
-#### 上下文工程之 Context Summarization
-
-**Context Summarization 即将累积的上下文压缩成简洁摘要**
+**Context Summarization 即将累积的上下文总结成简洁摘要**
 
 与 Pruning 的区别：
 
@@ -596,7 +585,17 @@ state = {
 
 据说 Claude Code 做了大量 AB 实验，在 94% 的时候会自动触发压缩 context。
 
-### RAG 、Pruning 和 Summarization 应该选哪个？
+### 上下文缓存(Context Cache)
+
+这个是Manus 首先提出的上下文工程技术。Manus 在官方发布的《AI 代理的 context 工程：构建 Manus 的经验教训》中表示：
+
+> 如果我必须选择一个指标，我认为 KV-cache 命中率是生产阶段 AI 代理最重要的单一指标。它直接影响延迟和成本。为了理解原因，让我们看看典型代理是如何运作的：在接收用户输入后，代理通过一系列工具使用链来完成任务。在每次迭代中，模型根据当前上下文从预定义的动作空间中选择一个动作。然后在环境中执行该动作（例如，Manus 的虚拟机沙盒）以产生观察结果。动作和观察结果被附加到上下文中，形成下一次迭代的输入。这个循环持续进行，直到任务完成...例如在 Manus 中，平均输入与输出的 token 比例约为 100:1。幸运的是，具有相同前缀的上下文可以利用 KV 缓存，这大大减少了首个 token 的生成时间（TTFT）和推理成本——无论你是使用自托管模型还是调用推理 API。我们说的不是小幅度的节省：例如使用 Claude Sonnet 时，缓存的输入 token 成本为 0.30 美元/百万 token，而未缓存的成本为 3 美元/百万 token——相差 10 倍。
+
+注意上下文缓存对于提高模型的响应延迟和节省token 花费很重要。不过缓存的细节在不同的LLM 供应商那里可能不太一样。
+
+### 讨论
+
+#### RAG 、Pruning 和 Summarization 应该选哪个？
 
 | 技术              | 操作         | 输出         | 适用场景     |
 | ----------------- | ------------ | ------------ | ------------ |
@@ -604,38 +603,32 @@ state = {
 | **Pruning**       | 删除无关部分 | 精简原始内容 | 检索结果冗余 |
 | **Summarization** | 压缩所有内容 | 新生成的摘要 | 长对话历史   |
 
+## OneAgent 的工具
+
+对于用户来说，决定Agent 本身效果的其实只有两个东西--写了什么 Prompt,以及用了什么工具。不管上下文工程做的有多好，模型没有对应工具的获取与处理信息，等于厨师没有锅碗瓢盆。在早期，扩大Agent 的工具供给，尤其是接入MCP 市场效果能提升较快。
+
 ### 内置工具
 
-hostagent 有5个基础内置工具：
+6 个基础内置工具：
 
 - `write_todos`：用于编写待办事项的工具
 - `write_file`：用于在虚拟文件系统中写入文件的工具
 - `read_file`：用于从虚拟文件系统中读取文件的工具
 - `ls`：用于列出虚拟文件系统中文件的工具
 - `edit_file`：用于编辑虚拟文件系统中文件的工具
+- `task`：用于 hostagent 向 subagent 派发任务
 
-但基础的工具箱其实可以有更多，这些工具通过参数可选是否开启或者自己传入。相比Claude Code，内置的 工具还非常的初级。Claude Code 同时拥有底层工具（Bash、Read、Write）、中层工具（Edit、Grep、Glob）和高级工具（Task、WebFetch、ExitPlanMode）。CC 可以使用 Bash，那么为什么还要单独提供一个 Grep 工具呢？权衡在于我们期望Agent 使用该工具的频率与代理使用该工具的准确性。CC 使用 Grep 和 Glob 的频率非常高，因此将它们作为单独的工具是合理的，但同时，它也可以针对特殊场景编写通用的 Bash 命令。同理对于 WebSearch也一样，我们通常不会让 Agent 单纯靠 playwright 这种工具自己访问浏览器。
+但基础的工具箱其实可以有更多，这些工具通过参数可选是否开启或者自己传入。相比Claude Code，内置的工具还非常的初级。Claude Code 同时拥有底层工具（Bash、Read、Write）、中层工具（Edit、Grep、Glob）和高级工具（Task、WebFetch、ExitPlanMode）。CC 可以使用 Bash，那么为什么还要单独提供一个 Grep 工具呢？ [权衡](https://minusx.ai/blog/decoding-claude-code/#appendix)在于我们期望Agent 使用该工具的频率与代理使用该工具的准确性。CC 使用 Grep 和 Glob 的频率非常高，因此将它们作为单独的工具是合理的，但同时，它也可以针对特殊场景编写通用的 Bash 命令。同理对于 WebSearch也一样，我们通常不会让 Agent 单纯靠 playwright 这种工具自己访问浏览器。
 
-- [Task](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Bash](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Glob](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Grep](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [LS](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [ExitPlanMode](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Read](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Edit](https://minusx.ai/blog/decoding-claude-code/#)
-- [MultiEdit](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [Write](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [NotebookEdit](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [WebFetch](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [TodoWrite](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [WebSearch](https://minusx.ai/blog/decoding-claude-code/#appendix)
-- [mcp**ide**getDiagnostics](https://minusx.ai/blog/decoding-claude-code/#)
-- [mcp**ide**executeCode](https://minusx.ai/blog/decoding-claude-code/#)
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301657179.png)
 
-#### MCP
+### 领域工具
 
-通过使用 [Langchain MCP Adapter 库](https://github.com/langchain-ai/langchain-mcp-adapters) 可以将 MCP 工具当做正常的 tool 来使用。
+传统开发利用微服务解耦不同领域业务之间的服务，Agent 时代则是基于MCP的完成模型对于不同领域微服务的调用。技术上通过使用 [Langchain MCP Adapter 库](https://github.com/langchain-ai/langchain-mcp-adapters) 可以将 MCP 工具当做正常的 tool 来使用。
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301743517.png)
+
+之前在 [[如何快速创建领域Agent - OneAgent + MCPs 范式]] 我详细介绍过 MCP 围绕着MCP 架构的组成，这里不再赘述。
 
 ## 派生领域 Agent
 
@@ -727,10 +720,6 @@ agent = create_host_agent(
 ```
 
 使用 `create_host_agent` 创建的智能体只是一个 LangGraph 图 - 因此你可以像与任何 LangGraph 智能体交互一样与它交互（流式传输、 Human-in-the-loop）。
-
-# Agent 时代基于MCP的微服务调用
-
-[[如何快速创建领域Agent - OneAgent + MCPs 范式]]
 
 # 附录
 
