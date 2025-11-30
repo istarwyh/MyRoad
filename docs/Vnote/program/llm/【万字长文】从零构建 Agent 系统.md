@@ -4,6 +4,33 @@
 
 OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文结合此前的分享，做一个综述。
 
+# 目录
+
+- [OneAgent 概览](#oneagent-概览)
+  - [OneAgent 是一个 Loop](#oneagent-是一个-loop)
+  - [OneAgent 执行流程](#oneagent-执行流程)
+  - [OneAgent 应用架构](#oneagent-应用架构)
+- [OneAgent 详细实现](#oneagent-详细实现)
+  - [ReAct 范式实现](#react-范式实现)
+    - [核心代码](#核心代码)
+    - [工具调用机制](#工具调用机制)
+    - [HTML 输出与工具调用](#html-输出与工具调用)
+  - [System Prompt 设计](#system-prompt-设计)
+  - [上下文工程](#上下文工程)
+    - [上下文规划 (Context Plan)](#上下文规划context-plan)
+    - [上下文卸载 (Context Offload)](#上下文卸载context-offload)
+    - [上下文隔离 (Context Isolate)](#上下文隔离context-isolate)
+    - [上下文检索 (Context Retrieve)](#上下文检索context-retrieve)
+    - [上下文压缩 (Context Reduce)](#上下文压缩context-reduce)
+    - [上下文缓存 (Context Cache)](#上下文缓存context-cache)
+    - [技术选型讨论](#技术选型讨论)
+  - [工具体系](#工具体系)
+    - [内置工具](#内置工具)
+    - [领域工具与 MCP](#领域工具与-mcp)
+  - [领域 Agent 派生](#领域-agent-派生)
+- [总结](#总结)
+- [附录](#附录)
+
 # OneAgent 概览
 
 ## OneAgent 是一个 Loop
@@ -58,11 +85,13 @@ style Tool4 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 
 在系统中为了区分主子Agent，OneAgent 会称呼为 hostagent 和 subagent。
 
-## OneAgent 执行流程与 Claude Code 一致
+## OneAgent 执行流程
 
 ![](https://minusx.ai/images/claude-code/control_loop.gif)
 
-## 一个经典的 OneAgent 应用架构
+OneAgent 的执行流程与 Claude Code 保持一致，采用经典的 ReAct 循环模式。
+
+## OneAgent 应用架构
 
 相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202510191740337.png) 更多信息在 [[如何打造可靠的Agent系统]] 中详细介绍过，这里不再赘述。下面介绍即Domain Service 层经典的Agent Builder -- OneAgent 具体如何实现。
 
@@ -70,9 +99,9 @@ style Tool4 fill:#e0f2f1,stroke:#555,stroke-width:2px,rx:8,ry:8
 
 OneAgent 的技术栈是Python + LangChain + LangGraph, 实际构建过程中从 [deepagents](https://github.com/langchain-ai/deepagents) 项目受益良多。
 
-## OneAgent 的 ReAct 如何实现？
+## ReAct 范式实现
 
-### 几行代码
+### 核心代码
 
 其实就是下面的伪代码：
 
@@ -131,7 +160,7 @@ app = workflow.compile()
 
 不过LangGraph 已经有实现好的 create_react_agent,我们直接用即可。
 
-### 工具调用细节
+### 工具调用机制
 
 #### 实际上发给 OpenAI 的请求长什么样？
 
@@ -181,9 +210,9 @@ app = workflow.compile()
 }
 ```
 
-### 如果要模型输出HTML 还能思考吗？
+### HTML 输出与工具调用
 
-蚂蚁的灵光率先开启了模型直接输出 HTML 或者 JS 和用户交互的范式，那么当我们要求 React Agent必须使用HTML 和用户交互时，模型还能进行正常的工具调用吗？ 因为直觉上，用于 Function Call 的参数不可能是 HTML。答案是没问题。如前所述，模型输出有两个独立的通道：
+蚂蚁的灵光率先开启了模型直接输出 HTML 或者 JS 和用户交互的范式，那么当我们要求 ReAct Agent 必须使用 HTML 和用户交互时，模型还能进行正常的工具调用吗？因为直觉上，用于 Function Call 的参数不可能是 HTML。答案是没问题。如前所述，模型输出有两个独立的通道：
 
 1. **Tool Calls 通道**：当模型决定调用工具时，它填充的是 `tool_calls` 字段，`content` 字段通常为空（或包含简短的思考）。
 2. **Content 通道**：当模型决定**不**调用工具，或者已经拿到了工具结果准备回答用户时，它填充的是 `content` 字段。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301824756.png)
@@ -269,9 +298,9 @@ graph TD
     linkStyle 6,7 stroke:#2e7d32,stroke-width:2px,fill:none;
 ```
 
-## OneAgent 的 System Prompt
+## System Prompt 设计
 
-OneAgent 的 System Prompt 几乎完全来自于 Claude Code,之所以不是全部，因为 Claude Code 拥有完整的文件系统，需要大幅度删减。即使在prompt 技巧普及化的今天（比如pricinple、 COT、few-shot 之类的技巧），Claude Code的提示词依然有很多值得学习的地方，
+OneAgent 的 System Prompt 几乎完全来自于 Claude Code，之所以不是全部，因为 Claude Code 拥有完整的文件系统，需要大幅度删减。即使在 prompt 技巧普及化的今天（比如 principle、COT、few-shot 之类的技巧），Claude Code 的提示词依然有很多值得学习的地方：
 
 1. Claude Code 综合使用 XML 标签和 Markdown 构建 prompt ，用 XML 作为单模块区分，用 markdown 做层次和目录区分。Markdown 标题示例包括：
 
@@ -306,7 +335,7 @@ cd /foo/bar && pytest tests
 
 系统提示词还包含关于如何使用内置规划工具、文件系统工具和子智能体的详细说明，详见附录。
 
-## OneAgent 的上下文工程
+## 上下文工程
 
 基于LangGraph, 基础的 ReAct Agent 实现已经相当简单，但在实际运行中，由海量工具调用和 long horizon reasoning 产生的冗长上下文--可能多达数十万 token，正如Chroma 在 7 月发布的报告 [Context Rot: How Increasing Input Tokens Impacts LLM Performance](https://research.trychroma.com/context-rot) 显示，随着 context 长度增加，模型的注意力会分散，推理能力也会随之下降, 直到模型失能变得不断重复或者幻觉频出。
 
@@ -432,7 +461,7 @@ state["messages"].extend([
 
 基于 Claude Code 的实践，hostagent 可以访问一个 `general-purpose` 子智能体 -- 这是一个与主智能体具有相同指令和所有工具访问权限的子智能体。对于搜索-生成-验证也都可以创建自己的子智能体
 
-### 上下文检索
+### 上下文检索 (Context Retrieve)
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301305724.png)
 
@@ -442,9 +471,7 @@ Retrieval 的出现时间早于 Context Engineering，最早以`RAG`(Retrieval A
 
 RAG 就是一种传统检索方法，用经典的向量检索或语义检索。用我们常用的 Cursor 举例子。Cursor 会把代码拆分成独立的代码块，并为这些代码块生成向量嵌入（embedding），然后利用语义相似性向量搜索来完成检索。同时 Cursor 也会结合传统的 grep 搜索，甚至构建知识图谱，最后将所有检索结果统一排序和整合，在用户使用过程中不断召回问题相关的上下文给模型。
 
-值得一提的是，grep 全称为 global regular expression print ，本身是 unix 工具，是一种基于正则或字符串匹配的文本搜索方法。相对来说是比较简单的检索方式。但是负责 Claude code 的 Boris Cherny 就表示 Claude Code 完全没有做任何索引，只依靠生成式检索。而我们也知道 Claude Code 的实际运行效果也是相当好的。这也引入了另一个概念-- Agentic Search -- 虽然是简单的工具，但是模型足够只能，模型自己可以进行 Agentic 智能地搜索，反而能获得比人类提前索引数据更好的效果。
-
-Latent Space 主持人 Shawn Wang 认为简单的方法往往已经能够解决 80% 的问题，而复杂的索引和多步骤检索可能只在少数追求极高精度的场景下才是真正必要的。
+值得一提的是，grep 全称为 global regular expression print ，本身是 unix 工具，是一种基于正则或字符串匹配的文本搜索方法。相对来说是比较简单的检索方式。但是负责 Claude code 的 Boris Cherny 就表示 Claude Code 完全没有做任何索引，只依靠生成式检索。而我们也知道 Claude Code 的实际运行效果也是相当好的。这也引入了另一个概念-- Agentic Search -- 虽然是简单的工具，但是模型足够智能能，模型自己可以进行 Agentic 智能地搜索，反而能获得比人类提前索引数据更好的效果。
 
 #### 工具按需挑选(Tool Loadout)
 
@@ -593,9 +620,9 @@ state = {
 
 注意上下文缓存对于提高模型的响应延迟和节省token 花费很重要。不过缓存的细节在不同的LLM 供应商那里可能不太一样。
 
-### 讨论
+### 技术选型讨论
 
-#### RAG 、Pruning 和 Summarization 应该选哪个？
+#### RAG、Pruning 和 Summarization 应该选哪个？
 
 | 技术              | 操作         | 输出         | 适用场景     |
 | ----------------- | ------------ | ------------ | ------------ |
@@ -603,7 +630,7 @@ state = {
 | **Pruning**       | 删除无关部分 | 精简原始内容 | 检索结果冗余 |
 | **Summarization** | 压缩所有内容 | 新生成的摘要 | 长对话历史   |
 
-## OneAgent 的工具
+## 工具体系
 
 对于用户来说，决定Agent 本身效果的其实只有两个东西--写了什么 Prompt,以及用了什么工具。不管上下文工程做的有多好，模型没有对应工具的获取与处理信息，等于厨师没有锅碗瓢盆。在早期，扩大Agent 的工具供给，尤其是接入MCP 市场效果能提升较快。
 
@@ -622,7 +649,7 @@ state = {
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301657179.png)
 
-### 领域工具
+### 领域工具与 MCP
 
 传统开发利用微服务解耦不同领域业务之间的服务，Agent 时代则是基于MCP的完成模型对于不同领域微服务的调用。技术上通过使用 [Langchain MCP Adapter 库](https://github.com/langchain-ai/langchain-mcp-adapters) 可以将 MCP 工具当做正常的 tool 来使用。
 
@@ -630,7 +657,7 @@ state = {
 
 之前在 [[如何快速创建领域Agent - OneAgent + MCPs 范式]] 我详细介绍过 MCP 围绕着MCP 架构的组成，这里不再赘述。
 
-## 派生领域 Agent
+## 领域 Agent 派生
 
 你可以向 `create_host_agent` 传递三个参数来创建自己的领域Agent。
 
