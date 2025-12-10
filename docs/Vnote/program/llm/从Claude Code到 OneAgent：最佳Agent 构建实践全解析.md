@@ -408,6 +408,8 @@ state["messages"].extend([
 # 3. 避免 Context Rot：信息不会被埋在深层
 ```
 
+事实上文件系统几乎是 Agent 成立最重要的条件之一，不单单因为文件系统某种程度上几乎给了模型无限的上下文窗口，更在于hostAgent 和 subAgent 之间的交流也完全依赖于文件系统--只需要互相传递路径即可。
+
 ### 上下文隔离(Context Isolate)
 
 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202511301622476.png)
@@ -427,7 +429,7 @@ state["messages"].extend([
 
 Retrieval 的出现时间早于 Context Engineering，最早以`RAG`(Retrieval Augmented Generation) 的技术为人们所知。即从外部资源（比如知识库、历史对话、文档、工具输出等）检索与当前任务相关的信息，然后把这些检索到的内容加入到模型的 Context 中，来辅助模型生成更准确、可靠的输出。
 
-RAG 就是一种传统检索方法，用经典的向量检索或语义检索。用我们常用的 Cursor 举例子。Cursor 会把代码拆分成独立的代码块，并为这些代码块生成向量嵌入（embedding），然后利用语义相似性向量搜索来完成检索。同时 Cursor 也会结合传统的 grep 搜索，甚至构建知识图谱，最后将所有检索结果统一排序和整合，在用户使用过程中不断召回问题相关的上下文给模型。
+RAG 就是一种传统检索方法，用经典的向量检索或语义检索。用我们常用的 Cursor 举例子。Cursor 会把代码拆分成独立的代码块，并为这些代码块生成向量嵌入（embedding），然后利用语义相似性向量搜索来完成检索。同时 Cursor 也会结合传统的 grep 搜索，甚至构建知识图谱，最后将所有检索结果统一排序和整合，在用户使用过程中不断召回问题相关的上下文给模型。Memory（记忆） 其实是对历史会话记录或者说沉淀的档案身份信息的RAG。
 
 值得一提的是，grep 全称为 global regular expression print ，本身是 unix 工具，是一种基于正则或字符串匹配的文本搜索方法。相对来说是比较简单的检索方式。但是负责 Claude code 的 Boris Cherny 就表示 Claude Code 完全没有做任何索引，只依靠生成式检索。而我们也知道 Claude Code 的实际运行效果也是相当好的。这也引入了另一个概念-- Agentic Search -- 虽然是简单的工具，但是模型足够智能能，模型自己可以进行 Agentic 智能地搜索，反而能获得比人类提前索引数据更好的效果。
 
