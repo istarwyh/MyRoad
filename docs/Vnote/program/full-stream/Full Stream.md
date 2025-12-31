@@ -132,16 +132,18 @@ Describe or include the test cases the method needs to pass.
 
 [用 LLM 构建企业专属的用户助手](https://mp.weixin.qq.com/s/bpeszhmyMC_aRHt1fb0NLA)
 
-- 本地LLM:https://jan.ai/ 、 ollma
+- 本地LLM:https://jan.ai/ 、 ollama
 - API:
   - https://api.zetatechs.com/
   - https://www.closeai-asia.com/
 - AI加持的terminal: warp
 - RPA：LaVague
+- 前端组件：https://21st.dev/community/components
 
 ### Ask
 
-什么 AI 网站都可以： https://devv.ai https://www.phind.com/ https://copilot.microsoft.com/
+什么 AI 网站都可以：
+https://devv.ai https://www.phind.com/ https://copilot.microsoft.com/
 
 ### IDE
 
@@ -152,7 +154,7 @@ Describe or include the test cases the method needs to pass.
 - 基于JVM做各种事：Arthas
 - 本地调用接口
 - 本地发送消息
-- 本地Debug 远程
+- 本地Debug 远程 [[JAR 调试指南]]
 
 ### Framework
 

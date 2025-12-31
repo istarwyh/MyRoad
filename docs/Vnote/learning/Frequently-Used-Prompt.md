@@ -5,7 +5,7 @@
 - [[CO-STAR Prompt Template]]
 - AIGC 图片收集工具链接：https://www.picwell.art/ai
 - Prompt 聚合层:https://github.com/danielmiessler/fabric
-
+- image prompt:https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts/blob/main/README_zh.md
 ## 稳定输出
 
 - 角色指定
