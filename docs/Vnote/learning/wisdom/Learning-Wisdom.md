@@ -1,8 +1,6 @@
-#wisdom 
+#wisdom
 
-Creativity is mostly copying. [[Absent-Minded Learning Yields No Gain]].
-Achieving an 85% success rate appears to be the optimal condition for efficient learning, both in humans and machines.
--- ScottYoung/《打开心智》
+Creativity is mostly copying. [[Absent-Minded Learning Yields No Gain]]. Achieving an 85% success rate appears to be the optimal condition for efficient learning, both in humans and machines. -- ScottYoung/《打开心智》
 
 人类几万年的进化，在基因中产生了一条新的心智模型：大脑既喜欢稳定又需要新鲜刺激。--《打开心智》
 
@@ -25,3 +23,5 @@ I cannot use a theorem other people proved. I have to understand every nut and b
 人类是工具的制造者，我们制造的工具可以极大地放大我们与生俱来的能力。--乔布斯
 
 哀莫大于心死，而身死次之。古典诗词中凝聚了古代伟大之诗人的所有心灵、智慧、品格、襟抱和修养。诵读古典诗词，可以让你的心灵不死。--叶嘉莹
+
+科学史、技术史关心的是人类认知的进化过程。人类原始的认知当然是出于直觉，然后因为一些机缘巧合，逐渐发现不对，有一些现象无法解释，有一些问题无法解决，于是提出新假设、摸索新理论……如此不断迭代，才到达今天。 --《余晟以为》
