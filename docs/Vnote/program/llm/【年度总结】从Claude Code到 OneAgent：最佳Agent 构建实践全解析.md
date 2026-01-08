@@ -2,43 +2,18 @@
 
 今年 5 月份我们提出了受 Manus 和 Claude Code 启发的 [[如何快速创建领域Agent - OneAgent + MCPs 范式|OneAgent +MCPs]] 范式。这个范式也被评为了阿里& 蚂蚁 Top10 最佳 Agent 实践。
 
-OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文结合此前的分享，做一个综述。
+OneAgent 的 One 指统一和复用，OneAgent 指的是强大的、方便复用的 基础Agent，基于 OneAgent 可以派生出其他各领域 Agent 以及子 Agent。OneAgent 基于LangGraph 与 Claude Code架构思想实现，涵盖Agent 构建、服务部署和MCP 微服务调用等模块，本文是从 Claude Code 出发构建与应用生产级 Agent 系统的第5篇，前4篇可见：
 
-# 目录
+1. [[【万字长文】 最强 AI Coding：Claude Code 最佳实践]]
+2. [[如何打造可靠的Agent系统]]
+3. [[领域 Agent 如何像 Manus 交付业务需求]]
+4. [[如何让 AI Agent 实时个性化可视交互]]
 
-- [OneAgent 概览](#oneagent-概览)
-  - [OneAgent 是一个 Loop](#oneagent-是一个-loop)
-  - [OneAgent 执行流程](#oneagent-执行流程)
-  - [OneAgent 应用架构](#oneagent-应用架构)
-- [OneAgent 详细实现](#oneagent-详细实现)
-  - [ReAct 范式实现](#react-范式实现)
-    - [核心代码](#核心代码)
-    - [工具调用机制](#工具调用机制)
-    - [HTML 输出与工具调用](#html-输出与工具调用)
-  - [System Prompt 设计](#system-prompt-设计)
-  - [上下文工程](#上下文工程)
-    - [上下文规划 (Context Plan)](#上下文规划context-plan)
-    - [上下文卸载 (Context Offload)](#上下文卸载context-offload)
-    - [上下文隔离 (Context Isolate)](#上下文隔离context-isolate)
-    - [上下文检索 (Context Retrieve)](#上下文检索context-retrieve)
-    - [上下文压缩 (Context Reduce)](#上下文压缩context-reduce)
-    - [上下文缓存 (Context Cache)](#上下文缓存context-cache)
-    - [技术选型讨论](#技术选型讨论)
-  - [工具体系](#工具体系)
-    - [内置工具](#内置工具)
-    - [领域工具与 MCP](#领域工具与-mcp)
-  - [领域 Agent 派生](#领域-agent-派生)
-- [总结](#总结)
-- [附录](#附录)
-
-# OneAgent 概览
-
-## OneAgent 在 Loop 中串联工具和 SubAgent
+## 简单而不脆弱的 Loop
 
 OneAgent 本质上是在 Loop（循环）中使用工具的模型。这种架构是表面上很好理解的，但不免让人质疑，仅仅是Loop 可以在更长、更复杂的任务中进行规划和行动吗？不过像 Manus 和 Claude Code 这种强大的 Agent 都是以主 Loop 为主的架构，他们是怎么解决这个问题的呢？首先得说明，Loop 之所以如此有用本质上靠的是模型的 Agentic 能力，也就是预训练时对于模型在 Loop 反复执行工具调用的训练。其次我认为他们主要通过出色的上下文工程，更明确的说是四个要素的组合来释放模型的潜力：
 
 - **规划工具** (write_todos)
--
 - **子智能体** (通过 task 方法转交)
 - 访问（虚拟）**文件系统** （ls 、 read_file 、 write_file、edit_file等)
 - 几万字token的**精心调教的Prompt**
@@ -51,11 +26,15 @@ OneAgent 本质上是在 Loop（循环）中使用工具的模型。这种架构
 
 ## OneAgent 应用架构
 
-相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。 ![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202510191740337.png) 更多信息在 [[如何打造可靠的Agent系统]] 中详细介绍过，这里不再赘述。下面介绍即Domain Service 层经典的Agent Builder -- OneAgent 具体如何实现。
+相比于Claude Code, 这里介绍的 OneAgent系统更多的面向Web端设计。OneAgent 主体是一个ReAct 或者说 Loop 范式的Agent，同时也可以借由意图识别支持 Workflow 的Agent，只不过在实践中，我们更多地使用方便的 ReAct 范式的 Agent。
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202512201651524.png)
+
+更多信息在 [[如何打造可靠的Agent系统]] 中详细介绍过，这里不再赘述。下面介绍即Domain Service 层经典的Agent Builder -- OneAgent 具体如何实现。
 
 # OneAgent 详细实现
 
-OneAgent 的技术栈是Python + LangChain + LangGraph, 实际构建过程中从 [deepagents](https://github.com/langchain-ai/deepagents) 项目受益良多。
+OneAgent 的技术栈是 Python + LangChain + LangGraph, 实际构建过程中从 [deepagents](https://github.com/langchain-ai/deepagents) 项目受益良多。
 
 ## ReAct 范式实现
 
@@ -419,7 +398,7 @@ state["messages"].extend([
 1. **Context Clash**: 不同子任务的信息冲突
 2. **Context Distraction**: 单一上下文过长导致注意力分散
 
-基于 Claude Code 的实践，hostagent 可以访问一个 `general-purpose` 子智能体 -- 这是一个与主智能体具有相同指令和所有工具访问权限的子智能体。对于搜索-生成-验证也都可以创建自己的子智能体
+基于 Claude Code 的实践，hostagent 可以访问一个 `general-purpose` 子智能体 -- 这是一个与主智能体具有相同指令和所有工具访问权限的子智能体。对于搜索-生成-验证也都可以创建自己的子智能体。隔离的实现除了subAgent,还包括资源隔离、模型调用方法隔离等。
 
 ### 上下文检索 (Context Retrieve)
 
@@ -580,7 +559,62 @@ state = {
 
 注意上下文缓存对于提高模型的响应延迟和节省token 花费很重要。不过缓存的细节在不同的LLM 供应商那里可能不太一样。
 
-### 技术选型讨论
+### 如何应用？
+
+LangGraph 为上下文工程提供了一系列装饰器和中间件(Middleware,这个名字容易和后端的中间件混淆...) Decorators/Hooks 提供技术层面的切面编程（AOP）能力，决定逻辑在生命周期的哪个具体节点执行; Middleware 则将通用的策略打包成可复用的组件，底层也是装饰器是一套代码。上面介绍的上下文工程基于都有对应实现。
+
+| **生命周期节点** | **装饰器 Trigger** | **执行的中间件 (Middleware)** | **实现的上下文策略 (Strategy)** |
+| --- | --- | --- | --- |
+| **构建 Prompt** | `@dynamic_prompt` | `TodoListMiddleware` | **Plan** (注入当前进度) |
+| **启动前** | `@before_agent` | `FilesystemFileSearchMiddleware` | **Retrieve** (加载背景知识) |
+| **调用 LLM 前** | `@before_model` | `SummarizationMiddleware` | **Reduce** (检查并压缩历史) |
+| **调用 LLM 中** | `@wrap_model_call` | `PIIMiddleware`, `ModelFallback` | **Isolate** (脱敏), **Cache** (复用) |
+| **调用工具中** | `@wrap_tool_call` | `HumanInTheLoop`, `ToolRetry` | **Safety**, **Robustness** |
+| **工具返回后** | `@wrap_tool_call` (后处理) | `ContextEditingMiddleware` | **Offload** (大结果转存文件) |
+
+#### Plan
+
+- 对**应中间件**：
+  - `TodoListMiddleware`
+- **底层装饰器实现机制**：- **@dynamic_prompt (注入)**：这是 Plan 的核心。无论对话进行到哪一步，强制将当前的 `Todo List` 状态动态拼接到 System Prompt 的末尾，确保模型“看见”计划。- **@after_agent (更新)**：Agent 执行完一步后，分析结果并更新 Todo List 的状态（Pending -> Done）。代码示例：
+
+```python
+# 实现 "Plan" 策略
+@dynamic_prompt
+def inject_plan(state, config):
+    # TodoListMiddleware 的核心逻辑
+    current_plan = state.get("plan", [])
+    formatted_plan = "\n".join([f"- [{'x' if t['done'] else ' '}] {t['task']}" for t in current_plan])
+    return f"System: Always refer to the following plan:\n{formatted_plan}"
+```
+
+#### Reduce (裁剪、压缩) & Cache (缓存)
+
+- **对应中间件**：
+  - `SummarizationMiddleware` (用于压缩)
+  - `ContextEditingMiddleware` (用于修剪)
+  - (自定义) `CachingMiddleware` (用于缓存)
+- **底层装饰器实现机制**：
+  - **@before_model (检测)**：在调用 LLM 前检查当前的 Token 计数。
+    - **@after_model (执行)**：如果 Token 超限，触发摘要逻辑，替换 `messages` 列表。
+    - **@wrap_model_call (拦截)**：这是实现 Cache 的核心。在调用 LLM API 之前计算 Prompt 的 Hash，如有命中直接返回结果，不再调用模型。
+
+#### Offload (卸载)
+
+- **对应中间件**：
+  - (自定义) `OffloadMiddleware`
+- **底层装饰器实现机制**：
+  - **@wrap_tool_call (拦截与替换)**：这是 Offload 的主战场。监控工具的返回值，如果大小超过阈值（如 2KB），则写入文件，并篡改返回给 LLM 的内容。
+
+#### Retrieve (检索) & Isolate (隔离)
+
+- **对应中间件**：
+  - `FilesystemFileSearchMiddleware` (检索)
+  - `PIIMiddleware` (隔离/脱敏 - 识别敏感信息)
+  - `ModelCallLimitMiddleware` / `ToolCallLimitMiddleware` (隔离资源消耗)
+- **底层装饰器实现机制**：
+  - **@before_agent (准备)**：在 Agent 启动前，根据用户 Query 进行检索，将相关文档放入 State。
+  - **@wrap_model_call (安全围栏)**：配合 `PIIMiddleware`，在发送给 LLM 之前扫描 Prompt 中的信用卡号、手机号等并进行掩码处理（Redaction），实现数据隔离保护。
 
 #### RAG、Pruning 和 Summarization 应该选哪个？
 
@@ -1512,3 +1546,5 @@ Tool description: Execute python code in the Jupyter kernel for the current note
     has been restarted.
 Input schema: {'type': 'object', 'properties': {'code': {'type': 'string', 'description': 'The code to be executed on the kernel.'}}, 'required': ['code'], 'additionalProperties': False, '$schema': 'http://json-schema.org/draft-07/schema#'}
 </details>
+
+![](https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/image/202512202108624.jpg)
