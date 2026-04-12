@@ -1,5 +1,5 @@
-我是[晓灰](https://istarwyh.github.io/resume-it/)，一个[[Cyber Farmer|赛博农民]]。这也是我在阿里工作时的花名。
 
+我是[晓灰](https://istarwyh.github.io/resume-it/)，一个[[Cyber Farmer|赛博农民]]。这也是我从 2021 年北大毕业后，校招入职阿里，一直到蚂蚁作为 Agent 专家（P7）时的花名。
 ## 我做过什么
 
 ### 工作项目
@@ -12,8 +12,17 @@
 
 ### 开源项目
 
-- 一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 13000+下载
+- 2021 年毕业时开发了一个雅思写作助手 [WritingHelper](https://marketplace.visualstudio.com/items?itemName=istarwyh.writinghelper), 目前 15000+下载
+- 2025 年劳动节开发了一个帮助用户安装 MCP 的 MCP：[MCPAdvisor](https://github.com/istarwyh/mcpadvisor)，获得了2025 OceanBase AI 黑客松二等奖
 - [[JUnit5 & Mockito|Junit5]] 扩展 junit5-extension，解决 JSON 参数化测试和任意测试类加载等问题
+
+### 个人荣誉
+
+- 作为队长，带领团队（2 人）获得2025 OceanBase AI 黑客松二等奖
+- 作为队长，带领团队（4 人）获得 2025 蚂蚁集团黑客松三等奖
+- 获得首届阿里&蚂蚁 ATA 个人 Agent 最佳实践奖
+- 获得”2025 蚂蚁集团年度优秀创作者“ 称号
+- 获得财保技术部 ”AI 年度之星“ 称号
 
 ## 我能给您带来什么
 
@@ -31,6 +40,8 @@
 - E-Mail: talk@xiaohui.cool
 - Telegram: xiaohui
 - Discord: xiaohui_wang
+
+联系请备注来自博客，非常感谢！
 
 ## 关于版权
 
