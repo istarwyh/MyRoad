@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信公众号封面 - 从创意到代码</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* 微信公众号封面尺寸：900x383px (宽高比 2.35:1) */
+        .cover-container {
+            width: 900px;
+            height: 383px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* 赛博朋克网格背景 */
+        .grid-background {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+
+        /* 霓虹灯光晕效果 */
+        .glow-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .glow-1 {
+            width: 400px;
+            height: 400px;
+            background: #a855f7;
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            width: 300px;
+            height: 300px;
+            background: #22d3ee;
+            bottom: -80px;
+            right: -80px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        /* 内容容器 */
+        .content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding: 50px 60px;
+            gap: 40px;
+        }
+
+        /* 左侧：NotebookLM 查询 */
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .section-label {
+            color: #22d3ee;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+        }
+
+        .mockup-window {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .window-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .window-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .window-content {
+            color: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.6;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        .query-text {
+            color: #a855f7;
+            font-weight: 600;
+        }
+
+        .result-text {
+            color: #22d3ee;
+            margin-top: 8px;
+        }
+
+        /* 中间：箭头 */
+        .arrow-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow {
+            font-size: 48px;
+            color: #f59e0b;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* 右侧：生成的界面 */
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .result-mockup {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(34, 211, 238, 0.2));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+        }
+
+        .mockup-title {
+            color: #22d3ee;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.6),
+                         0 0 20px rgba(34, 211, 238, 0.4),
+                         0 0 30px rgba(34, 211, 238, 0.2);
+        }
+
+        .mockup-elements {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .element-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #a855f7, #22d3ee);
+            opacity: 0.8;
+        }
+
+        .bar-1 { width: 80%; }
+        .bar-2 { width: 60%; }
+        .bar-3 { width: 90%; }
+
+        /* 标题 */
+        .main-title {
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            right: 60px;
+            text-align: center;
+        }
+
+        .title-main {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #22d3ee, #a855f7, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .title-sub {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a855f7, #22d3ee);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-container">
+        <!-- 背景效果 -->
+        <div class="grid-background"></div>
+        <div class="glow-circle glow-1"></div>
+        <div class="glow-circle glow-2"></div>
+
+        <!-- 主标题 -->
+        <div class="main-title">
+            <div class="title-main">从创意到代码，AI设计不再千篇一律</div>
+            <div class="title-sub">Claude Code + NotebookLM + Gemini 完整工作流</div>
+        </div>
+
+        <!-- 内容区 -->
+        <div class="content">
+            <!-- 左侧：NotebookLM 查询 -->
+            <div class="left-section">
+                <div class="section-label">📚 NotebookLM 查询</div>
+                <div class="mockup-window">
+                    <div class="window-header">
+                        <div class="window-dot dot-red"></div>
+                        <div class="window-dot dot-yellow"></div>
+                        <div class="window-dot dot-green"></div>
+                    </div>
+                    <div class="window-content">
+                        <div class="query-text">&gt; 查询设计规范文档</div>
+                        <div class="result-text">✓ 品牌色: #2D3748<br>
+                        ✓ 字体: Space Grotesk<br>
+                        ✓ 风格: 赛博朋克</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中间：箭头 -->
+            <div class="arrow-section">
+                <div class="arrow">→</div>
+            </div>
+
+            <!-- 右侧：生成的界面 -->
+            <div class="right-section">
+                <div class="section-label">🎨 生成独特界面</div>
+                <div class="result-mockup">
+                    <div class="mockup-title">Cyberpunk Music Player</div>
+                    <div class="mockup-elements">
+                        <div class="element-bar bar-1"></div>
+                        <div class="element-bar bar-2"></div>
+                        <div class="element-bar bar-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo -->
+        <div class="logo">
+            <div class="logo-icon">AP</div>
+            <div class="logo-text">Agent-Plugins</div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center; color: #666; font-size: 14px;">
+        ⬆️ 截图此区域作为封面（900x383px）
+    </div>
+</body>
+</html>

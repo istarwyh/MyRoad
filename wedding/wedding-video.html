@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>婚礼开场视频</title>
+  <link rel="stylesheet" href="wedding-video.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 背景音乐 -->
+  <audio id="bgMusic" preload="auto">
+    <source src="https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E8%B5%B5%E5%92%8F%E5%8D%8E-%E6%9C%80%E6%B5%AA%E6%BC%AB%E7%9A%84%E4%BA%8B.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 用餐背景音乐播放器 -->
+  <audio id="dinnerMusic" preload="none"></audio>
+
+  <!-- 幻灯片容器 -->
+  <div id="slideshow" class="slideshow">
+
+    <!-- Slide 1: 开场标题 -->
+    <div class="slide" data-duration="8000">
+      <div class="slide-bg ken-burns-in" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E7%BB%93%E5%A9%9A%E7%85%A7-%E5%A5%BD%E7%9C%8B%E7%89%88.jpg')"></div>
+      <div class="slide-overlay overlay-dark"></div>
+      <div class="slide-content center-content">
+        <div class="ornament fade-in-up" style="animation-delay: 0.5s">❦</div>
+        <h1 class="title-main fade-in-up" style="animation-delay: 1s">王艺辉 & 陈黎君</h1>
+        <div class="divider fade-in-up" style="animation-delay: 1.5s"></div>
+        <p class="title-date fade-in-up" style="animation-delay: 2s">二〇二六年二月十三日</p>
+        <p class="title-sub fade-in-up" style="animation-delay: 2.5s">我们结婚啦</p>
+        <button id="startBtn" class="play-btn fade-in-up" style="animation-delay: 3s">▶</button>
+      </div>
+    </div>
+
+    <!-- Slide 2: 新郎介绍 -->
+    <div class="slide" data-duration="6000">
+      <div class="slide-bg ken-burns-right portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E9%83%8E%E4%B8%AA%E4%BA%BA%E7%85%A7%E7%89%87.jpeg')"></div>
+      <div class="slide-overlay overlay-gradient-left"></div>
+      <div class="slide-content left-content">
+        <div class="person-intro fade-in-left">
+          <span class="person-label">新郎</span>
+          <h2 class="person-name">王艺辉</h2>
+          <p class="person-desc">愿与你携手，共度此生</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: 新娘写真 1 -->
+    <div class="slide" data-duration="5000">
+      <div class="slide-bg ken-burns-in portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F%E7%85%A7.jpg'); background-position: center 65%"></div>
+      <div class="slide-overlay overlay-gradient-right"></div>
+      <div class="slide-content right-content">
+        <div class="person-intro fade-in-right">
+          <span class="person-label">新娘</span>
+          <h2 class="person-name">陈黎君</h2>
+          <p class="person-desc">最美的你，嫁给最爱的人</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: 新娘写真 2 -->
+    <div class="slide" data-duration="5000">
+      <div class="slide-bg ken-burns-left portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F%E7%85%A7%202.jpg'); background-position: center 38%"></div>
+      <div class="slide-overlay overlay-soft"></div>
+      <div class="slide-content center-content bottom-text">
+        <p class="photo-caption fade-in-up">岁月温柔，你最动人</p>
+      </div>
+    </div>
+
+    <!-- Slide 5: 新娘写真 3 -->
+    <div class="slide" data-duration="5000">
+      <div class="slide-bg ken-burns-right" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F-%E5%86%99%E6%84%8F%E7%89%88.jpg')"></div>
+      <div class="slide-overlay overlay-soft"></div>
+      <div class="slide-content center-content bottom-text">
+        <p class="photo-caption fade-in-up">如诗如画，恰似你的美好</p>
+      </div>
+    </div>
+
+    <!-- Slide 6: 我们的故事 - 海边照 -->
+    <div class="slide" data-duration="8000">
+      <div class="slide-bg ken-burns-in" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E9%83%8E%E6%96%B0%E5%A8%98%E6%B5%B7%E8%BE%B9%E7%85%A7.jpg')"></div>
+      <div class="slide-overlay overlay-warm"></div>
+      <div class="slide-content center-content">
+        <div class="story-text">
+          <h2 class="story-title fade-in-up" style="animation-delay: 0.5s">我们的故事</h2>
+          <p class="story-desc fade-in-up" style="animation-delay: 1.2s">2018年冬天，经人介绍，我们在微信上相识</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 2.2s">2019年平安夜，第一次见面，一见如故</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: 深夜视频通话 - 温馨版 -->
+    <div class="slide" data-duration="6000">
+      <div class="slide-bg ken-burns-right portrait phone-screenshot" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E9%83%8E%E6%96%B0%E5%A8%98%E6%B7%B1%E5%A4%9C%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D-%E6%B8%A9%E9%A6%A8%E7%89%88.png')"></div>
+      <div class="slide-overlay overlay-warm"></div>
+      <div class="slide-content center-content bottom-text">
+        <p class="photo-caption fade-in-up">每一个深夜的视频通话，都是最温暖的陪伴</p>
+      </div>
+    </div>
+
+    <!-- Slide 8: 深夜视频通话 - 真情流露版 -->
+    <div class="slide" data-duration="6000">
+      <div class="slide-bg ken-burns-left portrait phone-screenshot" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E9%83%8E%E6%96%B0%E5%A8%98%E6%B7%B1%E5%A4%9C%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D-%E7%9C%9F%E6%83%85%E6%B5%81%E9%9C%B2%E7%89%88.png')"></div>
+      <div class="slide-overlay overlay-warm"></div>
+      <div class="slide-content center-content bottom-text">
+        <p class="photo-caption fade-in-up">屏幕两端千里，心却从未分离</p>
+      </div>
+    </div>
+
+    <!-- Slide 9: 电脑的故事 - 开篇 -->
+    <div class="slide" data-duration="10000">
+      <div class="slide-bg ken-burns-in" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F%E7%85%A7%203.jpg')"></div>
+      <div class="slide-overlay overlay-dark"></div>
+      <div class="slide-content center-content">
+        <div class="story-text">
+          <h2 class="story-title fade-in-up" style="animation-delay: 0.5s">一台电脑的"爱情宣言"</h2>
+          <div class="divider fade-in-up" style="animation-delay: 1s"></div>
+          <p class="story-desc fade-in-up" style="animation-delay: 1.8s">六年前，他精心挑选了一台 2K、3:2 的电脑</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 2.8s">只因这个比例最适合她写论文</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 4s">可他一去实习，电脑就开始"闹脾气"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: 电脑的故事 - 高潮 -->
+    <div class="slide" data-duration="12000">
+      <div class="slide-bg ken-burns-left" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F%E7%85%A7%204.jpg')"></div>
+      <div class="slide-overlay overlay-dark"></div>
+      <div class="slide-content center-content">
+        <div class="story-text">
+          <p class="story-desc fade-in-up" style="animation-delay: 0.5s">他回来，电脑安安稳稳</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 1.8s">他离开，屏幕就花了</p>
+          <div class="divider fade-in-up" style="animation-delay: 2.8s"></div>
+          <p class="story-desc fade-in-up" style="animation-delay: 3.5s">她说："你是搞计算机的，我镇不住它"</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 5s">他说："这都是巧合"</p>
+          <p class="story-desc story-highlight fade-in-up" style="animation-delay: 6.5s">可这样的"巧合"，一连发生了两次</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: 电脑的故事 - 结局 -->
+    <div class="slide" data-duration="10000">
+      <div class="slide-bg ken-burns-right" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%B7%A5%E4%BD%9C%E7%85%A7.jpg')"></div>
+      <div class="slide-overlay overlay-dark"></div>
+      <div class="slide-content center-content">
+        <div class="story-text">
+          <p class="story-desc fade-in-up" style="animation-delay: 0.5s">于是，电脑彻底换了屏</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 1.8s">而他也下定了决心</p>
+          <div class="divider fade-in-up" style="animation-delay: 2.8s"></div>
+          <p class="story-desc story-highlight fade-in-up" style="animation-delay: 3.5s">从杭州来到上海，这次不再离开</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 5s">从此，电脑相安无事</p>
+          <p class="story-desc fade-in-up" style="animation-delay: 6.5s">屏幕一如既往的明亮动人，就像她一样</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: 日常 -->
+    <div class="slide" data-duration="5000">
+      <div class="slide-bg ken-burns-left portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E6%97%A5%E5%B8%B8%E7%85%A7.jpg'); background-position: center 42%"></div>
+      <div class="slide-overlay overlay-soft"></div>
+      <div class="slide-content center-content bottom-text">
+        <p class="photo-caption fade-in-up">从此，平凡日子里都是小确幸</p>
+      </div>
+    </div>
+
+    <!-- Slide 13: 结婚照展示 -->
+    <div class="slide" data-duration="7000">
+      <div class="slide-bg ken-burns-in" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E7%BB%93%E5%A9%9A%E7%85%A7-%E6%AD%A3%E5%BC%8F%E7%89%88.jpg')"></div>
+      <div class="slide-overlay overlay-golden"></div>
+      <div class="slide-content center-content">
+        <div class="ornament fade-in-up" style="animation-delay: 0.5s">❦</div>
+        <h2 class="highlight-text fade-in-up" style="animation-delay: 1s">执子之手，与子偕老</h2>
+      </div>
+    </div>
+
+    <!-- Slide 14: 结婚照 2 -->
+    <div class="slide" data-duration="6000">
+      <div class="slide-bg ken-burns-left" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E7%BB%93%E5%A9%9A%E7%85%A7.jpg')"></div>
+      <div class="slide-overlay overlay-golden"></div>
+      <div class="slide-content center-content">
+        <h2 class="highlight-text fade-in-up" style="animation-delay: 0.5s">最好的时光，最美的我们</h2>
+      </div>
+    </div>
+
+    <!-- Slide 15: 感恩致辞 -->
+    <div class="slide" data-duration="12000">
+      <div class="slide-bg ken-burns-in portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E5%A9%9A%E7%A4%BC%E8%AF%B7%E6%9F%AC.png')"></div>
+      <div class="slide-overlay overlay-dark"></div>
+      <div class="slide-content center-content">
+        <div class="thanks-section">
+          <div class="ornament fade-in-up" style="animation-delay: 0.5s">❦</div>
+          <h2 class="thanks-title fade-in-up" style="animation-delay: 1s">感恩有你们</h2>
+          <div class="divider fade-in-up" style="animation-delay: 1.5s"></div>
+          <p class="thanks-text fade-in-up" style="animation-delay: 2s">
+            感谢各位伯伯叔叔、阿姥阿姨
+          </p>
+          <p class="thanks-text fade-in-up" style="animation-delay: 2.8s">
+            哥哥姐姐、父老乡亲们
+          </p>
+          <p class="thanks-text fade-in-up" style="animation-delay: 3.6s">
+            一直以来对我们的关心与照顾
+          </p>
+          <p class="thanks-text fade-in-up" style="animation-delay: 4.5s">
+            今后的日子，还请大家多多指教
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 16: 结尾 -->
+    <div class="slide" data-duration="10000">
+      <div class="slide-bg ken-burns-in portrait" style="background-image: url('https://xiaohui-zhangjiakou.oss-cn-zhangjiakou.aliyuncs.com/wedding/%E6%96%B0%E5%A8%98%E5%86%99%E7%9C%9F%E7%85%A7%205.jpg'); background-position: center 45%"></div>
+      <div class="slide-overlay overlay-warm"></div>
+      <div class="slide-content center-content">
+        <div class="ending-section">
+          <div class="ornament fade-in-up" style="animation-delay: 0.5s">✦</div>
+          <h2 class="ending-title fade-in-up" style="animation-delay: 1s">婚礼虽简，情意绵长</h2>
+          <div class="divider fade-in-up" style="animation-delay: 1.5s"></div>
+          <p class="ending-text fade-in-up" style="animation-delay: 2.5s">
+            祝大家吃好喝好，开心就好！
+          </p>
+          <div class="ending-hearts fade-in-up" style="animation-delay: 3.5s">
+            ♥ ♥ ♥
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 进度条 -->
+  <div id="progressBar" class="progress-bar hidden">
+    <div id="progressFill" class="progress-fill"></div>
+  </div>
+
+  <script src="wedding-video.js"></script>
+</body>
+</html>

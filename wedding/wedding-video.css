@@ -1,0 +1,551 @@
+/* ========================================
+   婚礼开场视频 - 温馨风格
+   ======================================== */
+
+/* CSS Variables */
+:root {
+  --color-gold: #d4a574;
+  --color-gold-light: #e8c9a0;
+  --color-cream: #faf5ef;
+  --color-warm-white: #fff8f0;
+  --color-text: #3a2a1a;
+  --color-text-light: #f5efe6;
+  --color-overlay-dark: rgba(30, 20, 10, 0.55);
+  --color-overlay-warm: rgba(60, 40, 20, 0.4);
+  --color-overlay-golden: rgba(80, 60, 30, 0.35);
+  --color-overlay-soft: rgba(0, 0, 0, 0.2);
+  --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --font-brush: 'Ma Shan Zheng', 'STKaiti', cursive;
+  --transition-fade: 1.2s ease-in-out;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #1a1008;
+  font-family: var(--font-serif);
+  color: var(--color-text-light);
+}
+
+/* ========================================
+   Play Button (on cover slide)
+   ======================================== */
+.play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  background: rgba(30, 20, 10, 0.5);
+  color: var(--color-gold);
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.play-btn:hover {
+  background: var(--color-gold);
+  color: #1a1008;
+  transform: scale(1.1);
+}
+
+/* ========================================
+   Slideshow Container
+   ======================================== */
+.slideshow {
+  position: fixed;
+  inset: 0;
+  background: #1a1008;
+}
+
+.progress-bar.hidden {
+  display: none;
+}
+
+/* ========================================
+   Individual Slide
+   ======================================== */
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fade);
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Background Image Layer */
+.slide-bg {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Blurred background for end state */
+.slide-bg.blurred {
+  filter: blur(8px) brightness(0.6);
+  transform: scale(1.1);
+}
+
+/* Portrait (vertical) photos - default to center */
+.slide-bg.portrait {
+  background-position: center center;
+}
+
+/* Phone screenshots - very tall narrow images, center them nicely */
+.slide-bg.phone-screenshot {
+  background-size: contain;
+  background-position: center center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+   Ken Burns Animations
+   ======================================== */
+.slide.active .ken-burns-in {
+  animation: kenBurnsIn 12s ease-out forwards;
+}
+
+.slide.active .ken-burns-left {
+  animation: kenBurnsLeft 12s ease-out forwards;
+}
+
+.slide.active .ken-burns-right {
+  animation: kenBurnsRight 12s ease-out forwards;
+}
+
+@keyframes kenBurnsIn {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.15) translate(0, -2%);
+  }
+}
+
+@keyframes kenBurnsLeft {
+  from {
+    transform: scale(1.05) translate(2%, 0);
+  }
+  to {
+    transform: scale(1.12) translate(-2%, -1%);
+  }
+}
+
+@keyframes kenBurnsRight {
+  from {
+    transform: scale(1.05) translate(-2%, 0);
+  }
+  to {
+    transform: scale(1.12) translate(2%, -1%);
+  }
+}
+
+/* ========================================
+   Overlay Layers
+   ======================================== */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.overlay-dark {
+  background: var(--color-overlay-dark);
+}
+
+.overlay-warm {
+  background: var(--color-overlay-warm);
+}
+
+.overlay-golden {
+  background: linear-gradient(
+    135deg,
+    rgba(80, 60, 30, 0.4) 0%,
+    rgba(60, 40, 20, 0.3) 50%,
+    rgba(80, 60, 30, 0.4) 100%
+  );
+}
+
+.overlay-soft {
+  background: var(--color-overlay-soft);
+}
+
+.overlay-gradient-left {
+  background: linear-gradient(
+    to right,
+    rgba(20, 12, 5, 0.85) 0%,
+    rgba(20, 12, 5, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+.overlay-gradient-right {
+  background: linear-gradient(
+    to left,
+    rgba(20, 12, 5, 0.85) 0%,
+    rgba(20, 12, 5, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+/* ========================================
+   Slide Content Layout
+   ======================================== */
+.slide-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+}
+
+.center-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.left-content {
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 8%;
+}
+
+.right-content {
+  align-items: flex-end;
+  justify-content: center;
+  padding-right: 8%;
+}
+
+.bottom-text {
+  justify-content: flex-end;
+  padding-bottom: 8%;
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
+/* Title Slide */
+.title-main {
+  font-family: var(--font-brush);
+  font-size: 6rem;
+  font-weight: 400;
+  color: var(--color-cream);
+  letter-spacing: 0.15em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  margin: 0.5rem 0;
+}
+
+.title-date {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-gold-light);
+  letter-spacing: 0.4em;
+  margin-top: 0.5rem;
+}
+
+.title-sub {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-gold);
+  letter-spacing: 0.5em;
+  margin-top: 1rem;
+}
+
+/* Ornament */
+.ornament {
+  font-size: 3.5rem;
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Divider */
+.divider {
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+  margin: 1rem auto;
+}
+
+/* Person Introduction */
+.person-label {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: var(--color-gold);
+  letter-spacing: 0.3em;
+  border: 1px solid var(--color-gold);
+  padding: 0.4rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.person-name {
+  font-family: var(--font-brush);
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: var(--color-cream);
+  margin: 0.5rem 0;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+.person-desc {
+  font-size: 1.5rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+}
+
+/* Photo Caption */
+.photo-caption {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-cream);
+  letter-spacing: 0.2em;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.4);
+}
+
+/* Story Section */
+.story-title {
+  font-family: var(--font-brush);
+  font-size: 4rem;
+  color: var(--color-cream);
+  margin-bottom: 1.5rem;
+}
+
+.story-desc {
+  font-size: 1.7rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.15em;
+  line-height: 2.4;
+}
+
+/* Story Highlight - emphasized narrative lines */
+.story-desc.story-highlight {
+  color: var(--color-cream);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Highlight Text */
+.highlight-text {
+  font-family: var(--font-brush);
+  font-size: 4rem;
+  color: var(--color-cream);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1em;
+}
+
+/* Thanks Section */
+.thanks-section {
+  max-width: 900px;
+}
+
+.thanks-title {
+  font-family: var(--font-brush);
+  font-size: 4rem;
+  color: var(--color-cream);
+  margin-bottom: 0.5rem;
+}
+
+.thanks-text {
+  font-size: 1.8rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.15em;
+  line-height: 2.6;
+}
+
+/* Ending Section */
+.ending-section {
+  text-align: center;
+}
+
+.ending-title {
+  font-family: var(--font-brush);
+  font-size: 4rem;
+  color: var(--color-cream);
+  margin-bottom: 0.5rem;
+}
+
+.ending-text {
+  font-size: 2.2rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.2em;
+  margin-top: 1rem;
+}
+
+.ending-hearts {
+  font-size: 3rem;
+  color: var(--color-gold);
+  margin-top: 2rem;
+  letter-spacing: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   Entrance Animations
+   ======================================== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide.active .fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.slide.active .fade-in-left {
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.slide.active .fade-in-right {
+  animation: fadeInRight 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   Progress Bar
+   ======================================== */
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 50;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    to right,
+    var(--color-gold),
+    var(--color-gold-light)
+  );
+  transition: width 0.1s linear;
+}
+
+/* ========================================
+   Particle / Floating Elements (optional)
+   ======================================== */
+.floating-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  animation: floatUp 6s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20vh) scale(1);
+  }
+}

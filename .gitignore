@@ -50,3 +50,9 @@ Thumbs.db
 #private
 .obsidian
 /docs/env/
+
+# wedding media (hosted on OSS)
+wedding/*.jpg
+wedding/*.jpeg
+wedding/*.png
+wedding/*.mp3
