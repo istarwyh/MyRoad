@@ -51,6 +51,10 @@ Thumbs.db
 .obsidian
 /docs/env/
 
+# Claude Code
+.claude/sessions
+**/.claude/sessions/
+
 # wedding media (hosted on OSS)
 wedding/*.jpg
 wedding/*.jpeg

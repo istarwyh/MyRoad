@@ -1,0 +1,74 @@
+{
+  "userName": "xiaohui",
+  "enableBlocklist": true,
+  "blockedCommands": {
+    "unix": [
+      "rm -rf",
+      "chmod 777",
+      "chmod -R 777"
+    ],
+    "windows": [
+      "del /s /q",
+      "rd /s /q",
+      "rmdir /s /q",
+      "format",
+      "diskpart",
+      "Remove-Item -Recurse -Force",
+      "Remove-Item -Force -Recurse",
+      "Remove-Item -r -fo",
+      "Remove-Item -fo -r",
+      "Remove-Item -Recurse",
+      "Remove-Item -r",
+      "ri -Recurse",
+      "ri -r",
+      "ri -Force",
+      "ri -fo",
+      "rm -r -fo",
+      "rm -Recurse",
+      "rm -Force",
+      "del -Recurse",
+      "del -Force",
+      "erase -Recurse",
+      "erase -Force",
+      "rd -Recurse",
+      "rmdir -Recurse",
+      "Format-Volume",
+      "Clear-Disk",
+      "Initialize-Disk",
+      "Remove-Partition"
+    ]
+  },
+  "permissionMode": "yolo",
+  "model": "haiku",
+  "thinkingBudget": "off",
+  "enableAutoTitleGeneration": true,
+  "titleGenerationModel": "sonnet",
+  "excludedTags": [],
+  "mediaFolder": "",
+  "systemPrompt": "你永远不会进行无意义地附和，并且有问题你就会问。",
+  "allowedExportPaths": [
+    "~/Desktop",
+    "~/Downloads"
+  ],
+  "persistentExternalContextPaths": [],
+  "environmentVariables": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run\n\nANTHROPIC_AUTH_TOKEN=sk-i7c73XzO0nWcTSwuTWdUdwlxbeJP8yB1RUHo9y5BETxEHexd",
+  "envSnippets": [],
+  "keyboardNavigation": {
+    "scrollUpKey": "w",
+    "scrollDownKey": "s",
+    "focusInputKey": "i"
+  },
+  "locale": "en",
+  "claudeCliPath": "/Users/mac/.nvm/versions/node/v25.2.1/bin/claude",
+  "claudeCliPaths": {
+    "macos": "/Users/mac/.nvm/versions/node/v25.2.1/bin/claude",
+    "linux": "",
+    "windows": ""
+  },
+  "loadUserClaudeSettings": true,
+  "activeConversationId": "conv-1774079795090-erhpb9mtu",
+  "lastClaudeModel": "sonnet",
+  "lastCustomModel": "",
+  "lastEnvHash": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run",
+  "enabledPlugins": []
+}
