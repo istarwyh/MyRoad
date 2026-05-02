@@ -2,11 +2,7 @@
   "userName": "xiaohui",
   "enableBlocklist": true,
   "blockedCommands": {
-    "unix": [
-      "rm -rf",
-      "chmod 777",
-      "chmod -R 777"
-    ],
+    "unix": ["rm -rf", "chmod 777", "chmod -R 777"],
     "windows": [
       "del /s /q",
       "rd /s /q",
@@ -39,19 +35,16 @@
     ]
   },
   "permissionMode": "yolo",
-  "model": "haiku",
+  "model": "opus[1m]",
   "thinkingBudget": "off",
   "enableAutoTitleGeneration": true,
   "titleGenerationModel": "sonnet",
   "excludedTags": [],
   "mediaFolder": "",
   "systemPrompt": "你永远不会进行无意义地附和，并且有问题你就会问。",
-  "allowedExportPaths": [
-    "~/Desktop",
-    "~/Downloads"
-  ],
+  "allowedExportPaths": ["~/Desktop", "~/Downloads"],
   "persistentExternalContextPaths": [],
-  "environmentVariables": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run\n\nANTHROPIC_AUTH_TOKEN=sk-i7c73XzO0nWcTSwuTWdUdwlxbeJP8yB1RUHo9y5BETxEHexd",
+  "environmentVariables": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run\n\nANTHROPIC_AUTH_TOKEN=sk-i7c73XzO0nWcTSwuTWdUdwlxbeJP8yB1RUHo9y5BETxEHexd\n\nANTHROPIC_MODEL=opus[1m]",
   "envSnippets": [],
   "keyboardNavigation": {
     "scrollUpKey": "w",
@@ -66,9 +59,9 @@
     "windows": ""
   },
   "loadUserClaudeSettings": true,
-  "activeConversationId": "conv-1774079795090-erhpb9mtu",
+  "activeConversationId": "conv-1775982561792-95q8mqrep",
   "lastClaudeModel": "sonnet",
   "lastCustomModel": "",
-  "lastEnvHash": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run",
+  "lastEnvHash": "ANTHROPIC_BASE_URL=https://a-ocnfniawgw.cn-shanghai.fcapp.run|ANTHROPIC_MODEL=opus[1m]",
   "enabledPlugins": []
 }
