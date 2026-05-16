@@ -11,6 +11,17 @@ categories:
 description: 详解 LangGraph State 在内存与数据库之间的完整生命周期：写入 → 更新 → 回滚 → 读取，涵盖 checkpoints / checkpoint_writes / checkpoint_blobs 三张表
 ---
 
+## 核心概念
+
+| 概念               | 说明                                                                             |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `thread_id`        | 一次对话/执行的唯一标识                                                          |
+| `checkpoint_id`    | 图执行到某一步时的状态快照 ID，在 checkpoints 表内递增                           |
+| `checkpoint_ns`    | 命名空间。`''` = 根图（root graph），非空 = 子图（subgraph）                     |
+| `channel`          | State 中的一个字段名（如 `messages`、`files`），每个 channel 独立版本化          |
+| `version`          | blob 的唯一标识，格式为 `{032d计数器}.{016f随机数}`，per-channel 单调递增        |
+| `channel_versions` | checkpoint 内部的 JSON 元数据，记录该 checkpoint 时刻每个 channel 对应的 version |
+
 ## 概览
 
 LangGraph 的 State 在内存与数据库之间流转，形成完整的生命周期。核心逻辑链条：
@@ -19,13 +30,50 @@ LangGraph 的 State 在内存与数据库之间流转，形成完整的生命周
 
 ### 三张核心表
 
-| 表名 | 职责 | 粒度 | 写入时机 |
-|------|------|------|---------|
-| `checkpoints` | 元数据索引（快照链条） | 每个 checkpoint 1 条 | checkpoint 完成时 |
-| `checkpoint_writes` | 写入操作历史（每个 node 的部分更新） | 每个 task 1+ 条 | **每个 node 执行后立即写入** |
-| `checkpoint_blobs` | 最终完整状态（合并后的序列化数据） | 每个 channel 1 条 | checkpoint 完成时 |
+| 表名                | 职责                                 | 粒度                 | 写入时机                     |
+| ------------------- | ------------------------------------ | -------------------- | ---------------------------- |
+| `checkpoints`       | 元数据索引（快照链条）               | 每个 checkpoint 1 条 | checkpoint 完成时            |
+| `checkpoint_writes` | 写入操作历史（每个 node 的部分更新） | 每个 task 1+ 条      | **每个 node 执行后立即写入** |
+| `checkpoint_blobs`  | 最终完整状态（合并后的序列化数据）   | 每个 channel 1 条    | checkpoint 完成时            |
 
 三表通过 `thread_id` + `checkpoint_ns_hash` 关联。
+
+### 两表关联方式（checkpoints ↔ checkpoint_blobs）
+
+checkpoints 和 blobs 之间**没有外键**，通过 checkpoint 内部的 `channel_versions` JSON 间接关联：
+
+```
+checkpoint 记录:
+{
+  "channel_versions": {
+    "messages": "00000000000000000000000000000003.0384719283746192",
+    "files": "00000000000000000000000000000002.0886748088723920",
+    "__start__":"00000000000000000000000000000001.0867480887239203"
+  }
+}
+         │
+         │ 按 (channel, version) 精确查找
+         ▼
+blob 表: (thread_id, channel="messages", version="...003.xxx") → blob_data
+        (thread_id, channel="files", version="...002.xxx") → blob_data
+```
+
+LangGraph 官方加载状态的 SQL：
+
+```sql
+SELECT ... FROM checkpoints
+INNER JOIN checkpoint_blobs bl
+  ON bl.thread_id = checkpoints.thread_id
+  AND bl.checkpoint_ns = checkpoints.checkpoint_ns
+  AND bl.channel = jsonb_each_text.key     -- channel 名
+  AND bl.version = jsonb_each_text.value   -- 从 channel_versions 取
+```
+
+这种设计的优势：
+
+- **存储去重**：同一个 blob 可被多个 checkpoint 引用（类似 Git）
+- **写入效率**：只写实际变化的 channel，未变的复用已有 blob
+- **分支共享**：分叉后未变的 channel 自然共享同一份 blob
 
 ### 三张表的关系
 
@@ -90,6 +138,37 @@ LangGraph 的 State 在内存与数据库之间流转，形成完整的生命周
 │                   ③ 回滚 = 新建分支                      │
 └───────────────────────────────────────────────────────┘
 ```
+
+---
+
+## version 字段详解
+
+### version 生成逻辑
+
+```python
+# LangGraph 源码 get_next_version()
+def get_next_version(self, current, channel):
+    current_v = 0 if current is None else int(current.split(".")[0])
+    next_v = current_v + 1
+    next_h = random.random()
+    return f"{next_v:032d}.{next_h:016f}"
+```
+
+### version 格式解读
+
+```
+00000000000000000000000000000003.0384719283746192
+|_______________________________| |_______________|
+      per-channel 递增计数器         随机数（防冲突）
+```
+
+- **计数器**：该 channel 第 N 次被写入（不是 checkpoint 序号）
+- **随机后缀**：防止分支/重跑时 version 碰撞
+- **零填充 32 位**：保证字典序 = 时间序，`ORDER BY version` 有效
+
+### 易混淆点
+
+version 前缀**不是** `checkpoint_id`。`messages` channel 的第 2 次写入可能发生在 checkpoint 3，也可能在 checkpoint 5，取决于哪些节点修改了 `messages`。
 
 ---
 
@@ -198,24 +277,24 @@ INSERT INTO checkpoints (
 
 **checkpoint_writes 表** — 3 条（每个 task 一条）：
 
-| thread_id  | checkpoint_id | task_id           | idx | channel      | blob_data |
-|------------|---------------|-------------------|-----|--------------|-----------|
+| thread_id  | checkpoint_id | task_id           | idx | channel      | blob_data  |
+| ---------- | ------------- | ----------------- | --- | ------------ | ---------- |
 | thread_001 | ckpt_005      | retrieve_context  | 0   | user_context | \<binary\> |
 | thread_001 | ckpt_005      | search_products   | 0   | messages     | \<binary\> |
 | thread_001 | ckpt_005      | generate_response | 0   | messages     | \<binary\> |
 
 **checkpoint_blobs 表** — 2 条（合并后只剩 2 个 channel）：
 
-| thread_id  | checkpoint_ns_hash | channel      | version | blob_data |
-|------------|--------------------|--------------|---------|-----------|
-| thread_001 | d41d8cd...         | user_context | 0       | \<binary\> |
+| thread_id  | checkpoint_ns_hash | channel      | version | blob_data                    |
+| ---------- | ------------------ | ------------ | ------- | ---------------------------- |
+| thread_001 | d41d8cd...         | user_context | 0       | \<binary\>                   |
 | thread_001 | d41d8cd...         | messages     | 0       | \<binary: 合并后的完整列表\> |
 
 **checkpoints 表** — 1 条：
 
 | thread_id  | checkpoint_id | parent_checkpoint_id | checkpoint_ns_hash | gmt_modified        |
-|------------|---------------|---------------------|--------------------|---------------------|
-| thread_001 | ckpt_005      | ckpt_004            | d41d8cd...         | 2026-04-06 10:00:00 |
+| ---------- | ------------- | -------------------- | ------------------ | ------------------- |
+| thread_001 | ckpt_005      | ckpt_004             | d41d8cd...         | 2026-04-06 10:00:00 |
 
 ---
 
@@ -274,10 +353,10 @@ INSERT INTO checkpoint_blobs VALUES
 -- files 和 user_context 未变化，不存储（读取时从 parent checkpoint 继承）
 ```
 
-| 对比 | checkpoints 表 | checkpoint_blobs 表 |
-|------|---------------|-------------------|
-| 方式 A | 1 条 | N 条（所有 channel） |
-| 方式 B | 1 条 | 仅变化的 channel |
+| 对比   | checkpoints 表 | checkpoint_blobs 表  |
+| ------ | -------------- | -------------------- |
+| 方式 A | 1 条           | N 条（所有 channel） |
+| 方式 B | 1 条           | 仅变化的 channel     |
 
 > 无论哪种方式，`checkpoint_writes` 始终记录每个 node 的实际写入操作。
 
@@ -330,12 +409,12 @@ ckpt_004 → ckpt_005 ┬→ ckpt_006  (旧分支，保留不删)
 
 对应的 checkpoints 表：
 
-| checkpoint_id | parent_checkpoint_id | gmt_modified |
-|---------------|---------------------|--------------|
-| ckpt_004      | ckpt_003            | 10:00:00     |
-| ckpt_005      | ckpt_004            | 10:00:30 ← 回滚目标 |
-| ckpt_006      | ckpt_005            | 10:01:00 ← 旧分支（保留） |
-| ckpt_007      | ckpt_005            | 10:02:00 ← 新分支 |
+| checkpoint_id | parent_checkpoint_id | gmt_modified              |
+| ------------- | -------------------- | ------------------------- |
+| ckpt_004      | ckpt_003             | 10:00:00                  |
+| ckpt_005      | ckpt_004             | 10:00:30 ← 回滚目标       |
+| ckpt_006      | ckpt_005             | 10:01:00 ← 旧分支（保留） |
+| ckpt_007      | ckpt_005             | 10:02:00 ← 新分支         |
 
 ---
 
@@ -423,13 +502,75 @@ ORDER BY gmt_create, idx;
 
 输出示例：
 
-| task_id           | idx | channel      | task_path | data_size | gmt_create     |
-|-------------------|-----|--------------|-----------|-----------|----------------|
-| retrieve_context  | 0   | user_context | ()        | 512       | 10:00:00.123   |
-| search_products   | 0   | messages     | ()        | 2048      | 10:00:01.456   |
-| generate_response | 0   | messages     | ()        | 1024      | 10:00:02.789   |
+| task_id           | idx | channel      | task_path | data_size | gmt_create   |
+| ----------------- | --- | ------------ | --------- | --------- | ------------ |
+| retrieve_context  | 0   | user_context | ()        | 512       | 10:00:00.123 |
+| search_products   | 0   | messages     | ()        | 2048      | 10:00:01.456 |
+| generate_response | 0   | messages     | ()        | 1024      | 10:00:02.789 |
 
 可以清晰看到：执行顺序、每个 node 写了什么、数据量多大。
+
+---
+
+## 查询实践：取最新 checkpoint 的特定 channel
+
+### 场景
+
+给定一批 `thread_id`，取每个 thread 根图最新 checkpoint 中 `files` channel 的值。
+
+### 关键点
+
+由于 version 是 per-channel 单调递增的，最新 checkpoint 引用的 `files` version 一定是该 thread 中 `files` channel 的**最大 version**。因此**无需查 checkpoints 表**，直接在 blob 表中取 `MAX(version)` 即可。
+
+### SQL（MaxCompute / ODPS）
+
+```sql
+SELECT thread_id, version, blob_data
+FROM (
+  SELECT thread_id, version, blob_data,
+         ROW_NUMBER() OVER (PARTITION BY thread_id ORDER BY version DESC) AS rn
+  FROM insx_ods.ods_checkpoint_blobs_db_alphaprove_delta
+  WHERE thread_id IN ({thread_id_list})
+    AND checkpoint_ns = ''
+    AND channel = 'files'
+    AND dt >= '{dt_start}'
+    AND dt <= '{dt_end}'
+) t
+WHERE rn = 1
+ORDER BY thread_id;
+```
+
+### 条件说明
+
+| 条件                                     | 作用                       |
+| ---------------------------------------- | -------------------------- |
+| `checkpoint_ns = ''`                     | 只取根图，排除子图         |
+| `channel = 'files'`                      | 只取 files channel         |
+| `ROW_NUMBER() ... ORDER BY version DESC` | 每个 thread 取最新 version |
+| `dt >= / dt <=`                          | blob 增量表的分区过滤      |
+
+### 为什么这样设计？
+
+| 方案                                  | blob 行数                        | 说明                                  |
+| ------------------------------------- | -------------------------------- | ------------------------------------- |
+| 以 checkpoint_id 为外键（每步存全量） | 5 channels × 4 steps = **20 行** |
+| **以 version 寻址（只存变化的）**     | **8 行**                         | ✅ channel 越多、步骤越长，节省越显著 |
+
+---
+
+## 存储设计原理
+
+### 1. 存储去重（Git-like）
+
+类比 Git：同一个 blob 可被多个 commit 引用，同一个 channel blob 也可被多个 checkpoint 引用。
+
+### 2. 写入效率
+
+blob 不可变（`ON CONFLICT DO NOTHING`）。每步只写实际变化的 channel，未变的 channel 复用已有 blob。
+
+### 3. 分支共享
+
+LangGraph 支持从历史 checkpoint 分叉执行。分叉后未变的 channel 自然共享同一份 blob，无需复制。
 
 ---
 
@@ -510,12 +651,12 @@ task_path = "('subgraph_name', 'nested',)"    # 嵌套子图
 
 ### 四阶段操作对照
 
-| 操作 | checkpoint_writes | checkpoint_blobs | checkpoints | State 内存 |
-|------|------------------|-----------------|-------------|-----------|
-| ① 写入 | INSERT（每 node 一条） | INSERT（每 channel 一条） | INSERT 1 条 | 序列化 |
-| ② 更新 | INSERT（新的 node 写入） | INSERT（完整或增量） | INSERT 1 条 | 新 State |
-| ③ 回滚 | — | 复制旧 blob | INSERT 1 条（parent → 目标） | — |
-| ④ 读取 | SELECT（调试/审计） | SELECT（常规读取） | SELECT（查 hash） | 反序列化 + 合并 |
+| 操作   | checkpoint_writes        | checkpoint_blobs          | checkpoints                  | State 内存      |
+| ------ | ------------------------ | ------------------------- | ---------------------------- | --------------- |
+| ① 写入 | INSERT（每 node 一条）   | INSERT（每 channel 一条） | INSERT 1 条                  | 序列化          |
+| ② 更新 | INSERT（新的 node 写入） | INSERT（完整或增量）      | INSERT 1 条                  | 新 State        |
+| ③ 回滚 | —                        | 复制旧 blob               | INSERT 1 条（parent → 目标） | —               |
+| ④ 读取 | SELECT（调试/审计）      | SELECT（常规读取）        | SELECT（查 hash）            | 反序列化 + 合并 |
 
 ### 三张表速查
 
@@ -578,14 +719,17 @@ state_field = serializer.loads_typed(('msgpack', binary_data))
 ### 场景设定
 
 ```
+
 thread_id = "thread_abc123" (用户咨询医疗险的完整会话)
+
 ```
 
 **会话流程**：
 
 ```
-checkpoint_1 (用户说"你好") → checkpoint_2 (Agent回复) → 
-checkpoint_3 (用户说"推荐医疗险") → checkpoint_4 (Agent推荐产品)
+
+checkpoint_1 (用户说"你好") → checkpoint_2 (Agent回复) → checkpoint_3 (用户说"推荐医疗险") → checkpoint_4 (Agent推荐产品)
+
 ```
 
 ---
@@ -657,42 +801,9 @@ checkpoint_3 (用户说"推荐医疗险") → checkpoint_4 (Agent推荐产品)
 ### Step 3: 数据流图可视化
 
 ```
-thread_abc123
-│
-├── ckpt_001 (初始空状态)
-│   └── writes: 无
-│   └── blobs: 空
-│
-├── ckpt_002 (问候完成)
-│   ├── writes:
-│   │   ├── task: handle_greeting → channel: messages ("你好")
-│   │   └── task: generate_response → channel: messages ("您好！...")
-│   │
-│   └── blobs:
-│       ├── channel: messages (合并后 2 条消息)
-│       └── channel: user_context (基础会话信息)
-│
-├── ckpt_003 (推荐请求处理中)
-│   ├── writes:
-│   │   ├── task: retrieve_context → channel: user_context (意图+年龄)
-│   │   ├── task: retrieve_context → channel: extracted_entities (实体列表)
-│   │   ├── task: search_products → channel: search_results (产品数据)
-│   │   ├── task: search_products → channel: tool_calls (工具调用记录)
-│   │   └── task: generate_response → channel: messages (推荐回复)
-│   │
-│   └── blobs:
-│       ├── channel: messages (合并后 4 条消息)
-│       ├── channel: user_context (更新后的用户信息)
-│       └── channel: search_results (产品列表)
-│
-└── ckpt_004 (最终回复完成)
-    ├── writes:
-    │   └── task: finalize_response → channel: messages (格式化回复)
-    │
-    └── blobs:
-        ├── channel: messages (完整对话历史)
-        ├── channel: user_context (完整用户画像)
-        └── channel: search_results (推荐产品快照)
+
+thread_abc123 │ ├── ckpt_001 (初始空状态) │ └── writes: 无│ └── blobs: 空│ ├── ckpt_002 (问候完成) │ ├── writes: │ │ ├── task: handle_greeting → channel: messages ("你好") │ │ └── task: generate_response → channel: messages ("您好！...") │ │ │ └── blobs: │ ├── channel: messages (合并后 2 条消息) │ └── channel: user_context (基础会话信息) │ ├── ckpt_003 (推荐请求处理中) │ ├── writes: │ │ ├── task: retrieve_context → channel: user_context (意图+年龄) │ │ ├── task: retrieve_context → channel: extracted_entities (实体列表) │ │ ├── task: search_products → channel: search_results (产品数据) │ │ ├── task: search_products → channel: tool_calls (工具调用记录) │ │ └── task: generate_response → channel: messages (推荐回复) │ │ │ └── blobs: │ ├── channel: messages (合并后 4 条消息) │ ├── channel: user_context (更新后的用户信息) │ └── channel: search_results (产品列表) │ └── ckpt_004 (最终回复完成) ├── writes: │ └── task: finalize_response → channel: messages (格式化回复) │ └── blobs: ├── channel: messages (完整对话历史) ├── channel: user_context (完整用户画像) └── channel: search_results (推荐产品快照)
+
 ```
 
 ---
@@ -702,20 +813,14 @@ thread_abc123
 以 **ckpt_003** 为例，展示 `messages` channel 是如何合并的：
 
 ```
-checkpoint_writes 中的原始写入 (按时间序):
-├── ckpt_002: generate_response 写入 → [AIMessage("您好！")]
-├── ckpt_003: retrieve_context 未写 messages
-├── ckpt_003: search_products 未写 messages
-└── ckpt_003: generate_response 写入 → [AIMessage("为您推荐...")]
 
-合并算法 (列表类型 = 拼接):
-messages = messages_ckpt_002 + messages_ckpt_003_generate
-         = [Human("你好"), AI("您好！")] + [AI("为您推荐...")]
-         = [Human("你好"), AI("您好！"), AI("为您推荐...")]
+checkpoint_writes 中的原始写入 (按时间序): ├── ckpt_002: generate_response 写入 → [AIMessage("您好！")] ├── ckpt_003: retrieve_context 未写 messages ├── ckpt_003: search_products 未写 messages └── ckpt_003: generate_response 写入 → [AIMessage("为您推荐...")]
 
-最终存入 checkpoint_blobs:
-└── messages: [3条消息的完整列表]
-```
+合并算法 (列表类型 = 拼接): messages = messages_ckpt_002 + messages_ckpt_003_generate = [Human("你好"), AI("您好！")] + [AI("为您推荐...")] = [Human("你好"), AI("您好！"), AI("为您推荐...")]
+
+最终存入 checkpoint_blobs: └── messages: [3条消息的完整列表]
+
+````
 
 ---
 
@@ -729,16 +834,16 @@ graph.update_state(
     thread_id="thread_abc123",
     checkpoint_id="ckpt_002"
 )
-```
+````
 
 #### 回滚后的 checkpoints 表（形成分支）
 
-| checkpoint_id | parent_checkpoint_id | 说明 |
-|---------------|-------------------|------|
-| ckpt_001 | NULL | 初始 |
-| ckpt_002 | ckpt_001 | 问候完成 ← 回滚目标 |
-| ckpt_003 | ckpt_002 | 旧分支（含推荐） |
-| ckpt_004 | ckpt_002 | 新分支（从此继续） |
+| checkpoint_id | parent_checkpoint_id | 说明                |
+| ------------- | -------------------- | ------------------- |
+| ckpt_001      | NULL                 | 初始                |
+| ckpt_002      | ckpt_001             | 问候完成 ← 回滚目标 |
+| ckpt_003      | ckpt_002             | 旧分支（含推荐）    |
+| ckpt_004      | ckpt_002             | 新分支（从此继续）  |
 
 ```
                     ┌→ ckpt_003 → (废弃分支，保留)
@@ -750,10 +855,10 @@ ckpt_001 → ckpt_002 ┤
 
 从 ckpt_002 **复制**所有 blob 数据：
 
-| thread_id | checkpoint_id | channel | blob_data 来源 |
-|-----------|---------------|---------|---------------|
-| thread_abc123 | ckpt_004 | messages | 复制自 ckpt_002 |
-| thread_abc123 | ckpt_004 | user_context | 复制自 ckpt_002 |
+| thread_id     | checkpoint_id | channel      | blob_data 来源  |
+| ------------- | ------------- | ------------ | --------------- |
+| thread_abc123 | ckpt_004      | messages     | 复制自 ckpt_002 |
+| thread_abc123 | ckpt_004      | user_context | 复制自 ckpt_002 |
 
 > ckpt_003 的 `search_results` 和推荐相关的 `messages` 不会出现在 ckpt_004 中。
 
@@ -765,7 +870,7 @@ ckpt_001 → ckpt_002 ┤
 
 ```sql
 -- 查看 ckpt_003 中每个 node 的贡献
-SELECT 
+SELECT
     task_id,
     channel,
     LENGTH(blob_data) as bytes,
@@ -796,7 +901,7 @@ WHERE thread_id = 'thread_abc123' AND checkpoint_id = 'ckpt_003';
 -- ckpt_003 的 blobs 总量
 SELECT SUM(LENGTH(blob_data)) as blobs_total_bytes
 FROM checkpoint_blobs
-WHERE thread_id = 'thread_abc123' 
+WHERE thread_id = 'thread_abc123'
     AND checkpoint_ns_hash = 'd41d8cd...';
 -- 结果: 3072 bytes (3条合并后)
 
@@ -844,3 +949,4 @@ WHERE thread_id = 'thread_abc123'
 │ version         │ 0 / 1 / 2... ← 同一 checkpoint 的版本    │
 │ blob_data       │ <二进制: 合并后的完整消息列表>            │
 └─────────────────┴─────────────────────────────────────────┘
+```
